@@ -1,0 +1,41 @@
+
+<link rel="import" href="./../../components/data-manage-behavior.html">
+
+<dom-module id="company-list">
+    <style include="page-style flex-style"></style>
+    <template>
+        <paper-material elevation="1">
+            <table class="gl-table-default">
+                <thead>
+                    <tr>
+                        <th>TAX ID</th>
+                        <th>ชื่อ</th>
+                        <th>เข้า (ตัน)</th>
+                        <th>มูลค่า (บาท)</th>
+                        <th>ออก (ตัน)</th>
+                        <th>มูลค่า (บาท)</th>
+                    </tr>
+                </thead>
+                <template is="dom-if" if="[[checkData(dataList)]]">
+                    <tbody>
+                        <tr>
+                            <td colspan="6">ไม่พบข้อมูล</td>
+                        </tr>
+                    </tbody>
+                </template>
+            </table>
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'company-list',
+            behaviors:[DataManageBehavior],
+            properties:{
+                dataList:{
+                    type: Array,
+                    value: []
+                }
+            }
+        });
+    </script>
+</dom-module>

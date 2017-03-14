@@ -1,18 +1,12 @@
 <script>
     DataManageBehavior={
-        properties:{
-            dataStat:{
-                type: Boolean,
-                value: true
-            }
-        },
         checkData:function(data){
-            // console.log('data',data);
+            console.log('data',data);
             if((typeof data == 'undefined')==true || data == ''){
-                this.dataStat = true;
+                return true;
             }
             else{
-                this.dataStat = false;
+               return false;
             }     
         },
             

@@ -61,7 +61,7 @@
                         </mask>
                         </svg>
                         <!--<iron-icon icon="home" item-icon></iron-icon>-->
-                            ระบบสวัสดิการ
+                            ระบบสถิติ
                     </app-toolbar>
                 </paper-material>
 				<div role="listbox">
@@ -90,20 +90,15 @@
                     type:Array,
                     value:[
                         {
-                            name: 'หน้าผู้ใช้งาน',
-                            path: '/user-welfare',
+                            name: 'พิกัดข้าว',
+                            path: '/hamonize',
                             role: ''
                         },
                         {
-                            name: 'หน้าจัดการพนักงาน',
-                            path: '/list-user',
+                            name: 'ข้อมูลผู้ส่งออก',
+                            path: '/company',
                             role: ''
-                        },
-                        {
-                            name: 'จัดการคำขอสวัสดิการ',
-                            path: '/admin-approve',
-                            role: ''
-                        },
+                        }
                         // {
                         //     name: 'จัดการห้องสอบ',
                         //     path: '/examRoom',
@@ -119,11 +114,6 @@
                         //     path: '/module',
                         //     role: 'teacher'
                         // },
-                        {
-                            name: 'หน้าจัดการข้อมูล',
-                            path: '/back-end',
-                            role: ''
-                        }
                     ]
                 },
                 sendElement:{
