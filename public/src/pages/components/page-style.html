@@ -1,42 +1,23 @@
 
 <dom-module id="page-style">
     <template>
-        <style include="gl-size gl-font gl-styles gl-color gl-table gl-panel iron-flex iron-flex-factors iron-flex-alignment">
-        table.gl-table-default > thead.table-head > tr > th,
-        table.gl-table-default > tbody.table-body > tr > td {
-            text-align: center;
-        }
-        table.gl-table-default {
-                width: 98% ;
-                border: 1px solid #ddd;
-                /*margin: 15px;*/
+        <style include="gl-size gl-font gl-styles gl-color gl-table gl-panel">
+            .container{
+                padding: 20px;
             }
-        paper-button.gl-small{
+            .labelSearchDate{
+                margin-top: 30px;
+                margin-left: 10px;
+            }
+            paper-material{
+                background-color: white;
+            }
+            paper-button,section{
                 font-family: 'CSChatThaiUI', sans-serif;
                 -webkit-font-smoothing: antialiased;
-                font-size: var(--font-size-h5);
-       }
-        paper-material {
-                background-color: #FFFFFF;
-                padding-top: 15px;
-                padding-bottom: 15px;
             }
-            paper-material > div.head {
-                padding: 10px;
-                font-size: 35px;
-                /*margin-bottom: 25px;*/
+            .textCenter{
                 text-align: center;
-                @apply(--layout-flex);
-            }
-           div.label {
-                text-align :left;
-                padding-top: 10px;
-                padding-right: 15px;
-                padding-left: 5px;
-                /*padding-top: 17px;*/
-            } 
-            vaadin-date-picker {
-                margin-top: -19px;
             }
             .xcontainer{
         	    margin:auto;

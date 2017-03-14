@@ -1,0 +1,22 @@
+
+<link rel="import" href="./components/company-list.html">
+<link rel="import" href="./components/company-search.html">
+
+<dom-module id="page-company">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <company-search></company-search>
+           </section>
+           <section class="container">
+                 <company-list></company-list>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-company'
+        });
+    </script>
+</dom-module>

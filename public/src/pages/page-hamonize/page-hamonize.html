@@ -1,0 +1,22 @@
+
+<link rel="import" href="./components/hamonize-list.html">
+<link rel="import" href="./components/hamonize-search.html">
+
+<dom-module id="page-hamonize">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <hamonize-search></hamonize-search>
+           </section>
+           <section class="container">
+                 <hamonize-list></hamonize-list>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-hamonize'
+        });
+    </script>
+</dom-module>
