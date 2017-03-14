@@ -1,25 +1,26 @@
 
 <link rel="import" href="./../../components/data-manage-behavior.html">
 
-<dom-module id="company-list">
+<dom-module id="license-list">
     <style include="page-style flex-style"></style>
     <template>
         <paper-material elevation="1">
             <table class="gl-table-default">
                 <thead>
                     <tr>
-                        <th>TAX ID</th>
+                        <th>เลข พณ.</th>
                         <th>บริษัท</th>
-                        <th>เข้า (ตัน)</th>
+                        <th>ชนิดข้าว</th>
+                        <th>ปริมาณ (ตัน)</th>
                         <th>มูลค่า (บาท)</th>
-                        <th>ออก (ตัน)</th>
-                        <th>มูลค่า (บาท)</th>
+                        <th>วันที่อนุญาติ</th>
+                        <th>วันที่หมดอายุ</th>
                     </tr>
                 </thead>
                 <template is="dom-if" if="[[checkData(dataList)]]">
                     <tbody>
                         <tr>
-                            <td colspan="6">ไม่พบข้อมูล</td>
+                            <td colspan="7">ไม่พบข้อมูล</td>
                         </tr>
                     </tbody>
                 </template>
@@ -28,7 +29,7 @@
     </template>
     <script>
         Polymer({
-            is: 'company-list',
+            is: 'license-list',
             behaviors:[DataManageBehavior],
             properties:{
                 dataList:{

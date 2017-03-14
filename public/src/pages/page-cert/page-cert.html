@@ -1,0 +1,22 @@
+
+<link rel="import" href="./components/cert-list.html">
+<link rel="import" href="./components/cert-search.html">
+
+<dom-module id="page-cert">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <cert-search></cert-search>
+           </section>
+           <section class="container">
+                 <cert-list></cert-list>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-cert'
+        });
+    </script>
+</dom-module>

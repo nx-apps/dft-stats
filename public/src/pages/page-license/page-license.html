@@ -1,0 +1,22 @@
+
+<link rel="import" href="./components/license-list.html">
+<link rel="import" href="./components/license-search.html">
+
+<dom-module id="page-license">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <license-search></license-search>
+           </section>
+           <section class="container">
+                 <license-list></license-list>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-license'
+        });
+    </script>
+</dom-module>

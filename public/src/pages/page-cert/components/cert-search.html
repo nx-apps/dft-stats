@@ -1,0 +1,42 @@
+
+<dom-module id="cert-search">
+    <style include="page-style flex-style"></style>
+    <template>
+         <paper-material elevation="1">
+            <div class="container">
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="labelSearchDate">
+                        เริ่มวันที่ : 
+                    </div>
+                    <div class="flex2child">
+                        <vaadin-date-picker class="textCenter"></vaadin-date-picker>
+                    </div>
+                    <div class="flexchild"></div>
+                        <div class="labelSearchDate">
+                        ถึงวันที่ : 
+                    </div>
+                    <div class="flex2child">
+                        <vaadin-date-picker class="textCenter"></vaadin-date-picker>
+                    </div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="labelSearchDate">
+                        เลข พณ. : 
+                    </div>
+                    <div class="flex2child">
+                        <gl-combo-box class="textCenter" items="" item-label-path="" item-value-path="" value=""></gl-combo-box>
+                    </div>
+                    <div class="flexchild"></div>
+                </div>
+            </div>
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'cert-search'
+        });
+    </script>
+</dom-module>
