@@ -1,0 +1,189 @@
+<link rel="import" href="./../components/format-number-behavior.html">
+<link rel="import" href="./../components/common-logic.html">
+
+<link rel="import" href="./components/dialog-use-welfare.html">
+
+<dom-module id="user-welfare">
+    <style include="page-style gl-styles gl-size iron-flex iron-flex-factors iron-flex-alignment">
+            :host {
+                display: block;
+            }
+            .head-text{
+                font-size: var(--font-size-h4);
+                margin: 15px 15px 15px 15px;
+            }
+            table.gl-table-default {
+                width: 98%;
+                border: 1px solid #ddd;
+            /*margin: 15px;*/
+            }
+            .label,.inpit  {
+                font-size: var(--font-size-h5)
+            }
+            .label {
+                text-align: right;
+                padding-right: 5px;
+            }
+            .left {
+               text-align: left; 
+            }
+            fieldset {
+                margin: 15px;
+            }
+        </style>
+    <template>
+        
+        
+             <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
+                <gl-form-panel-head label="" set-padding="10px" set-border="1px">
+                    <paper-button class="gl-btn-info" on-tap="editData" raised>แก้ไขข้อมูลพนักงาน</paper-button>
+                </gl-form-panel-head>
+                <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                    <fieldset>
+                        <legend>ข้อมูลพนักงาน :</legend>
+                        <div class="flex content horizontal start-justified layout">
+                                <div class="flex">ชื่อ : [[data.prefixname_name]] [[data.name]] [[data.surname]]</div>
+                                <div class="flex">รหัสพนักงาน : [[data.emp_id]]</div>
+                        </div>
+                        <div class="flex content horizontal start-justified layout">
+                                <div class="flex">สถานภาพการทำงาน : [[data.active_name]]</div>
+                                <div class="flex">ตำแหน่ง : [[data.position_name]]</div>
+                        </div>
+                        <div class="flex content horizontal start-justified layout">
+                                <div class="flex">ภาควิชา : [[data.department_name]]</div>
+                                <div class="flex">คณะ : [[data.faculty_name]]</div>
+                        </div>
+                    </fieldset>
+                </gl-form-panel-body>
+
+ <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                 <div class="head-text">
+             สวัสดิการที่ได้รับสิทธิ์
+            </div>
+                <div class="content horizontal center-justified layout">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width: 5%">ลำดับ</th>
+                                <th style="width: 50%">สวัสดิการที่สามารถใช้ได้</th>
+                                <th style="width: 30%">จำนวนเงินคงเหลือ</th>
+                                <th style="width: 15%">ขอใช้</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            
+                            <template is="dom-repeat" items={{data.welfare}} >
+                                <tr>
+                                    <td>[[_Obindex(index)]]</td>
+                                    <td>[[item.name]]</td>
+                                    <td>[[formatNumber(item.budget_balance)]]</td>
+                                    <td> <paper-button class="gl-btn-primary gl-small"raised on-tap="usewelfare" data="[[item]]">ขอใช้</paper-button></td>
+                                </tr>
+                            </template>
+                            <template is="dom-if" if={{_ObIsHave(data.welfare)}}>
+                                <tr>
+                                    <td colspan="4" style="text-align: center">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+                            
+                        </tbody>
+                    </table>
+            </div>
+
+            </gl-form-panel-body>
+             <gl-form-panel-body label="" set-padding="10px" set-border="1px">
+                 <div class="head-text">
+             สวัสดิการที่ได้ใช้สิทธิ์ไปแล้ว
+            </div>
+                <div class="content horizontal center-justified layout">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width: 5%">ลำดับ</th>
+                                <th style="width: 30%">สวัสดิการที่ใช้</th>
+                                <th style="width: 30%">จำนวนเงินที่ใช้</th>
+                                <th style="width: 30%">วันที่ใช้งาน</th>
+                                <th style="width: 10%">กระทำการ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items={{data.history_welfare}} >
+                                <tr>
+                                    <td>[[_Obindex(index)]]</td>
+                                    <td>[[item.name]]</td>
+                                    <td>[[formatNumber(item.use_budget)]]</td>
+                                    <td>
+                                        <vaadin-date-picker always-float-label  disabled value="{{item.date_use}}"></vaadin-date-picker>
+                                    </td>
+                                    <td> <paper-button class="gl-btn-danger gl-small"raised on-tap="deleteHistoryWelfare" data="[[item]]">ลบ</paper-button></td>
+                                </tr>
+                            </template>
+                            <template is="dom-if" if={{_ObIsHave(data.history_welfare)}}>
+                                <tr>
+                                    <td colspan="5" style="text-align: center">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+                         </tbody>
+                    </table>
+            </div>
+
+            </gl-form-panel-body>
+                <!--<gl-form-panel-footer label="Footer" set-padding="10px">
+                
+                </gl-form-panel-footer>-->
+            </gl-form-panel>
+        <!--</paper-material>-->
+<paper-dialog id="welfare_budget" >
+        <dialog-use-welfare data="{{usewelfareProp}}"></dialog-use-welfare>
+        <div class="flex horizontal end-justified layout">
+            <paper-button raised class="gl-btn-primary" on-tap="getwelfare">ใช้งาน</paper-button>
+        </div>
+</paper-dialog>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'user-welfare',
+            behaviors:[ReduxBehavior,FormatNumberBehavior,commonLogic],
+            properties:{
+                data:{
+                    statePath:'users.select_welefares'
+                },
+                usewelfareProp:{
+                    statePath:'users.select_use_welefares',
+                    type:Object,
+                },
+                dataSelete:{
+                    type:Object,
+                    value:{budget:0}
+                },
+            },
+            editData(){
+                this.fire('_get-user-edit',this.data)
+                // this.dispatchAction('USER_SELECT',e.detail);
+            },
+            _Obindex(index){
+                return index+1
+            },
+            usewelfare(e){
+                let data = new Object();
+                data.title = e.currentTarget.data.name
+                data.emp_id = this.data.id
+                data.welfare_id = e.currentTarget.data.welfare_id
+                data.budget_cover = e.currentTarget.data.budget_balance
+                this.$$('#welfare_budget').open()
+                this.dispatchAction('USER_USE_SELETE_WELFARE',data);
+            },
+            getwelfare(){
+                // console.log(this.usewelfareProp);
+                this.$$('#welfare_budget').close()
+                this.dispatchAction('USER_USE_WELFARE',this.usewelfareProp);
+            },
+            
+            deleteHistoryWelfare(e){
+                // console.log(e.currentTarget.data);
+                this.dispatchAction('USER_DELETE_USE_WELFARE',e.currentTarget.data);
+            }
+        });
+    </script>
+</dom-module>

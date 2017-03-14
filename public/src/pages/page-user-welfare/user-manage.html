@@ -1,0 +1,267 @@
+
+<dom-module id="user-manage">
+    <style include="page-style iron-flex iron-flex-factors iron-flex-alignment">
+        fieldset {
+            margin: 15px 5px ;
+        }
+            
+            gl-form-input,
+            gl-combo-box,
+            vaadin-date-picker {
+                width: 90%;
+            }
+            vaadin-date-picker {
+                margin-top: -19px;
+            }
+        </style>
+    <template>
+        <div class="container layout vertical ">
+            <fieldset>
+                <legend>ข้อมูลส่วนตัว :</legend>
+                <div class="from layout horizontal">
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="personal_id" >รหัสบัตรประชาชน :</label>
+                        </div>
+                        <div class="flex-2 label">
+                        {{data.personal_id}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <!--<div class="flex label">
+                            <label for="emp_id">รหัสพนักงาน :</label>
+                        </div>
+                        <div class="flex-2">
+                            <gl-form-input id="emp_id" no-label-float value="{{data.emp_id}}" disabled="[[disabled]]" class="required" required></gl-form-input>
+                        </div>    -->
+                    </div>
+                </div> 
+                <div class="from layout horizontal">  
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="prefixname">คำนำหน้าชื่อ :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.prefix_name}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="gender" >เพศ :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.gender}}
+                        </div> 
+                    </div>
+                </div>
+                <div class="from layout horizontal">  
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="name" >ชื่อ :</label>
+                        </div>
+                        <div class="flex-2 label">
+                        {{data.firstname}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="name" >นามสกุล :</label>
+                        </div>
+                        <div class="flex-2 label">
+                        {{data.lastname}}
+                        </div> 
+                    </div>
+                </div>
+                <div class="from layout horizontal">  
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="birthday">วันเกิด :</label>
+                        </div>
+                        <div class="flex-2">
+                            <vaadin-date-picker id="birthday"always-float-label  value="{{data.birthdate}}"disabled="[[disabled]]" class="required" required></vaadin-date-picker>
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <!--<div class="flex label">
+                            <label for="relation" >ความสัมพัธ์ :</label>
+                        </div>
+                        <div class="flex-2">
+                            <gl-combo-box id="relation" no-label-float items="{{relation}}" value="{{data.relation_id}}" item-label-path="relation_name" item-value-path="id" disabled="[[disabled]]"></gl-combo-box>
+                        </div> -->
+                    </div>
+                </div>
+                <!--<div class="from layout horizontal">  
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="relation" >ความสัมพัธ์ :</label>
+                        </div>
+                        <div class="flex-2">
+                            <gl-combo-box id="relation" no-label-float items="{{relation}}" value="{{data.relation_id}}" item-label-path="relation_name" item-value-path="id" disabled="[[disabled]]" class="required" required></gl-combo-box>
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="name" >รหัสพนักงาน :</label>
+                        </div>
+                        <div class="flex-2">
+                        <gl-form-input id="name" no-label-float value="{{data.surname}}" disabled="[[disabled]]" class="required" required></gl-form-input>
+                        </div> 
+                    </div>
+                </div>-->
+            </fieldset>
+            <fieldset>
+                <legend>ข้อมูลพนักงาน :</legend>
+                <div class="from layout horizontal">
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="emp_no">รหัสพนักงาน :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.emp_no}}
+                        </div>    
+                    </div> 
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="start_work_date" >วันที่เริ่มทำงาน :</label>
+                        </div>
+                        <div class="flex-2">
+                            <vaadin-date-picker always-float-label  value="{{data.start_work_date}}"disabled class="required" required></vaadin-date-picker>
+                        </div> 
+                    </div> 
+                    
+                </div>
+                <div class="from layout horizontal"> 
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="active_id">สถานณะการทำงาน :</label>
+                        </div>
+                        <div class="flex-2">
+                            {{data.active_name}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="type_emp_name" >ประเภทลูกจ้าง :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.type_employee_name}}
+                        </div> 
+                    </div> 
+                    
+                </div>
+                <div class="from layout horizontal"> 
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="position">ตำแหน่ง :</label>
+                        </div>
+                        <div class="flex-2">
+                            {{data.position_name}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="matier_id" >ระดับทางวิชาการ :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.matier_name}}
+                        </div> 
+                    </div> 
+                    
+                </div>
+                <div class="from layout horizontal"> 
+                    <div class="flex layout horizontal">
+                        <div class="flex label">
+                            <label for="academic">ตำแหน่งทางวิชาการ :</label>
+                        </div>
+                        <div class="flex-2 label">
+                            {{data.academic_name}}
+                        </div> 
+                    </div>
+                    <div class="flex layout horizontal"> 
+                    </div> 
+                 </div>  
+                 <div class="from layout horizontal"> 
+                    <div class="flex label">
+                            <label for="faculty">คณะ :</label>
+                    </div>
+                    <div class="flex-5 label">
+                            {{data.faculty_name}}
+                     </div> 
+                </div>     
+                <div class="from layout horizontal"> 
+                        <div class="flex label">
+                            <label for="department" >แผนก :</label>
+                        </div>
+                        <div class="flex-5 label">
+                           {{data.department_name}}
+                        </div> 
+                </div>
+                
+            </fieldset>
+            
+            
+            
+        </div>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'user-manage',
+            behaviors:[ReduxBehavior,ValidateFormBehavior],
+            properties:{
+                data:{
+                    type:Object,
+                    value:{},
+                    notify:true
+                },
+                
+                academic:{
+                    statePath:'commonData.academic'
+                },
+                active:{
+                    statePath:'commonData.active'
+                },
+                department:{
+                    statePath:'commonData.department'
+                },
+                employee:{
+                    statePath:'commonData.employee'
+                },
+                faculty:{
+                    statePath:'commonData.faculty'
+                },
+                gender:{
+                    statePath:'commonData.gender'
+                },
+                matier:{
+                    statePath:'commonData.matier'
+                },
+                position:{
+                    statePath:'commonData.position'
+                },
+                prefixname:{
+                    statePath:'commonData.prefixname'
+                },
+                relation:{
+                    statePath:'commonData.relation'
+                },
+                type_employee:{
+                    statePath:'commonData.type_employee'
+                }
+            },
+            // _checkFaculty(dataSelete){
+            //     // console.log(dataSelete)
+            //     if(dataSelete){
+            //     let departmentID = this.department.find((departmentID)=>departmentID.id == dataSelete);
+            //     // console.log(departmentID)
+            //       let faculty_code = this.faculty.find((facultyID)=>facultyID.faculty_code == departmentID.faculty);
+            //     //  console.log(faculty_code)
+            //       this.set('data.faculty_id',faculty_code.id)
+            //     //   console.log(this.data.faculty_id)
+            //     } 
+            // },
+            
+        });
+    </script>
+</dom-module>
+

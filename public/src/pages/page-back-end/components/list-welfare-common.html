@@ -1,0 +1,64 @@
+
+<dom-module id="list-welfare-common">
+    <template>
+        <style include="gl-table">
+            table{
+                margin: auto;
+                border: 1px solid #ddd;
+            }
+            td,th{
+                text-align: center !important; 
+            }
+            paper-material{
+                background-color: white;
+                padding: 20px;
+            }
+        </style>
+        <paper-material elevation="1">
+            <table class="gl-table-default">
+                <thead class="table-head">
+                    <tr>
+                        <th>ลำดับที่</th>
+                        <th>ชื่อตาราง</th>
+                        <th>กระทำ</th>
+                    </tr>
+                </thead>  
+                <!--<template is="dom-if" if="">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">ไม่พบข้อมูล</td>
+                        </tr>
+                    </tbody>
+                </template>-->
+                <tbody>
+                    <template is="dom-repeat" items="[[dataList]]">
+                    <tr>
+                        <td>[[count(index)]]</td>
+                        <td>[[item]]</td>
+                        <td>
+                            <paper-icon-button icon="create" item="[[item]]" on-tap="selectData"></paper-icon-button>
+                        </td>
+                    </tr>
+                    </template>
+                </tbody>
+            </table>
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'list-welfare-common',
+            behaviors:[ReduxBehavior],
+            properties:{
+                dataList:{
+                   statePath:'conditionReadWelfare.listTable'
+                }
+            },
+            count:function(index){
+                return index+1;
+            },
+            selectData:function(e){
+                this.fire('open-panel',e.target.item);
+            }
+        });
+    </script>
+</dom-module>

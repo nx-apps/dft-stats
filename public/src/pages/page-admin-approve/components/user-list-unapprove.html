@@ -1,0 +1,91 @@
+
+<link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="./dialog-approve-welfare.html">
+
+<dom-module id="user-list-unapprove">
+    <style include="iron-flex iron-flex-factors iron-flex-alignment page-style">
+            :host {
+                display: block;
+            }
+        </style>
+    <template>
+        
+        <paper-material elevation="1">
+            <div class="head">รายชื่อคนที่ขอสมัครใช้สวัสดิการ</div>
+            <div class="content horizontal center-justified layout">
+                <table class="gl-table-default">
+                <thead class="table-head">
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>ชื่อ - นามสกุล</th>
+                        <th>สวัสดิการที่ขอใช้</th>
+                        <th>กอง</th>
+                        <th>คณะ</th>
+                        <th>กระทำ</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    
+                    <template is="dom-repeat" items={{listUserFalse}} >
+                        <tr>
+                            <td>[[_Obindex(index)]]</td>
+                            <td>[[item.prefixname_id]] [[item.firstname]] [[item.lastname]]</td>
+                            <td>[[item.group_welfare_name]]</td>
+                            <td>[[item.department]]</td>
+                            <td>[[item.faculty]]</td>
+                            <td>
+                                <paper-button raised class="gl-btn-info gl-small" on-tap="userwelfare" data="[[item]]"> ดูข้อมูล </paper-button>
+                            </td>
+                        </tr>
+                    </template>
+                    <template is="dom-if" if={{_ObIsHave(listUserFalse)}}>
+                                <tr>
+                                    <td colspan="6" style="text-align: center">ยังไม่มีการขอใช้สวัสดิการ</td>
+                                </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        </paper-material>
+        <paper-dialog id="welfare_budget" >
+            <dialog-approve-welfare data="{{usewelfareProp}}"></dialog-approve-welfare>
+            <div class="flex horizontal end-justified layout">
+                <paper-button raised class="gl-btn-primary" on-tap="getwelfare">อนุมัติ</paper-button>
+                <paper-button raised class="gl-btn-danger" on-tap="delwelfare">ไม่อนุมัติ</paper-button>
+            </div>
+        </paper-dialog>
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'user-list-unapprove',
+            behaviors: [
+                ReduxBehavior,commonLogic
+            ],
+            properties:{
+                listUserFalse:{
+                    statePath:'users.lisyUserFalse'
+                },
+                usewelfareProp:{
+                    type:Object
+                }
+            },
+            userwelfare(e){
+                // console.log(e.currentTarget.data);
+                this.set('usewelfareProp',e.currentTarget.data)
+                this.$$('#welfare_budget').open()
+                // this.dispatchAction('USER_USE_SELETE_WELFARE',data);
+            },
+            getwelfare(){
+                this.dispatchAction('USER_USE_WELFARE_APPROVE',this.usewelfareProp);
+                this.$$('#welfare_budget').close()
+            },
+            delwelfare(){
+                // console.log(this.usewelfareProp.id);
+                this.dispatchAction('USER_DELETE_USE_WELFARE',this.usewelfareProp);
+                this.$$('#welfare_budget').close()
+            }
+        });
+    </script>
+</dom-module>

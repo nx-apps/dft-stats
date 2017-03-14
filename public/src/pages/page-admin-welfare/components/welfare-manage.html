@@ -1,0 +1,159 @@
+<link rel="import" href="../../components/format-number-behavior.html">
+<dom-module id="welfare-manage">
+    <template>
+        <style is="custom-style" include="page-style iron-flex iron-flex-factors iron-flex-alignment">
+            gl-form-input,
+            vaadin-date-picker,
+            gl-combo-box {
+                margin-top: 15px;
+            }
+            .label_condition {
+                font-weight: bold;
+                text-align: right;
+                margin-top: 35px;
+                font-size: 20px;
+            }
+            .btn-bottom {
+                margin: 30px;
+            }
+            paper-material {
+                background-color: var(--gl-white-color);
+            }
+        </style>
+
+        <div style="padding:20px 20px 50px 20px;">
+
+            <paper-material elevation="1">
+
+                <div class="horizontal end-justified layout">
+                    <div style="margin:20px 20px 0px 0px;" hidden="{{!active}}">
+                        <template is="dom-if" if={{!data.status_approve}}>
+                            <paper-icon-button icon="icons:create" on-tap="_edit"></paper-icon-button>
+                            <paper-icon-button icon="delete" on-tap="_delete"></paper-icon-button>
+                        </template>
+                    </div>
+                </div>
+
+                <gl-grid-row width="{{getWidth}}">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ปี" allowed-pattern="[0-9]" value="{{data.year}}" disabled="{{active}}" maxlength="4"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ชื่อสวัสดิการ" value="{{data.group_welfare_name}}" disabled="{{active}}"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                        <vaadin-date-picker label="วันที่เริ่มใช้งาน :" value="{{data.start_date}}" disabled="{{active}}"></vaadin-date-picker>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                        <vaadin-date-picker label="วันที่สิ้นสุดใช้งาน :" value="{{data.end_date}}" disabled="{{active}}"></vaadin-date-picker>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-textarea style="margin-top:15px;" label="รายละเอียด" value="{{data.description}}" always-float-label disabled="{{active}}"></gl-form-textarea>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row style="margin-top: 10px">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <paper-checkbox checked="{{data.onetime}}" disabled="{{active}}">ใช้ครั้งเดียว (เต็มจำนวน)</paper-checkbox>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row style="margin-top: 10px">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <paper-checkbox checked="{{data.admin_use}}" disabled="{{active}}">admin เป็นผู้อนุมัติ</paper-checkbox>
+                    </gl-grid-col>
+                </gl-grid-row>
+
+                <div class="horizontal end-justified layout btn-bottom">
+                    <div hidden="{{active}}">
+                        <paper-button raised style="margin-bottom:15px;" class="gl-btn-danger" on-tap="cancle">ยกเลิก</paper-button>
+                        <paper-button raised style="margin-bottom:15px;" class="gl-btn-success" on-tap="save">บันทึก</paper-button>
+                    </div>
+                    
+                    <div hidden="{{!active}}">
+                        <template is="dom-if" if={{!data.status_approve}}>
+                            <paper-button raised style="margin-bottom:15px;" class="gl-btn-success" on-tap="approve">อนุมัติใช้งาน</paper-button>
+                        </template>
+                    </div>
+
+                </div>
+            </paper-material>
+
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'welfare-manage',
+            behaviors: [ReduxBehavior, FormatNumberBehavior],
+            properties: {
+                data: {
+                    statePath: 'groupWelfare.select'
+                },
+                active: {
+                    type: Boolean,
+                    value: true
+                }
+            },
+            _delete: function () {
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'คุณต้องการที่จะลบใช่หรือไม่ ?',
+                    confirmed: this._confirm.bind(this),
+                    datas: {
+                        id: this.data.id,
+                        year : this.data.year
+                    }
+                });
+            },
+            _confirm: function (result, detail) {
+                if (result == true) {
+                    this.dispatchAction('DELETE_WELFARE', detail.datas);
+                }
+            },
+            _edit: function () {
+                this.set('disabled', this.active = false);
+            },
+            save: function () {
+                this.data.year = this.unFormat(this.data.year);
+                // console.log(this.data);
+                this.dispatchAction('EDIT_WELFARE', this.data);
+                this.active = true;
+            },
+            delete_condition: function (e) {
+                // console.log(e.target.index);
+                this.splice('data.condition', e.target.index, 1);
+            },
+            cancle: function () {
+                var id = this.data.id;
+                this.dispatchAction('SELECT_DATA', id);
+                this.active = true;
+            },
+            approve: function () {
+                this.fire('toast', {
+                    status: 'openDialog',
+                    text: 'คุณต้องการที่อนุมัติใช่หรือไม่ ?',
+                    confirmed: this._confirmToast.bind(this),
+                    datas: {
+                        id : this.data.id,
+                        status_approve : true
+                    }
+                });
+            },
+            _confirmToast: function (result, detail) {
+                if (result == true) {
+                    this.dispatchAction('APPROVE_WELFARE', detail.datas);
+                }
+            }
+        });
+    </script>
+</dom-module>

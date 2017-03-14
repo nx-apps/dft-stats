@@ -1,0 +1,126 @@
+<link rel="import" href="../../components/format-number-behavior.html">
+<dom-module id="welfare-panel">
+    <template>
+        <style is="custom-style" include="page-style iron-flex iron-flex-factors iron-flex-alignment">
+            gl-form-input,
+            vaadin-date-picker,
+            gl-combo-box{
+                margin-top: 15px;
+            }
+            .label_condition {
+                font-weight: bold;
+                text-align: right;
+                margin-top: 35px;
+                font-size: 20px;
+            }
+            .btn-bottom {
+                margin: 30px;
+            }
+            paper-material {
+                background-color: var(--gl-white-color);
+            }
+            paper-checkbox{
+                 font-family: 'CSChatThaiUI', sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+        </style>
+
+        <div style="padding:20px;">
+
+            <paper-material elevation="1">
+
+                <gl-grid-row width="{{getWidth}}">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ปี" allowed-pattern="[0-9]" maxlength="4" value="{{data.year}}" placeholder="กรุณากรอกปี พ.ศ."></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ชื่อสวัสดิการ" value="{{data.group_welfare_name}}" placeholder="กรุณากรอกชื่อสวัสดิการ"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                        <vaadin-date-picker label="วันที่เริ่มใช้งาน :" value="{{data.start_date}}"></vaadin-date-picker>
+                    </gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                        <vaadin-date-picker label="วันที่สิ้นสุดใช้งาน :" value="{{data.end_date}}"></vaadin-date-picker>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-textarea style="margin-top:15px;" label="รายละเอียด" value="{{data.description}}" placeholder="เพิ่มรายละเอียด"></gl-form-textarea>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row style="margin-top: 10px">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                       <paper-checkbox checked="{{data.onetime}}">ใช้ครั้งเดียว (เต็มจำนวน)</paper-checkbox>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row style="margin-top: 10px">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]"></gl-grid-col>
+                    [[checkSelect(data.admin_use)]]
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                       <paper-checkbox checked="{{data.admin_use}}">admin เป็นผู้อนุมัติ</paper-checkbox>
+                    </gl-grid-col>
+                </gl-grid-row>
+
+                <div class="horizontal end-justified layout btn-bottom">
+                    <paper-button raised class="gl-btn-danger" on-tap="close">ยกเลิก</paper-button>
+                    <paper-button raised class="gl-btn-success" on-tap="save">บันทึก</paper-button>
+                </div>
+
+            </paper-material>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'welfare-panel',
+            behaviors: [ReduxBehavior, FormatNumberBehavior],
+            properties: {
+                data: {
+                    type: Object,
+                    value: function(){
+                        return {
+                            start_date : new Date().toISOString().split('-')[0]+'-01-01',
+                            end_date : new Date().toISOString().split('-')[0]+'-12-31'
+                        }
+                    },
+                    notify: true
+                },
+            },
+            save: function () {
+                this.data.year = this.unFormat(this.data.year);
+                this.data.status_approve = false;
+                if(this.data.onetime != true){
+                    this.data.onetime = false;
+                }
+                if(this.data.admin_use != true){
+                    this.data.admin_use = false;
+                }
+                // console.log(this.data);
+                this.dispatchAction('INSERT_WELFARE', this.data)
+            },
+            delete_condition: function (e) {
+                // console.log(e.target.index);
+                this.splice('data.condition', e.target.index, 1);
+            },
+            close: function(){
+                this.fire('closePanel');
+            },
+            checkSelect: function(e){
+                if (e == true) {
+                    if(typeof this.data.onetime == 'undefined'){
+                        this.set('data.onetime', true);
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

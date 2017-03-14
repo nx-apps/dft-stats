@@ -1,0 +1,198 @@
+
+<link rel="import" href="./../../../components/validateFormBehaviors.html">
+
+<dom-module id="department-manage">
+    <style include="gl-table gl-styles flex-style">
+        .container {
+            padding: 20px
+        }
+        .contentTable{
+            background-color: white;
+        }
+        table{
+            border:1px solid #ddd;
+        }
+        td,th{
+            text-align: center !important;
+        }
+    </style>
+    <template>
+        <div class="container">
+            <section>
+                <gl-form-panel set-padding="10px 20px 10px 20px" set-border="1px">
+                    <gl-form-panel-head label="เพิ่มข้อมูล" set-padding="10px" set-border="0px">
+                        <!--<paper-icon-button icon="clear"></paper-icon-button>-->
+                    </gl-form-panel-head>
+                    <gl-form-panel-body label="" set-padding="10px" set-border="0px">
+                        <div class="flex-horizontal-with-ratios">
+                            <div class="flexchild"></div>
+                            <div class="flex3child">
+                                <gl-form-input label="department_name" placeholder="กรอกข้อมูล" value="{{data.department_name}}"></gl-form-input>
+                            </div>
+                            <div class="flexchild" style="text-align: center"></div>
+                        </div>
+                         <div class="flex-horizontal-with-ratios">
+                            <div class="flexchild"></div>
+                            <div class="flex3child">
+                                <gl-form-input label="faculty" placeholder="กรอกข้อมูล" value="{{data.faculty}}"></gl-form-input>
+                            </div>
+                            <div class="flexchild" style="text-align: center"></div>
+                        </div>
+                         <div class="flex-horizontal-with-ratios">
+                            <div class="flexchild"></div>
+                            <div class="flex3child">
+                                <gl-form-input label="faculty_name" placeholder="กรอกข้อมูล" value="{{data.faculty_name}}"></gl-form-input>
+                            </div>
+                            <div class="flexchild" style="text-align: center"></div>
+                        </div>
+                         <div class="flex-horizontal-with-ratios">
+                            <div class="flexchild"></div>
+                            <div class="flex3child" style="margin-top: 10px">
+                               <paper-button on-tap="getForm" class="gl-btn-primary" style="width: 100%" raised>
+                                   เพิ่ม
+                                </paper-button>
+                            </div>
+                            <div class="flexchild" style="text-align: center"></div>
+                        </div>
+                    </gl-form-panel-body>
+                </gl-form-panel>
+            </section>
+
+            <section style="padding: 10px 20px 10px 20px;">
+                <div class="contentTable">
+                    <table class="gl-table-default">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%">ลำดับ</th>
+                                <th>department_name</th>
+                                <th>faculty</th>
+                                <th>faculty_name</th>
+                                <th style="width: 20%">กระทำ</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <template is="dom-repeat" items="[[dataList]]">
+                                <tr>
+                                    <td>[[count(index)]]</td>
+                                    <template is="dom-if" if="{{item.check}}">
+                                        <td>
+                                            {{item.department_name}} 
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{!item.check}}">
+                                        <td>
+                                            <paper-input no-label-float value="{{item.department_name}}"></paper-input>
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{item.check}}">
+                                        <td>
+                                            {{item.faculty}} 
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{!item.check}}">
+                                        <td>
+                                            <paper-input no-label-float value="{{item.faculty}}"></paper-input>
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{item.check}}">
+                                        <td>
+                                            {{item.faculty_name}} 
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{!item.check}}">
+                                        <td>
+                                            <paper-input no-label-float value="{{item.faculty_name}}"></paper-input>
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{item.check}}">
+                                        <td>
+                                            <paper-icon-button on-tap="edit" item="[[item]]" disabled="[[item.status]]" index="[[index]]" icon="create"></paper-icon-button>
+                                            <paper-icon-button on-tap="confirmDelete" item="[[item]]" disabled="[[item.status]]" index="[[index]]" icon="delete"></paper-icon-button>
+                                        </td>
+                                    </template>
+                                    <template is="dom-if" if="{{!item.check}}">
+                                        <td>
+                                            <paper-icon-button on-tap="update" item="[[item]]" index="[[index]]" icon="save"></paper-icon-button>
+                                            <paper-icon-button on-tap="close" item=[[item.department_name]] index="[[index]]" icon="clear"></paper-icon-button>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>       
+                </div>
+            </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'department-manage',
+            behaviors:[ReduxBehavior,ValidateFormBehavior],
+            properties:{
+                dataList:{
+                    statePath:'commonData.department'
+                },
+                data:{
+                    type:Object,
+                    value:{}
+                }
+            },
+            count:function(index){
+                return index+1;
+            },
+            // update table function 
+            edit:function(e){
+                var index = e.target.index;
+                this.dataList.map((item,num)=>{
+                    if(num != index){
+                        this.set('dataList.'+num+'.check',true);
+                        this.set('dataList.'+num+'.status',true);
+                    }
+                    else{
+                        this.set('dataList.'+num+'.check',false);
+                    }
+                })
+            },
+            close:function(e){
+                var index = e.target.index;
+                this.dispatchAction('COMMONDATA_DATA_DEPARTMENT')
+                this.set('dataList.'+index+'.check',true);
+                // this.dataList.map((item,num)=>{
+                //     this.set('dataList.'+num+'.status',false);
+                // })
+            },
+            getForm:function(){
+                // console.log(this.data)
+                this.dispatchAction('COMMONDATA_DATA_DEPARTMENT_INSERT',this.data);
+            },
+            update:function(e){
+                var getForm = e.target.item;
+                var newItem = {
+                    id: getForm.id,
+                    department_name: getForm.department_name,
+                    faculty:getForm.faculty,
+                    faculty_name:getForm.faculty_name
+                }
+                this.dispatchAction('COMMONDATA_DATA_DEPARTMENT_UPDATE',newItem);
+            },
+            confirmDelete:function(e){
+                var id = e.target.item.id;
+                this.fire('toast',{ 
+                 status:'openDialog',
+                 text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
+                 confirmed:this._deleteData.bind(this), 
+                 data:id 
+                 })
+            },
+            _deleteData:function(check,id){
+                if(check == true){
+                    // console.log(id.data);
+                    var id = id.data;
+                    this.dispatchAction('COMMONDATA_DATA_DEPARTMENT_DELETE',id);
+                }
+            }
+            
+        });
+    </script>
+</dom-module>

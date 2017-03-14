@@ -1,0 +1,35 @@
+<script>
+    commonLogic = {
+        comBtnStatus(insertView,disabled,btn){
+            
+        },
+        _Obindex(index){
+                return index+1
+        },
+        _ObIsHave: function (data) {
+            if ((typeof data == 'object') && (data !== null)) {
+              if (data.length < 1) {
+                return true;
+              } else {
+                return false
+              }
+            } else {
+              return true
+            }
+        },
+        changeString2Num (ob, param) {
+                if (typeof ob.value == "string") {
+                    var pathChange = ob.path.split(".");
+                    // undefined
+                    if (pathChange.length == 2) {
+                    if (pathChange[1] == param) {
+                        ob.base[param] = numeral().unformat(ob.value);
+                        // console.log(ob.base[param]);
+                    }
+                    }
+                }
+            }
+         
+    }
+  
+</script>

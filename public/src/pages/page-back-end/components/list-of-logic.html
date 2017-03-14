@@ -1,0 +1,77 @@
+
+<link rel="import" href="../../components/common-logic.html">
+
+<dom-module id="list-of-logic">
+    <style include="page-style">
+            :host {
+                display: block;
+            }
+            
+        </style>
+    <template>
+        
+        <paper-material elevation="1">
+            <div class="head">รายการฟิลด์เงื่อนไข</div>
+            <div class="content horizontal center-justified layout">
+            <table class="gl-table-default">
+                <thead class="table-head">
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>ชื่อ</th>
+                        <th>แหล่งที่มาของข้อมูล</th>
+                        <th>กระทำ</th>
+                    </tr>
+                </thead>
+                <tfoot class="table-foot">
+                    <tr>
+                        <td colspan="4">
+                            <div class="horizontal end-justified layout">
+                                <paper-button raised class="gl-btn-primary" on-tap="addlogic">เพิ่ม</paper-button>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody class="table-body">
+                    
+                    <template is="dom-repeat" items={{lists}} >
+                        <tr>
+                            <td>[[_Obindex(index)]]</td>
+                            <td>[[item.label]]</td>
+                            <td>[[item.data_source]]</td>
+                            <td>
+                                <paper-button class="gl-btn-info gl-small"raised on-tap="editData" data="[[item]]">แก้ไข</paper-button>
+                            </td>
+                        </tr>
+                    </template>
+                     <template is="dom-if" if={{_ObIsHave(lists)}}>
+                                <tr>
+                                    <td colspan="4" style="text-align: center">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+                    
+                </tbody>
+            </table>
+        </div>
+        </paper-material>
+        
+        
+    </template>
+    <script>
+        Polymer({
+            is: 'list-of-logic',
+            behaviors:[ReduxBehavior,commonLogic],
+            properties:{
+                lists:{
+                    statePath:'conditionReadWelfare.listConditions'
+                },
+            },
+            addlogic(){
+                this.fire('_get-field')
+            },
+            editData(e){
+               this.fire('_edit-data-condition',e.currentTarget.data) 
+            }
+
+        });
+    </script>
+</dom-module>

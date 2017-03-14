@@ -1,0 +1,89 @@
+
+<link rel="import" href="../components/common-logic.html">
+
+<dom-module id="user-list">
+    <style include="gl-styles iron-flex iron-flex-factors iron-flex-alignment">
+            :host {
+                display: block;
+            }
+            paper-material {
+                background-color: #FFFFFF;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            paper-material > div.head {
+                padding: 10px;
+                font-size: 35px;
+                /*margin-bottom: 25px;*/
+                text-align: center;
+                @apply(--layout-flex);
+            }
+            table.gl-table-default {
+            width: 98%;
+            border: 1px solid #ddd;
+            /*margin: 15px;*/
+            }
+        </style>
+    <template>
+        
+        <paper-material elevation="1" class="vertical">
+        <div class="head">รายชื่อพนักงาน</div>
+        <div class="content horizontal center-justified layout">
+            <table class="gl-table-default ">
+                <thead class="table-head">
+                    <tr>
+                    <th>ลำดับ</th>
+                    <th>รหัสพนักงาน</th>
+                    <!--<th>คำนำหน้าชื่อ</th>-->
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ตำแหน่งงาน</th>
+                    <th>สถานภาพการทำงาน</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <template is="dom-repeat" items=[[lists]]>
+                        <tr data=[[item]] on-tap="userClick">
+                            <td>[[_Obindex(index)]]</td>
+                            <td>[[item.emp_id]]</td>
+                            <!--<td>[[item.prefixname]]</td>-->
+                            <td>[[item.prefixname]] [[item.name]]</td>
+                            <td>[[item.surname]]</td>
+                            <td>[[item.position_name]]</td>
+                            <td>[[item.active_name]]</td>
+                        </tr>
+                    </template>
+                    
+                    <template is="dom-if" if={{_ObIsHave(lists)}}>
+                        <tr>
+                            <td colspan="6" style="text-align: center">ไม่มีข้อมูล</td>
+                        </tr>
+                    </template>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+       </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'user-list',
+            behaviors:[ReduxBehavior,commonLogic],
+            properties:{
+                lists:{
+                    statePath:'users.lists'
+                },
+            },
+            userClick(e){
+                this.fire('_get-user',e.currentTarget.data)
+                // this.dispatchAction('USER_GET_WELFARES',e.currentTarget.data.id);
+                
+                // console.log(e.currentTarget.data.id)
+            },
+            _Obindex(index){
+                return index+1
+            }
+        });
+    </script>
+</dom-module>

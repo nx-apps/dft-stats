@@ -1,0 +1,297 @@
+<link rel="import" href="../../components/format-number-behavior.html">
+<dom-module id="welfare-insert">
+    <template>
+        <style is="custom-style" include="page-style iron-flex iron-flex-factors iron-flex-alignment">
+            gl-form-input,
+            vaadin-date-picker,
+            gl-combo-box {
+                margin-top: 15px;
+            }
+            
+            .label_condition {
+                font-weight: bold;
+                text-align: right;
+                margin-top: 35px;
+                font-size: 20px;
+            }
+            
+            .btn-bottom {
+                margin: 30px;
+            }
+            
+            paper-material {
+                background-color: var(--gl-white-color);
+            }
+        </style>
+
+        <div style="padding:20px;">
+
+            <paper-material elevation="1">
+                <gl-grid-row width="{{getWidth}}">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ชื่อสวัสดิการย่อย" value="{{data.welfare_name}}" placeholder="กรุณากรอกชื่อสวัสดิการ"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="จำนวนเงิน" format-number="on" value="{{data.budget}}" placeholder="กรุณากรอกจำนวนเงิน"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <template is="dom-repeat" items="{{data.condition}}">
+                    <gl-grid-row>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]"></gl-grid-col>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]">
+                            <div class="label_condition">เงื่อนไข ([[count(index)]])</div>
+                        </gl-grid-col>
+                        <!--[[checkField(item.field,index)]]-->
+                        [[getfield(item.field,index)]]
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                            <gl-combo-box id="field-[[index]]" items="[[item.itemField]]" item-label-path="label" item-value-path="id" value="{{item.field}}"></gl-combobox>
+                        </gl-grid-col>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                            
+                            <gl-form-dropdown-menu style="margin-top: 15px">
+                                <paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{item.logic_show}}">
+                                    <template is="dom-repeat" items="{{item.itemLogic}}">
+                                        <paper-item value="{{item.symbol}}">{{item.name}}</paper-item>
+                                    </template>
+                                </paper-listbox>
+                            </gl-form-dropdown-menu>
+                            <!--<gl-combo-box id="symbo-[[index]]" items="[[item.itemLogic]]" item-label-path="name" item-value-path="symbol" value="{{item.logic_show}}"></gl-combobox>-->
+                        </gl-grid-col>
+                        [[checkValue(item.field,index)]]
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                            <div id="combobox-[[index]]" hidden>
+                                <gl-form-dropdown-menu style="margin-top:15px;width:100%;">
+                                    <paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{item.value_show}}">
+                                        <template is="dom-repeat" items="{{item.itemValue}}">
+                                            <paper-item value="{{item.id}}">{{item.name}}</paper-item>
+                                        </template>
+                                    </paper-listbox>
+                                </gl-form-dropdown-menu>
+                                <!--<gl-combo-box id="value-combo-[[index]]" items="[[item.itemValue]]" item-label-path="name" item-value-path="id" value="{{item.value_show}}"></gl-combobox>-->
+                            </div>
+                            <div id="input-[[index]]" hidden>
+                                <gl-form-input value="{{item.value_show}}"></gl-form-input>
+                            </div>
+                        </gl-grid-col>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]">
+                            <paper-icon-button icon="delete" style="margin-top:25px;" index="{{index}}" on-tap="delete_condition"></paper-icon-button>
+                        </gl-grid-col>
+                    </gl-grid-row>
+                </template>
+                <div class="horizontal center-justified layout">
+                    <paper-button raised class="gl-btn-info" style="margin-top:15px;" on-tap="add_condition">เพิ่มเงื่อนไข</paper-button>
+                </div>
+                <div class="horizontal end-justified layout btn-bottom">
+                    <paper-button raised class="gl-btn-danger" on-tap="back">ยกเลิก</paper-button>
+                    <paper-button raised class="gl-btn-success" on-tap="save">บันทึก</paper-button>
+                </div>
+            </paper-material>
+
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'welfare-insert',
+            behaviors: [ReduxBehavior, FormatNumberBehavior],
+            properties: {
+                condition: {
+                    statePath: 'welfare.condition',
+                    // observer:'setCondition'
+                },
+                active: {
+                    type: Boolean,
+                    value: true
+                },
+                data:{
+                    type: Object,
+                    value:{
+                        condition:[],
+                    }
+                }
+                // value: {
+                //     type: Array,
+                //     value: [{}]
+                // }
+            },
+            add_condition:function () {
+                this.push('data.condition', {
+                    itemField: this.condition,
+                    field:'',
+                    itemLogic: '',
+                    logic_show: '',
+                    itemValue:'',
+                    value_show:''
+                })
+            },
+            setCondition:function(data){
+                // console.log(data);
+                if(data.length != 0){
+                    this.push('data.condition', {
+                        itemField: this.condition,
+                        field:'',
+                        itemLogic: '',
+                        logic_show: '',
+                        itemValue:'',
+                        value_show:''
+                    })
+                }
+               
+            },
+            getfield:function(id,index){
+                this.set('data.condition.'+index+'.logic_show','');
+                this.set('data.condition.'+index+'.value_show','');
+                if(id != ""){
+                    //  console.log(id);
+                     var filter = this.condition.filter((item)=>{
+                         return item.id == id;
+                     })
+                     var getcodition
+                     var getitemValue 
+                     filter.map((item)=>{
+                        getcodition = item.conditions;
+                        getitemValue = item.data;
+
+                     })
+                     console.log(getcodition);
+                     this.set('data.condition.'+index+'.itemLogic',getcodition);
+                     this.set('data.condition.'+index+'.itemValue',getitemValue);
+                     console.log(this.data.condition);
+                }
+                // console.log('*',filed);
+                // for (var index = 0; index < filed.base.length; index++) {
+                //     var id = filed.base[index].field;
+                //     // console.log(filter);
+                //     // console.log(id);
+                //     // var condition = this.condition[index]
+                //     if(typeof this.condition != 'undefined'){
+                //         // console.log(this.condition);
+                //         var filter = this.condition.filter((item)=>{
+                //             return id == item.id
+                //         })
+                //         var getCondition = [];
+                //         filter.map((item)=>{
+                //             getCondition = item.conditions;
+                //         });
+                //         console.log(getCondition);
+                //         // console.log(filter);
+                //         this.set('data.condition.'+index+'.itemLogic',getCondition)
+                //     }
+                    
+                // }
+            },
+            save: function () {
+                for (var i = 0; i < this.data.condition.length; i++) {
+                    // console.log(this.data.condition[i].field);
+                    var id = this.data.condition[i].field;
+                    var item = this.condition.filter((val) => val.id == id)[0]
+                    var field = item.field;
+                    // console.log(field);
+                    // console.log(this.data.condition[i].logic.search("<"))
+                    if (field == 'start_work_date') {
+                        if (this.data.condition[i].logic_show.search(">") >= 0) {
+                            var d = this.datas.start_date.split("-");
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace(">", "<");
+                        } else if (this.data.condition[i].logic_show.search("<") >= 0) {
+                            var d = this.datas.end_date.split("-");
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace("<", ">");
+                        }
+                    }
+                    else if (field == 'birthday') {
+                        if (this.data.condition[i].logic_show.search(">") >= 0) {
+                            var date = new Date().toISOString().split("T")(0);
+                            var d = date.split('-');
+                            // console.log(d);
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace(">", "<");
+                        } else if (this.data.condition[i].logic_show.search("<") >= 0) {
+                            var date = new Date().toISOString().split("T")(0);
+                            var d = date.split('-');
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace("<", ">");
+                        }
+                    } else {
+                        this.data.condition[i].value = this.data.condition[i].value_show;
+                        this.data.condition[i].logic = this.data.condition[i].logic_show;
+                    }
+
+                }
+                this.data.budget = this.unFormat(this.data.budget);
+                this.set('data.group_id', this.datas.id);
+                // console.log(this.data);
+                var newItem = {
+                    budget:this.data.budget,
+                    group_id: this.data.group_id,
+                    welfare_name: this.data.welfare_name,
+                    condition: this.data.condition.map((item)=>{
+                        var newItem = {
+                            field: item.field,
+                            logic: item.logic,
+                            logic_show: item.logic_show,
+                            value: item.value,
+                            value_show: item.value_show
+                        }
+                        return newItem;
+                    })
+                  
+                }
+                // console.log(newItem);
+                this.fire('back');
+                this.dispatchAction('WELFARE_INSERT', newItem);
+            },
+            delete_condition: function (e) {
+                // console.log(e.target.index);
+                this.splice('data.condition', e.target.index, 1);
+            },
+            back: function () {
+                this.fire('back');
+                this.data = {};
+                this.data = {
+                    condition: [
+                //         { field: '', logic: '', value: '' }
+                    ]
+                };
+            },
+            checkField: function (e, index) {
+                try {
+                    var combobox = Polymer.dom(this.root).querySelector('#symbo-' + index);
+                    // console.log(combobox.items);
+                    var id = e;
+                    var symbol = this.condition.filter((val) => val.id == id)[0]
+                    // console.log(symbol);
+                    combobox.items = symbol.conditions;
+
+                } catch (error) {
+
+                }
+            },
+            checkValue: function (e, index) {
+                try {
+                    var combobox = Polymer.dom(this.root).querySelector('#value-combo-' + index);
+                    var id = e;
+                    var value = this.condition.filter((val) => val.id == id)[0]
+                    // combobox.items = value.data;
+                    if (value.data.length == 0) {
+                        Polymer.dom(this.root).querySelector('#input-' + index).hidden = false;
+                        Polymer.dom(this.root).querySelector('#combobox-' + index).hidden = true;
+                    } else {
+                        Polymer.dom(this.root).querySelector('#input-' + index).hidden = true;
+                        Polymer.dom(this.root).querySelector('#combobox-' + index).hidden = false;
+                        // combobox.items = [];
+                        combobox.items = value.data;
+                    }
+                } catch (error) {
+
+                }
+            },
+            count: function (val) {
+                return val + 1;
+            }
+        });
+    </script>
+</dom-module>

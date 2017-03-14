@@ -1,0 +1,188 @@
+<link rel="import" href="./../components/panel-right/panel-right.html">
+<link rel="import" href="./../components/page-style.html">
+<link rel="import" href="components/logic-panel.html">
+<link rel="import" href="components/list-of-logic.html">
+<link rel="import" href="./components/list-welfare-common.html">
+<link rel="import" href="./components/common-components/academic-manage.html">
+<link rel="import" href="./components/common-components/active-manage.html">
+<link rel="import" href="./components/common-components/department-manage.html">
+<link rel="import" href="./components/common-components/faculty-manage.html">
+<link rel="import" href="./components/common-components/gender-manage.html">
+<link rel="import" href="./components/common-components/matier-manage.html">
+<link rel="import" href="./components/common-components/position-manage.html">
+<link rel="import" href="./components/common-components/prefixname-manage.html">
+<link rel="import" href="./components/common-components/relation-manage.html">
+<link rel="import" href="./components/common-components/TypeEmployee-manage.html">
+
+<dom-module id="page-back-end">
+      <style include="iron-flex iron-flex-factors iron-flex-alignment page-style">
+    :host {
+      --paper-fab-background:var(--paper-light-blue-500);
+      --paper-fab-keyboard-focus-background: var(--paper-light-blue-900);
+    }
+    *{
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    paper-fab {
+         position: fixed;
+         right: 25px;
+         bottom: 25px;
+         color: #fff;
+    }
+    list-of-logic {
+        width: 80%;
+    }
+        </style>
+    <template>
+        <div class="list horizontal center-justified layout">
+            <list-of-logic></list-of-logic>
+           
+        </div>
+
+        <div class="xcontainer">
+             <list-welfare-common></list-welfare-common>
+        </div>
+        
+         <panel-right id="test" title="{{title}}" >
+             <iron-pages selected="{{selected}}">
+                 <section>
+                    <logic-panel></logic-panel>
+                 </section>
+                 <section>
+                    <academic-manage></academic-manage>
+                 </section>
+                 <section>
+                    <active-manage></active-manage>
+                 </section>
+                 <section>
+                    <department-manage></department-manage>
+                 </section>
+                 <section>
+                     <faculty-manage></faculty-manage>
+                 </section>
+                  <section>
+                     <gender-manage></gender-manage>
+                 </section>
+                <section>
+                     <matier-manage></matier-manage>
+                 </section>
+                <section>
+                    <position-manage></position-manage>
+                 </section>
+                 <section>
+                    <prefixname-manage></prefixname-manage>
+                 </section>
+                  <section>
+                    <relation-manage></relation-manage>
+                 </section>
+                <section>
+                    <TypeEmployee-manage></TypeEmployee-manage>
+                </section>
+             </iron-pages>
+             
+         <!--<iron-pages selected="{{page}}">
+             <div class="horizontal center-justified layout">
+                <user-panel class="sub-component" data="[[dataSelete]]"></user-panel>
+        </iron-pages>-->
+         </panel-right>
+         
+    </template>
+    <script>
+        Polymer({
+            is: 'page-back-end',
+            behaviors:[nylonBehavior,ReduxBehavior,conditionReadWelfareAction,commonDataAction],
+            properties:{
+                data:{
+                    statePath:'conditionReadWelfare.select'
+                }
+            },
+            nylonPageActive:function(){
+                this.dispatchAction('CONDITIONREADWELFARE_LIST');
+                this.dispatchAction('CONDITIONREADWELFARE_TABLE_LIST');
+                this.dispatchAction('CONDITIONREADWELFARE_FIEID_LIST');
+                
+            },
+            listeners:{
+                'open-panel':'openPanel',
+                '_get-field':'_getField',
+                '_edit-data-condition':'_editDataCondition'
+            },
+            _getField(){
+                // this.set('dataSelete',{})
+                this.selected = 0;
+                this.$$('panel-right').open();
+                this.set('title','เพิ่มฟิลด์')
+                this.dispatchAction('CONDITIONREADWELFARE_SET'); 
+                this.dispatchAction('CONDITIONREADWELFARE_BTN',false);
+                this.dispatchAction('CONDITIONREADWELFARE_INSERT_VIEW',true);
+            },
+            _editDataCondition(e){
+                this.selected = 0;
+                this.set('title','แก้ไขฟิลด์')
+                this.dispatchAction('CONDITIONREADWELFARE_BTN',true);
+                this.dispatchAction('CONDITIONREADWELFARE_INSERT_VIEW',false);
+                this.dispatchAction('CONDITIONREADWELFARE_SELECT',e.detail); 
+                this.$$('panel-right').open(); 
+            },
+            openPanel:function(e){    
+                var item = e.detail;
+                switch (item) {
+                    case 'academic':
+                        this.selected = 1;
+                        this.COMMONDATA_DATA_ACADEMIC();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'active':
+                        this.selected = 2;
+                        this.COMMONDATA_DATA_ACTIVE();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'department':
+                        this.selected = 3;
+                        this.COMMONDATA_DATA_DEPARTMENT();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'faculty':
+                        this.selected = 4;
+                        this.COMMONDATA_DATA_FACULTY();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'gender':
+                        this.selected = 5;
+                        this.COMMONDATA_DATA_GENDER();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'matier':
+                        this.selected = 6;
+                        this.COMMONDATA_DATA_MATIER();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'position':
+                        this.selected = 7;
+                        this.COMMONDATA_DATA_POSITION();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'prefix':
+                        this.selected = 8;
+                        this.COMMONDATA_DATA_PREFIXNAME();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'relation':
+                        this.selected = 9;
+                        this.COMMONDATA_DATA_RELATION();
+                        this.$$('panel-right').open();
+                        break;
+                    case 'type_employee':
+                        this.selected = 10;
+                        this.COMMONDATA_DATA_TYPE_EMPLOYEE();
+                        this.$$('panel-right').open();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+        });
+    </script>
+</dom-module>

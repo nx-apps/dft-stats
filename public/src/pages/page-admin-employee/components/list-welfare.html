@@ -1,0 +1,78 @@
+<link rel="import" href="list-user.html">
+<dom-module id="list-welfare">
+    <style is="custom-style" include="gl-color gl-table iron-flex iron-flex-factors iron-flex-alignment">
+        paper-material {
+            background-color: var(--gl-white-color);
+        }
+        .table-detail {
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+        }
+        table.gl-table-default {
+            border: 1px solid #ddd;
+        }
+    </style>
+    <template>
+        <iron-pages selected="{{pages}}">
+            <div>
+                <div class="horizontal layout">
+                    <paper-button raised on-tap="back">back</paper-button>
+                </div>
+                <div class="table-detail">
+                    <paper-material elevation="1">
+                        <table class="gl-table-default">
+                            <thead class="table-head">
+                                <tr>
+                                    <th style="text-align:center;">ชื่อสวัสดิการย่อย</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                <template is="dom-repeat" items="{{list}}">
+                                    <template is="dom-repeat" items="{{item.welfare}}" as="welfare">
+                                    <tr data="[[welfare]]" on-tap="select_welfare" style="cursor:pointer;">
+                                        <td>[[welfare.welfare_name]]</td>
+                                    </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </paper-material>
+                </div>
+            </div>
+            <div>
+                <list-user></list-user>
+            </div>
+        </iron-pages>
+    </template>
+    <script>
+        Polymer({
+            is: 'list-welfare',
+            behaviors: [ReduxBehavior],
+            properties: {
+                pages:{
+                    type:Number,
+                    value:0
+                },
+                list: {
+                    statePath: 'userWelfare.list_id',
+                }
+            },
+            listeners:{
+                'back_page_welfare' : 'back_page'
+            },
+            select_welfare: function (e) {
+                // console.log(e.currentTarget.data);
+                this.pages = 1;
+                var id = e.currentTarget.data.id;
+                this.dispatchAction('LIST_USER',id);
+            },
+            back:function(){
+                this.fire('back_page');
+            },
+            back_page:function(){
+                this.pages = 0;
+            }
+        });
+    </script>
+</dom-module>

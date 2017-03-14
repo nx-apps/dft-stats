@@ -1,0 +1,57 @@
+<link rel="import" href="./provider-list.html">
+<dom-module id="page-provider">
+    <template>
+        <style include="page-style">
+            .page{
+                background-color: white;
+            }
+            .fabSave{
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                --paper-fab-background: #337ab7;
+            }
+            paper-dialog{
+                width: 50%;
+                height: auto;
+            }
+        </style>
+
+
+
+        <!--<div class="xcontainer">
+            <div class="header gl-large">
+                จัดการชุดข้อสอบ
+            </div>
+            <examination-list data-list="[[dataList]]" type-list="examination"></examination-list>
+            <panel-right title="จัดการชุดข้อสอบ">
+                <examination-page selected="0" data="[[data]]"></examination-page>
+                
+            </panel-right>
+        </div>-->
+
+
+        <div class="xcontainer">
+            
+            <div class="header gl-large">
+                จัดการ Provider
+            </div>
+            <provider-list type-list="examination"></provider-list>
+            <panel-right title="จัดการ Provider">
+                <provider-manage selected="0" data="[[data]]"></provider-manage>
+            </panel-right>
+        </div>
+
+
+
+    </template>
+    <script>
+        Polymer({
+            is: 'page-provider',
+            behaviors: [nylonBehavior,ReduxBehavior,providerAction],
+            nylonPageActive:function(){
+                this.dispatchAction('PROVIDER_LIST');
+            }
+        });
+    </script>
+</dom-module>

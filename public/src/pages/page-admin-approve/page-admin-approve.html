@@ -1,0 +1,34 @@
+<link rel="import" href="./../components/panel-right/panel-right.html">
+<link rel="import" href="./../components/page-style.html">
+<link rel="import" href="./../components/format-number-behavior.html">
+<link rel="import" href="./components/user-list-unapprove.html">
+<!--<link rel="import" href="./../components/common-logic.html">-->
+<dom-module id="page-admin-approve">
+    <style include="iron-flex iron-flex-factors iron-flex-alignment">
+            *{
+      font-family: 'CSChatThaiUI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+            user-list-unapprove {
+                margin-top: 15px;
+        width: 98%;
+    }
+        </style>
+    <template>
+        
+        <div class="list horizontal center-justified layout">
+            <user-list-unapprove></user-list-unapprove>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-admin-approve',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,usersAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('USERS_FALSE_LIST');
+            }
+        });
+    </script>
+</dom-module>

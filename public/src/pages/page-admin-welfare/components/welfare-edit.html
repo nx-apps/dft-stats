@@ -1,0 +1,340 @@
+<link rel="import" href="../../components/format-number-behavior.html">
+<dom-module id="welfare-edit">
+    <template>
+        <style is="custom-style" include="page-style iron-flex iron-flex-factors iron-flex-alignment">
+            gl-form-input,
+            vaadin-date-picker,
+            gl-combo-box {
+                margin-top: 15px;
+            }
+            
+            .label_condition {
+                font-weight: bold;
+                text-align: right;
+                margin-top: 35px;
+                font-size: 20px;
+            }
+            
+            .btn-bottom {
+                margin: 30px;
+            }
+            
+            paper-material {
+                background-color: var(--gl-white-color);
+            }
+            
+            .table-detail {
+                margin: auto;
+                width: 96%;
+                padding: 20px 20px 100px 20px;
+            }
+            
+            table.gl-table-default {
+                border: 1px solid #ddd;
+            }
+        </style>
+        <div style="padding:20px;">
+   <!--[[setCondition(condition)]]-->
+            <paper-material elevation="1">
+
+                <div class="horizontal end-justified layout">
+                    <div style="margin:20px 20px 0px 0px;" hidden="{{status}}">
+                        <paper-icon-button icon="icons:create" on-tap="_edit"></paper-icon-button>
+                        <paper-icon-button icon="delete" on-tap="_delete"></paper-icon-button>
+                    </div>
+                </div>
+
+                <gl-grid-row width="{{getWidth}}">
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="ชื่อสวัสดิการย่อย" value="{{data.welfare_name}}" placeholder="กรุณากรอกชื่อสวัสดิการ" disabled="{{active}}"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <gl-grid-row>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]"></gl-grid-col>
+                    <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,4]]">
+                        <gl-form-input label="จำนวนเงิน" format-number="on" value="{{data.budget}}" placeholder="กรุณากรอกจำนวนเงิน" disabled="{{active}}"></gl-form-input>
+                    </gl-grid-col>
+                </gl-grid-row>
+                <template is="dom-repeat" items="{{data.condition}}">
+                    <gl-grid-row>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]"></gl-grid-col>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]">
+                            <div class="label_condition">เงื่อนไข</div>
+                        </gl-grid-col>
+                        [[checkField(item.field,index)]]
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                            <gl-combo-box id="name-[[index]]" on-value-changed="setCondition" id="[[index]]"  item-label-path="label" item-value-path="id" items="[[condition]]"
+                                value="{{item.field}}" disabled="{{active}}"></gl-combobox>
+                        </gl-grid-col>
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,2]]">
+                            <gl-combo-box id="symbo-[[index]]" item-label-path="name" item-value-path="symbol" value="{{item.logic_show}}" disabled="{{active}}"></gl-combobox>
+                        </gl-grid-col>
+                        [[checkValue(item.field,index)]]
+                        <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,3]]">
+                            <div id="combobox-[[index]]" hidden>
+                                <gl-combo-box id="value-combo-[[index]]" item-label-path="name" item-value-path="id" value="{{item.value_show}}" disabled="{{active}}"></gl-combobox>
+                            </div>
+                            <div id="input-[[index]]" hidden>
+                                <gl-form-input value="{{item.value_show}}" disabled="{{active}}"></gl-form-input>
+                            </div>
+                        </gl-grid-col>
+                        <div hidden="{{active}}">
+                            <gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,1]]">
+                                <paper-icon-button icon="delete" style="margin-top:25px;" index="{{index}}" on-tap="delete_condition"></paper-icon-button>
+                            </gl-grid-col>
+                        </div>
+                    </gl-grid-row>
+                </template>
+                <div class="horizontal center-justified layout">
+                    <div hidden="{{active}}">
+                        <paper-button raised class="gl-btn-info" style="margin-top:15px;" on-tap="add_condition">เพิ่มเงื่อนไข</paper-button>
+                    </div>
+                </div>
+                <div class="horizontal layout">
+                    <div hidden="{{!active}}" class="btn-bottom">
+                        <paper-button raised class="gl-btn-danger" on-tap="back">ย้อนกลับ</paper-button>
+                        <paper-button raised class="gl-btn-info" on-tap="list_users">ดูสมาชิก</paper-button>
+                        <paper-button raised class="gl-btn-warning" on-tap="print">Print</paper-button>
+                    </div>
+                </div>
+                <div class="horizontal end-justified layout">
+                    <div hidden="{{active}}" class="btn-bottom">
+                        <paper-button raised class="gl-btn-danger" on-tap="cancle">ยกเลิก</paper-button>
+                        <paper-button raised class="gl-btn-success" on-tap="save">บันทึก</paper-button>
+                    </div>
+                </div>
+            </paper-material>
+
+        </div>
+
+        
+        
+        
+        <template is="dom-if" if="{{tableStatus}}">
+            <div class="horizontal end-justified layout" >
+                <div style="margin-right:30px;font-weight: bold;font-size: 20px;">จำนวนผู้ได้รับสิทธิ [[employees.count_employee]] คน</div>
+            </div>
+            <div class="table-detail">
+                <paper-material elevation="1">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="text-align:center">เลขบัตรประชาชน</th>
+                                <th style="text-align:center">ชื่อ</th>
+                                <th style="text-align:center">ตำแหน่ง</th>
+                                <th style="text-align:center">แผนก</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items="{{employees.employee}}">
+                                <tr>
+                                    <td>[[item.personal_id]]</td>
+                                    <td>[[item.prefix_name]] [[item.firstname]] [[item.lastname]]</td>
+                                    <td>[[item.position_name]]</td>
+                                    <td>[[item.department_name]]</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </paper-material>
+            </div>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: 'welfare-edit',
+            behaviors: [ReduxBehavior, FormatNumberBehavior],
+            properties: {
+                condition: {
+                    statePath: 'welfare.condition'
+                },
+                data: {
+                    statePath: 'welfare.dataSelect',
+                    type: Object,
+                    // value:
+                    // {
+                    //     condition: [
+                    //         { field: '', logic: '', value: '' }
+                    //     ]
+                    // },
+                    // notify: true
+                },
+                active: {
+                    type: Boolean,
+                    value: true
+                },
+                employees: {
+                    statePath: 'welfare.employees'
+                }
+            },
+            // attached: function() {
+            //     this.setCondition();
+            // },
+            add_condition: function () {
+                this.push('data.condition', { field_id: '', logic_show: '', value_show: '' })
+            },
+            save: function () {
+                for (var i = 0; i < this.data.condition.length; i++) {
+                    // console.log(this.data.condition[i].field);
+                    var id = this.data.condition[i].field_id;
+                    var item = this.condition.filter((val) => val.id == id)[0]
+                    var field = item.field;
+                    // console.log(field);
+                    // console.log(this.data.condition[i].logic.search("<"))
+                    if (field == 'start_work_date') {
+                        if (this.data.condition[i].logic_show.search(">") >= 0) {
+                            var d = this.datas.start_date.split("-");
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace(">", "<");
+                        } else if (this.data.condition[i].logic_show.search("<") >= 0) {
+                            var d = this.datas.end_date.split("-");
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace("<", ">");
+                        }
+                    }
+                    else if (field == 'birthday') {
+                        if (this.data.condition[i].logic_show.search(">") >= 0) {
+                            var date = new Date().toISOString().split("T")(0);
+                            var d = date.split('-');
+                            // console.log(d);
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace(">", "<");
+                        } else if (this.data.condition[i].logic_show.search("<") >= 0) {
+                            var date = new Date().toISOString().split("T")(0);
+                            var d = date.split('-');
+                            this.data.condition[i].value = (parseInt(d[0]) - parseInt(this.data.condition[i].value_show)) + "-" + d[1] + "-" + d[2];
+                            this.data.condition[i].logic = this.data.condition[i].logic_show.replace("<", ">");
+                        }
+                    } else {
+                        this.data.condition[i].value = this.data.condition[i].value_show;
+                        this.data.condition[i].logic = this.data.condition[i].logic_show;
+                    }
+
+                }
+                this.data.budget = this.unFormat(this.data.budget);
+                console.log(this.data);
+                // this.dispatchAction('WELFARE_EDIT', this.data)
+                this.set('disabled', this.active = true);
+            },
+            delete_condition: function (e) {
+                // console.log(e.target.index);
+                this.splice('data.condition', e.target.index, 1);
+            },
+            back: function () {
+                this.fire('back');
+                this.set('disabled', this.active = true);
+                this.data = {
+                    condition: [
+                        { field: '', logic: '', value: '' }
+                    ]
+                };
+                this.tableStatus = false;
+            },
+            cancle: function () {
+                this.set('disabled', this.active = true);
+                this.dispatchAction('WELFARE_DATA_SELECT', this.data.id)
+            },
+            // setCondition(){
+            //      this.async(()=>{
+            //          try {
+            //              let  comboboxs,arrForItem,itemif;
+            //         // console.log('hhhhhhhhhhhhhh',this.condition);
+                    
+            //         for (var i = 0; i < this.data.condition.length; i++) {
+            //             arrForItem = JSON.parse(JSON.stringify(this.condition));
+            //             // console.log(arrForItem);
+            //             this.data.condition.map((item,index)=>{
+            //                 let itemUse = item.field
+            //                 let date =  this.condition.filter((field)=> field.id == itemUse)[0]
+            //                 // // console.log('date',date);
+            //                 // console.log(date.field.search('date') > 0);
+            //                 console.log(i, index,i != index);
+            //                     if (i != index) {
+            //                         // console.log(date.field.search('date') > 0);
+            //                         // console.log(arrForItem);
+            //                     if (arrForItem.filter((blDetail)=> blDetail.id == item.field )[0] != undefined) {
+            //        itemif = arrForItem.indexOf(arrForItem.filter((blDetail)=> blDetail.id == item.field )[0]);
+            //       //  console.log(itemif);
+            //        arrForItem.splice(itemif, 1);
+            //      }
+                 
+            //                 } //else if (date[0].field.search('date') > 0) {
+            //                     // console.log(11121212);
+            //                     console.log('arrForItem',arrForItem);
+            //                 //     let count = this.data.condition.filter((field)=> field.field == itemUse).length
+            //                 //     console.log('จริงง');
+            //                 //     if (count > 1){
+                                    
+            //                 //     }
+            //                // }
+                            
+                            
+            //                 // console.log(item.field);
+                            
+            //             });
+            //             // console.log(arrForItem);
+            //             var combobox = Polymer.dom(this.root).querySelector('#name-'+i);
+            //             console.log('combobox>',combobox);
+            //             //  console.log('151218131865168');
+            //             combobox.items = arrForItem
+            //         }
+            //          } catch (error) {
+                         
+            //          }
+                    
+            //      },1);  
+            // },
+            checkField: function (e, index) {
+                 this.async(()=>{
+                  try {
+                    // console.log(e, index);
+                    // console.log('ddddddd',document.getElementById(symbo-1));
+                    var combobox = Polymer.dom(this.root).querySelector('#symbo-'+index);
+                    // console.log('fffff',combobox);
+                    var id = e;
+                    var symbol = this.condition.filter((val) => val.id == id)[0]
+                    // console.log(symbol);
+                    combobox.items = symbol.conditions;
+
+                } catch (error) {
+
+                }
+                 },1);  
+            },
+            checkValue: function (e, index) {
+                this.async(()=>{
+                try {
+                    var combobox = Polymer.dom(this.root).querySelector('#value-combo-' + index);
+                    var id = e;
+                    var value = this.condition.filter((val) => val.id == id)[0]
+                    combobox.items = value.data;
+                    if (value.data.length == 0) {
+                        Polymer.dom(this.root).querySelector('#input-' + index).hidden = false;
+                        Polymer.dom(this.root).querySelector('#combobox-' + index).hidden = true;
+                    } else {
+                        Polymer.dom(this.root).querySelector('#input-' + index).hidden = true;
+                        Polymer.dom(this.root).querySelector('#combobox-' + index).hidden = false;
+                        // combobox.items = [];
+                        combobox.items = value.data;
+                    }
+                } catch (error) {
+
+                }
+                },1); 
+            },
+            _edit: function () {
+                this.set('disabled', this.active = false);
+            },
+            list_users: function () {
+                var id = this.data.id;
+                this.dispatchAction('WELFARE_LIST_EMPLOYEE', id)
+                this.tableStatus = true;
+            },
+            print:function(){
+                var id = this.data.id;
+                window.open('api/report/report1/' + id);
+            }
+        });
+    </script>
+</dom-module>
