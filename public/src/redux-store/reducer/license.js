@@ -35,15 +35,17 @@ export function licenseAction(store){
       },
       LICENSE_CODE_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-        console.log(data);
-        // axios.get('/license/')
-        // .then( (response)=>{
-        //     console.log(response);
-        //     store.dispatch({type:'license_CODE_GET',payload:response.data})
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
+        // console.log(data); 
+        axios.get('/license/re01/?'+data)
+        .then( (response)=>{
+            console.log(response);
+            this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
+              store.dispatch({type:'LICENSE_CODE_GET',payload:response.data})
+            }});
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
       },
    }]
 };

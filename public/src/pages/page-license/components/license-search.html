@@ -59,7 +59,7 @@
             },
             getlicenseValue(){
                 // console.log(this.change2GMT7(this.data));
-                this.dispatchAction('LICENSE_CODE_SEARCH',this.change2GMT7(this.data))
+                this.dispatchAction('LICENSE_CODE_SEARCH',this.genUrl(this.change2GMT7(this.data)))
             },
         });
     </script>
