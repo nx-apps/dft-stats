@@ -43,30 +43,72 @@ exports.re01 = function (req, res) {
         edate: e
     })
         .merge(function (hm) {
-            return r.table('ec_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
-                .pluck('id')
-                .coerceTo('array')
-                .merge(function (dm) {
-                    return r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
-                        .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
-
-                })
-                //  .getField('hamonize')
-                .reduce(function (l, r) {
-                    return l.add(r)
-                })
-                .group('hamonize_code')
-                .ungroup()
-                .map(function (dm) {
-                    return {
-                        hamonize_code: dm('group'),
-                        fob_amt_baht_out: dm('reduction').sum('fob_amt_baht'),
-                        net_weight_out: dm('reduction').sum('net_weight')
-                    }
-                })
-            // }
+            return {
+                out: r.table('ec_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
+                    .pluck('id')
+                    .coerceTo('array')
+                    .merge(function (dm) {
+                        return {
+                            hamonize: r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
+                                .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
+                        }
+                    })
+                    .getField('hamonize')
+                    .reduce(function (l, r) {
+                        return l.add(r)
+                    })
+                    .group('hamonize_code')
+                    .ungroup()
+                    .map(function (dm) {
+                        return {
+                            hamonize_code: dm('group'),
+                            fob_amt_baht: dm('reduction').sum('fob_amt_baht'),
+                            net_weight: dm('reduction').sum('net_weight'),
+                            status: 'out'
+                        }
+                    }),
+                in: r.table('ic_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
+                    .pluck('id')
+                    .coerceTo('array')
+                    .merge(function (dm) {
+                        return {
+                            hamonize: r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
+                                .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
+                        }
+                    })
+                    .getField('hamonize')
+                    .reduce(function (l, r) {
+                        return l.add(r)
+                    })
+                    .group('hamonize_code')
+                    .ungroup()
+                    .map(function (dm) {
+                        return {
+                            hamonize_code: dm('group'),
+                            fob_amt_baht: dm('reduction').sum('fob_amt_baht'),
+                            net_weight: dm('reduction').sum('net_weight'),
+                            status: 'in'
+                        }
+                    })
+            }
         })
-        // .getField('data')
+        .merge(function (data_merge) {
+            return {
+                data: data_merge('in').union(data_merge('out'))
+            }
+        })
+        .getField('data')
+        .group('hamonize_code')
+        .ungroup()
+        .map(function (dm) {
+            return {
+                hamonize_code: dm('group'),
+                fob_amt_baht_in: dm('reduction').filter({ status: 'in' }).sum('fob_amt_baht'),
+                fob_amt_baht_out: dm('reduction').filter({ status: 'out' }).sum('fob_amt_baht'),
+                net_weight_in: dm('reduction').filter({ status: 'in' }).sum('net_weight'),
+                net_weight_out: dm('reduction').filter({ status: 'out' }).sum('net_weight')
+            }
+        })
         .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
         .orderBy('hamonize_code')
         .run()
