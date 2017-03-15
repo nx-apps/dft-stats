@@ -1,4 +1,4 @@
-
+<link rel="import" href="./../../components/format-number-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
 
 <dom-module id="company-list">
@@ -29,7 +29,11 @@
     <script>
         Polymer({
             is: 'company-list',
-            behaviors:[DataManageBehavior],
+            behaviors:[
+                DataManageBehavior,
+                ReduxBehavior,
+                FormatNumberBehavior
+            ],
             properties:{
                 dataList:{
                     type: Array,
