@@ -34,7 +34,6 @@ exports.h01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    res.json(param);
     r.expr({
         sdate: s,
         edate: e
