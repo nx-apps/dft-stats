@@ -29,12 +29,14 @@ exports.re01 = function (req, res) {
     if (typeof req.query.sdate !== "undefined") {
         s = new Date(req.query.sdate).getTime()
     } else {
-        s = r.table('ec_head').orderBy({ index: 'approve_date' }).limit(1)(0).getField('approve_date')
+        s = new Date(today).getTime()
+        //r.table('ec_head').orderBy({ index: 'approve_date' }).limit(1)(0).getField('approve_date')
     }
     if (typeof req.query.edate !== "undefined") {
         e = new Date(req.query.edate).getTime()
     } else {
-        e = r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
+        e = new Date(tomorrow).getTime()
+        //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
     r.expr({
         sdate: s,
