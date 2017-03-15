@@ -6,6 +6,8 @@
             <div class="container">
                 <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         เริ่มวันที่ : 
                     </div>
@@ -20,14 +22,18 @@
                         <vaadin-date-picker class="textCenter" value="{{data.edate}}"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
                 </div>
                 <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         เลข พณ. : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="" item-label-path="" item-value-path="" value=""></gl-combo-box>
+                        <gl-combo-box class="textCenter" items="[[licenseCodeList]]" item-label-path="reference_code2" item-value-path="id" value="{{data.license_id}}"></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -37,6 +43,9 @@
                             </paper-button>
                         </div>
                     </div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
                 </div>
             </div>
         </paper-material>
@@ -49,9 +58,9 @@
                 MonthBehavior
             ],
             properties:{
-                // hamonizeCodeList:{
-                //     statePath:'hamonize.hamonizeCodeList'
-                // },
+                licenseCodeList:{
+                    statePath: 'license.licenseCodeList'
+                },
                 data:{
                     type:Object,
                     value:{}
