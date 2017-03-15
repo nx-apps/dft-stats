@@ -13,6 +13,8 @@ export function hamonizeReducer(state = initialState,action){
     switch (action.type) {
         case 'HAMONIZE_CODE_GET':
           return Object.assign({},state,{hamonizeCodeList:action.payload});
+        case 'HAMONIZE_CODE_SEARCH' :
+          return Object.assign({},state,{list:action.payload});   
         default:
           return state
     }
@@ -38,7 +40,10 @@ export function hamonizeAction(store){
         axios.get('/hamonize/re01?'+data)
         .then( (response)=>{
             console.log(response);
-            store.dispatch({type:'HAMONIZE_CODE_SEARCH',payload:response.data})
+            this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
+              store.dispatch({type:'HAMONIZE_CODE_SEARCH',payload:response.data})
+            }});
+            
         })
         .catch(function (error) {
             console.log(error);

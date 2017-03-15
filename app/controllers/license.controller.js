@@ -2,7 +2,6 @@ var today = new Date();
 var dd = today.getDate();
 var dt = today.getDate() + 1;
 var mm = today.getMonth() + 1; //January is 0!
-
 var yyyy = today.getFullYear();
 if (dd < 10) {
     dd = '0' + dd;
@@ -15,7 +14,8 @@ if (mm < 10) {
 }
 var today = '2016' + '-' + mm + '-' + dd;
 var tomorrow = '2016' + '-' + mm + '-' + dt;
-exports.h01 = function (req, res) {
+
+exports.re01 = function (req, res) {
     var r = req.r;
     var s, e;
     if (typeof req.query.sdate !== "undefined") {
@@ -37,35 +37,23 @@ exports.h01 = function (req, res) {
         .merge(function (hm) {
             return {
                 data: r.table('ec_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
-                    .pluck('id')
+                    .pluck('id', 'reference_code2', 'company_name', 'approve_date', 'expire_date')
                     .coerceTo('array')
                     .merge(function (dm) {
                         return {
+                            ax: r.js("(function(x) { d = new Date(x.approve_date); return d.toISOString(); })"),
+                            //  approve_date: dm('approve_date'),
                             hamonize: r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
                                 .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
                         }
                     })
-                    .getField('hamonize')
-                    .reduce(function (l, r) {
-                        return l.add(r)
-                    })
-                    .group('hamonize_code')
-                    .ungroup()
-                    .map(function (dm) {
-                        return {
-                            hamonize_code: dm('group'),
-                            fob_amt_baht_out: dm('reduction').sum('fob_amt_baht'),
-                            net_weight_out: dm('reduction').sum('net_weight')
-                        }
-                    })
-                    .orderBy('hamonize_code')
             }
         })
-        .getField('data')
-        .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
+        // .getField('data')
+        // .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
         .run()
         .then(function (data) {
-            // res.json(data)
-           res.ireport("report1.jasper", req.query.export || "pdf", data);
-        });
+            res.json(data)
+        })
+
 }
