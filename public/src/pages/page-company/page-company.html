@@ -17,7 +17,13 @@
     </template>
     <script>
         Polymer({
-            is: 'page-company'
+            is: 'page-company',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,companyAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('COMPANY_CODE_GET');
+            }
         });
     </script>
 </dom-module>

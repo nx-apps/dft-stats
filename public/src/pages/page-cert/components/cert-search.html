@@ -10,14 +10,14 @@
                         เริ่มวันที่ : 
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.date_start}}"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
                         <div class="labelSearchDate">
                         ถึงวันที่ : 
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.date_end}}"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
                 </div>
@@ -29,14 +29,33 @@
                     <div class="flex2child">
                         <gl-combo-box class="textCenter" items="" item-label-path="" item-value-path="" value=""></gl-combo-box>
                     </div>
-                    <div class="flexchild"></div>
+                    <div class="flexchild">
+                        <div class="btn-search">                    
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </paper-material>
     </template>
     <script>
         Polymer({
-            is: 'cert-search'
+            is: 'cert-search',
+            properties:{
+                // hamonizeCodeList:{
+                //     statePath:'hamonize.hamonizeCodeList'
+                // },
+                data:{
+                    type:Object,
+                    value:{}
+                }
+            },
+            getRiceValue(){
+                console.log(this.data);
+            }
         });
     </script>
 </dom-module>

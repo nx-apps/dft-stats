@@ -17,7 +17,13 @@
     </template>
     <script>
         Polymer({
-            is: 'page-cert'
+            is: 'page-cert',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,certAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('CERT_CODE_GET');
+            }
         });
     </script>
 </dom-module>

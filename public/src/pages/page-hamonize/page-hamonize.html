@@ -17,7 +17,13 @@
     </template>
     <script>
         Polymer({
-            is: 'page-hamonize'
+            is: 'page-hamonize',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,hamonizeAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('HAMONIZE_CODE_GET');
+            }
         });
     </script>
 </dom-module>

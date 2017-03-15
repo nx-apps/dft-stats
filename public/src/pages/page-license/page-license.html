@@ -17,7 +17,13 @@
     </template>
     <script>
         Polymer({
-            is: 'page-license'
+            is: 'page-license',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,licenseAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('LICENSE_CODE_GET');
+            }
         });
     </script>
 </dom-module>
