@@ -1,4 +1,6 @@
 
+<link rel="import" href="./../../components/format-number-behavior.html">
+
 <link rel="import" href="./../../components/data-manage-behavior.html">
 
 <dom-module id="hamonize-list">
@@ -8,32 +10,47 @@
             <table class="gl-table-default">
                 <thead>
                     <tr>
-                        <th>HM CODE</th>
-                        <th>ชื่อ</th>
-                        <th>เข้า (ตัน)</th>
-                        <th>มูลค่า (บาท)</th>
-                        <th>ออก (ตัน)</th>
-                        <th>มูลค่า (บาท)</th>
+                        <th class="label-head">HM CODE</th>
+                        <th class="label-head">ชื่อ</th>
+                        <th class="label-head">เข้า (ตัน)</th>
+                        <th class="label-head">มูลค่า (บาท)</th>
+                        <th class="label-head">ออก (ตัน)</th>
+                        <th class="label-head">มูลค่า (บาท)</th>
                     </tr>
                 </thead>
-                <template is="dom-if" if="[[checkData(dataList)]]">
-                    <tbody>
+                <tbody>
+                    <template is="dom-if" if="[[checkData(dataList)]]">
                         <tr>
                             <td colspan="6">ไม่พบข้อมูล</td>
                         </tr>
-                    </tbody>
-                </template>
+                    </template>
+                    
+                    <template is="dom-repeat" items={{dataList}} >
+                        <tr>
+                            <td>[[item.hamonize_code]]</td>
+                            <td>[[item.hamonize_th]]</td>
+                            <td>ไม่พบข้อมูล</td>
+                            <td>ไม่พบข้อมูล</td>
+                            <td class="format-number">[[formatNumber(item.net_weight_out)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht_out)]]</td>
+                        </tr>
+                    </template>
+                    
+                </tbody>
             </table>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'hamonize-list',
-            behaviors:[DataManageBehavior],
+            behaviors:[
+                ReduxBehavior,
+                DataManageBehavior,
+                FormatNumberBehavior
+            ],
             properties:{
                 dataList:{
-                    type: Array,
-                    value: []
+                    statePath:'hamonize.list'
                 }
             }
         });
