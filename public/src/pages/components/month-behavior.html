@@ -69,7 +69,7 @@
                 let newdata = new Object();
                 Object.getOwnPropertyNames(data).map((date)=>{
                     // console.log(date.indexOf("date"));
-                    if (date.indexOf("date") == 0) {
+                    if (date.indexOf("date") > -1) {
                         newdata[date] = data[date].replace("-", "/").replace("-", "/");
                     }else {
                         newdata[date] = data[date];
@@ -83,7 +83,7 @@
             let conunt = new Number()
             for (var variable in url) {
                 data = data+variable+"="+ url[variable];
-                (conunt < url_length-1) ? data += '?'  :'';
+                (conunt < url_length-1) ? data += '&'  :'';
                 conunt++
             }
             return data
