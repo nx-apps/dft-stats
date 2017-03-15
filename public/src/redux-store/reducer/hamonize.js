@@ -34,15 +34,15 @@ export function hamonizeAction(store){
       },
       HAMONIZE_CODE_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-        console.log(data);
-        // axios.get('/hamonize/')
-        // .then( (response)=>{
-        //     console.log(response);
-        //     store.dispatch({type:'HAMONIZE_CODE_GET',payload:response.data})
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
+        // console.log(data);
+        axios.get('/hamonize/re01?'+data)
+        .then( (response)=>{
+            console.log(response);
+            store.dispatch({type:'HAMONIZE_CODE_SEARCH',payload:response.data})
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
       },
    }]
 };
