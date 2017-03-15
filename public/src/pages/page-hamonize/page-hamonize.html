@@ -23,10 +23,17 @@
             behaviors: [
                 ReduxBehavior,nylonBehavior,hamonizeAction
             ],
+            properties:{
+                date:{
+                    statePath:'hamonize.date',
+                    observer: '_setDate'
+                },
+            },
             nylonPageActive(){
                 this.dispatchAction('HAMONIZE_CODE_GET');
-                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1');
-            }
+                this.dispatchAction('HAMONIZE_SET_DATE');
+            },
+            get
         });
     </script>
 </dom-module>
