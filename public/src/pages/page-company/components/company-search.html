@@ -27,7 +27,7 @@
                         เลขที่ผู้เสียภาษี : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="" item-label-path="" item-value-path="" value=""></gl-combo-box>
+                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="" item-value-path="" value=""></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -36,6 +36,18 @@
                                 ค้นหา
                             </paper-button>
                         </div>
+                    </div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild">
+                        <div class="btn-search">                    
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValueReport">
+                                <iron-icon icon="assignment"></iron-icon>
+                                ออกรายงาน
+                            </paper-button>
+                        </div>
+                    </div>
+                    <div class="flex3child">
                     </div>
                 </div>
             </div>
@@ -49,18 +61,39 @@
                 MonthBehavior
             ],
             properties:{
-                // hamonizeCodeList:{
-                //     statePath:'hamonize.hamonizeCodeList'
-                // },
+                companyCodeList:{
+                    statePath:'hamonize.companyCodeList'
+                },
+               date:{
+                    statePath:'hamonize.date',
+                    observer: '_setDate'
+                },
                 data:{
                     type:Object,
                     value:{}
                 }
             },
-            getCompanyValue(){
-                // console.log(this.changeDateslde('2017-55-85'));
-                this.dispatchAction('COMPANY_CODE_SEARCH',this.change2GMT7(this.data))
+            _setDate(e){
+                this.set('data.sdate',e.sdate)
+                this.set('data.edate',e.edate)
+                this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)));
+                // console.log(this.data);
             },
+            getCompanyValue(){
+                // console.log(this.data.hamonize_id == undefined || this.data.hamonize_id == '');
+                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                    this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)))
+                }else {
+                    this.dispatchAction('COMPANY_CODE_SEARCH_R2',this.genUrl(this.change2GMT7(this.data)))
+                }
+            },
+            getCompanyValueReport(){
+                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                    window.open('./api/report/c01?'+this.genUrl(this.change2GMT7(this.data)))
+                }else {
+                    window.open('./api/report/c02?'+this.genUrl(this.change2GMT7(this.data)))
+                }
+            }
         });
     </script>
 </dom-module>
