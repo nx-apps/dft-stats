@@ -23,7 +23,7 @@ exports.list = function (req, res) {
             res.json(data)
         })
 }
-exports.filter = function (req, res) {
+exports.re01 = function (req, res) {
     var r = req.r;
     var s, e;
     if (typeof req.query.sdate !== "undefined") {
@@ -60,14 +60,15 @@ exports.filter = function (req, res) {
                     .map(function (dm) {
                         return {
                             hamonize_code: dm('group'),
-                            fob_amt_baht: dm('reduction').sum('fob_amt_baht'),
-                            net_weight: dm('reduction').sum('net_weight')
+                            fob_amt_baht_out: dm('reduction').sum('fob_amt_baht'),
+                            net_weight_out: dm('reduction').sum('net_weight')
                         }
                     })
                     .orderBy('hamonize_code')
             }
         })
         .getField('data')
+        .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
         .run()
         .then(function (data) {
             res.json(data)
@@ -83,7 +84,8 @@ exports.sp01 = function (req, res) {
     if (typeof req.query.edate !== "undefined") {
         e = req.query.edate
     }
-    j.query("mssql", `exec sp_hamonize01 @sdate=?,@edate=?`, [s, e],
+    j.query("mssql", `exec sp_hamonize01 @sdate= ?, @edate= ?`, [s, e],
+        // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)
         })
