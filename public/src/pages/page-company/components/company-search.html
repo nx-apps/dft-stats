@@ -27,7 +27,7 @@
                         เลขที่ผู้เสียภาษี : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="" item-value-path="" value=""></gl-combo-box>
+                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="" item-value-path="" value="{{data.company_taxno}}"></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -81,15 +81,15 @@
                 // console.log(this.data);
             },
             getCompanyValue(){
-                // console.log(this.data.hamonize_id == undefined || this.data.hamonize_id == '');
-                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                // console.log(this.data.company_taxno == undefined || this.data.company_taxno == '');
+                if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
                     this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)))
                 }else {
                     this.dispatchAction('COMPANY_CODE_SEARCH_R2',this.genUrl(this.change2GMT7(this.data)))
                 }
             },
             getCompanyValueReport(){
-                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
                     window.open('./api/report/c01?'+this.genUrl(this.change2GMT7(this.data)))
                 }else {
                     window.open('./api/report/c02?'+this.genUrl(this.change2GMT7(this.data)))
