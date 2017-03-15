@@ -75,8 +75,9 @@
             },
             _setDate(e){
                 this.set('data.sdate',e.sdate)
-                this.set('data.edate',e.edate)
-                this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)));
+                this.set('data.edate',e.edate);
+                
+                (e.edate != '')? this.getCompanyValue():'';
                 // console.log(this.data);
             },
             getCompanyValue(){
