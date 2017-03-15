@@ -1,5 +1,5 @@
 var fs = require("fs");
-exports.head = function (req, res) {
+exports.echead = function (req, res) {
     var j = req.jdbc;
     var r = req.r;
     j.query("mssql", `exec sp_ec_head`, [], function (err, data) {
@@ -7,20 +7,16 @@ exports.head = function (req, res) {
         wstream.write(data);
         wstream.end();
         res.send("Ok");
-        // r.pipe(
-        // r.table('src').filter({ 'a': true }),
-        //   r.json(data),
-        //  wstream
-        // r.node('mynode').openStream('exported-file.json')
-        // )
-        //  res.setHeader('Content-Type', 'application/json')
-        // res.send(data);
-        //   r.table('ec_head')
-        //     .insert(r.json(data))
-        //    .run()
-        //    .then(function (datas) {
-        //   res.json(datas)
-        //   })
+    });
+}
+exports.ichead = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_ic_head`, [], function (err, data) {
+        var wstream = fs.createWriteStream('ic-head.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
     });
 }
 exports.data = function (req, res) {
@@ -31,20 +27,6 @@ exports.data = function (req, res) {
         wstream.write(data);
         wstream.end();
         res.send("Ok");
-        // r.pipe(
-        // r.table('src').filter({ 'a': true }),
-        //   r.json(data),
-        //  wstream
-        // r.node('mynode').openStream('exported-file.json')
-        // )
-        //  res.setHeader('Content-Type', 'application/json')
-        // res.send(data);
-        //   r.table('ec_head')
-        //     .insert(r.json(data))
-        //    .run()
-        //    .then(function (datas) {
-        //   res.json(datas)
-        //   })
     });
 }
 exports.form = function (req, res) {
@@ -55,20 +37,6 @@ exports.form = function (req, res) {
         wstream.write(data);
         wstream.end();
         res.send("Ok");
-        // r.pipe(
-        // r.table('src').filter({ 'a': true }),
-        //   r.json(data),
-        //  wstream
-        // r.node('mynode').openStream('exported-file.json')
-        // )
-        //  res.setHeader('Content-Type', 'application/json')
-        // res.send(data);
-        //   r.table('ec_head')
-        //     .insert(r.json(data))
-        //    .run()
-        //    .then(function (datas) {
-        //   res.json(datas)
-        //   })
     });
 }
 exports.product = function (req, res) {
@@ -79,20 +47,6 @@ exports.product = function (req, res) {
         wstream.write(data);
         wstream.end();
         res.send("Ok");
-        // r.pipe(
-        // r.table('src').filter({ 'a': true }),
-        //   r.json(data),
-        //  wstream
-        // r.node('mynode').openStream('exported-file.json')
-        // )
-        //  res.setHeader('Content-Type', 'application/json')
-        // res.send(data);
-        //   r.table('ec_head')
-        //     .insert(r.json(data))
-        //    .run()
-        //    .then(function (datas) {
-        //   res.json(datas)
-        //   })
     });
 }
 
