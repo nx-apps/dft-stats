@@ -76,6 +76,17 @@
                     }
                 })
                 return newdata
+        },
+        genUrl(url){
+            let data = new String()
+            let url_length = Object.getOwnPropertyNames(url).length
+            let conunt = new Number()
+            for (var variable in url) {
+                data = data+variable+"="+ url[variable];
+                (conunt < url_length-1) ? data += '?'  :'';
+                conunt++
+            }
+            return data
         } 
     }
 </script>
