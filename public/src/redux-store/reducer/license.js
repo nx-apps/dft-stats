@@ -33,7 +33,7 @@ export function licenseAction(store){
         //     console.log(error);
         // });
       },
-      license_CODE_SEARCH(data){
+      LICENSE_CODE_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         console.log(data);
         // axios.get('/license/')

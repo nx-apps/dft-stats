@@ -33,7 +33,7 @@ export function certAction(store){
         //     console.log(error);
         // });
       },
-      cert_CODE_SEARCH(data){
+      CERT_CODE_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         console.log(data);
         // axios.get('/cert/')

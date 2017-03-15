@@ -1,4 +1,4 @@
-
+<link rel="import" href="./../../components/month-behavior.html">
 <dom-module id="hamonize-search">
     <style include="page-style flex-style"></style>
     <template>
@@ -45,7 +45,8 @@
         Polymer({
             is: 'hamonize-search',
             behaviors: [
-                ReduxBehavior
+                ReduxBehavior,
+                MonthBehavior
             ],
             properties:{
                 hamonizeCodeList:{
@@ -57,8 +58,9 @@
                 }
             },
             getRiceValue(){
-                this.dispatchAction('HAMONIZE_CODE_SEARCH',this.data)
-            }
+                // console.log(this.changeDateslde('2017-55-85'));
+                this.dispatchAction('HAMONIZE_CODE_SEARCH',this.change2GMT7(this.data))
+            },
         });
     </script>
 </dom-module>

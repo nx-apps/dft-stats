@@ -1,4 +1,4 @@
-
+<link rel="import" href="./../../components/month-behavior.html">
 <dom-module id="company-search">
     <style include="page-style flex-style"></style>
     <template>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
                                 <iron-icon icon="search"></iron-icon>
                                 ค้นหา
                             </paper-button>
@@ -45,7 +45,8 @@
         Polymer({
             is: 'company-search',
             behaviors: [
-                ReduxBehavior
+                ReduxBehavior,
+                MonthBehavior
             ],
             properties:{
                 // hamonizeCodeList:{
@@ -55,6 +56,10 @@
                     type:Object,
                     value:{}
                 }
+            },
+            getCompanyValue(){
+                // console.log(this.changeDateslde('2017-55-85'));
+                this.dispatchAction('COMPANY_CODE_SEARCH',this.change2GMT7(this.data))
             },
         });
     </script>
