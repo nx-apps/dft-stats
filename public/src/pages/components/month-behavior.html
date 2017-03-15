@@ -80,11 +80,11 @@
         genUrl(url){
             let data = new String()
             let url_length = Object.getOwnPropertyNames(url).length
-            let conunt = new Number()
+            let count = new Number()
             for (var variable in url) {
                 data = data+variable+"="+ url[variable];
-                (conunt < url_length-1) ? data += '&'  :'';
-                conunt++
+                (count < url_length-1) ? data += '&'  :'';
+                count++
             }
             return data
         } 

@@ -34,7 +34,7 @@ export function hamonizeAction(store){
             console.log(error);
         });
       },
-      HAMONIZE_CODE_SEARCH(data){
+      HAMONIZE_CODE_SEARCH(data=''){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         // console.log(data);
         axios.get('/hamonize/re01?'+data)
