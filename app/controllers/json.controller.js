@@ -19,6 +19,26 @@ exports.ichead = function (req, res) {
         res.send("Ok");
     });
 }
+exports.lchead = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_lc_head`, [], function (err, data) {
+        var wstream = fs.createWriteStream('lc-head.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
+    });
+}
+exports.cthead = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_ct_head`, [], function (err, data) {
+        var wstream = fs.createWriteStream('ct-head.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
+    });
+}
 exports.data = function (req, res) {
     var j = req.jdbc;
     var r = req.r;
@@ -54,6 +74,18 @@ exports.hamonize = function (req, res) {
     var r = req.r;
     j.query("mssql", `exec sp_hamonize_type`, [], function (err, data) {
         var wstream = fs.createWriteStream('hamonize-type.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
+    });
+
+}
+
+exports.company = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_company`, [], function (err, data) {
+        var wstream = fs.createWriteStream('company.json');
         wstream.write(data);
         wstream.end();
         res.send("Ok");

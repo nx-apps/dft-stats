@@ -15,6 +15,7 @@
 	<field name="net_weight" class="java.lang.Integer"/>
 	<field name="reference_code2" class="java.lang.String"/>
 	<field name="product_name" class="java.lang.String"/>
+	<field name="form_nameFull" class="java.lang.String"/>
 	<variable name="sum_weight" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight}]]></variableExpression>
 	</variable>
@@ -278,7 +279,7 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{form_nameFull}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
