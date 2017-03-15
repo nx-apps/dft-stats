@@ -5,5 +5,5 @@ module.exports = function (app) {
     app.get('/data', controller.data);
     app.get('/form', controller.form);
     app.get('/product', controller.product);
-
+    app.get('/hamonize', controller.hamonize);
 }

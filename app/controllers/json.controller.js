@@ -49,4 +49,15 @@ exports.product = function (req, res) {
         res.send("Ok");
     });
 }
+exports.hamonize = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_hamonize_type`, [], function (err, data) {
+        var wstream = fs.createWriteStream('hamonize-type.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
+    });
+
+}
 
