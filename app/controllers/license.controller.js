@@ -35,24 +35,29 @@ exports.re01 = function (req, res) {
         edate: e
     })
         .merge(function (hm) {
-            return {
-                data: r.table('ec_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
-                    .pluck('id', 'reference_code2', 'company_name', 'approve_date', 'expire_date')
-                    .coerceTo('array')
-                    .merge(function (dm) {
-                        return {
-                            ax: r.js("(function(x) { d = new Date(x.approve_date); return d.toISOString(); })"),
-                            //  approve_date: dm('approve_date'),
-                            hamonize: r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
-                                .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
-                        }
-                    })
-            }
+            return r.table('ec_head').between(hm('sdate'), hm('edate'), { index: 'approve_date' })
+                .pluck('id', 'reference_code2', 'company_name', 'approve_date', 'expire_date')
+                .coerceTo('array')
+                .merge(function (dm) {
+                    return r.table('ec_data').getAll(dm('id'), { index: 'invh_run_auto' }).coerceTo('array')
+                        .pluck('hamonize_code', 'fob_amt_baht', 'net_weight')
+                        .merge(function (hm2) {
+                            return dm
+                        })
+
+                })
         })
-        // .getField('data')
-        // .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
+        .reduce(function (l, r) {
+            return l.add(r)
+        })
+        .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
+        .orderBy('reference_code2')
         .run()
         .then(function (data) {
+            for (var i in data) {
+                data[i].approve_date = new Date(data[i].approve_date).toLocaleString()
+                data[i].expire_date = new Date(data[i].expire_date).toLocaleString()
+            }
             res.json(data)
         })
 
