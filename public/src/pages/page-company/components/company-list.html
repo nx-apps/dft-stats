@@ -16,13 +16,25 @@
                         <th class="label-head">มูลค่า (บาท)</th>
                     </tr>
                 </thead>
+                <tbody>
                 <template is="dom-if" if="[[checkData(dataList)]]">
-                    <tbody>
+                    
                         <tr>
                             <td colspan="6" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
-                    </tbody>
+                    
                 </template>
+                <template is="dom-repeat" items={{dataList}} >
+                        <tr>
+                            <td>[[item.company_taxno]]</td>
+                            <td>[[item.company_name]]</td>
+                            <td class="format-number">[[formatNumber(item.net_weight_in)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht_in)]]</td>
+                            <td class="format-number">[[formatNumber(item.net_weight_out)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht_out)]]</td>
+                        </tr>
+                    </template>
+                </tbody>
             </table>
         </paper-material>
     </template>
@@ -37,7 +49,7 @@
             properties:{
                 dataList:{
                     type: Array,
-                    value: []
+                    statePath:'company.list'
                 }
             }
         });
