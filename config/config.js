@@ -10,7 +10,7 @@ var config = {
       servers: [
         { host: 'rdb.codeunbug.com', port: 28015, username: 'admin', password: 'next@2017' }
       ],
-      db: 'oauth'
+      db: 'stats'
     },
 
     oauth: {
@@ -42,9 +42,9 @@ var config = {
       {
         name: "mssql",
         driver: "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-        url: "jdbc:sqlserver://202.44.34.86:1433;databaseName=RiceDB",
-        user: "riceuser",
-        password: "l2ice2015"
+        url: "jdbc:sqlserver://10.3.1.173:1433;databaseName=external",
+        user: "external",
+        password: "external@2017"
       },
       {
         name: "oracle",
