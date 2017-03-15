@@ -30,6 +30,7 @@ exports.h01 = function (req, res) {
         e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
+    }
     r.expr({
         sdate: s,
         edate: e
@@ -66,6 +67,6 @@ exports.h01 = function (req, res) {
         .run()
         .then(function (data) {
             // res.json(data)
-           res.ireport("report1.jasper", req.query.export || "pdf", data);
+           res.ireport("hamonize/report1.jasper", req.query.export || "pdf", data);
         });
 }
