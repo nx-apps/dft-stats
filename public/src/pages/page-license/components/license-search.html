@@ -2,21 +2,21 @@
 <dom-module id="license-search">
     <style include="page-style flex-style"></style>
     <template>
-         <paper-material elevation="1">
+        <paper-material elevation="1">
             <div class="container">
                 <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
-                        เริ่มวันที่ : 
+                        เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
                         <vaadin-date-picker class="textCenter" value="{{data.sdate}}"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
-                        <div class="labelSearchDate">
-                        ถึงวันที่ : 
+                    <div class="labelSearchDate">
+                        ถึงวันที่ :
                     </div>
                     <div class="flex2child">
                         <vaadin-date-picker class="textCenter" value="{{data.edate}}"></vaadin-date-picker>
@@ -30,13 +30,14 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
-                        เลข พณ. : 
+                        เลข พณ. :
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="[[licenseCodeList]]" item-label-path="reference_code2" item-value-path="id" value="{{data.license_id}}"></gl-combo-box>
+                        <!--<gl-combo-box class="textCenter" items="[[licenseList]]" item-label-path="reference_code2" item-value-path="reference_code2" value="{{data.reference_code2}}"></gl-combo-box>-->
+                        <gl-form-input allowed-pattern="[0-9]" value="{{data.reference_code2}}"><div prefix style="padding-left:5px;">พณ</div></gl-form-input>
                     </div>
                     <div class="flexchild">
-                        <div class="btn-search">                    
+                        <div class="btn-search">
                             <paper-button raised class="gl-btn-info gl-small" on-tap="getlicenseValue">
                                 <iron-icon icon="search"></iron-icon>
                                 ค้นหา
@@ -47,6 +48,18 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                 </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getlicenseValueReport">
+                                <iron-icon icon="assignment"></iron-icon>
+                                ออกรายงาน
+                            </paper-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex3child"></div>
+            </div>
             </div>
         </paper-material>
     </template>
@@ -57,19 +70,42 @@
                 ReduxBehavior,
                 MonthBehavior
             ],
-            properties:{
-                licenseCodeList:{
-                    statePath: 'license.licenseCodeList'
+            properties: {
+                licenseList: {
+                    statePath: 'license.licenseList'
                 },
-                data:{
-                    type:Object,
-                    value:{}
+                date:{
+                    statePath:'hamonize.date',
+                    observer: '_setDate'
+                },
+                data: {
+                    type: Object,
+                    value: {}
                 }
             },
-            getlicenseValue(){
-                // console.log(this.change2GMT7(this.data));
-                this.dispatchAction('LICENSE_CODE_SEARCH',this.genUrl(this.change2GMT7(this.data)))
+            _setDate(e){
+                this.set('data.sdate',e.sdate)
+                this.set('data.edate',e.edate)
+                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)));
+                // console.log(this.data);
             },
+            getlicenseValue() {
+                // console.log(this.change2GMT7(this.data));
+                if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
+                    this.dispatchAction('LICENSE_SEARCH', this.genUrl(this.change2GMT7(this.data)))
+                } else {
+                    this.dispatchAction('LICENSE_SEARCH_REFERENCE', this.genUrl(this.change2GMT7(this.data)))
+                }
+            },
+            getlicenseValueReport() {
+                if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
+                    window.open('./api/report/li01?'+this.genUrl(this.change2GMT7(this.data)))
+                    // console.log(this.data);
+                } else {
+                    // console.log(this.data);
+                    window.open('./api/report/li02?'+this.genUrl(this.change2GMT7(this.data)))
+                }
+            }
         });
     </script>
 </dom-module>

@@ -9,36 +9,49 @@
                 <thead>
                     <tr>
                         <th class="label-head">เลข พณ.</th>
+                        <th class="label-head">ประเภทใบอนุญาต</th>
                         <th class="label-head">บริษัท</th>
                         <th class="label-head">ชนิดข้าว</th>
                         <th class="label-head">ปริมาณ (ตัน)</th>
                         <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head">วันที่อนุญาติ</th>
+                        <th class="label-head">วันที่อนุญาต</th>
                         <th class="label-head">วันที่หมดอายุ</th>
                     </tr>
                 </thead>
-                <template is="dom-if" if="[[checkData(dataList)]]">
-                    <tbody>
+                <tbody>
+                    <template is="dom-if" if="[[checkData(dataList)]]">
                         <tr>
-                            <td colspan="7" class="no-data">ไม่พบข้อมูล</td>
+                            <td colspan="8" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
-                    </tbody>
-                </template>
+                    </template>
+
+                    <template is="dom-repeat" items={{dataList}}>
+                        <tr>
+                            <td>[[item.reference_code2]]</td>
+                            <td>[[item.product_name]]</td>
+                            <td>[[item.company_name]]</td>
+                            <td>[[item.hamonize_th]]</td>
+                            <td class="format-number">[[formatNumber(item.net_weight)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht)]]</td>
+                            <td>[[item.approve_date]]</td>
+                            <td>[[item.expire_date]]</td>
+                        </tr>
+                    </template>
+                </tbody>
             </table>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'cert-list',
-            behaviors:[
+            behaviors: [
                 DataManageBehavior,
                 ReduxBehavior,
                 FormatNumberBehavior
-                ],
-            properties:{
-                dataList:{
-                    type: Array,
-                    value: []
+            ],
+            properties: {
+                dataList: {
+                    statePath: 'cert.list'
                 }
             }
         });

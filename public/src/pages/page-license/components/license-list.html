@@ -2,14 +2,14 @@
 <link rel="import" href="./../../components/data-manage-behavior.html">
 
 <dom-module id="license-list">
-    <style include="page-style flex-style">
-    </style>
+    <style include="page-style flex-style"></style>
     <template>
         <paper-material elevation="1" class="container">
             <table class="gl-table-default">
                 <thead>
                     <tr>
                         <th class="label-head">เลข พณ.</th>
+                        <th class="label-head">ประเภทใบอนุญาต</th>
                         <th class="label-head">บริษัท</th>
                         <th class="label-head">ชนิดข้าว</th>
                         <th class="label-head">ปริมาณ (ตัน)</th>
@@ -21,13 +21,14 @@
                 <tbody>
                     <template is="dom-if" if="[[checkData(dataList)]]">
                         <tr>
-                            <td colspan="7" class="no-data">ไม่พบข้อมูล</td>
+                            <td colspan="8" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
                     </template>
 
                     <template is="dom-repeat" items={{dataList}}>
                         <tr>
                             <td>[[item.reference_code2]]</td>
+                            <td>[[item.product_name]]</td>
                             <td>[[item.company_name]]</td>
                             <td>[[item.hamonize_th]]</td>
                             <td class="format-number">[[formatNumber(item.net_weight)]]</td>
@@ -50,7 +51,7 @@
             ],
             properties: {
                 dataList: {
-                    statePath: 'license.licenseCodeList'
+                    statePath: 'license.licenseList'
                 }
             }
         });

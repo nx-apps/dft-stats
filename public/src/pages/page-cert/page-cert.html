@@ -19,10 +19,11 @@
         Polymer({
             is: 'page-cert',
             behaviors: [
-                ReduxBehavior,nylonBehavior,certAction
+                ReduxBehavior,nylonBehavior,certAction,hamonizeAction
             ],
             nylonPageActive(){
-                this.dispatchAction('CERT_CODE_GET');
+                this.dispatchAction('CERT_SEARCH');
+                this.dispatchAction('HAMONIZE_SET_DATE');
             }
         });
     </script>

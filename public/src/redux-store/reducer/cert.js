@@ -2,17 +2,16 @@ import axios from '../axios'
 import {commonAction} from '../config'
 
 const initialState = {
-    select:{},
-    list:[],
-    certCodeList:[]
-    // listFiles:[]
+    list:[]
 }
 
 export function certReducer(state = initialState,action){
 
     switch (action.type) {
-        case 'CERT_CODE_GET':
-          return Object.assign({},state,{certCodeList:action.payload});
+        case 'CERT_SEARCH':
+          return Object.assign({},state,{list:action.payload});
+        case 'CERT_SEARCH_REFERENCE':
+          return Object.assign({},state,{list:action.payload});
         default:
           return state
     }
@@ -21,29 +20,33 @@ export function certReducer(state = initialState,action){
 
 export function certAction(store){
     return [commonAction(),{
-      CERT_CODE_GET(data){
-        // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-        console.log(1);
-        // axios.get('/cert/')
-        // .then( (response)=>{
-        //     console.log(response);
-        //     store.dispatch({type:'CERT_CODE_GET',payload:response.data})
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
-      },
-      CERT_CODE_SEARCH(data){
+      CERT_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-        console.log(data);
-        // axios.get('/cert/')
-        // .then( (response)=>{
-        //     console.log(response);
-        //     store.dispatch({type:'cert_CODE_GET',payload:response.data})
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
+        // console.log(data); 
+        axios.get('/cert/re01/?'+data)
+        .then( (response)=>{
+            // console.log(response);
+            this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
+              store.dispatch({type:'CERT_SEARCH',payload:response.data})
+            }});
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
       },
+      CERT_SEARCH_REFERENCE(data){
+        this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
+        // console.log(data); 
+        axios.get('/cert/re02/?'+data)
+        .then( (response)=>{
+            // console.log(response);
+            this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
+              store.dispatch({type:'CERT_SEARCH_REFERENCE',payload:response.data})
+            }});
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      }
    }]
 };
