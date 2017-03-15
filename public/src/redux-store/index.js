@@ -5,24 +5,24 @@ import axios from './axios'
 import {commonSystemReducer,commonSystemAction} from './reducer/commonSystem'
 import {authReducer,authAction} from './reducer/auth'
 import {providerReducer,providerAction} from './reducer/provider'
-import {userWelfareReducer,userWelfareAction} from './reducer/userWelfare'
-import {welfareReducer,welfareAction} from './reducer/welfare'
-import {groupWelfareReducer,groupWelfareAction} from './reducer/groupWelfare'
-import {commonDataReducer,commonDataAction} from './reducer/commonData'
-import {usersReducer,usersAction} from './reducer/users'
-import {conditionReadWelfareReducer,conditionReadWelfareAction} from './reducer/conditionReadWelfare'
 import {uploadReducer,uploadAction} from './reducer/upload'
+
+import {hamonizeReducer,hamonizeAction} from './reducer/hamonize'
+import {companyReducer,companyAction} from './reducer/company'
+import {licenseReducer,licenseAction} from './reducer/license'
+import {certReducer,certAction} from './reducer/cert'
+
 const rootReducer = combineReducers({
     commonSystem:commonSystemReducer,
     auth:authReducer,
     provider:providerReducer,
-    userWelfare:userWelfareReducer,
-    welfare:welfareReducer,
-    groupWelfare:groupWelfareReducer,
-    commonData:commonDataReducer,
-    users:usersReducer,
-    conditionReadWelfare:conditionReadWelfareReducer,
     upload:uploadReducer,
+
+    hamonize:hamonizeReducer,
+    company:companyReducer,
+    license:licenseReducer,
+    cert:certReducer,
+
 });
 const storeApp = createStore(
     rootReducer,
@@ -35,10 +35,10 @@ window.axios = axios;
 window.commonSystemAction = commonSystemAction(storeApp);
 window.authAction = authAction(storeApp);
 window.providerAction = providerAction(storeApp);
-window.userWelfareAction = userWelfareAction(storeApp);
-window.welfareAction = welfareAction(storeApp);
-window.groupWelfareAction = groupWelfareAction(storeApp);
-window.commonDataAction = commonDataAction(storeApp); 
-window.usersAction = usersAction(storeApp);
-window.conditionReadWelfareAction = conditionReadWelfareAction(storeApp);
 window.uploadAction = uploadAction(storeApp);
+
+window.hamonizeAction = hamonizeAction(storeApp);
+window.companyAction = companyAction(storeApp);
+window.licenseAction = licenseAction(storeApp);
+window.certAction = certAction(storeApp);
+
