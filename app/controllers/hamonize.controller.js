@@ -27,15 +27,15 @@ exports.re01 = function (req, res) {
     var r = req.r;
     var s, e;
     if (typeof req.query.sdate !== "undefined") {
-        s = new Date(req.query.sdate).getTime()
+        s = new Date(req.query.sdate).getTime() // => 2016/01/01
     } else {
-        s = new Date(today).getTime()
+        s = new Date(today.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: 'approve_date' }).limit(1)(0).getField('approve_date')
     }
     if (typeof req.query.edate !== "undefined") {
-        e = new Date(req.query.edate).getTime()
+        e = new Date(req.query.edate).getTime() // => 2016/01/01
     } else {
-        e = new Date(tomorrow).getTime()
+        e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
     r.expr({
