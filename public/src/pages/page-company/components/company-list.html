@@ -8,18 +8,18 @@
             <table class="gl-table-default">
                 <thead>
                     <tr>
-                        <th>TAX ID</th>
-                        <th>บริษัท</th>
-                        <th>เข้า (ตัน)</th>
-                        <th>มูลค่า (บาท)</th>
-                        <th>ออก (ตัน)</th>
-                        <th>มูลค่า (บาท)</th>
+                        <th class="label-head">TAX ID</th>
+                        <th class="label-head">บริษัท</th>
+                        <th class="label-head">เข้า (ตัน)</th>
+                        <th class="label-head">มูลค่า (บาท)</th>
+                        <th class="label-head">ออก (ตัน)</th>
+                        <th class="label-head">มูลค่า (บาท)</th>
                     </tr>
                 </thead>
                 <template is="dom-if" if="[[checkData(dataList)]]">
                     <tbody>
                         <tr>
-                            <td colspan="6">ไม่พบข้อมูล</td>
+                            <td colspan="6" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
                     </tbody>
                 </template>
