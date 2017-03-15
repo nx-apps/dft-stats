@@ -38,6 +38,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild">
+                        <div class="btn-search">                    
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValueReport">
+                                <iron-icon icon="assignment"></iron-icon>
+                                ออกรายงาน
+                            </paper-button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="flex3child">
+                    </div>
+                </div>
             </div>
         </paper-material>
     </template>
@@ -61,8 +74,21 @@
                 // console.log(this.changeDateslde('2017-55-85'));
                 // console.log(this.change2GMT7(this.data));
                 // console.log(this.genUrl(this.change2GMT7(this.data)));
-                this.dispatchAction('HAMONIZE_CODE_SEARCH',this.genUrl(this.change2GMT7(this.data)))
+                // console.log();
+                // console.log(this.data.hamonize_id == undefined || this.data.hamonize_id == '');
+                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                    this.dispatchAction('HAMONIZE_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)))
+                }else {
+                    console.log(1);
+                }
             },
+            getRiceValueReport(){
+                if (this.data.hamonize_id == undefined || this.data.hamonize_id == '') {
+                    // console.log(1);
+                }else {
+                    // this.dispatchAction('HAMONIZE_CODE_SEARCH',this.genUrl(this.change2GMT7(this.data)))
+                }
+            }
         });
     </script>
 </dom-module>
