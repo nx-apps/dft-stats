@@ -30,7 +30,11 @@ exports.h01 = function (req, res) {
         e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
-    }
+    var param = {
+        sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
+        edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
+    };
+    res.json(param);
     r.expr({
         sdate: s,
         edate: e
@@ -67,6 +71,6 @@ exports.h01 = function (req, res) {
         .run()
         .then(function (data) {
             // res.json(data)
-           res.ireport("hamonize/report1.jasper", req.query.export || "pdf", data);
+            res.ireport("hamonize/report1.jasper", req.query.export || "pdf", data, param);
         });
 }
