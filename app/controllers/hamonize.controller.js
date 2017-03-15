@@ -56,7 +56,7 @@ exports.re01 = function (req, res) {
                     .getField('hamonize')
                     .reduce(function (l, r) {
                         return l.add(r)
-                    })
+                    }).default([])
                     .group('hamonize_code')
                     .ungroup()
                     .map(function (dm) {
@@ -79,7 +79,7 @@ exports.re01 = function (req, res) {
                     .getField('hamonize')
                     .reduce(function (l, r) {
                         return l.add(r)
-                    })
+                    }).default([])
                     .group('hamonize_code')
                     .ungroup()
                     .map(function (dm) {
