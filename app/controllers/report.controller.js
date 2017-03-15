@@ -65,7 +65,7 @@ exports.h01 = function (req, res) {
         .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
         .run()
         .then(function (data) {
-            res.json(data)
-        })
-
+            // res.json(data)
+           res.ireport("report1.jasper", req.query.export || "pdf", data);
+        });
 }
