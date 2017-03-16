@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8eee6db5-07b6-49b2-9b5b-22900058352b">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
@@ -26,9 +26,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="106" splitType="Stretch">
+		<band height="90" splitType="Stretch">
 			<staticText>
-				<reportElement x="722" y="86" width="80" height="20" uuid="a5deb366-7080-4b43-a157-59e476dd1ee1"/>
+				<reportElement x="722" y="70" width="80" height="20" uuid="a5deb366-7080-4b43-a157-59e476dd1ee1"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -42,7 +42,7 @@
 				<text><![CDATA[มูลค่า (บาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="652" y="86" width="70" height="20" uuid="9cd44b6e-5091-42e5-8c56-33ae1a41085f"/>
+				<reportElement x="652" y="70" width="70" height="20" uuid="9cd44b6e-5091-42e5-8c56-33ae1a41085f"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -56,7 +56,7 @@
 				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="542" y="86" width="110" height="20" uuid="a17b06b8-6473-4369-8898-f50107171287"/>
+				<reportElement x="542" y="70" width="110" height="20" uuid="a17b06b8-6473-4369-8898-f50107171287"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -70,7 +70,7 @@
 				<text><![CDATA[ชนิดข้าว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="86" width="85" height="20" uuid="1ee76311-9b90-432e-a5b7-0e34190d360b"/>
+				<reportElement x="0" y="70" width="85" height="20" uuid="1ee76311-9b90-432e-a5b7-0e34190d360b"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -84,7 +84,7 @@
 				<text><![CDATA[เลข พณ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="86" width="135" height="20" uuid="83353ca5-1453-47e3-ac9d-de16da8872cb"/>
+				<reportElement x="407" y="70" width="135" height="20" uuid="83353ca5-1453-47e3-ac9d-de16da8872cb"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -98,7 +98,7 @@
 				<text><![CDATA[บริษัท]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="85" y="86" width="142" height="20" uuid="a81e8dd2-0c9b-433a-a054-7951bdb3be02"/>
+				<reportElement x="85" y="70" width="142" height="20" uuid="a81e8dd2-0c9b-433a-a054-7951bdb3be02"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -112,21 +112,21 @@
 				<text><![CDATA[ประเภทใบอนุญาต]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="536" y="61" width="266" height="20" uuid="7d7b2c47-db23-4452-baa9-fda9b505877e"/>
+				<reportElement x="536" y="50" width="266" height="20" uuid="7d7b2c47-db23-4452-baa9-fda9b505877e"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่ "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="19" width="802" height="26" uuid="9832ce0b-499f-4b58-8a03-14589cd7c679"/>
+				<reportElement x="0" y="10" width="802" height="26" uuid="9832ce0b-499f-4b58-8a03-14589cd7c679"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้อมูลใบอนุญาต การออกใบอนุญาตและใบอนุญาตการนำเข้าสินค้าข้าว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="227" y="86" width="90" height="20" uuid="956551ea-6607-4119-8cca-7ed7189e9423"/>
+				<reportElement x="227" y="70" width="90" height="20" uuid="956551ea-6607-4119-8cca-7ed7189e9423"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -140,7 +140,7 @@
 				<text><![CDATA[วันที่อนุญาต]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="317" y="86" width="90" height="20" uuid="e9b792c3-927b-4ae9-87fa-03ae3e329489"/>
+				<reportElement x="317" y="70" width="90" height="20" uuid="e9b792c3-927b-4ae9-87fa-03ae3e329489"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -197,7 +197,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht},"#,###.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="542" y="0" width="110" height="20" isPrintWhenDetailOverflows="true" uuid="8d8ed49e-fdec-4b1b-9263-8e72bf309aa0"/>
@@ -272,7 +272,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="652" height="20" uuid="d8f89a4b-435d-4eed-b007-67053fd04687"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
@@ -299,7 +299,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($V{sum_baht},"#,###.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($V{sum_baht},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="652" y="0" width="70" height="20" uuid="4fa5706a-6181-48b3-932f-a254c3ae5a77"/>
@@ -313,7 +313,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($V{sum_weight},"#,###.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($V{sum_weight},"#,##0.00")]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
