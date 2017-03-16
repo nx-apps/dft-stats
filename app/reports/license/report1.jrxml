@@ -153,6 +153,13 @@
 				</textElement>
 				<text><![CDATA[วันที่หมดอายุ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="286" height="20" uuid="6224f09a-156d-4630-a0fe-25e30b18fd13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>

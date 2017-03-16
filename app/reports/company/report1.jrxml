@@ -154,6 +154,13 @@
 				</textElement>
 				<text><![CDATA[ส่งออก]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="278" height="20" uuid="d4388f29-5fc8-47f7-9f57-72864330bd01"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>

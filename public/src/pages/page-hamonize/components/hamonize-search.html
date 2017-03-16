@@ -32,7 +32,7 @@
                         เลขพิกัดศุลกากร : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="[[hamonizeCodeList]]" item-label-path="id" item-value-path="id" value="{{data.hamonize_code}}"></gl-combo-box>
+                        <gl-combo-box id="hamonizeSearch" class="textCenter" value="{{data.hamonize_code}}"></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -68,7 +68,8 @@
             ],
             properties:{
                 hamonizeCodeList:{
-                    statePath:'hamonize.hamonizeCodeList'
+                    statePath:'hamonize.hamonizeCodeList',
+                    observer: '_setItem'
                 },
                 date:{
                     statePath:'hamonize.date',
@@ -79,11 +80,17 @@
                     value:{}
                 }
             },
+            _setItem(hamonizeCodeList){
+                let combobox = this.$$('#hamonizeSearch')
+                let newData = hamonizeCodeList.map((hamonize)=>{
+                    return {label: hamonize.id+' '+hamonize.hamonize_th, value: hamonize.id}
+                })
+                combobox.items = newData;
+            },
             _setDate(e){
                 this.set('data.sdate',e.sdate)
                 this.set('data.edate',e.edate);
                 (e.edate != '')? this.getRiceValue():'';
-                
             },
             getRiceValue(){
                 console.log(1);
