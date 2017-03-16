@@ -57,8 +57,8 @@ exports.re01 = function (req, res) {
         .run()
         .then(function (data) {
             for (var i in data) {
-                data[i].approve_date = new Date(data[i].approve_date).toLocaleString()
-                data[i].expire_date = new Date(data[i].expire_date).toLocaleString()
+                data[i].approve_date = new Date(data[i].approve_date).toISOString().split("T")[0]
+                data[i].expire_date = new Date(data[i].expire_date).toISOString().split("T")[0]
             }
             res.json(data)
         })
@@ -112,8 +112,8 @@ exports.re02 = function (req, res) {
         .run()
         .then(function (data) {
             for (var i in data) {
-                data[i].approve_date = new Date(data[i].approve_date).toLocaleString()
-                data[i].expire_date = new Date(data[i].expire_date).toLocaleString()
+                data[i].approve_date = new Date(data[i].approve_date).toISOString().split("T")[0]
+                data[i].expire_date = new Date(data[i].expire_date).toISOString().split("T")[0]
             }
             res.json(data)
         })

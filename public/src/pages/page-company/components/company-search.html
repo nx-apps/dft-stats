@@ -27,7 +27,7 @@
                         เลขที่ผู้เสียภาษี : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="" item-value-path="" value="{{data.company_taxno}}"></gl-combo-box>
+                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="company_taxno" item-value-path="id" value="{{data.company_taxno}}"></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -62,7 +62,7 @@
             ],
             properties:{
                 companyCodeList:{
-                    statePath:'hamonize.companyCodeList'
+                    statePath:'company.companyCodeList'
                 },
                date:{
                     statePath:'hamonize.date',
@@ -90,9 +90,9 @@
             },
             getCompanyValueReport(){
                 if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
-                    window.open('./api/report/c01?'+this.genUrl(this.change2GMT7(this.data)))
+                    window.open('./api/report/c01?'+this.genUrl(this.data))
                 }else {
-                    window.open('./api/report/c02?'+this.genUrl(this.change2GMT7(this.data)))
+                    window.open('./api/report/c02?'+this.genUrl(this.data))
                 }
             }
         });
