@@ -33,7 +33,7 @@
                         เลขที่ผู้เสียภาษี : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box class="textCenter" items="[[companyCodeList]]" item-label-path="company_taxno" item-value-path="id" value="{{data.company_taxno}}"></gl-combo-box>
+                        <gl-combo-box id="companySearch" class="textCenter"  value="{{data.company_taxno}}"></gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
@@ -71,7 +71,8 @@
             ],
             properties:{
                 companyCodeList:{
-                    statePath:'company.companyCodeList'
+                    statePath:'company.companyCodeList',
+                    observer: '_setItem'
                 },
                date:{
                     statePath:'hamonize.date',
@@ -81,6 +82,13 @@
                     type:Object,
                     value:{}
                 }
+            },
+            _setItem(companyCodeList){
+                let combobox = this.$$('#companySearch')
+                let newData = companyCodeList.map((company)=>{
+                    return company.company_taxno+' '+company.company_name
+                })
+                combobox.items = newData;
             },
             _setDate(e){
                 this.set('data.sdate',e.sdate)
