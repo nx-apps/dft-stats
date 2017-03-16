@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13891fff-e428-49f7-a150-97a747b9b0f6">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="8"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
@@ -11,16 +11,16 @@
 	<field name="fob_amt_baht_in" class="java.lang.Double"/>
 	<field name="net_weight_in" class="java.lang.Double"/>
 	<field name="company_name" class="java.lang.String"/>
-	<variable name="sum_baht_out" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_baht_out" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht_out}]]></variableExpression>
 	</variable>
-	<variable name="sum_weight_out" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_weight_out" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight_out}]]></variableExpression>
 	</variable>
-	<variable name="sum_baht_in" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_baht_in" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht_in}]]></variableExpression>
 	</variable>
-	<variable name="sum_weight_in" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_weight_in" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight_in}]]></variableExpression>
 	</variable>
 	<background>
