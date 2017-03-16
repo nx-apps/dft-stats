@@ -1,0 +1,70 @@
+<link rel="import" href="../components/box-menu-not-re.html">
+<dom-module id="page-report">
+    <template>
+        <style include="page-style iron-flex iron-flex-factors iron-flex-alignment"></style>
+        <!--<div class="xcontainer">
+           <section class="container">-->
+               <div class="horizontal center-justified layout wrap" >
+                   <template is="dom-repeat" items={{mainMenu}} >
+                     <box-menu-not-re data="{{item}}" on-tap="urlToReport" id={{index}}></box-menu-not-re>
+                   </template>
+                </div>
+           <!--</section>
+        </div>-->
+        
+        
+       
+    </template>
+    <script>
+        Polymer({
+            is: 'page-report',
+            properties:{
+                mainMenu:{
+                type:Array,
+                value:
+                    [
+                        {
+                            path:'/stats/stats1',
+                            nameMenu:'สถานการณ์ส่งออก',
+                            img:'/images/static2/05/192.png'
+                        },
+                        {
+                            path:'/stats/stats3',
+                            nameMenu:'การส่งออกข้าวไทยแยกตามชนิดข้าว',
+                            img:'/images/static2/11/192.png'
+                        },
+                        {
+                            path:'/stats/stats4',
+                            nameMenu:'ตลาดส่งออกข้าวแบ่งตามภูมิภาค',
+                            img:'/images/static2/12-12/192.png'
+                        },
+                        {
+                            path:'/stats/stats6',
+                            nameMenu:'ราคาข้าวสาร',
+                            img:'/images/static2/07/192.png'
+                        },
+                        {
+                            path:'/stats/stats7',
+                            nameMenu:'ราคาข้าวเปลือก',
+                            img:'/images/static2/13/192.png'
+                        },
+                        {
+                            path:'/stats/stats8',
+                            nameMenu:'สถานะการระบายข้าว',
+                            img:'/images/static2/20/192.png'
+                        },
+                        {
+                            path:'/stats/stats9',
+                            nameMenu:'ประมาณการมูลค่าข้าว',
+                            img:'/images/static2/21/192.png'
+                        },
+                        
+                    ]
+                },
+            },
+            urlToReport(e){
+                window.open('./api'+e.currentTarget.data.path)
+            }
+        });
+    </script>
+</dom-module>
