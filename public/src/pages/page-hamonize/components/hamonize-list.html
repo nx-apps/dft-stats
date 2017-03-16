@@ -4,7 +4,16 @@
 <link rel="import" href="./../../components/data-manage-behavior.html">
 
 <dom-module id="hamonize-list">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(1),
+        table.gl-table-default > tfoot > tr > td:nth-child(1) {
+            width: 15%;
+        }
+        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
+        table.gl-table-default > tfoot > tr > td:nth-child(2) {
+            width: 30%;
+        }
+    </style>
     <template>
         <paper-material elevation="1" class="container">
             <table class="gl-table-default">
@@ -44,14 +53,14 @@
                         </tr>
                     </template>
                 </tbody>
-                <tfoot class="table-foot">
+                <tfoot>
                     <tr>
-                        <td colspan="2">รวม</td>
-                        <!--<td></td>-->
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>รวม</td>
+                        <td class="total">[[formatNumber(total.net_weight_in)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_baht_in)]]</td>
+                        <td class="total">[[formatNumber(total.net_weight_out)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_baht_out)]]</td>
                     </tr>
             </tfoot>
             </table>
@@ -76,10 +85,11 @@
                 }
             },
             totalcal(dataList){
-                console.log(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_in , 0));
-
-                // Object.keys(dataR2r).reduce((previous, current) => previous + dataR2r[current].ton , 0)
-            }
+                this.set('total.net_weight_in',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_in , 0));
+                this.set('total.fob_amt_baht_in',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_in , 0));
+                this.set('total.net_weight_out',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_out , 0));
+                this.set('total.fob_amt_baht_out',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_out , 0));
+            },
         });
     </script>
 </dom-module>
