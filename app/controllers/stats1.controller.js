@@ -8,46 +8,46 @@ exports.index = function (req, res, next) {
     r.expr([
         {
             name: "ปริมาณ(ตัน)",
-            "y2559": r.db('external_f3').table('custom')
+            "y2559": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2559 })
                 .sum('quantity').div(1000),
-            "y2558": r.db('external_f3').table('custom')
+            "y2558": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2558 })
                 .sum('quantity').div(1000)
         },
         {
             name: "มูลค่า(ล้านบาท)",
-            "y2559": r.db('external_f3').table('custom')
+            "y2559": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2559 })
                 .sum('value_baht').div(1000000),
-            "y2558": r.db('external_f3').table('custom')
+            "y2558": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2558 })
                 .sum('value_baht').div(1000000),
         },
         {
             name: "มูลค่า(ล้าน USD)",
-            "y2559": r.db('external_f3').table('custom')
+            "y2559": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2559 })
                 .sum('value_usd').div(1000000),
-            "y2558": r.db('external_f3').table('custom')
+            "y2558": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2558 })
                 .sum('value_usd').div(1000000),
         },
         {
             name: "ราคาเฉลี่ย(usd/ตัน)",
-            "y2559": r.db('external_f3').table('custom')
+            "y2559": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2559 })
                 .sum('value_usd')
                 .div(
-                r.db('external_f3').table('custom')
+                r.db('stats').table('custom')
                     .filter({ tran_type: 'export', tran_year: 2559 })
                     .sum('quantity').div(1000)
                 ),
-            "y2558": r.db('external_f3').table('custom')
+            "y2558": r.db('stats').table('custom')
                 .filter({ tran_type: 'export', tran_year: 2558 })
                 .sum('value_usd')
                 .div(
-                r.db('external_f3').table('custom')
+                r.db('stats').table('custom')
                     .filter({ tran_type: 'export', tran_year: 2558 })
                     .sum('quantity').div(1000)
                 ),

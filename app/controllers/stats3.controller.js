@@ -10,13 +10,13 @@ exports.index = function (req, res, next) {
             datas: [
                 {
                     name: "ข้าวขาว",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .between('10063099009', '10063099023', { index: 'hamonize' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .between('10063099009', '10063099023', { index: 'hamonize' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
@@ -25,13 +25,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "ข้าวหอมมะลิไทย",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll(2559, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('1006304'))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll(2558, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('1006304'))
@@ -40,24 +40,24 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "ข้าวนึ่ง",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('10063091000', { index: 'hamonize' })
                         .filter({ tran_type: 'export', tran_year: 2559 })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('10063091000', { index: 'hamonize' })
                         .filter({ tran_type: 'export', tran_year: 2558 })
                         .sum('quantity').div(1000).div(1000000),
                 },
                 {
                     name: "ข้าวเหนียว",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll(2559, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('1006303'))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll(2558, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('1006303'))
@@ -66,14 +66,14 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "ข้าวปทุมธานี",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .between('10063099001', '10063099008', { index: 'hamonize' })
                         .filter(function (f) {
                             return f('tran_type').eq('export')
                                 .and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .between('10063099001', '10063099008', { index: 'hamonize' })
                         .filter(function (f) {
                             return f('tran_type').eq('export')
@@ -83,13 +83,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "ข้าวกล้อง",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll(2559, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('10062'))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll(2558, { index: 'tran_year' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('hamonize').match('10062'))

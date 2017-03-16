@@ -10,13 +10,13 @@ exports.index = function (req, res, next) {
             datas: [
                 {
                     name: "แอฟริกา",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('AF', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('AF', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
@@ -25,13 +25,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "เอเชีย",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('AS', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('AS', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
@@ -40,13 +40,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "อเมริกา",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('NA', 'SA', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('NA', 'SA', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
@@ -55,13 +55,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "ยุโรป",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('EU', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('EU', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
@@ -70,13 +70,13 @@ exports.index = function (req, res, next) {
                 },
                 {
                     name: "โอเชียเนีย",
-                    "y2559": r.db('external_f3').table('custom')
+                    "y2559": r.db('stats').table('custom')
                         .getAll('OC', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2559))
                         })
                         .sum('quantity').div(1000).div(1000000),
-                    "y2558": r.db('external_f3').table('custom')
+                    "y2558": r.db('stats').table('custom')
                         .getAll('OC', { index: 'continent2' })
                         .filter(function (f) {
                             return f('tran_type').eq('export').and(f('tran_year').eq(2558))
