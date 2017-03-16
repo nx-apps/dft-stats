@@ -82,7 +82,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[เลขผู้เสียภาษีอากร]]></text>
+				<text><![CDATA[เลขที่ผู้เสียภาษี]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="346" y="90" width="101" height="20" uuid="0ca0cc44-c2b6-4ddc-a1db-4e0663e012c8"/>
@@ -124,7 +124,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ข้อมูลผู้ส่งออกข้าวตามข้อมูลการขึ้นทะเบียน]]></text>
+				<text><![CDATA[ข้อมูลผู้นำเข้า/ส่งออกข้าว]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="346" y="70" width="217" height="20" uuid="de2d693b-273d-471f-916c-cc7fba50933c"/>
