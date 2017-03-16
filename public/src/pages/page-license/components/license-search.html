@@ -94,16 +94,16 @@
                 if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
                     this.dispatchAction('LICENSE_SEARCH', this.genUrl(this.change2GMT7(this.data)))
                 } else {
-                    this.dispatchAction('LICENSE_SEARCH_REFERENCE', this.genUrl(this.change2GMT7(this.data)))
+                    this.dispatchAction('LICENSE_SEARCH_REFERENCE', this.data.reference_code2)
                 }
             },
             getlicenseValueReport() {
                 if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
-                    window.open('./api/report/li01?'+this.genUrl(this.change2GMT7(this.data)))
+                    window.open('./api/report/li01?'+this.genUrl(this.data));
                     // console.log(this.data);
                 } else {
                     // console.log(this.data);
-                    window.open('./api/report/li02?'+this.genUrl(this.change2GMT7(this.data)))
+                    window.open('./api/report/li02/'+this.data.reference_code2);
                 }
             }
         });
