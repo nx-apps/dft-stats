@@ -28,9 +28,11 @@ export function hamonizeAction(store){
     return [commonAction(),{
       HAMONIZE_SET_DATE(){
           let date = new Object()
-          let today = new Date()
+          let today = new Date(new Date().setFullYear(new Date().getFullYear()-1))
+          console.log(today);
           date.sdate = today.toISOString().split('T')[0]
           date.edate = new Date(today.setDate(today.getDate()+1)).toISOString().split('T')[0]
+          console.log(date.edate);
           store.dispatch({type:'HAMONIZE_SET_DATE',payload:date})
       },
       HAMONIZE_CODE_GET(data){
