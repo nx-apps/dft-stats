@@ -83,7 +83,7 @@
             _setItem(hamonizeCodeList){
                 let combobox = this.$$('#hamonizeSearch')
                 let newData = hamonizeCodeList.map((hamonize)=>{
-                    return hamonize.id+' '+hamonize.hamonize_th
+                    return {label: hamonize.id+' '+hamonize.hamonize_th, value: hamonize.id}
                 })
                 combobox.items = newData;
             },
