@@ -7,62 +7,38 @@
 	<parameter name="edate" class="java.lang.String"/>
 	<field name="hamonize_code" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
-	<field name="fob_amt_baht_out" class="java.lang.Integer"/>
-	<field name="net_weight_out" class="java.lang.Integer"/>
-	<field name="fob_amt_baht_in" class="java.lang.Integer"/>
-	<field name="net_weight_in" class="java.lang.Integer"/>
-	<variable name="sum_baht_out" class="java.lang.Integer" calculation="Sum">
+	<field name="fob_amt_baht_out" class="java.lang.Double"/>
+	<field name="net_weight_out" class="java.lang.Double"/>
+	<field name="fob_amt_baht_in" class="java.lang.Double"/>
+	<field name="net_weight_in" class="java.lang.Double"/>
+	<variable name="sum_baht_out" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht_out}]]></variableExpression>
 	</variable>
-	<variable name="sum_weight_out" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_weight_out" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight_out}]]></variableExpression>
 	</variable>
-	<variable name="sum_baht_in" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_baht_in" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht_in}]]></variableExpression>
 	</variable>
-	<variable name="sum_weight_in" class="java.lang.Integer" calculation="Sum">
+	<variable name="sum_weight_in" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight_in}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="100">
-			<textField>
-				<reportElement x="50" y="50" width="283" height="20" uuid="6d9712e0-351a-46c8-a2c2-ba4d3a6c39b2"/>
-				<box leftPadding="5" rightPadding="5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
-			</textField>
+		<band height="73">
 			<staticText>
-				<reportElement x="0" y="50" width="50" height="20" uuid="0cfdf30b-610b-4d40-9763-3cea0d834a9c"/>
-				<box leftPadding="5" rightPadding="5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<reportElement x="0" y="23" width="555" height="31" uuid="713e2b92-2b31-4e20-badf-8272ccdd6eb2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[วันที่]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="76" width="70" height="20" uuid="1b917202-db05-4636-a09e-75d446252f50"/>
-				<box leftPadding="5" rightPadding="5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[เลขที่พิกัดข้าว]]></text>
+				<text><![CDATA[ข้อมูลการส่งออกข้าวตามเลขพิกัดศุลกากร (Harmonized Code)]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="40" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="-81" width="555" height="31" uuid="713e2b92-2b31-4e20-badf-8272ccdd6eb2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[พิกัดข้าว]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="70" height="40" uuid="67beb4f9-2806-4d4f-8eca-e0c08aa18da2"/>
 				<box leftPadding="0">
@@ -242,7 +218,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="20" splitType="Stretch">
+		<band height="49" splitType="Stretch">
 			<textField>
 				<reportElement x="389" y="0" width="83" height="20" uuid="3cf68750-c827-4e9d-906d-138dc15819fb"/>
 				<box leftPadding="5" rightPadding="5">
@@ -312,6 +288,14 @@
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_in},"#,###.00")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="23" width="265" height="20" uuid="6d9712e0-351a-46c8-a2c2-ba4d3a6c39b2"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
