@@ -153,13 +153,6 @@
 				</textElement>
 				<text><![CDATA[ข้อมูลหนังสือรับรองการนำเข้าส่งออกสินค้าข้าว]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="0" y="50" width="284" height="20" uuid="3a725f22-17fc-4308-9737-9f4e615e003d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
@@ -278,6 +271,17 @@
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="284" height="20" uuid="3a725f22-17fc-4308-9737-9f4e615e003d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<textField>

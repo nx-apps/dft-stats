@@ -155,13 +155,6 @@
 				</textElement>
 				<text><![CDATA[ส่งออก]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="0" y="50" width="259" height="20" uuid="0c9ff47d-457f-4ad1-a2f7-744ffe8b69d9"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
@@ -252,6 +245,17 @@
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="259" height="20" uuid="0c9ff47d-457f-4ad1-a2f7-744ffe8b69d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<textField>

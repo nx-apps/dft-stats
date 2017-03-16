@@ -81,7 +81,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[เลข พณ]]></text>
+				<text><![CDATA[เลขที่ใบอนุญาต]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="407" y="70" width="135" height="20" uuid="83353ca5-1453-47e3-ac9d-de16da8872cb"/>
@@ -152,13 +152,6 @@
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[วันที่หมดอายุ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="50" width="286" height="20" uuid="6224f09a-156d-4630-a0fe-25e30b18fd13"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -278,6 +271,17 @@
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="286" height="20" uuid="6224f09a-156d-4630-a0fe-25e30b18fd13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<textField>
