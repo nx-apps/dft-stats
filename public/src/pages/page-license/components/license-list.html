@@ -5,17 +5,18 @@
     <style include="page-style flex-style"></style>
     <template>
         <paper-material elevation="1" class="container">
+            <div style="overflow-x: auto; border:1px solid #ddd;">
             <table class="gl-table-default">
                 <thead>
                     <tr>
                         <th class="label-head">เลขที่ใบอนุญาต</th>
                         <th class="label-head">ประเภทใบอนุญาต</th>
-                        <th class="label-head">บริษัท</th>
+                        <th class="label-head" style="width:20%;">บริษัท</th>
                         <th class="label-head">ชนิดข้าว</th>
                         <th class="label-head">ปริมาณ (ตัน)</th>
                         <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head">วันที่อนุญาต</th>
-                        <th class="label-head">วันที่หมดอายุ</th>
+                        <th class="label-head" style="width:10%;">วันที่อนุญาต</th>
+                        <th class="label-head" style="width:10%;">วันที่หมดอายุ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                     </template>
                 </tbody>
             </table>
+            </div>
         </paper-material>
     </template>
     <script>
