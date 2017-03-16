@@ -18,6 +18,6 @@ module.exports = function (app) {
     app.get('/stats6', stats6.index);
     app.get('/stats7', stats7.index);
     app.get('/stats8', stats8.index);
-    app.get('/stats9', stats9.index);
-
+    app.get('/stats9', stats9.index); 
+// 
 }
