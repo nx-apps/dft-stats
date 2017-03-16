@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c1034887-de4f-47ed-b83c-c1ff45f8f554">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="148"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
@@ -57,7 +57,7 @@
 				<text><![CDATA[ชนิดข้าว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="342" y="70" width="115" height="40" uuid="2519f634-90df-48cf-bf10-f1025b99ebe8"/>
+				<reportElement x="342" y="90" width="115" height="20" uuid="2519f634-90df-48cf-bf10-f1025b99ebe8"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -68,11 +68,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ปริมาณนำเข้า
-(ตัน)]]></text>
+				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="457" y="70" width="115" height="40" uuid="9be8d69f-2632-47ee-a832-a75fc234275d"/>
+				<reportElement x="457" y="90" width="115" height="20" uuid="9be8d69f-2632-47ee-a832-a75fc234275d"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -83,11 +82,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[มูลค่า
-(บาท)]]></text>
+				<text><![CDATA[มูลค่า (บาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="572" y="70" width="115" height="40" uuid="2dea0c15-fa1d-4eca-aff6-fa1105617794"/>
+				<reportElement x="572" y="90" width="115" height="20" uuid="2dea0c15-fa1d-4eca-aff6-fa1105617794"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -98,11 +96,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ปริมาณส่งออก
-(ตัน)]]></text>
+				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="687" y="70" width="115" height="40" uuid="d44c48e1-f87b-49a9-b901-e3def51c1870"/>
+				<reportElement x="687" y="90" width="115" height="20" uuid="d44c48e1-f87b-49a9-b901-e3def51c1870"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -113,8 +110,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[มูลค่า
-(ตัน)]]></text>
+				<text><![CDATA[มูลค่า (ตัน)]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="537" y="50" width="265" height="20" uuid="6d9712e0-351a-46c8-a2c2-ba4d3a6c39b2"/>
@@ -130,6 +126,34 @@
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้อมูลการส่งออกข้าวตามเลขพิกัดศุลกากร (Harmonized Code)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="70" width="230" height="20" uuid="0f9100b2-2f2b-4018-ae92-5b28aff9afa8"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[นำเข้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="70" width="230" height="20" uuid="edfd05f3-81fc-4d78-bfea-b7f94c55036c"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออก]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
