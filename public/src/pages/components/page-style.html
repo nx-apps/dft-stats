@@ -16,9 +16,6 @@
                 font-family: 'CSChatThaiUI', sans-serif;
                 -webkit-font-smoothing: antialiased;
             }
-            .gl-table-default{
-                border: 1px solid #ddd;
-            }
             .textCenter{
                 text-align: center;
             }
@@ -29,11 +26,15 @@
             .gl-small{
                 font-size: var(--font-size-h5);
             }
+            table.gl-table-default {
+                border: 1px solid #ddd;
+            }
             table.gl-table-default > thead > tr > th.label-head,
             table.gl-table-default > tbody > tr > td.no-data {
                 text-align: center;
             }
-            table.gl-table-default > tbody > tr > td.format-number{
+            table.gl-table-default > tbody > tr > td.format-number,
+            table.gl-table-default > tfoot > tr > td.total {
                 text-align: right;
             }
             .xcontainer{
