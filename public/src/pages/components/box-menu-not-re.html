@@ -52,7 +52,7 @@
     }
   </style>
   <template>
-    <div class="card" on-tap="urlToReport">
+    <div class="card" >
       <div class="flex">
         <div>
           <div class="heading">
@@ -76,10 +76,6 @@
           value:{path:'/',nameMenu:'ชื่อเมนู',img:'/im.jpg'}
         }
       },
-      urlToReport(e){
-        console.log(this.data);
-        window.open('./api'+this.data.path)
-      }
 
     });
   </script>
