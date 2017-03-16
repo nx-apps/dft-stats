@@ -6,10 +6,10 @@
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
 	<field name="company_taxno" class="java.lang.String"/>
-	<field name="fob_amt_baht_out" class="java.lang.Integer"/>
-	<field name="net_weight_out" class="java.lang.Integer"/>
-	<field name="fob_amt_baht_in" class="java.lang.Integer"/>
-	<field name="net_weight_in" class="java.lang.Integer"/>
+	<field name="fob_amt_baht_out" class="java.lang.Double"/>
+	<field name="net_weight_out" class="java.lang.Double"/>
+	<field name="fob_amt_baht_in" class="java.lang.Double"/>
+	<field name="net_weight_in" class="java.lang.Double"/>
 	<field name="company_name" class="java.lang.String"/>
 	<variable name="sum_baht_out" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht_out}]]></variableExpression>
