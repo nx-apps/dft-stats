@@ -1,6 +1,12 @@
 <link rel="import" href="./../../components/month-behavior.html">
 <dom-module id="cert-search">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        paper-icon-button {
+            width: 23px;
+            height: 23px;
+            padding: 0px 4px;
+        }
+    </style>
     <template>
         <paper-material elevation="1">
             <div class="container">
@@ -30,11 +36,14 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
-                        เลข พณ. :
+                        เลขที่หนังสือรับรอง :
                     </div>
                     <div class="flex2child">
                         <!--<gl-combo-box class="textCenter" items="[[licenseList]]" item-label-path="reference_code2" item-value-path="reference_code2" value="{{data.reference_code2}}"></gl-combo-box>-->
-                        <gl-form-input value="{{data.reference_code2}}" allowed-pattern="[0-9]"><div prefix style="padding-left:5px;">พณ</div></gl-form-input>
+                        <gl-form-input value="{{data.reference_code2}}" allowed-pattern="[0-9]">
+                            <!--<div prefix style="padding-left:5px;">พณ</div>-->
+                            <paper-icon-button suffix icon="clear" on-tap="clearInput"></paper-icon-button>
+                        </gl-form-input>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">
@@ -71,11 +80,11 @@
                 MonthBehavior
             ],
             properties: {
-                certList:{
-                    statePath:'cert.list'
+                certList: {
+                    statePath: 'cert.list'
                 },
-                date:{
-                    statePath:'hamonize.date',
+                date: {
+                    statePath: 'hamonize.date',
                     observer: '_setDate'
                 },
                 data: {
@@ -83,10 +92,10 @@
                     value: {}
                 }
             },
-            _setDate(e){
-                this.set('data.sdate',e.sdate)
-                this.set('data.edate',e.edate)
-                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)));
+            _setDate(e) {
+                this.set('data.sdate', e.sdate)
+                this.set('data.edate', e.edate)
+                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.change2GMT7(this.data)));
                 // console.log(this.data);
             },
             getCertValue() {
@@ -98,12 +107,15 @@
             },
             getCertValueReport() {
                 if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
-                    window.open('./api/report/ce01?'+this.genUrl(this.data));
+                    window.open('./api/report/ce01?' + this.genUrl(this.data));
                     // console.log(this.data);
                 } else {
                     // console.log(this.data);
-                    window.open('./api/report/ce02/'+this.data.reference_code2);
+                    window.open('./api/report/ce02/' + this.data.reference_code2);
                 }
+            },
+            clearInput:function(){
+                this.set('data.reference_code2', '');
             }
         });
     </script>
