@@ -34,6 +34,10 @@ exports.h01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
+    var order = req.query.orderby;
+    if (order.indexOf('hamonize') == -1) {
+        order = r.desc(order);
+    }
     r.expr({
         sdate: s,
         edate: e
@@ -106,7 +110,7 @@ exports.h01 = function (req, res) {
             }
         })
         .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
-        .orderBy('hamonize_code')
+        .orderBy(order)
         .run()
         .then(function (data) {
             // res.json(data)
@@ -234,6 +238,10 @@ exports.c01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
+    var order = req.query.orderby;
+    if (order.indexOf('company') == -1) {
+        order = r.desc(order);
+    }
     r.expr({
         sdate: s,
         edate: e
@@ -307,7 +315,7 @@ exports.c01 = function (req, res) {
             }
         })
         .eqJoin('company_taxno', r.table('company')).pluck('left', { right: 'company_name' }).zip()
-        .orderBy(r.desc('net_weight_out'), r.desc('net_weight_in'))
+        .orderBy(order)
         // .orderBy('company_taxno')
         .run()
         .then(function (data) {

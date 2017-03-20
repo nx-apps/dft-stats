@@ -117,18 +117,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[มูลค่า (ตัน)]]></text>
+				<text><![CDATA[มูลค่า (บาท)]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="537" y="50" width="265" height="20" uuid="6d9712e0-351a-46c8-a2c2-ba4d3a6c39b2"/>
-				<box leftPadding="0" rightPadding="0"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="0" y="10" width="802" height="31" uuid="713e2b92-2b31-4e20-badf-8272ccdd6eb2"/>
+				<reportElement x="0" y="14" width="802" height="31" uuid="713e2b92-2b31-4e20-badf-8272ccdd6eb2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -285,10 +277,18 @@
 			<staticText>
 				<reportElement x="0" y="0" width="259" height="20" uuid="0c9ff47d-457f-4ad1-a2f7-744ffe8b69d9"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="537" y="0" width="265" height="20" uuid="6d9712e0-351a-46c8-a2c2-ba4d3a6c39b2"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 	<summary>
