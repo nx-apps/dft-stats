@@ -39,7 +39,7 @@
                 <tbody>
                     <template is="dom-if" if="[[checkData(dataList)]]">
                         <tr>
-                            <td colspan="6" class="no-data">ไม่พบข้อมูล</td>
+                            <td colspan="7" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
                     </template>
                     
@@ -57,6 +57,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td>รวม</td>
                         <td class="total">[[formatNumber(total.net_weight_in)]]</td>
