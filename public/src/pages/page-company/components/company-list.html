@@ -1,14 +1,14 @@
 <link rel="import" href="./../../components/format-number-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
-
+<link rel="import" href="./../../components/common-logic.html">
 <dom-module id="company-list">
     <style include="page-style flex-style">
-         table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(1),
-        table.gl-table-default > tfoot > tr > td:nth-child(1) {
+         table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
+        table.gl-table-default > tfoot > tr > td:nth-child(2) {
             width: 15%;
         }
-        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
-        table.gl-table-default > tfoot > tr > td:nth-child(2) {
+        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(3),
+        table.gl-table-default > tfoot > tr > td:nth-child(3) {
             width: 30%;
         }
     </style>
@@ -17,6 +17,7 @@
             <table class="gl-table-default">
                 <thead>
                     <tr>
+                        <th class="label-head" rowspan="2">ลำดับ</th>
                         <th class="label-head" rowspan="2">เลขที่ผู้เสียภาษี</th>
                         <th class="label-head" rowspan="2">บริษัท</th>
                         <th class="label-head" colspan="2">นำเข้า</th>
@@ -43,6 +44,7 @@
                 </template>
                 <template is="dom-repeat" items={{dataList}} >
                         <tr>
+                            <td style="text-align: center;">[[_Obindex(index)]]</td>
                             <td>[[item.company_taxno]]</td>
                             <td>[[item.company_name]]</td>
                             <td class="format-number">[[formatNumber(item.net_weight_in)]]</td>
@@ -54,6 +56,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td>รวม</td>
                         <td class="total">[[formatNumber(total.net_weight_in)]]</td>
@@ -71,7 +74,8 @@
             behaviors:[
                 DataManageBehavior,
                 ReduxBehavior,
-                FormatNumberBehavior
+                FormatNumberBehavior,
+                commonLogic
             ],
             properties:{
                 dataList:{
