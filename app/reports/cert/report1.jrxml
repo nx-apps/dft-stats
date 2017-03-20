@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c59934fd-cf54-401f-9658-3c0ce67a2d17">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="148"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
@@ -28,7 +28,7 @@
 	<pageHeader>
 		<band height="90" splitType="Stretch">
 			<staticText>
-				<reportElement x="92" y="70" width="95" height="20" uuid="67ecc365-3562-4fc1-a4cf-d2aca10af546"/>
+				<reportElement x="92" y="70" width="133" height="20" uuid="67ecc365-3562-4fc1-a4cf-d2aca10af546"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -56,7 +56,7 @@
 				<text><![CDATA[มูลค่า (บาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="429" y="70" width="95" height="20" uuid="72ea0987-8c99-429d-a994-d5853f223ba4"/>
+				<reportElement x="452" y="70" width="80" height="20" uuid="72ea0987-8c99-429d-a994-d5853f223ba4"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -70,7 +70,7 @@
 				<text><![CDATA[วันที่หมดอายุ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="334" y="70" width="95" height="20" uuid="368316ed-abb3-4fd7-831f-476d0e410f27"/>
+				<reportElement x="372" y="70" width="80" height="20" uuid="368316ed-abb3-4fd7-831f-476d0e410f27"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -84,7 +84,7 @@
 				<text><![CDATA[วันที่อนุญาต]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="524" y="70" width="133" height="20" uuid="ed22b15b-545d-4cc2-bfa0-bbdb08f2662d"/>
+				<reportElement x="532" y="70" width="125" height="20" uuid="ed22b15b-545d-4cc2-bfa0-bbdb08f2662d"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -112,7 +112,7 @@
 				<text><![CDATA[เลขที่หนังสือรับรอง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="187" y="70" width="147" height="20" uuid="b97cd6c6-e21e-473a-bb5d-f4a3a7aa2cda"/>
+				<reportElement x="225" y="70" width="147" height="20" uuid="b97cd6c6-e21e-473a-bb5d-f4a3a7aa2cda"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -166,13 +166,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{net_weight},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="524" y="0" width="133" height="20" isPrintWhenDetailOverflows="true" uuid="b6ed17a3-b91a-4371-9b20-c94de8716b83"/>
+				<reportElement stretchType="RelativeToBandHeight" x="532" y="0" width="125" height="20" isPrintWhenDetailOverflows="true" uuid="b6ed17a3-b91a-4371-9b20-c94de8716b83"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -180,7 +180,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement verticalAlignment="Top">
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{hamonize_th}]]></textFieldExpression>
@@ -194,13 +194,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reference_code2}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="92" y="0" width="95" height="20" isPrintWhenDetailOverflows="true" uuid="58c254a5-0551-4e27-9199-c50132150993"/>
+				<reportElement stretchType="RelativeToBandHeight" x="92" y="0" width="133" height="20" isPrintWhenDetailOverflows="true" uuid="58c254a5-0551-4e27-9199-c50132150993"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -208,7 +208,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement verticalAlignment="Top">
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{form_nameFull}]]></textFieldExpression>
@@ -222,13 +222,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="187" y="0" width="147" height="20" isPrintWhenDetailOverflows="true" uuid="f9392898-a76f-4b8b-9826-3831c8c60e53"/>
+				<reportElement stretchType="RelativeToBandHeight" x="225" y="0" width="147" height="20" isPrintWhenDetailOverflows="true" uuid="f9392898-a76f-4b8b-9826-3831c8c60e53"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -236,13 +236,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement verticalAlignment="Top">
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{company_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="334" y="0" width="95" height="20" isPrintWhenDetailOverflows="true" uuid="20325238-9274-4c08-9d1f-7336553bcc60"/>
+				<reportElement stretchType="RelativeToBandHeight" x="372" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="20325238-9274-4c08-9d1f-7336553bcc60"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -250,13 +250,13 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate ($F{approve_date})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="429" y="0" width="95" height="20" isPrintWhenDetailOverflows="true" uuid="0e8359b2-4d72-4a94-979d-9e287216fcda"/>
+				<reportElement stretchType="RelativeToBandHeight" x="452" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="0e8359b2-4d72-4a94-979d-9e287216fcda"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -264,7 +264,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate ($F{expire_date})]]></textFieldExpression>
