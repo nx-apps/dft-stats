@@ -110,7 +110,7 @@ exports.re01 = function (req, res) {
             }
         })
         .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
-        .orderBy('hamonize_code')
+        .orderBy(r.desc('net_weight_out'), r.desc('net_weight_in'))
         .run()
         .then(function (data) {
             res.json(data)
