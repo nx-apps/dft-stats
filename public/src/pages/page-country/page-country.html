@@ -1,0 +1,35 @@
+
+<link rel="import" href="./components/country-list.html">
+
+<link rel="import" href="./components/country-search.html">
+<dom-module id="page-country">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <country-search></country-search>
+           </section>
+           <section class="container">
+                <div class="header">ข้อมูลรายประเทศ / กลุ่มประเทศ</div>
+                 <country-list></country-list>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-country',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,companyAction,hamonizeAction
+            ],
+            nylonPageActive(){
+                this.dispatchAction('COMPANY_CODE_GET');
+                this.dispatchAction('HAMONIZE_SET_DATE');
+            }
+        });
+    </script>
+</dom-module>
