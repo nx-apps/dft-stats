@@ -24,7 +24,7 @@ export function commonSystemAction(store){
                     store.dispatch({type:'COMMON_MODULE',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err);
+                    //console.log(err);
                 })
             }
         }

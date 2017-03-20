@@ -31,7 +31,7 @@ export function certAction(store){
             }});
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       },
       CERT_SEARCH_REFERENCE(data){
@@ -45,7 +45,7 @@ export function certAction(store){
             }});
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       }
    }]

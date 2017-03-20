@@ -27,7 +27,7 @@ const clearDatawelfare = (data,callback)=>{
     
     let {emp_id,welfare_id,use_budget,status,year,group_id}=data;
     let newData={emp_id,welfare_id,use_budget,status,year,group_id};
-    // console.log(data.date/use_welfare/update_use == '');
+    // //console.log(data.date/use_welfare/update_use == '');
    
     newData.document_ids = new Array()    
     data.document_ids.map((file)=>{
@@ -37,17 +37,17 @@ const clearDatawelfare = (data,callback)=>{
     if (data.date_use == '' || data.date_use == undefined) {
         newData.date_use = new Date().toISOString();
     } else {
-        // console.log(data.date_use);
+        // //console.log(data.date_use);
         newData.date_use = new Date (data.date_use).toISOString();
     }
-    // console.log(newData);
+    // //console.log(newData);
         callback(newData)
 }
 export function usersReducer(state = initialState,action){
 
     switch (action.type) {
         case 'USERS_LIST':
-        // console.log(1)
+        // //console.log(1)
             return Object.assign({},state,{lists:action.payload});
         case 'USER_SELECT':
             return Object.assign({},state,{select:action.payload});
@@ -72,10 +72,10 @@ export function usersAction(store){
     return [commonAction(),
         {
             USERS_LIST:function(){
-                // console.log(1)
+                // //console.log(1)
                 axios.get('./employee/list')
                 .then(res=>{
-                    console.log(res.data)
+                    //console.log(res.data)
                     store.dispatch({type:'USERS_LIST',payload:res.data})
                 })
                 .catch(err=>{
@@ -95,7 +95,7 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                     })
             },
@@ -103,7 +103,7 @@ export function usersAction(store){
                store.dispatch({type:'USER_SELECT',payload:data})
             },
             USER_EDIT:function(data){
-                // console.log(data)
+                // //console.log(data)
                 this.fire('toast',{
                     status:'openDialog',
                     text:'ต้องการบันทึกข้อมูลใช่หรือไม่ ?',
@@ -123,7 +123,7 @@ export function usersAction(store){
                                     });
                                 })
                                 .catch(err=>{
-                                    console.log(err);
+                                    //console.log(err);
                                 })
                             })
                         }
@@ -133,7 +133,7 @@ export function usersAction(store){
             
             },
             USER_DELETED:function(id){
-                // console.log(id)
+                // //console.log(id)
                 this.fire('toast',{
                     status:'openDialog',
                     text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
@@ -154,19 +154,19 @@ export function usersAction(store){
                 
             },
             USER_BTN(data){
-                // console.log(data)
+                // //console.log(data)
                 store.dispatch({type:'USER_BTN',payload:data})
             },
             USER_INSERT_VIEW(data){
-                // console.log(data)
+                // //console.log(data)
                 store.dispatch({type:'USER_INSERT_VIEW',payload:data})
             },
             USER_GET_WELFARES(id,otherFunction=false,year=new Date().getFullYear()){
-                console.log('otherFunctioncdddd',year)
+                //console.log('otherFunctioncdddd',year)
                  this.fire('toast',{status:'load'});
                     axios.get(`./employee/${id}/welfares/year/${year}`)
                     .then(res=>{
-                        console.log(res)
+                        //console.log(res)
                         this.fire('toast',{status:'success',text:'โหลดข้อมูลสำเร็จ',
                             callback:()=>{
                                 store.dispatch({type:'USER_GET_WELFARES',payload:res.data})
@@ -176,12 +176,12 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                     // })
             },
             USER_USE_WELFARE(data){
-            // console.log(data);
+            // //console.log(data);
             clearDatawelfare(data,(newData)=>{
                 
                 this.fire('toast',{status:'load'});
@@ -197,12 +197,12 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                 })
             },
             USER_USE_WELFARE_APPROVE(data){
-            // console.log(data);
+            // //console.log(data);
             clearDatawelfare(data,(newData)=>{
                 newData.id = data.id;
                 this.fire('toast',{status:'load'});
@@ -219,7 +219,7 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                 })
             },
@@ -240,10 +240,10 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                 })
-                // console.log(data);
+                // //console.log(data);
                 //  this.fire('toast',{
                 //     status:'openDialog',
                 //     text:'ต้องการลบข้อมูลใช่หรือไม่ ?',
@@ -269,7 +269,7 @@ export function usersAction(store){
                 this.fire('toast',{status:'load'});
                     axios.get(`./employee/unapprove/`)
                     .then(res=>{
-                        // console.log(res)
+                        // //console.log(res)
                         this.fire('toast',{status:'success',text:'โหลดข้อมูลสำเร็จ',
                             callback:()=>{
                                 store.dispatch({type:'USERS_FALSE_LIST',payload:res.data})
@@ -279,7 +279,7 @@ export function usersAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
             }
         },

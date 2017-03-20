@@ -29,51 +29,51 @@ export function hamonizeAction(store){
       HAMONIZE_SET_DATE(){
           let date = new Object()
           let today = new Date(new Date().setFullYear(new Date().getFullYear()-1))
-          console.log(today);
+          //console.log(today);
           date.sdate = today.toISOString().split('T')[0]
           date.edate = new Date(today.setDate(today.getDate()+1)).toISOString().split('T')[0]
-          console.log(date.edate);
+          //console.log(date.edate);
           store.dispatch({type:'HAMONIZE_SET_DATE',payload:date})
       },
       HAMONIZE_CODE_GET(data){
         // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
         axios.get('/hamonize/')
         .then( (response)=>{
-            console.log(response);
+            //console.log(response);
             store.dispatch({type:'HAMONIZE_CODE_GET',payload:response.data})
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       },
       HAMONIZE_CODE_SEARCH_R1(data=''){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-        // console.log(data);
+        // //console.log(data);
         axios.get('/hamonize/re01?'+data)
         .then( (response)=>{
-            console.log(response);
+            //console.log(response);
             this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
               store.dispatch({type:'HAMONIZE_CODE_SEARCH_R1',payload:response.data})
             }});
             
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       },
       HAMONIZE_CODE_SEARCH_R2(data=''){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-        // console.log(data);
+        // //console.log(data);
         axios.get('/hamonize/re02?'+data)
         .then( (response)=>{
-            console.log(response);
+            //console.log(response);
             this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
               store.dispatch({type:'HAMONIZE_CODE_SEARCH_R1',payload:response.data})
             }});
             
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       },
    }]

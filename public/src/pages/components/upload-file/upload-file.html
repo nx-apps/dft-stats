@@ -101,7 +101,7 @@
               if(fileChange.path=='file.complete'){
                 if(fileChange.base.xhr){
                   var res = JSON.parse(fileChange.base.xhr.response);
-                  console.log(res.generated_keys[0]);
+                  //console.log(res.generated_keys[0]);
                   this.getData = res.generated_keys;
                  
                 //   this.dispatchAction('UPLOAD_FILECHANGE',res.generated_keys[0]);
@@ -129,7 +129,7 @@
                     this.listFiles = response.data;
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    //console.log(error);
                 });
               }
             },
@@ -154,7 +154,7 @@
                   idFile = this.fileIdUpload
                 }else{
                   idFile = e.target.fileId
-                  console.log("ID File = "+idFile);
+                  //console.log("ID File = "+idFile);
                 }
                 this.fire('toast',{status:'openDialog',
                 text:'คุณต้องการจะลบไฟล์ใช่หรือไม่ ?',

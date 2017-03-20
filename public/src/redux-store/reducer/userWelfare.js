@@ -16,7 +16,7 @@ const clearDatawelfare = (data, callback) => {
 
     let { emp_id, welfare_id, use_budget, status, year, group_id } = data;
     let newData = { emp_id, welfare_id, use_budget, status, year, group_id };
-    // console.log(data.date/use_welfare/update_use == '');
+    // //console.log(data.date/use_welfare/update_use == '');
 
     newData.document_ids = new Array()
     data.document_ids.map((file) => {
@@ -26,10 +26,10 @@ const clearDatawelfare = (data, callback) => {
     if (data.date_use == '' || data.date_use == undefined) {
         newData.date_use = new Date().toISOString();
     } else {
-        // console.log(data.date_use);
+        // //console.log(data.date_use);
         newData.date_use = new Date(data.date_use).toISOString();
     }
-    // console.log(newData);
+    // //console.log(newData);
     callback(newData)
 }
 
@@ -67,7 +67,7 @@ export function userWelfareAction(store) {
         WELFARE_LIST_YEAR: function () {
             axios.get('./user_welfare/groupYear')
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'WELFARE_LIST_YEAR', payload: result.data })
                 })
                 .catch(err => {
@@ -75,11 +75,11 @@ export function userWelfareAction(store) {
                 })
         },
         WELFARE_LIST: function (data) {
-            // console.log(data);
+            // //console.log(data);
             axios.get('./user_welfare/groupByYear/year/' + data)
                 .then(function (result) {
-                    console.log(result.data);
-                    // console.log(JSON.stringify(result.data));
+                    //console.log(result.data);
+                    // //console.log(JSON.stringify(result.data));
                     store.dispatch({ type: 'WELFARE_LIST', payload: result.data })
                 })
                 .catch(err => {
@@ -87,10 +87,10 @@ export function userWelfareAction(store) {
                 })
         },
         LIST_USER: function (id) {
-            // console.log(id);
+            // //console.log(id);
             axios.get('./employee/list')
                 .then(function (result) {
-                    console.log(result.data);
+                    //console.log(result.data);
                     var newData = result.data.map((item)=>{
                         if(item.academic_name == ""){
                             item.fullName = item.prefix_name + " " + item.firstname + " " + item.lastname
@@ -109,7 +109,7 @@ export function userWelfareAction(store) {
             this.userSearch = id;
             axios.get('./user_welfare/adminEmployee/' + id)
                 .then((response) => {
-                    //  console.log(JSON.stringify(response.data));
+                    //  //console.log(JSON.stringify(response.data));
                     var newData = response.data.map((item) => {
                         if(item.academic_name == ""){
                             item.fullName = item.prefix_name + " " + item.firstname + " " + item.lastname
@@ -123,8 +123,8 @@ export function userWelfareAction(store) {
                     store.dispatch({ type: 'LIST_USER_SERARCH', payload: newData })
                 })
                 .catch((error) => {
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
         },
         USER_INSERT: function (data) {
@@ -139,15 +139,15 @@ export function userWelfareAction(store) {
                     });
                 })
                 .catch((error) => {
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
         },
         LIST_EMPLOYEE_WELFARE: function (data) {
-            // console.log(data);
+            // //console.log(data);
             axios.get('./user_welfare/welfaresEmployee/' + data)
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'LIST_EMPLOYEE_WELFARE', payload: result.data })
                 })
                 .catch(err => {
@@ -155,10 +155,10 @@ export function userWelfareAction(store) {
                 })
         },
         LIST_EMPLOYEES_WELFARE: function (data) {
-            // console.log(data);
+            // //console.log(data);
             axios.get('./employee/'+ data.id+'/welfares/year/' + data.year)
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'LIST_EMPLOYEES_WELFARE', payload: result.data })
                 })
                 .catch(err => {
@@ -166,11 +166,11 @@ export function userWelfareAction(store) {
                 })
         },
         EMPLOYEE_GET_WELFARES(id, year = new Date().getFullYear()) {
-            // console.log(id, year);
+            // //console.log(id, year);
             // this.fire('toast', { status: 'load' });
             axios.get(`./employee/${id}/welfares/year/${year}`)
                 .then(res => {
-                    // console.log(res)
+                    // //console.log(res)
                     this.fire('toast', {
                         status: 'success', text: 'โหลดข้อมูลสำเร็จ',
                         callback: () => {
@@ -181,17 +181,17 @@ export function userWelfareAction(store) {
                     });
                 })
                 .catch(err => {
-                    console.log(err);
+                    //console.log(err);
                 })
         },
         EMPLOYEE_USE_SELETE_WELFARE(data) {
-            // console.log(data);
+            // //console.log(data);
             store.dispatch({ type: 'EMPLOYEE_USE_SELETE_WELFARE', payload: data })
         },
         EMPLOYEE_USE_WELFARE(data) {
-            // console.log(data);
+            // //console.log(data);
             clearDatawelfare(data, (newData) => {
-                // console.log(newData);
+                // //console.log(newData);
 
                 this.fire('toast', { status: 'load' });
                 // newData.status = true;
@@ -207,7 +207,7 @@ export function userWelfareAction(store) {
                         });
                     })
                     .catch(err => {
-                        console.log(err);
+                        //console.log(err);
                     })
             })
         },
@@ -217,7 +217,7 @@ export function userWelfareAction(store) {
                     store.dispatch({ type: 'FACULTY_LIST', payload: response.data })
                 })
                 .catch((error) => {
-                    console.log(error);
+                    //console.log(error);
                 });
         }
     }

@@ -40,7 +40,7 @@ export function providerAction(store){
                 .catch(err=>{
 
                 })
-                console.log(id);
+                //console.log(id);
             }
         }
     ]

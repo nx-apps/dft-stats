@@ -15,7 +15,7 @@ const clearData = (data,callback)=>{
     let {label,field,data_source}=data;
     let newData={label,field,data_source};
     newData.conditions = new Array();
-    console.log(typeof newData.data_source == 'undefined');
+    //console.log(typeof newData.data_source == 'undefined');
     if(typeof newData.data_source == 'undefined')
         newData.data_source = ''
     // for (let prop in newData) {
@@ -56,11 +56,11 @@ export function conditionReadWelfareAction(store){
                 store.dispatch({type:'CONDITIONREADWELFARE_SET'})
             },
             CONDITIONREADWELFARE_BTN(data){
-                // console.log(data)
+                // //console.log(data)
                 store.dispatch({type:'CONDITIONREADWELFARE_BTN',payload:data})
             },
             CONDITIONREADWELFARE_INSERT_VIEW(data){
-                // console.log(data)
+                // //console.log(data)
                 store.dispatch({type:'CONDITIONREADWELFARE_INSERT_VIEW',payload:data})
             },
             CONDITIONREADWELFARE_LIST(){
@@ -69,17 +69,17 @@ export function conditionReadWelfareAction(store){
                     store.dispatch({type:'CONDITIONREADWELFARE_LIST',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err);
+                    //console.log(err);
                 })
             },
             CONDITIONREADWELFARE_TABLE_LIST(){
-                // console.log(1);
+                // //console.log(1);
                 axios.get('/condition_read_welfare/listTable/')
                 .then(res=>{
                     store.dispatch({type:'CONDITIONREADWELFARE_TABLE_LIST',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err);
+                    //console.log(err);
                 })
             },
             CONDITIONREADWELFARE_FIEID_LIST(){
@@ -88,11 +88,11 @@ export function conditionReadWelfareAction(store){
                     store.dispatch({type:'CONDITIONREADWELFARE_FIEID_LIST',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err);
+                    //console.log(err);
                 })
             },
             CONDITIONREADWELFARE_INSERT(data){
-                console.log(data);
+                //console.log(data);
                 clearData(data,(newData)=>{
                 this.fire('toast',{status:'load'});
                 axios.post(`./condition_read_welfare/insert`,newData)
@@ -105,7 +105,7 @@ export function conditionReadWelfareAction(store){
                         });
                     })
                     .catch(err=>{
-                        console.log(err);
+                        //console.log(err);
                     })
                     })
             },
@@ -113,7 +113,7 @@ export function conditionReadWelfareAction(store){
                store.dispatch({type:'CONDITIONREADWELFARE_SELECT',payload:data})
             },
             CONDITIONREADWELFARE_EDIT:function(data){
-                // console.log(data)
+                // //console.log(data)
                 this.fire('toast',{
                     status:'openDialog',
                     text:'ต้องการบันทึกข้อมูลใช่หรือไม่ ?',
@@ -133,7 +133,7 @@ export function conditionReadWelfareAction(store){
                                     });
                                 })
                                 .catch(err=>{
-                                    console.log(err);
+                                    //console.log(err);
                                 })
                             })
                         }
@@ -141,7 +141,7 @@ export function conditionReadWelfareAction(store){
                 })
             },
             CONDITIONREADWELFARE_DELETED:function(id){
-                // console.log(id)
+                // //console.log(id)
                 this.fire('toast',{
                     status:'openDialog',
                     text:'ต้องการลบข้อมูลใช่หรือไม่ ?',

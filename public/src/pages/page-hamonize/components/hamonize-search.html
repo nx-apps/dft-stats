@@ -93,7 +93,7 @@
                 (e.edate != '')? this.getRiceValue():'';
             },
             getRiceValue(){
-                console.log(1);
+                //console.log(1);
                 // console.log(this.data.hamonize_id == undefined || this.data.hamonize_id == '');
                 if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
                     this.dispatchAction('HAMONIZE_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)))

@@ -57,7 +57,7 @@ export function commonDataAction(store){
     return [commonAction(),
         {
             COMMONDATA_LIST:function(){
-                console.log(1)
+                //console.log(1)
                 // axios.get('/providers')
                 // .then(res=>{
                 //     store.dispatch({type:'COMMONDATA_LIST',payload:res.data})
@@ -78,7 +78,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_ACADEMIC',payload:newData})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_ACADEMIC_INSERT:function(data){
@@ -92,8 +92,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_ACADEMIC_UPDATE:function(data){
@@ -107,8 +107,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_ACADEMIC_DELETE:function(del){
@@ -122,15 +122,15 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_ACTIVE
             COMMONDATA_DATA_ACTIVE:function(id){
                 axios.get(`/common/active`)
                 .then(res=>{
-                    // console.log(res.data);
+                    // //console.log(res.data);
                     var newData = res.data.map((item)=>{
                         item.check = true;
                         item.status = false;
@@ -139,11 +139,11 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_ACTIVE',payload:newData})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_ACTIVE_INSERT:function(data){
-                // console.log(data)
+                // //console.log(data)
                 this.fire('toast',{status:'load'}); 
                 axios.post(`/common/active/insert`,data)
                 .then((response)=>{
@@ -154,8 +154,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_ACTIVE_UPDATE:function(data){
@@ -169,8 +169,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_ACTIVE_DELETE:function(del){
@@ -184,8 +184,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_DEPARTMENT 
@@ -200,7 +200,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_DEPARTMENT',payload:newData})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_DEPARTMENT_INSERT:function(data){
@@ -214,8 +214,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_DEPARTMENT_UPDATE:function(data){
@@ -229,8 +229,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_DEPARTMENT_DELETE:function(del){
@@ -244,8 +244,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_FACULTY
@@ -260,7 +260,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_FACULTY',payload:newData})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_FACULTY_INSERT:function(data){
@@ -274,8 +274,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_FACULTY_UPDATE:function(data){
@@ -289,8 +289,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_FACULTY_DELETE:function(del){
@@ -304,8 +304,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_GENDER:function(id){
@@ -319,7 +319,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_GENDER',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_GENDER_INSERT:function(data){
@@ -333,8 +333,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_GENDER_UPDATE:function(data){
@@ -348,8 +348,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_GENDER_DELETE:function(del){
@@ -363,8 +363,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_EMPLOYEE:function(id){
@@ -373,7 +373,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_EMPLOYEE',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             // COMMONDATA_DATA_MATIER
@@ -388,7 +388,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_MATIER',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_MATIER_INSERT:function(data){
@@ -402,8 +402,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_MATIER_UPDATE:function(data){
@@ -417,8 +417,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_MATIER_DELETE:function(del){
@@ -432,8 +432,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_POSITION
@@ -448,7 +448,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_POSITION',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_POSITION_INSERT:function(data){
@@ -462,8 +462,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_POSITION_UPDATE:function(data){
@@ -477,8 +477,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_POSITION_DELETE:function(del){
@@ -492,8 +492,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_PREFIXNAME
@@ -508,7 +508,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_PREFIXNAME',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_PREFIXNAME_INSERT:function(data){
@@ -522,8 +522,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_PREFIXNAME_UPDATE:function(data){
@@ -537,8 +537,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_PREFIXNAME_DELETE:function(del){
@@ -552,8 +552,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_RELATION
@@ -568,7 +568,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_RELATION',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_RELATION_INSERT:function(data){
@@ -582,8 +582,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_RELATION_UPDATE:function(data){
@@ -597,8 +597,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_RELATION_DELETE:function(del){
@@ -612,8 +612,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             // COMMONDATA_DATA_TYPE_EMPLOYEE
@@ -628,7 +628,7 @@ export function commonDataAction(store){
                     store.dispatch({type:'COMMONDATA_DATA_TYPE_EMPLOYEE',payload:res.data})
                 })
                 .catch(err=>{
-                    console.log(err)
+                    //console.log(err)
                 })
             },
             COMMONDATA_DATA_TYPE_EMPLOYEE_INSERT:function(data){
@@ -642,8 +642,8 @@ export function commonDataAction(store){
                      });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_TYPE_EMPLOYEE_UPDATE:function(data){
@@ -657,8 +657,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             },
             COMMONDATA_DATA_TYPE_EMPLOYEE_DELETE:function(del){
@@ -672,8 +672,8 @@ export function commonDataAction(store){
                     });
                 })
                 .catch((error)=>{
-                    console.log('error');
-                    console.log(error);
+                    //console.log('error');
+                    //console.log(error);
                 });
             }
             // COMMONDATA_SELECT:function(id){
@@ -684,7 +684,7 @@ export function commonDataAction(store){
             //     .catch(err=>{
 
             //     })
-            //     console.log(id);
+            //     //console.log(id);
             // }
         }
     ]

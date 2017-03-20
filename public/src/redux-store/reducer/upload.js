@@ -25,14 +25,14 @@ export function uploadAction(store){
         this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
         axios.delete('/employee/delete/'+data)
         .then( (response)=>{
-            console.log(response);
+            //console.log(response);
             // store.dispatch({type:'UPLOAD_DELETE',payload:response.data})
             this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',callback:function(){
-              console.log('success');
+              //console.log('success');
             }});
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
         });
       }
    }]

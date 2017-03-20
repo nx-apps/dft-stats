@@ -36,7 +36,7 @@ export function welfareAction(store) {
         WELFARE_LIST: function () {
             axios.get('/welfare')
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'WELFARE_LIST', payload: result.data })
                 })
                 .catch(err => {
@@ -46,7 +46,7 @@ export function welfareAction(store) {
         WELFARE_LIST_ID: function (data) {
             axios.get('/welfare/' + data)
                 .then(function (result) {
-                    console.log('*',result.data);
+                    //console.log('*',result.data);
                     store.dispatch({ type: 'WELFARE_LIST_ID', payload: result.data })
                 })
                 .catch(err => {
@@ -54,41 +54,41 @@ export function welfareAction(store) {
                 })
         },
         WELFARE_INSERT: function (data) {
-            console.log(data);
+            //console.log(data);
             this.fire('toast', { status: 'load' });
             axios.post(`./welfare/insert`, data)
                 .then((result) => {
-                    console.log(result);
+                    //console.log(result);
                     this.LIST_WELFARE_ID(data.group_id);
                     this.fire('toast', {
                         status: 'success', text: 'บันทึกสำเร็จ', callback: () => {
-                            console.log('success');
+                            //console.log('success');
                             this.clearData();
                         }
                     });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    //console.log(err);
                 })
         },
         WELFARE_DELETE: function (data) {
-            // console.log(data);
+            // //console.log(data);
             axios.delete(`./welfare/delete/id/` + data.id)
                 .then((result) => {
-                    // console.log(result);
+                    // //console.log(result);
                     this.LIST_WELFARE_ID(data.group_id);
                     this.fire('toast', {
                         status: 'success', text: 'ลบสำเร็จ', callback: () => {
-                            console.log('success');
+                            //console.log('success');
                         }
                     });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    //console.log(err);
                 })
         },
         WELFARE_EDIT: function (data) {
-            // console.log(data);
+            // //console.log(data);
             var datas = {
                 budget: data.budget,
                 group_id: data.group_id,
@@ -96,27 +96,27 @@ export function welfareAction(store) {
                 condition: data.condition,
                 id: data.id
             }
-            // console.log(datas);
+            // //console.log(datas);
             this.fire('toast', { status: 'load' });
             axios.put(`./welfare/update`, datas)
                 .then((result) => {
-                    // console.log(result);
+                    // //console.log(result);
                     this.WELFARE_LIST();
                     this.fire('toast', {
                         status: 'success', text: 'บันทึกสำเร็จ', callback: function () {
-                            console.log('success');
+                            //console.log('success');
                         }
                     });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    //console.log(err);
                 })
         },
         WELFARE_DATA_SELECT: function (val) {
             // this.id = val
             axios.get('/welfare/' + val)
                 .then(function (result) {
-                    // console.log("*",result.data);
+                    // //console.log("*",result.data);
                     store.dispatch({ type: 'WELFARE_DATA_SELECT', payload: result.data })
                 })
                 .catch(err => {
@@ -126,7 +126,7 @@ export function welfareAction(store) {
         CONDITION_LIST: function () {
             axios.get('/condition_read_welfare/list/conditions')
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'CONDITION_LIST', payload: result.data })
                 })
                 .catch(err => {
@@ -134,10 +134,10 @@ export function welfareAction(store) {
                 })
         },
         WELFARE_LIST_EMPLOYEE: function (id) {
-            // console.log(id);
+            // //console.log(id);
             axios.get('/user_welfare/id/' + id)
                 .then(function (result) {
-                    // console.log(result.data);
+                    // //console.log(result.data);
                     store.dispatch({ type: 'WELFARE_LIST_EMPLOYEE', payload: result.data })
                 })
                 .catch(err => {
