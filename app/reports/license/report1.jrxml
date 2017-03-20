@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8eee6db5-07b6-49b2-9b5b-22900058352b">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="148"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
@@ -22,6 +22,13 @@
 	<variable name="sum_baht" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht}]]></variableExpression>
 	</variable>
+	<variable name="nocount" class="java.lang.Integer" incrementType="Group" incrementGroup="g" calculation="Count">
+		<variableExpression><![CDATA[new Integer(1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="g" minHeightToStartNewPage="40">
+		<groupExpression><![CDATA[$F{reference_code2}]]></groupExpression>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -111,15 +118,8 @@
 				</textElement>
 				<text><![CDATA[ประเภทใบอนุญาต]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="536" y="50" width="266" height="20" uuid="7d7b2c47-db23-4452-baa9-fda9b505877e"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่ "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="0" y="10" width="802" height="26" uuid="9832ce0b-499f-4b58-8a03-14589cd7c679"/>
+				<reportElement x="0" y="19" width="802" height="26" uuid="9832ce0b-499f-4b58-8a03-14589cd7c679"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="18" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -271,17 +271,24 @@
 			</textField>
 		</band>
 	</detail>
-	<lastPageFooter>
+	<pageFooter>
 		<band height="20">
 			<staticText>
 				<reportElement x="0" y="0" width="286" height="20" uuid="6224f09a-156d-4630-a0fe-25e30b18fd13"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ที่มา: สำนักบริการการค้าต่างประเทศ กรมการค้าต่างประเทศ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="536" y="0" width="266" height="20" uuid="7d7b2c47-db23-4452-baa9-fda9b505877e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" ข้อมูล ณ วันที่ "+new nylon.utility.NumberFormat().toThaiDate ($P{sdate})+"  ถึงวันที่  "+new nylon.utility.NumberFormat().toThaiDate ($P{edate})]]></textFieldExpression>
+			</textField>
 		</band>
-	</lastPageFooter>
+	</pageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<textField>

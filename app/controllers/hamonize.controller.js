@@ -40,12 +40,8 @@ exports.re01 = function (req, res) {
     }
 
     var order = req.query.orderby;
-    console.log(order.indexOf('hamonize'))
-    if (order.indexOf('hamonize') >= 0) {
-        console.log('xx');
-        order = r.desc(order)
-    } else {
-        console.log('yy');
+    if (order.indexOf('hamonize') == -1) {
+        order = r.desc(order);
     }
     r.expr({
         sdate: s,
@@ -156,13 +152,7 @@ exports.re02 = function (req, res) {
         e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
-    var order = req.query.orderby;
-    if (!order.indexOf('hamonize') > -1) {
-        console.log('xx');
-        order = r.desc(order)
-    } else {
-        console.log('yy');
-    }
+    
     r.expr({
         sdate: s,
         edate: e
@@ -239,7 +229,6 @@ exports.re02 = function (req, res) {
             }
         })
         .eqJoin('hamonize_code', r.table('hamonize_type')).pluck('left', { right: 'hamonize_th' }).zip()
-        .orderBy(order)
         .run()
         .then(function (data) {
             res.json(data)

@@ -38,6 +38,10 @@ exports.re01 = function (req, res) {
         e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
+    var order = req.query.orderby;
+    if (order.indexOf('company') == -1) {
+        order = r.desc(order);
+    }
     r.expr({
         sdate: s,
         edate: e
@@ -111,7 +115,7 @@ exports.re01 = function (req, res) {
             }
         })
         .eqJoin('company_taxno', r.table('company')).pluck('left', { right: 'company_name' }).zip()
-        .orderBy(r.desc('net_weight_out'), r.desc('net_weight_in'))
+        .orderBy(order)
         // .orderBy('company_taxno')
         .run()
         .then(function (data) {
