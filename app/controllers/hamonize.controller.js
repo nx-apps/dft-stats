@@ -122,21 +122,7 @@ exports.re01 = function (req, res) {
         })
 
 }
-exports.sp01 = function (req, res) {
-    var j = req.jdbc;
-    var s = today, e = tomorrow;
-    if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate
-    }
-    if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate
-    }
-    j.query("mssql", `exec sp_hamonize01 @sdate= ?, @edate= ?`, [s, e],
-        // j.query("mssql", `select * from hamonize_type`, [],
-        function (err, data) {
-            res.send(data)
-        })
-}
+
 exports.re02 = function (req, res) {
     var r = req.r;
     var s, e;
@@ -152,7 +138,7 @@ exports.re02 = function (req, res) {
         e = new Date(tomorrow.replace("-", "/")).getTime()
         //r.table('ec_head').orderBy({ index: r.desc('approve_date') }).limit(1)(0).getField('approve_date')
     }
-    
+
     r.expr({
         sdate: s,
         edate: e
@@ -234,4 +220,35 @@ exports.re02 = function (req, res) {
             res.json(data)
         })
 
+}
+
+exports.sp01 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_h01 @sdate= ?, @edate= ?`, [s, e],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.sp02 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_h02 @sdate= ?, @edate= ?,@hCode=?`, [s, e, req.query.hamonize_code],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
 }

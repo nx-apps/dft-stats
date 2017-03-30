@@ -8,5 +8,6 @@ module.exports = function (app) {
     app.get('/form', controller.form);
     app.get('/product', controller.product);
     app.get('/hamonize', controller.hamonize);
+    app.get('/hamonize2SQ', controller.hamonize2SQ);
     app.get('/company', controller.company);
 }

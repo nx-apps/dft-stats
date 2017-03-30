@@ -81,6 +81,27 @@ exports.hamonize = function (req, res) {
 
 }
 
+exports.hamonize2SQ = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+
+    r.table('hamonize_type')
+        .run()
+        .then(function (data) {
+            // res.json(data);
+            for (var d in data) {
+                j.query("mssql", `insert into hamonize_type(hamonize_code,hamonize_th,hamonize_en)
+                values(?,?,?)`, [data[d].id, data[d].hamonize_th, data[d].hamonize_en], function (err, data) {
+                        console.log('ok');
+                    });
+                // console.log(data[d].id);
+            }
+            res.send('ok')
+        })
+
+
+}
+
 exports.company = function (req, res) {
     var j = req.jdbc;
     var r = req.r;

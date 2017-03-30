@@ -119,3 +119,33 @@ exports.re02 = function (req, res) {
         })
 
 }
+exports.sp01 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_lc01 @sdate= ?, @edate= ?`, [s, e],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.sp02 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_lc02 @refCode=?`, [req.params.code],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}

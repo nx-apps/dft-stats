@@ -123,21 +123,7 @@ exports.re01 = function (req, res) {
         })
 
 }
-exports.sp01 = function (req, res) {
-    var j = req.jdbc;
-    var s = today, e = tomorrow;
-    if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate
-    }
-    if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate
-    }
-    j.query("mssql", `exec sp_hamonize01 @sdate= ?, @edate= ?`, [s, e],
-        // j.query("mssql", `select * from hamonize_type`, [],
-        function (err, data) {
-            res.send(data)
-        })
-}
+
 exports.re02 = function (req, res) {
     var r = req.r;
     var s, e;
@@ -235,4 +221,35 @@ exports.re02 = function (req, res) {
             res.json(data)
         })
 
+}
+
+exports.sp01 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_c01 @sdate= ?, @edate= ?`, [s, e],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.sp02 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    j.query("mssql", `exec sp_query_c02 @sdate= ?, @edate= ?,@taxId=?`, [s, e, req.query.company_taxno],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
 }
