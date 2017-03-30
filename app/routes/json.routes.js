@@ -10,4 +10,5 @@ module.exports = function (app) {
     app.get('/hamonize', controller.hamonize);
     app.get('/hamonize2SQ', controller.hamonize2SQ);
     app.get('/company', controller.company);
+    app.get('/agent', controller.agent);
 }

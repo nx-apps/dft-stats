@@ -105,8 +105,19 @@ exports.hamonize2SQ = function (req, res) {
 exports.company = function (req, res) {
     var j = req.jdbc;
     var r = req.r;
-    j.query("mssql", `exec sp_company`, [], function (err, data) {
+    j.query("mssql", `exec sp_company_info`, [], function (err, data) {
         var wstream = fs.createWriteStream('company.json');
+        wstream.write(data);
+        wstream.end();
+        res.send("Ok");
+    });
+
+}
+exports.agent = function (req, res) {
+    var j = req.jdbc;
+    var r = req.r;
+    j.query("mssql", `exec sp_company_agent`, [], function (err, data) {
+        var wstream = fs.createWriteStream('agent.json');
         wstream.write(data);
         wstream.end();
         res.send("Ok");
