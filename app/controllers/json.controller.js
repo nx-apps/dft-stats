@@ -124,4 +124,37 @@ exports.agent = function (req, res) {
     });
 
 }
+exports.learn1 = function (req, res) {
+    req.jdbc.query("mssql", `
+        SELECT top 20 ca.company_taxno,ci.company_name_th,ca.company_agent
+            FROM company_agent ca
+                join company_info ci on ci.company_taxno = ca.company_taxno
+        order by company_name_th
+    `
+        , []
+        , function (err, data) {
+            data = JSON.parse(data);
+            var companies = [];
+            for (x in data) {
+                if (companies.filter((f) => f.company_taxno == data[x].company_taxno).length == 0) {
+                    data[x].company_agent = [data[x].company_agent];
+                    companies.push(data[x]);
+                }
+                else {
+                    var index = companies.indexOf(companies.filter((f) => f.company_taxno == data[x].company_taxno)[0]);
+                    companies[index].company_agent.push(data[x].company_agent);
+                }
+            }
+            // res.send(data);
+            res.json(companies);
+        });
+}
+exports.learn2 = function (req, res) {
 
+    req.jdbc.query("mssql", "exec sp_report_daily_company @approveDate=?", [req.query.date], function (err, data) {
+        //res.send(data);
+        req.r.json(data).run().then(function (d2) {
+            res.ireport("daily/report8.jasper", "pdf", d2, { approveDate: req.query.date });
+        })
+    })
+}
