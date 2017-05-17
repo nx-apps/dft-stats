@@ -32,13 +32,21 @@
                         เลขพิกัดศุลกากร : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" class="textCenter" value="{{data.hamonize_code}}"></gl-combo-box>
+                        <gl-combo-box id="hamonizeSearch" class="textCenter" value="{{data.hamonize_code}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
                     </div>
                     <div class="labelSearchDate">
                         เรียงโดย : 
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}"></gl-combo-box>
+                        <gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    

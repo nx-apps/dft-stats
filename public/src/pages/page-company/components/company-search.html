@@ -33,13 +33,21 @@
                         เลขที่ผู้เสียภาษี : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="companySearch" class="textCenter"  value="{{data.company_taxno}}"></gl-combo-box>
+                        <gl-combo-box id="companySearch" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.company_taxno}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
                     </div>
                     <div class="labelSearchDate">
                         เรียงโดย : 
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="companyOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}"></gl-combo-box>
+                        <gl-combo-box id="companyOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
                     </div>
                     <div class="flexchild">
                         <div class="btn-search">                    
