@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex2child">
                         <gl-combo-box id="hamonizeSearch" class="textCenter" items="{{hamonizeCodeList}}" item-label-path="label" item-value-path="id"
-                            value="{{data.hamonize_code}}" on-value-changed="getChildHm">
+                            value="{{data.hmparent}}" on-value-changed="getChildHm">
                             <template>
                                 [[item.label]]
                             </template>
@@ -225,7 +225,7 @@
                     arr.push(id.id)
                 })
                 // console.log(arr);
-                this.data.hmcode = arr
+                this.data.hmchild = arr
                 // console.log(this.data);
                 // if (this.data.orderby == '') {
                 //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
@@ -248,7 +248,7 @@
                     arr.push(id.id)
                 })
                 // console.log(arr);
-                this.data.hmcode = arr
+                this.data.hmchild = arr
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
                     window.open('./api/report/h01?' + this.genUrl(this.data))
                 // } else {

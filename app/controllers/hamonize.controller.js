@@ -246,8 +246,8 @@ exports.sp01 = function (req, res) {
     if (typeof req.query.edate !== "undefined") {
         e = req.query.edate
     }
-    let head = req.query.hamonize_code
-    let child = req.query.hmcode
+    let head = req.query.hmparent
+    let child = req.query.hmchild
     // console.log('>>>>>>>>>>>>>',req.query);
     // console.log(s);
     // @return_value = [dbo].[sp_qry_stats_hmcode]
@@ -258,7 +258,7 @@ exports.sp01 = function (req, res) {
     j.query("mssql", `exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`, [head,child,s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
-            console.log('>>>>>>>>>>>>>',data);
+            // console.log('>>>>>>>>>>>>>',data);
             res.send(data)
             // res.send([])
         })
