@@ -40,7 +40,7 @@ export function hamonizeAction(store) {
             axios.get('/hamonize/codelist')
                 .then((response) => {
                     // console.log(response.data);
-                    
+                    // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
                     // console.log(response.data);
                     store.dispatch({type:'HAMONIZE_CODE_GET',payload:response.data})
                     // return ha
@@ -51,25 +51,8 @@ export function hamonizeAction(store) {
         },
         HAMONIZE_CODE_SEARCH_R1(data = '') {
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-            console.log(data);
+            // console.log(data);
             axios.get('/hamonize/re01?'+ data)
-                .then((response) => {
-                    //console.log(response);
-                    this.fire('toast', {
-                        status: 'success', text: 'ค้นหาสำเร็จ', callback() {
-                            store.dispatch({ type: 'HAMONIZE_CODE_SEARCH_R1', payload: response.data })
-                        }
-                    });
-
-                })
-                .catch(function (error) {
-                    //console.log(error);
-                });
-        },
-        HAMONIZE_CODE_SEARCH_R2(data = '') {
-            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-            // //console.log(data);
-            axios.get('/hamonize/re02?' + data)
                 .then((response) => {
                     //console.log(response);
                     this.fire('toast', {

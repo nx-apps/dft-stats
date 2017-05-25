@@ -226,7 +226,7 @@
                 })
                 // console.log(arr);
                 this.data.hmcode = arr
-                console.log(this.data);
+                // console.log(this.data);
                 // if (this.data.orderby == '') {
                 //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
                 //     comboboxhamonizeOrderBy.value = 'hamonize_code'
@@ -242,11 +242,18 @@
                 // }
             },
             getRiceValueReport() {
-                if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
+                let arr = []
+                let rice = this.newList.filter((item) => item.checks === true)
+                rice.map((id) => {
+                    arr.push(id.id)
+                })
+                // console.log(arr);
+                this.data.hmcode = arr
+                // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
                     window.open('./api/report/h01?' + this.genUrl(this.data))
-                } else {
-                    window.open('./api/report/h02?' + this.genUrl(this.data))
-                }
+                // } else {
+                //     window.open('./api/report/h02?' + this.genUrl(this.data))
+                // }
             }
         });
     </script>
