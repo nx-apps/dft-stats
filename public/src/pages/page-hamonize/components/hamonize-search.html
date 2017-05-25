@@ -32,9 +32,9 @@
                         เลขพิกัดศุลกากร : 
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" class="textCenter" value="{{data.hamonize_code}}">
+                        <gl-combo-box id="hamonizeSearch" class="textCenter" items="{{hamonizeCodeList}}" item-label-path="label" item-value-path="id" value="{{data.hamonize_code}}">
                             <template>
-                                [[item.label]]
+                                [[item.label]] 
                             </template>
                         </gl-combo-box>
                     </div>
@@ -123,17 +123,15 @@
                     value:{}
                 }
             },
-            _setItem(hamonizeCodeList){
-                let combobox = this.$$('#hamonizeSearch')
-                let newData = hamonizeCodeList.map((hamonize)=>{
-                    return {label: hamonize.id+' '+hamonize.hamonize_th, value: hamonize.id}
-                })
-                combobox.items = newData;
-                let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
-                comboboxhamonizeOrderBy.items = this.hamonizeOrder
-                comboboxhamonizeOrderBy.value = 'hamonize_code'
-                // this.set('data.orderby','hamonize_code')
-            },
+            // _setItem(hamonizeCodeList){
+            //     let combobox = this.$$('#hamonizeSearch')
+            //     let newData = hamonizeCodeList
+            //     combobox.items = newData;
+            //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
+            //     comboboxhamonizeOrderBy.items = this.hamonizeOrder
+            //     comboboxhamonizeOrderBy.value = 'hamonize_code'
+            //     // this.set('data.orderby','hamonize_code')
+            // },
 
             _setDate(e){
                 this.set('data.sdate',e.sdate)

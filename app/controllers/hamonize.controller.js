@@ -23,6 +23,19 @@ exports.list = function (req, res) {
             res.json(data)
         })
 }
+exports.listha = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT 
+                        hamonize_code as id,
+                        CONCAT ('( ',hamonize_code,' ) ',hamonize_th) as label,
+                        LEN (hamonize_code) as lengths
+                        from hamonize_type
+                        ORDER BY lengths`, [],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
 exports.re01 = function (req, res) {
     var r = req.r;
     var s, e;
