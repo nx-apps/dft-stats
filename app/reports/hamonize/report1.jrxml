@@ -5,30 +5,30 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
-	<field name="hamonize_code" class="java.lang.String"/>
+	<field name="hmcode" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
-	<field name="fob_amt_baht_out" class="java.lang.Double"/>
-	<field name="net_weight_out" class="java.lang.Double"/>
-	<field name="fob_amt_baht_in" class="java.lang.Double"/>
-	<field name="net_weight_in" class="java.lang.Double"/>
+	<field name="fob_amt_baht_e" class="java.lang.Double"/>
+	<field name="net_weight_e" class="java.lang.Double"/>
+	<field name="fob_amt_baht_i" class="java.lang.Double"/>
+	<field name="net_weight_i" class="java.lang.Double"/>
 	<variable name="sum_baht_out" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{fob_amt_baht_out}]]></variableExpression>
+		<variableExpression><![CDATA[$F{fob_amt_baht_e}]]></variableExpression>
 	</variable>
 	<variable name="sum_weight_out" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{net_weight_out}]]></variableExpression>
+		<variableExpression><![CDATA[$F{net_weight_e}]]></variableExpression>
 	</variable>
 	<variable name="sum_baht_in" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{fob_amt_baht_in}]]></variableExpression>
+		<variableExpression><![CDATA[$F{fob_amt_baht_i}]]></variableExpression>
 	</variable>
 	<variable name="sum_weight_in" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{net_weight_in}]]></variableExpression>
+		<variableExpression><![CDATA[$F{net_weight_i}]]></variableExpression>
 	</variable>
 	<variable name="nocount" class="java.lang.Integer" incrementType="Group" incrementGroup="g" calculation="Count">
 		<variableExpression><![CDATA[new Integer(1)]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
 	</variable>
 	<group name="g" minHeightToStartNewPage="40">
-		<groupExpression><![CDATA[$F{hamonize_code}]]></groupExpression>
+		<groupExpression><![CDATA[$F{hmcode}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -184,7 +184,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{hamonize_code}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{hmcode}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="142" y="0" width="200" height="20" uuid="ffc15ec2-ea84-452e-aee9-4b37f40af16a"/>
@@ -212,7 +212,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{net_weight_in},"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{net_weight_i},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="457" y="0" width="115" height="20" uuid="14d4990e-14cc-4100-b29c-279afb516da0"/>
@@ -226,7 +226,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_in},"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_i},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="572" y="0" width="115" height="20" uuid="06559c2a-12fa-4611-964c-5f9f33a8feba"/>
@@ -240,7 +240,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{net_weight_out},"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{net_weight_e},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="687" y="0" width="115" height="20" uuid="a368c858-a30d-49a5-bbd3-3d53a69e00d2"/>
@@ -254,7 +254,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_out},"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_e},"#,##0.00")]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="52" height="20" uuid="00f0cb07-74bf-46af-a94d-c50172e50fd8"/>
@@ -361,7 +361,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_in},"#,##0.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht_i},"#,##0.00")]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
