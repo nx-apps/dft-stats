@@ -191,16 +191,18 @@
             getChildHm(e) {
                 try {
                     // console.log(e.detail.value);
-                    let num = 6
+
+                    let num = ''
                     if (e.detail.value.length === 4)
                         num = 6
                     if (e.detail.value.length === 6)
                         num = 8
                     if (e.detail.value.length === 8)
                         num = 11
-                    // console.log(num);
+                    if (e.detail.value.length === 11)
+                        return this.set('newList', [])
                     let newList = this.hamonizeCodeList.filter((check) => check.lengths === num)
-                    newList.map((check)=>{
+                    newList.map((check) => {
                         return check.checks = true
                     })
                     this.set('newList', newList)
@@ -231,8 +233,8 @@
                 //     this.data.orderby = 'hamonize_code'
                 // }
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
-                    // console.log(1);
-                    this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
+                // console.log(1);
+                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
                 // } else {
                 //     console.log(2);
                 //     this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
