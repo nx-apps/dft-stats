@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8eee6db5-07b6-49b2-9b5b-22900058352b">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="48"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
 	<field name="approve_date" class="java.lang.String"/>
-	<field name="company_name" class="java.lang.String"/>
+	<field name="company_name_th" class="java.lang.String"/>
 	<field name="expire_date" class="java.lang.String"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
-	<field name="hamonize_code" class="java.lang.String"/>
+	<field name="hmcode" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="id" class="java.lang.String"/>
 	<field name="net_weight" class="java.lang.Double"/>
 	<field name="reference_code2" class="java.lang.String"/>
 	<field name="product_name" class="java.lang.String"/>
-	<field name="form_nameFull" class="java.lang.String"/>
+	<field name="contract_type_name" class="java.lang.String"/>
 	<variable name="sum_weight" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight}]]></variableExpression>
 	</variable>
@@ -183,7 +183,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{company_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{company_name_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="722" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="235c4490-49b3-49e7-aac5-b8a612d231d5"/>
@@ -239,7 +239,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{form_nameFull}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{contract_type_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="242" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="67c927b0-8d46-44f2-9c9e-ddcde825d8e5"/>
@@ -250,7 +250,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate ($F{approve_date})]]></textFieldExpression>
@@ -264,7 +264,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDate ($F{expire_date})]]></textFieldExpression>

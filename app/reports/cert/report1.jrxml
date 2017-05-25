@@ -6,16 +6,16 @@
 	<parameter name="sdate" class="java.lang.String"/>
 	<parameter name="edate" class="java.lang.String"/>
 	<field name="approve_date" class="java.lang.String"/>
-	<field name="company_name" class="java.lang.String"/>
+	<field name="company_name_th" class="java.lang.String"/>
 	<field name="expire_date" class="java.lang.String"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
-	<field name="hamonize_code" class="java.lang.String"/>
+	<field name="hmcode" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="id" class="java.lang.String"/>
 	<field name="net_weight" class="java.lang.Double"/>
 	<field name="reference_code2" class="java.lang.String"/>
 	<field name="product_name" class="java.lang.String"/>
-	<field name="form_nameFull" class="java.lang.String"/>
+	<field name="contract_type_name" class="java.lang.String"/>
 	<variable name="sum_weight" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight}]]></variableExpression>
 	</variable>
@@ -211,7 +211,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{form_nameFull}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{contract_type_name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="728" y="0" width="74" height="20" isPrintWhenDetailOverflows="true" uuid="5d18f212-d0f3-4f08-8a47-815fef8de6b1"/>
@@ -239,7 +239,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{company_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{company_name_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="372" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="20325238-9274-4c08-9d1f-7336553bcc60"/>
