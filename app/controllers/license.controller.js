@@ -128,10 +128,7 @@ exports.sp01 = function (req, res) {
     if (typeof req.query.edate !== "undefined") {
         e = req.query.edate
     }
-    // console.log('>>>>>>>><<<<<<',req.query);
-    // console.log(1111111111111111111);
     let reference_code2 = req.query.reference_code2 || ''
-    // console.log('>>>>>>>>>>.',reference_code2);
     j.query("mssql", `exec sp_qry_stats_import @refCode= ?, @startDate= ?, @endDate= ?`, [reference_code2,s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
