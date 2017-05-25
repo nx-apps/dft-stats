@@ -237,7 +237,7 @@ exports.re02 = function (req, res) {
 }
 
 exports.sp01 = function (req, res) {
-    console.log(11111111111111111111111111111111111111111111111111111111111111111111111111111111111);
+    // console.log(11111111111111111111111111111111111111111111111111111111111111111111111111111111111);
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {

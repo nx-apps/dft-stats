@@ -16,11 +16,31 @@ if (mm < 10) {
 var today = '2016' + '-' + mm + '-' + dd;
 var tomorrow = '2016' + '-' + mm + '-' + dt;
 exports.list = function (req, res) {
-    var r = req.r;
-    r.table('company')
-        .run()
-        .then(function (data) {
-            res.json(data)
+    var j = req.jdbc;
+    j.query("mssql", `SELECT 
+                         company_taxno as id,
+                         CONCAT('( ',company_taxno,' ) ',company_name_th) as label
+                        from company_info`, [],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.spp01 = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    let company_taxno = req.query.company_taxno
+     j.query("mssql", `exec sp_qry_stats_company @taxno= ?, @startDate= ?, @endDate= ?`,
+      [company_taxno,s, e],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
         })
 }
 exports.re01 = function (req, res) {

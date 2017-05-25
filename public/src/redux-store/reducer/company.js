@@ -25,7 +25,7 @@ export function companyAction(store){
     return [commonAction(),{
       COMPANY_CODE_GET(data){
           //console.log(1);
-        this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
+        // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
         axios.get('/company/')
         .then( (response)=>{
             //console.log(response);
@@ -36,11 +36,11 @@ export function companyAction(store){
         });
       },
       COMPANY_CODE_SEARCH_R1(data=''){
-        this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
+        // this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         //console.log(data);
         axios.get('/company/re01?'+data)
         .then( (response)=>{
-            //console.log(response);
+            console.log(response);
             this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
               store.dispatch({type:'COMPANY_CODE_SEARCH_R1',payload:response.data})
             }});
