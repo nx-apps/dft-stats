@@ -38,11 +38,21 @@
                             </template>
                         </gl-combo-box>
                     </div>
-                    <div class="labelSearchDate">
+                    <!--<div class="labelSearchDate">
                         เรียงโดย : 
                     </div>
                     <div class="flexchild">
                         <gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
+                    </div>-->
+                    <div class="labelSearchDate">
+                        แหล่งข้อมูล : 
+                    </div>
+                    <div class="flexchild">
+                        <gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id" value="{{data.dataSourch}}">
                             <template>
                                 [[item.label]]
                             </template>
@@ -115,6 +125,19 @@
                         { 
                             id: 'fob_amt_baht_out',
                           label:'มูลค่าส่งออก' 
+                        }
+                    ]
+                },
+                dataSourch :{
+                    type:Array,
+                    value:[
+                        {
+                            id:'f3',
+                            label : 'ข้อมูลจากชั้น 3'
+                        },
+                        {
+                            id:'do',
+                            label : 'ข้อมูลจากกรมศุล'
                         }
                     ]
                 },
