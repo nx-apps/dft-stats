@@ -82,7 +82,7 @@ exports.li01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_qry_stats_import @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code||'',s, e],
+    j.query("mssql", `exec sp_qry_stats_import @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             // res.send(data);
@@ -107,8 +107,8 @@ exports.ce01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_qry_stats_export @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code||'',s, e],
-    
+    j.query("mssql", `exec sp_qry_stats_export @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
+
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             // res.send(data);
@@ -116,8 +116,14 @@ exports.ce01 = function (req, res) {
                 res.ireport("cert/report1.jasper", req.query.export || "pdf", d2, param);
             })
         })
-
-
-
 }
 
+exports.dailyCompany = function (req, res) {
+
+    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_company @approveDate=?", [req.query.date], function (err, data) {
+        // res.send(data);
+        req.r.json(data).run().then(function (d2) {
+            res.ireport("daily/report8.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
+        })
+    })
+}
