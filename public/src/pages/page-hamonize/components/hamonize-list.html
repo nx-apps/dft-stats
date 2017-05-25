@@ -46,12 +46,12 @@
                     <template is="dom-repeat" items={{dataList}} >
                         <tr>
                             <td style="text-align: center;">[[_Obindex(index)]]</td>
-                            <td>[[item.hamonize_code]]</td>
+                            <td>[[item.hmcode]]</td>
                             <td>[[item.hamonize_th]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight_in)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht_in)]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight_out)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht_out)]]</td>
+                            <td class="format-number">[[formatNumber(item.net_weight_i)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht_i)]]</td>
+                            <td class="format-number">[[formatNumber(item.net_weight_e)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_baht_e)]]</td>
                         </tr>
                     </template>
                 </tbody>
@@ -60,10 +60,10 @@
                         <td></td>
                         <td></td>
                         <td>รวม</td>
-                        <td class="total">[[formatNumber(total.net_weight_in)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_baht_in)]]</td>
-                        <td class="total">[[formatNumber(total.net_weight_out)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_baht_out)]]</td>
+                        <td class="total">[[formatNumber(total.net_weight_i)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_baht_i)]]</td>
+                        <td class="total">[[formatNumber(total.net_weight_e)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_baht_e)]]</td>
                     </tr>
                 </tfoot>
             </table>
@@ -89,10 +89,10 @@
                 }
             },
             totalcal(dataList){
-                this.set('total.net_weight_in',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_in , 0));
-                this.set('total.fob_amt_baht_in',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_in , 0));
-                this.set('total.net_weight_out',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_out , 0));
-                this.set('total.fob_amt_baht_out',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_out , 0));
+                this.set('total.net_weight_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i , 0));
+                this.set('total.fob_amt_baht_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i , 0));
+                this.set('total.net_weight_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e , 0));
+                this.set('total.fob_amt_baht_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e , 0));
             },
         });
     </script>

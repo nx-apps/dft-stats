@@ -28,7 +28,8 @@ exports.listha = function (req, res) {
     j.query("mssql", `SELECT 
                         hamonize_code as id,
                         CONCAT ('( ',hamonize_code,' ) ',hamonize_th) as label,
-                        LEN (hamonize_code) as lengths
+                        LEN (hamonize_code) as lengths,
+                        '' as checks
                         from hamonize_type
                         ORDER BY lengths`, [],
         // j.query("mssql", `select * from hamonize_type`, [],
@@ -236,6 +237,7 @@ exports.re02 = function (req, res) {
 }
 
 exports.sp01 = function (req, res) {
+    console.log(11111111111111111111111111111111111111111111111111111111111111111111111111111111111);
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
@@ -244,13 +246,25 @@ exports.sp01 = function (req, res) {
     if (typeof req.query.edate !== "undefined") {
         e = req.query.edate
     }
-    j.query("mssql", `exec sp_query_h01 @sdate= ?, @edate= ?`, [s, e],
+    let head = req.query.hamonize_code
+    let child = req.query.hmcode
+    // console.log('>>>>>>>>>>>>>',req.query);
+    // console.log(s);
+    // @return_value = [dbo].[sp_qry_stats_hmcode]
+	// 	@hmparent = N'1006',
+	// 	@hmchild = N'100610,100620,100630,100640',
+	// 	@startDate = 2016-01-25,
+	// 	@endDate = 2016-05-26
+    j.query("mssql", `exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`, [head,child,s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
+            console.log('>>>>>>>>>>>>>',data);
             res.send(data)
+            // res.send([])
         })
 }
 exports.sp02 = function (req, res) {
+    console.log(22222222222222222222222222222222222222222222222222222222222222);
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {

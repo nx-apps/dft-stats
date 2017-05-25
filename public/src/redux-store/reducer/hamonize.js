@@ -51,8 +51,8 @@ export function hamonizeAction(store) {
         },
         HAMONIZE_CODE_SEARCH_R1(data = '') {
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-            // //console.log(data);
-            axios.get('/hamonize/re01?' + data)
+            console.log(data);
+            axios.get('/hamonize/re01?'+ data)
                 .then((response) => {
                     //console.log(response);
                     this.fire('toast', {
