@@ -82,7 +82,7 @@ exports.li01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_qry_stats_import @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
+    j.query("mssql", `exec sp_qry_stats_license @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             // res.send(data);
@@ -107,7 +107,7 @@ exports.ce01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_qry_stats_export @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
+    j.query("mssql", `exec sp_qry_stats_cert @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
 
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
@@ -123,7 +123,37 @@ exports.dailyCompany = function (req, res) {
     req.jdbc.query("mssql", "exec sp_rpt_stats_daily_company @approveDate=?", [req.query.date], function (err, data) {
         // res.send(data);
         req.r.json(data).run().then(function (d2) {
-            res.ireport("daily/report8.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
+            res.ireport("daily/rpt_invioce_company.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
+        })
+    })
+}
+exports.dailyCountry = function (req, res) {
+    var j = req.jdbc;
+    var s = today, e = tomorrow;
+    if (typeof req.query.sdate !== "undefined") {
+        s = req.query.sdate
+    }
+    if (typeof req.query.edate !== "undefined") {
+        e = req.query.edate
+    }
+    var param = {
+        sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
+        edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
+    };
+    j.query("mssql", "exec sp_rpt_stats_daily_country @startDate=?, @endDate=?", [s, e], 
+    function (err, data) {
+        // res.send(data);
+        req.r.json(data).run().then(function (d2) {
+            res.ireport("daily/rpt_invioce_country.jasper", req.query.export || "pdf", d2, param);
+        })
+    })
+}
+exports.dailyPricerice= function (req, res) {
+
+    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
+        // res.send(data);
+        req.r.json(data).run().then(function (d2) {
+            res.ireport("daily/rpt_invioce_pricerice.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
         })
     })
 }

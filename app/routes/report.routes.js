@@ -9,4 +9,6 @@ module.exports = function (app) {
     app.get('/ce01', controller.ce01)
     //  app.get('/ce02/:code', controller.ce02)
     app.get('/daily/company', controller.dailyCompany)
+    app.get('/daily/country', controller.dailyCountry)
+    app.get('/daily/pricerice', controller.dailyPricerice)
 }
