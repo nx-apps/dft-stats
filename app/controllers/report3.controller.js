@@ -150,7 +150,7 @@ exports.li02 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_query_lc02 @refCode=?`, [req.params.code],
+    j.query("mssql", `exec sp_qry_stats_import @refCode=?,@`, [req.params.code],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             r.json(data).run().then(function (d2) {
