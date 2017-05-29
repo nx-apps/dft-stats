@@ -37,10 +37,10 @@ exports.listha = function (req, res) {
             res.send(data)
         })
 }
-exports.child_code = function (req,res) {
-  var j = req.jdbc;
-  let head = req.query.hmparent || '1006'
-//   console.log('=>>>>>',req.query.hmparent);
+exports.child_code = function (req, res) {
+    var j = req.jdbc;
+    let head = req.query.hmparent || '1006'
+    //   console.log('=>>>>>',req.query.hmparent);
     j.query("mssql", `select
                         hamonize_code as id,
                         CONCAT (hamonize_code,'  ',hamonize_th) as label
@@ -48,7 +48,7 @@ exports.child_code = function (req,res) {
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)
-        })  
+        })
 }
 exports.re01 = function (req, res) {
     var r = req.r;
@@ -262,21 +262,23 @@ exports.sp01 = function (req, res) {
     let head = req.query.hmparent
     let child = req.query.hmchild
     let dataSourch = req.query.dataSourch
-    console.log('dataSourch>>>>',dataSourch);
+    console.log('dataSourch>>>>', dataSourch);
     // console.log('>>>>>>>>>>>>>',req.query);
     // console.log(s);
-    // @return_value = [dbo].[sp_qry_stats_hmcode]
-	// 	@hmparent = N'1006',
-	// 	@hmchild = N'100610,100620,100630,100640',
-	// 	@startDate = 2016-01-25,
-	// 	@endDate = 2016-05-26
-    j.query("mssql", `exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`, [head,child,s, e],
-        // j.query("mssql", `select * from hamonize_type`, [],
+    if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
+        j.query("mssql", `exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
+            [head, child, s, e],
+            function (err, data) {
+                res.send(data)
+            })
+    }else {
+        j.query("mssql", `exec sp_qry_stats_hmcode_custom @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
+     [head,child,s, e],
         function (err, data) {
-            // console.log('>>>>>>>>>>>>>',data);
             res.send(data)
-            // res.send([])
         })
+    }
+
 }
 exports.sp02 = function (req, res) {
     // console.log(22222222222222222222222222222222222222222222222222222222222222);
