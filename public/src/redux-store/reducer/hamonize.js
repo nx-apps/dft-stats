@@ -1,6 +1,7 @@
 import axios from '../axios'
 import { commonAction } from '../config'
-
+// var groupArray = require('group-array');
+import groupArray from './../../../../node_modules/group-array'
 const initialState = {
     select: {},
     list: [],
@@ -31,7 +32,7 @@ export function hamonizeAction(store) {
     return [commonAction(), {
         HAMONIZE_SET_DATE() {
             let date = new Object()
-            let today = new Date(new Date().setFullYear(new Date().getFullYear() -1))
+            let today = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
             //console.log(today);
             date.sdate = today.toISOString().split('T')[0]
             date.edate = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
@@ -44,7 +45,10 @@ export function hamonizeAction(store) {
                 .then((response) => {
                     // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
                     // console.log(response.data);
-                    store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: response.data })
+                    // group by the `tag` property 
+                    
+                    // console.log();
+                    store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: groupArray(response.data, 'hamonize_year') })
                     // return ha
                 })
                 .catch(function (error) {
@@ -52,7 +56,7 @@ export function hamonizeAction(store) {
                 });
         },
         HAMONIZE_CODE_GET_CHILD(hmparent) {
-            this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.get('/hamonize/child?' + hmparent)
                 .then((response) => {
                     // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})

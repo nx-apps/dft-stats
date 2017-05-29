@@ -1,0 +1,114 @@
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<dom-module id="list-report">
+    <template>
+        <style include="page-style flex-style">
+            vaadin-grid {
+                margin: 0px;
+                width: 100%;
+                height: auto;
+            }
+
+            .img {
+                width: 24px;
+                height: 24px;
+                margin: 0px 10px;
+                /*background-color: lightgray;*/
+            }
+
+            .text-center{
+                text-align: center;
+            }
+        </style>
+        <paper-material elevation="1">
+            <div class="container">
+                <div class="flex-horizontal-with-ratios">
+                    <!--<div class="flexchild"></div>-->
+                    <!--<div class="flex4child">-->
+                    <vaadin-grid aria-label="Report" class="material" items="[[report]]">
+                        <vaadin-grid-column width="100px" flex-grow="0">
+                            <template class="header ">
+                                <div class="text-center">ลำดับ</div>
+                            </template>
+
+                            <template>[[item.report_id]]</template>
+                        </vaadin-grid-column>
+
+
+                        <vaadin-grid-column width="640px" flex-grow="0">
+                            <template class="header">ชื่อรายงาน</template>
+                            <template>[[item.report_name]]</template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="150px" flex-grow="0">
+                            <template class="header">
+                                <div class="text-center">PDF</div>
+                            </template>
+                            <template>
+                                <paper-button raised class="btnInTable">
+                                    <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/pdf.png"></iron-image>
+                                    PDF</paper-button>
+                            </template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="150px" flex-grow="0">
+                            <template class="header">
+                                <div class="text-center">WORD</div>
+                            </template>
+                            <template>
+                                <paper-button raised class="btnInTable">
+                                    <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
+                                    WORD</paper-button>
+                            </template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="150px" flex-grow="0">
+                            <template class="header">
+                                <div class="text-center">EXCEL</div>
+                            </template>
+                            <template>
+                                <paper-button raised class="btnInTable">
+                                    <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
+                                    EXCEL</paper-button>
+                            </template>
+                        </vaadin-grid-column>
+                    </vaadin-grid>
+                    <!--</div>-->
+                    <!--<div class="flexchild"></div>-->
+                </div>
+            </div>
+
+
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'list-report',
+            properties: {
+                date: {
+                    type: Object,
+                },
+                report: {
+                    type: Array,
+                    value: [
+                        {
+                            report_id: 1,
+                            report_name: 'รายงาน1',
+                            report_link: '/stats/stats1'
+                        },
+                        {
+                            report_id: 2,
+                            report_name: 'รายงาน2',
+                            report_link: '/stats/stats1'
+                        },
+                        {
+                            report_id: 3,
+                            report_name: 'รายงาน3',
+                            report_link: '/stats/stats1'
+                        },
+                    ]
+                }
+            }
+        });
+    </script>
+</dom-module>

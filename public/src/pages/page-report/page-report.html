@@ -2,22 +2,26 @@
 
 <link rel="import" href="./../../../bower_components/paper-dialog/paper-dialog.html">
 
+<link rel="import" href="./components/list-report.html">
+
+<link rel="import" href="./../../l">
+
 <dom-module id="page-report">
     <template>
         <!--<button type="ddd" on-tap="_print">df</button>-->
         <style include="page-style iron-flex iron-flex-factors iron-flex-alignment"></style>
         <!--<div class="xcontainer">
            <section class="container">-->
-        <div class="horizontal center-justified layout wrap">
+        <!--<div class="horizontal center-justified layout wrap">
             <box-menu-not-re data="{{boxq1}}" on-tap="_print"></box-menu-not-re>
             <template is="dom-repeat" items={{mainMenu}}>
                 <box-menu-not-re data="{{item}}" on-tap="urlToReport" id={{index}}></box-menu-not-re>
             </template>
-        </div>
+        </div>-->
         <!--</section>
         </div>-->
 
-        <paper-dialog id="report">
+        <!--<paper-dialog id="report">
             <div class="layout horizontal start-justified">
                 <div class="flex" style=" margin-right: 30px">
                     <vaadin-date-picker always-float-label label="วันที่ที่ต้องการดู" value="{{data}}"></vaadin-date-picker>
@@ -26,20 +30,24 @@
                 <div class="flex horizontal end-justified layout buttons">
                     <paper-button raised class="gl-btn-primary" on-tap="printReport" dialog-confirm autofocus>ออกรายงาน</paper-button>
                 </div>
-        </paper-dialog>
-
+        </paper-dialog>-->
+        <div class="xcontainer">
+            <section class="container">
+              <list-report></list-report>
+            </section>
+        </div>
     </template>
     <script>
         Polymer({
             is: 'page-report',
             properties: {
-                boxq1:{
-                  type: Object,
-                  value: {
-                            path: '/stats/stats1',
-                            nameMenu: 'สถานการณ์ส่งออก',
-                            img: '/images/static2/05/192.png'
-                        },  
+                boxq1: {
+                    type: Object,
+                    value: {
+                        path: '/stats/stats1',
+                        nameMenu: 'สถานการณ์ส่งออก',
+                        img: '/images/static2/05/192.png'
+                    },
                 },
                 mainMenu: {
                     type: Array,
@@ -91,9 +99,9 @@
                 this.$$('#report').open()
 
             },
-            printReport(){
+            printReport() {
                 this.data
-                 window.open('./api/report/daily/company?date=' + this.data)
+                window.open('./api/report/daily/company?date=' + this.data)
             }
         });
     </script>

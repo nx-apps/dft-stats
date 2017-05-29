@@ -27,8 +27,9 @@ exports.listha = function (req, res) {
     var j = req.jdbc;
     j.query("mssql", `SELECT 
                         hamonize_code as id,
-                        CONCAT (hamonize_code,'  ',hamonize_th) as label,
+                        CONCAT (hamonize_code,'  ',hamonize_th,' ',' (ปี ',hamonize_year,')') as label,
                         LEN (hamonize_code) as lengths,
+                        hamonize_year,
                         '' as checks
                         from hamonize_type
                         ORDER BY lengths`, [],
@@ -40,11 +41,13 @@ exports.listha = function (req, res) {
 exports.child_code = function (req, res) {
     var j = req.jdbc;
     let head = req.query.hmparent || '1006'
+    let year = req.query.year
     //   console.log('=>>>>>',req.query.hmparent);
     j.query("mssql", `select
                         hamonize_code as id,
                         CONCAT (hamonize_code,'  ',hamonize_th) as label
-                        from fn_get_hamonize_child(?)`, [head],
+                        from fn_get_hamonize_child(? ) ham
+						where ham.hamonize_year = ?`, [head, year],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)
@@ -254,30 +257,40 @@ exports.sp01 = function (req, res) {
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate
+        s = req.query.sdate;
     }
     if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate
+        e = req.query.edate;
     }
-    let head = req.query.hmparent
-    let child = req.query.hmchild
-    let dataSourch = req.query.dataSourch
-    console.log('dataSourch>>>>', dataSourch);
+    let head = req.query.hmparent;
+    let child = req.query.hmchild;
+    let dataSourch = req.query.dataSourch;
+    console.log(head, child, dataSourch, s, e);
+    // console.log(req.query);
+    // console.log('dataSourch>>>>', dataSourch);
     // console.log('>>>>>>>>>>>>>',req.query);
     // console.log(s);
-    if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
-        j.query("mssql", `exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
-            [head, child, s, e],
-            function (err, data) {
-                res.send(data)
-            })
-    }else {
-        j.query("mssql", `exec sp_qry_stats_hmcode_custom @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
-     [head,child,s, e],
+    // if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
+    j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `,
+        [head, child, s, e,dataSourch],
         function (err, data) {
             res.send(data)
         })
-    }
+
+
+    // }else {
+    //     j.query("mssql", `exec sp_qry_stats_hmcode_custom @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
+    //  [head,child,s, e],
+    //     function (err, data) {
+    //         res.send(data)
+    //     })
+    // }
+    // j.query("mssql", `exec	sp_qry_stats_hmcode
+    // 	@hmparent = ?, @hmchild = ?, @startDate = ?, @endDate = ?, @refDB = ?`,
+    //      [head,child,s, e,dataSourch], function (err, data) {
+    //         res.send(data)
+    //     })
+
 
 }
 exports.sp02 = function (req, res) {

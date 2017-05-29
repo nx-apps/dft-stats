@@ -22,14 +22,14 @@
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.sdate}}"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.sdate}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.edate}}"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.edate}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
@@ -42,8 +42,8 @@
                         เลขพิกัดศุลกากร :
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList}}" item-label-path="label" item-value-path="id"
-                            value="{{data.hmparent}}" on-value-changed="getChildHm">
+                        <gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList.use}}" item-label-path="label"
+                            item-value-path="label" value="{{data.hmparent}}" on-value-changed="getChildHm">
                             <template>
                                 [[item.label]]
                             </template>
@@ -63,7 +63,7 @@
                         แหล่งข้อมูล :
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="hamonizeSourch"class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
+                        <gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
                             value="{{data.dataSourch}}">
                             <template>
                                 [[item.label]]
@@ -176,7 +176,7 @@
                             label: 'ข้อมูลจากชั้น 3'
                         },
                         {
-                            id: 'do',
+                            id: 'custom',
                             label: 'ข้อมูลจากกรมศุล'
                         }
                     ]
@@ -188,35 +188,81 @@
                 hmChild: {
                     statePath: 'hamonize.hamonizeCodeChild',
                 },
-                statusCheck:{
+                statusCheck: {
                     type: Boolean,
-                    value:true
+                    value: true
+                }
+            },
+            setHamonizeSdate(data) {
+                try {
+                    // console.log(data.detail.value);
+                    let sdate = new Date(data.detail.value).getFullYear(),
+                        edate = new Date(this.data.edate).getFullYear()
+                    this.setYearHamonize(sdate, edate)
+                } catch (e) {
+
+                }
+
+            },
+            setHamonizeEdate(data) {
+                try {
+                    // console.log(data.detail.value);
+                    let sdate = new Date(this.data.sdate).getFullYear(),
+                        edate = new Date(data.detail.value).getFullYear()
+                    this.setYearHamonize(sdate, edate)
+                } catch (e) {
+
+                }
+            },
+            _setItem(hmcode) {
+                let sdate = new Date(this.data.sdate).getFullYear(),
+                    edate = new Date(this.data.edate).getFullYear()
+                this.setYearHamonize(sdate, edate)
+                // console.log(this.hamonizeCodeList);
+                // console.log(111);
+            },
+            setYearHamonize(Syear, Eyear) {
+
+                if (!Number.isNaN(Syear) && !Number.isNaN(Eyear)
+                    && this.hamonizeCodeList !== undefined) {
+                    let hm = this.hamonizeCodeList
+                    let startyear = '',
+                        endyear= ''
+                        for (var variable in hm) {
+                            if (Number(variable) <= Syear)
+                                startyear = variable
+                        }
+                    if (Syear === Eyear) {
+                        // console.log(this.hamonizeCodeList[startyear]);
+                        this.set('hamonizeCodeList.use',this.hamonizeCodeList[startyear])
+                    } else {
+                        // console.log(222);
+                        for (var variable in hm) {
+                            if (Number(variable) <= Eyear)
+                                endyear = variable
+                        }
+                    //     console.log(222222);
+                    //    console.log(this.hamonizeCodeList[startyear]);
+                    //     console.log('Eyear',this.hamonizeCodeList[endyear]);
+                        let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
+                       this.set('hamonizeCodeList.use',newArr)
+                       console.log(this.hamonizeCodeList.use.length);
+                    }
+
                 }
             },
             getChildHm(e) {
                 try {
-                    // console.log(e.detail.value);
-                    let hmparent = e.detail.value
+                    // console.log(e.detail.value.split(' ')[0]);
+                    let code = e.detail.value.split(' ')
+                    let hmparent = code[0]
+                    let year = code[code.length-1].slice(0,4)
+                    this.set('data.hamonizeYear',year)
                     if (hmparent !== '' && hmparent !== undefined) {
                         // console.log(this.data);
-                        let data = { 'hmparent': hmparent }
+                        let data = { 'hmparent': hmparent ,'year': this.data.hamonizeYear}
                         this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
                     }
-                    // let num = ''
-                    // if (e.detail.value.length === 4)
-                    //     num = 6
-                    // if (e.detail.value.length === 6)
-                    //     num = 8
-                    // if (e.detail.value.length === 8)
-                    //     num = 11
-                    // if (e.detail.value.length === 11)
-                    //     return this.set('newList', [])
-                    // let newList = this.hamonizeCodeList.filter((check) => check.lengths === num)
-                    // newList.map((check) => {
-                    //     return check.checks = true
-                    // })
-                    // this.set('newList', newList)
-                    // console.log(newList);
                 } catch (e) {
 
                 }
@@ -229,7 +275,7 @@
                 this.hmChild.map((set, index) => {
                     // console.log(this.list_employees[index].budget_balance);
                     // if (this.hmChild[index].budget_balance !== 0)
-                        this.set('hmChild.' + index + '.checks', this.statusCheck)
+                    this.set('hmChild.' + index + '.checks', this.statusCheck)
                     // console.log(this.list_employees[index].budget_balance);
                 })
                 // this.set('paperFab', !this.statusCheck)
@@ -251,6 +297,11 @@
                 })
                 // console.log(arr);
                 this.data.hmchild = arr
+                let code = this.data.hmparent.split(' ')
+                    let hmparent = code[0]
+                    // console.log(hmparent);
+                let newLink = this.data
+                newLink.hmparent =  hmparent
                 // console.log(this.data);
                 // if (this.data.orderby == '') {
                 //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
