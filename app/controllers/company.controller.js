@@ -19,7 +19,7 @@ exports.list = function (req, res) {
     var j = req.jdbc;
     j.query("mssql", `SELECT 
                          company_taxno as id,
-                         CONCAT('( ',company_taxno,' ) ',company_name_th) as label
+                         CONCAT(company_taxno,'  ',company_name_th) as label
                         from company_info`, [],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {

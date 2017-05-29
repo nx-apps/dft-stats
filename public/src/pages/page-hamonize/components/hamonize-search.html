@@ -42,7 +42,7 @@
                         เลขพิกัดศุลกากร :
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" class="textCenter" items="{{hamonizeCodeList}}" item-label-path="label" item-value-path="id"
+                        <gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList}}" item-label-path="label" item-value-path="id"
                             value="{{data.hmparent}}" on-value-changed="getChildHm">
                             <template>
                                 [[item.label]]
@@ -59,17 +59,17 @@
                             </template>
                         </gl-combo-box>
                     </div>-->
-                    <!--<div class="labelSearchDate">
+                    <div class="labelSearchDate">
                         แหล่งข้อมูล :
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
+                        <gl-combo-box id="hamonizeSourch"class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
                             value="{{data.dataSourch}}">
                             <template>
                                 [[item.label]]
                             </template>
                         </gl-combo-box>
-                    </div>-->
+                    </div>
                     <div class="flexchild">
                         <div class="btn-search">
                             <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
@@ -95,10 +95,12 @@
                 <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
                     <div class="flex2child">
-                        <vaadin-grid aria-label="Basic Binding Example" items="[[newList]]">
+                        <vaadin-grid aria-label="Basic Binding Example" items="[[hmChild]]">
 
                             <vaadin-grid-column width="150px" flex-grow="0">
-                                <template class="header">#</template>
+                                <template class="header">
+                                    <paper-checkbox checked="{{statusCheck}}" on-tap="selectAll">เลือกทั้งหมด</paper-checkbox>
+                                </template>
                                 <template>
                                     <paper-checkbox checked="{{item.checks}}"></paper-checkbox>
                                 </template>
@@ -183,29 +185,37 @@
                     type: Object,
                     value: {}
                 },
-                newList: {
-                    type: Array,
-                    value: []
+                hmChild: {
+                    statePath: 'hamonize.hamonizeCodeChild',
+                },
+                statusCheck:{
+                    type: Boolean,
+                    value:true
                 }
             },
             getChildHm(e) {
                 try {
                     // console.log(e.detail.value);
-
-                    let num = ''
-                    if (e.detail.value.length === 4)
-                        num = 6
-                    if (e.detail.value.length === 6)
-                        num = 8
-                    if (e.detail.value.length === 8)
-                        num = 11
-                    if (e.detail.value.length === 11)
-                        return this.set('newList', [])
-                    let newList = this.hamonizeCodeList.filter((check) => check.lengths === num)
-                    newList.map((check) => {
-                        return check.checks = true
-                    })
-                    this.set('newList', newList)
+                    let hmparent = e.detail.value
+                    if (hmparent !== '' && hmparent !== undefined) {
+                        // console.log(this.data);
+                        let data = { 'hmparent': hmparent }
+                        this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
+                    }
+                    // let num = ''
+                    // if (e.detail.value.length === 4)
+                    //     num = 6
+                    // if (e.detail.value.length === 6)
+                    //     num = 8
+                    // if (e.detail.value.length === 8)
+                    //     num = 11
+                    // if (e.detail.value.length === 11)
+                    //     return this.set('newList', [])
+                    // let newList = this.hamonizeCodeList.filter((check) => check.lengths === num)
+                    // newList.map((check) => {
+                    //     return check.checks = true
+                    // })
+                    // this.set('newList', newList)
                     // console.log(newList);
                 } catch (e) {
 
@@ -213,14 +223,29 @@
 
                 // 
             },
+            selectAll() {
+                this.fire('toast', { status: 'load' })
+                console.log(this.statusCheck);
+                this.hmChild.map((set, index) => {
+                    // console.log(this.list_employees[index].budget_balance);
+                    // if (this.hmChild[index].budget_balance !== 0)
+                        this.set('hmChild.' + index + '.checks', this.statusCheck)
+                    // console.log(this.list_employees[index].budget_balance);
+                })
+                // this.set('paperFab', !this.statusCheck)
+                // console.log(this.paperFab);
+                this.fire('toast', { status: 'load' })
+            },
             _setDate(e) {
                 this.set('data.sdate', e.sdate)
                 this.set('data.edate', e.edate);
+                this.set('data.dataSourch', 'f3');
+                // data.dataSourch
                 // (e.edate != '') ? this.getRiceValue() : '';
             },
             getRiceValue() {
                 let arr = []
-                let rice = this.newList.filter((item) => item.checks === true)
+                let rice = this.hmChild.filter((item) => item.checks === true)
                 rice.map((id) => {
                     arr.push(id.id)
                 })
@@ -243,14 +268,14 @@
             },
             getRiceValueReport() {
                 let arr = []
-                let rice = this.newList.filter((item) => item.checks === true)
+                let rice = this.hmChild.filter((item) => item.checks === true)
                 rice.map((id) => {
                     arr.push(id.id)
                 })
                 // console.log(arr);
                 this.data.hmchild = arr
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
-                    window.open('./api/report/h01?' + this.genUrl(this.data))
+                window.open('./api/report/h01?' + this.genUrl(this.data))
                 // } else {
                 //     window.open('./api/report/h02?' + this.genUrl(this.data))
                 // }
