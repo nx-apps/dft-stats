@@ -257,22 +257,22 @@ exports.sp01 = function (req, res) {
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate;
+        startDate = req.query.sdate;
     }
     if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate;
+        endDate = req.query.edate;
     }
-    let head = req.query.hmparent;
-    let child = req.query.hmchild;
-    let dataSourch = req.query.dataSourch;
-    console.log(head, child, dataSourch, s, e);
+    let hmparent = req.query.hmparent;
+    let hmchild = req.query.hmchild;
+    let refDB = req.query.dataSourch;
+    // console.log(head, child, dataSourch, s, e);
     // console.log(req.query);
     // console.log('dataSourch>>>>', dataSourch);
     // console.log('>>>>>>>>>>>>>',req.query);
     // console.log(s);
     // if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
     j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `,
-        [head, child, s, e,dataSourch],
+        [hmparent, hmchild, startDate, endDate,refDB],
         function (err, data) {
             res.send(data)
         })
