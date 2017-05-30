@@ -227,26 +227,26 @@
                     && this.hamonizeCodeList !== undefined) {
                     let hm = this.hamonizeCodeList
                     let startyear = '',
-                        endyear= ''
-                        for (var variable in hm) {
-                            if (Number(variable) <= Syear)
-                                startyear = variable
-                        }
+                        endyear = ''
+                    for (var variable in hm) {
+                        if (Number(variable) <= Syear)
+                            startyear = variable
+                    }
                     if (Syear === Eyear) {
                         // console.log(this.hamonizeCodeList[startyear]);
-                        this.set('hamonizeCodeList.use',this.hamonizeCodeList[startyear])
+                        this.set('hamonizeCodeList.use', this.hamonizeCodeList[startyear])
                     } else {
                         // console.log(222);
                         for (var variable in hm) {
                             if (Number(variable) <= Eyear)
                                 endyear = variable
                         }
-                    //     console.log(222222);
-                    //    console.log(this.hamonizeCodeList[startyear]);
-                    //     console.log('Eyear',this.hamonizeCodeList[endyear]);
+                        //     console.log(222222);
+                        //    console.log(this.hamonizeCodeList[startyear]);
+                        //     console.log('Eyear',this.hamonizeCodeList[endyear]);
                         let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
-                       this.set('hamonizeCodeList.use',newArr)
-                       console.log(this.hamonizeCodeList.use.length);
+                        this.set('hamonizeCodeList.use', newArr)
+                        console.log(this.hamonizeCodeList.use.length);
                     }
 
                 }
@@ -256,11 +256,11 @@
                     // console.log(e.detail.value.split(' ')[0]);
                     let code = e.detail.value.split(' ')
                     let hmparent = code[0]
-                    let year = code[code.length-1].slice(0,4)
-                    this.set('data.hamonizeYear',year)
+                    let year = code[code.length - 1].slice(0, 4)
+                    this.set('data.hamonizeYear', year)
                     if (hmparent !== '' && hmparent !== undefined) {
                         // console.log(this.data);
-                        let data = { 'hmparent': hmparent ,'year': this.data.hamonizeYear}
+                        let data = { 'hmparent': hmparent, 'year': this.data.hamonizeYear }
                         this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
                     }
                 } catch (e) {
@@ -271,7 +271,7 @@
             },
             selectAll() {
                 this.fire('toast', { status: 'load' })
-                console.log(this.statusCheck);
+                // console.log(this.statusCheck);
                 this.hmChild.map((set, index) => {
                     // console.log(this.list_employees[index].budget_balance);
                     // if (this.hmChild[index].budget_balance !== 0)
@@ -298,10 +298,10 @@
                 // console.log(arr);
                 this.data.hmchild = arr
                 let code = this.data.hmparent.split(' ')
-                    let hmparent = code[0]
-                    // console.log(hmparent);
+                let hmparent = code[0]
+                // console.log(hmparent);
                 let newLink = this.data
-                newLink.hmparent =  hmparent
+                newLink.hmparent = hmparent
                 // console.log(this.data);
                 // if (this.data.orderby == '') {
                 //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
@@ -310,7 +310,7 @@
                 // }
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
                 // console.log(1);
-                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
+                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(newLink))
                 // } else {
                 //     console.log(2);
                 //     this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
@@ -325,8 +325,13 @@
                 })
                 // console.log(arr);
                 this.data.hmchild = arr
+                let code = this.data.hmparent.split(' ')
+                let hmparent = code[0]
+                // console.log(hmparent);
+                let newLink = this.data
+                newLink.hmparent = hmparent
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
-                window.open('./api/report/h01?' + this.genUrl(this.data))
+                window.open('./api/report/h01?' + this.genUrl(newLink))
                 // } else {
                 //     window.open('./api/report/h02?' + this.genUrl(this.data))
                 // }
