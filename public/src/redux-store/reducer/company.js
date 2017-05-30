@@ -39,7 +39,7 @@ export function companyAction(store){
       COMPANY_CODE_SEARCH_R1(data=''){
         // this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         //console.log(data);
-        this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
+        this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         axios.get('/company/re01?'+data)
         .then( (response)=>{
             // console.log(response);

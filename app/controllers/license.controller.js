@@ -121,15 +121,16 @@ exports.re02 = function (req, res) {
 }
 exports.sp01 = function (req, res) {
     var j = req.jdbc;
-    var s = today, e = tomorrow;
+    var startDate = today, endDate = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate
+        startDate = req.query.sdate
     }
     if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate
+        endDate = req.query.edate
     }
     let reference_code2 = req.query.reference_code2 || ''
-    j.query("mssql", `exec sp_qry_stats_export @refCode= ?, @startDate= ?, @endDate= ?`, [reference_code2,s, e],
+    j.query("mssql", `exec sp_qry_stats_license @refCode= ?, @startDate= ?, @endDate= ?`, 
+    [reference_code2,startDate, endDate],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)

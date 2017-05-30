@@ -30,14 +30,15 @@ exports.spp01 = function (req, res) {
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
-        s = req.query.sdate
+        startDate = req.query.sdate
     }
     if (typeof req.query.edate !== "undefined") {
-        e = req.query.edate
+        endDate = req.query.edate
     }
-    let company_taxno = req.query.company_taxno
+    let company_taxno = req.query.company_taxno || ''
+    console.log(company_taxno,startDate, endDate);
      j.query("mssql", `exec sp_qry_stats_company @taxno= ?, @startDate= ?, @endDate= ?`,
-      [company_taxno,s, e],
+      [company_taxno,startDate, endDate],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)
