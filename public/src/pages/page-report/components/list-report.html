@@ -16,7 +16,7 @@
                 /*background-color: lightgray;*/
             }
 
-            .text-center{
+            .text-center {
                 text-align: center;
             }
         </style>
@@ -45,7 +45,7 @@
                                 <div class="text-center">PDF</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable">
+                                <paper-button raised class="btnInTable" id="PDF" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/pdf.png"></iron-image>
                                     PDF</paper-button>
                             </template>
@@ -56,7 +56,7 @@
                                 <div class="text-center">WORD</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable">
+                                <paper-button raised class="btnInTable" id="WORD" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
                                     WORD</paper-button>
                             </template>
@@ -67,7 +67,7 @@
                                 <div class="text-center">EXCEL</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable">
+                                <paper-button raised class="btnInTable" id="EXCEL" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
                                     EXCEL</paper-button>
                             </template>
@@ -80,6 +80,17 @@
 
 
         </paper-material>
+        <paper-dialog id="report">
+            <div class="layout horizontal start-justified">
+                <div class="flex" style=" margin-right: 30px">
+                    <vaadin-date-picker always-float-label label="วันที่ที่ต้องการดู" value="{{data}}"></vaadin-date-picker>
+                </div>
+
+                <div class="flex horizontal end-justified layout buttons">
+                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
+                    <paper-button raised class="gl-btn-primary" on-tap="printReport" dialog-confirm autofocus>ออกรายงาน</paper-button>
+                </div>
+        </paper-dialog>
     </template>
     <script>
         Polymer({
@@ -87,6 +98,7 @@
             properties: {
                 date: {
                     type: Object,
+                    value:{type:'PDF'}
                 },
                 report: {
                     type: Array,
@@ -107,8 +119,25 @@
                             report_link: '/stats/stats1'
                         },
                     ]
+                },
+                setType: {
+                    type: Object,
+                    value:{}
                 }
+            },
+            print(e){
+                let link = e.model.item.report_link
+                let type = e.currentTarget.id
+                this.set('date.type',type)
+                this.set('date.link',link)
+                // console.log(e.model.item);
+                // console.log(e.currentTarget.id);
+                this.$$('#report').open()
+            },
+            printReport(){
+                window.open('./api/report/daily/company?date=' + this.data)
             }
+            
         });
     </script>
 </dom-module>
