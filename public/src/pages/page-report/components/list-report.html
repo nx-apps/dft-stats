@@ -26,21 +26,22 @@
                     <!--<div class="flexchild"></div>-->
                     <!--<div class="flex4child">-->
                     <vaadin-grid aria-label="Report" class="material" items="[[report]]">
-                        <vaadin-grid-column width="100px" flex-grow="0">
+                        <vaadin-grid-column width="10%" flex-grow="0">
                             <template class="header ">
                                 <div class="text-center">ลำดับ</div>
                             </template>
-
-                            <template>[[item.report_id]]</template>
+                            <template>
+                                <div class="text-center">[[item.report_id]]</div>
+                            </template>
                         </vaadin-grid-column>
 
 
-                        <vaadin-grid-column width="640px" flex-grow="0">
+                        <vaadin-grid-column width="53.9%" flex-grow="0">
                             <template class="header">ชื่อรายงาน</template>
                             <template>[[item.report_name]]</template>
                         </vaadin-grid-column>
 
-                        <vaadin-grid-column width="150px" flex-grow="0">
+                        <vaadin-grid-column width="12%" flex-grow="0">
                             <template class="header">
                                 <div class="text-center">PDF</div>
                             </template>
@@ -51,7 +52,7 @@
                             </template>
                         </vaadin-grid-column>
 
-                        <vaadin-grid-column width="150px" flex-grow="0">
+                        <vaadin-grid-column width="12%" flex-grow="0">
                             <template class="header">
                                 <div class="text-center">WORD</div>
                             </template>
@@ -62,7 +63,7 @@
                             </template>
                         </vaadin-grid-column>
 
-                        <vaadin-grid-column width="150px" flex-grow="0">
+                        <vaadin-grid-column width="12%" flex-grow="0">
                             <template class="header">
                                 <div class="text-center">EXCEL</div>
                             </template>
@@ -98,7 +99,7 @@
             properties: {
                 date: {
                     type: Object,
-                    value:{type:'PDF'}
+                    value: { type: 'PDF' }
                 },
                 report: {
                     type: Array,
@@ -122,22 +123,22 @@
                 },
                 setType: {
                     type: Object,
-                    value:{}
+                    value: {}
                 }
             },
-            print(e){
+            print(e) {
                 let link = e.model.item.report_link
                 let type = e.currentTarget.id
-                this.set('date.type',type)
-                this.set('date.link',link)
+                this.set('date.type', type)
+                this.set('date.link', link)
                 // console.log(e.model.item);
                 // console.log(e.currentTarget.id);
                 this.$$('#report').open()
             },
-            printReport(){
+            printReport() {
                 window.open('./api/report/daily/company?date=' + this.data)
             }
-            
+
         });
     </script>
 </dom-module>
