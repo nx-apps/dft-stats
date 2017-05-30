@@ -264,32 +264,14 @@ exports.sp01 = function (req, res) {
     }
     let hmparent = req.query.hmparent;
     let hmchild = req.query.hmchild;
-    let refDB = req.query.dataSourch;
-    // console.log(head, child, dataSourch, s, e);
-    // console.log(req.query);
-    // console.log('dataSourch>>>>', dataSourch);
-    // console.log('>>>>>>>>>>>>>',req.query);
-    // console.log(s);
+    let refDB = req.query.refDB;
+
     // if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
     j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `,
         [hmparent, hmchild, startDate, endDate,refDB],
         function (err, data) {
             res.send(data)
         })
-
-
-    // }else {
-    //     j.query("mssql", `exec sp_qry_stats_hmcode_custom @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?`,
-    //  [head,child,s, e],
-    //     function (err, data) {
-    //         res.send(data)
-    //     })
-    // }
-    // j.query("mssql", `exec	sp_qry_stats_hmcode
-    // 	@hmparent = ?, @hmchild = ?, @startDate = ?, @endDate = ?, @refDB = ?`,
-    //      [head,child,s, e,dataSourch], function (err, data) {
-    //         res.send(data)
-    //     })
 
 
 }
