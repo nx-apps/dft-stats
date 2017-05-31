@@ -11,4 +11,5 @@ module.exports = function (app) {
     app.get('/daily/company', controller.dailyCompany)
     app.get('/daily/country', controller.dailyCountry)
     app.get('/daily/pricerice', controller.dailyPricerice)
+    app.get('/daily/exportrice', controller.dailyExportrice)
 }

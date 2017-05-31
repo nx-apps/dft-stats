@@ -17,6 +17,7 @@ var today = '2016' + '-' + mm + '-' + dd;
 var tomorrow = '2016' + '-' + mm + '-' + dt;
 exports.h01 = function (req, res) {
     var j = req.jdbc;
+    var r = req.r;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {
         s = req.query.sdate
@@ -29,11 +30,13 @@ exports.h01 = function (req, res) {
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
 
-    j.query("mssql", `exec sp_qry_stats_hmcode @hmparent=?,@hmchild=?, @startDate= ?, @endDate= ?`, [
+    j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `, [
+        
         req.query.hmparent || '1006',
         req.query.hmchild,
         s,
-        e
+        e,
+        req.query.refDB
     ],
         function (err, data) {
             // res.send(data);
@@ -154,6 +157,15 @@ exports.dailyPricerice= function (req, res) {
         // res.send(data);
         req.r.json(data).run().then(function (d2) {
             res.ireport("daily/rpt_invioce_pricerice.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
+        })
+    })
+}
+exports.dailyExportrice= function (req, res) {
+
+    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_exportrice ", [], function (err, data) {
+        // res.send(data);
+        req.r.json(data).run().then(function (d2) {
+            res.ireport("daily/rpt_invioce_exportrice.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
         })
     })
 }

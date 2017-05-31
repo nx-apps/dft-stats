@@ -5,8 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="approveDate" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new Integer(new SimpleDateFormat("yyyy").format(new Date()))-543
-]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[new Integer(new SimpleDateFormat("yyyy").format(new Date()))-543]]></defaultValueExpression>
 	</parameter>
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
@@ -19,6 +18,7 @@
 	<field name="groupCode" class="java.lang.String"/>
 	<field name="invoice_date" class="java.lang.String"/>
 	<field name="fob_amt_perunit" class="java.lang.Double"/>
+	<field name="country_name_th" class="java.lang.String"/>
 	<variable name="sum_weight_a" class="java.lang.Double" resetType="Group" resetGroup="groupA" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_weight}]]></variableExpression>
 	</variable>
@@ -47,7 +47,7 @@
 			<band height="20">
 				<printWhenExpression><![CDATA[$F{groupCode}=="a"]]></printWhenExpression>
 				<textField pattern="#,##0.00">
-					<reportElement x="130" y="0" width="70" height="20" uuid="6ff02590-b93a-4cf6-873c-e2eeb6701f4f"/>
+					<reportElement x="130" y="0" width="60" height="20" uuid="6ff02590-b93a-4cf6-873c-e2eeb6701f4f"/>
 					<box rightPadding="2">
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -61,7 +61,7 @@
 					<textFieldExpression><![CDATA[$V{sum_weight_a}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="200" y="0" width="70" height="20" uuid="e1aa0a5d-bbb5-4a83-8d8f-916b286ace1a"/>
+					<reportElement x="190" y="0" width="60" height="20" uuid="e1aa0a5d-bbb5-4a83-8d8f-916b286ace1a"/>
 					<box rightPadding="2">
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -89,7 +89,7 @@
 					<textFieldExpression><![CDATA["------รวม------"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="270" y="0" width="285" height="20" uuid="3e181618-a10f-4f87-b8b7-ebc3ef7689be"/>
+					<reportElement x="250" y="0" width="305" height="20" uuid="3e181618-a10f-4f87-b8b7-ebc3ef7689be"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -125,7 +125,7 @@
 					<textFieldExpression><![CDATA["------รวม------"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="270" y="0" width="285" height="20" uuid="d2a0457a-42bd-4134-ba4c-083c4a16ad2b"/>
+					<reportElement x="250" y="0" width="305" height="20" uuid="d2a0457a-42bd-4134-ba4c-083c4a16ad2b"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -139,7 +139,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="130" y="0" width="70" height="20" uuid="b7e6d9c9-5b40-465f-ad22-cf595d44e776"/>
+					<reportElement x="130" y="0" width="60" height="20" uuid="b7e6d9c9-5b40-465f-ad22-cf595d44e776"/>
 					<box rightPadding="2">
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -153,7 +153,7 @@
 					<textFieldExpression><![CDATA[$V{sum_weight_z}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="200" y="0" width="70" height="20" uuid="443fd8ab-b7eb-4efa-b83a-ac7804c5fead"/>
+					<reportElement x="190" y="0" width="60" height="20" uuid="443fd8ab-b7eb-4efa-b83a-ac7804c5fead"/>
 					<box rightPadding="2">
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -201,7 +201,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[บริษัท]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="0" width="70" height="20" uuid="4d9b79e1-9116-4849-b6fa-434d5130be3d"/>
+				<reportElement x="130" y="0" width="60" height="20" uuid="4d9b79e1-9116-4849-b6fa-434d5130be3d"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -215,7 +215,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="70" height="20" uuid="6c25a5fc-f3ce-4986-9270-3287c5e3c265"/>
+				<reportElement x="190" y="0" width="60" height="20" uuid="6c25a5fc-f3ce-4986-9270-3287c5e3c265"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -229,7 +229,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[มูลค่า (US.$)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="0" width="95" height="20" uuid="b2497f01-f178-42c7-b805-1f8056d0e93f"/>
+				<reportElement x="250" y="0" width="95" height="20" uuid="b2497f01-f178-42c7-b805-1f8056d0e93f"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -257,7 +257,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[วันทำสัญญา]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="0" width="70" height="20" uuid="16356a8e-7dee-4abf-ae76-4c517899fcbb"/>
+				<reportElement x="405" y="0" width="90" height="20" uuid="16356a8e-7dee-4abf-ae76-4c517899fcbb"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -271,7 +271,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[ประเทศปลายทาง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="365" y="0" width="60" height="20" uuid="3f7b436e-fa8f-4ac6-8230-4759c4789a10"/>
+				<reportElement x="345" y="0" width="60" height="20" uuid="3f7b436e-fa8f-4ac6-8230-4759c4789a10"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -304,7 +304,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{company_name_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="130" y="0" width="70" height="20" uuid="e55f190c-4d75-4bdc-b680-45d2bc070234"/>
+				<reportElement stretchType="RelativeToBandHeight" x="130" y="0" width="60" height="20" uuid="e55f190c-4d75-4bdc-b680-45d2bc070234"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -318,7 +318,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{net_weight}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="200" y="0" width="70" height="20" uuid="4c73b572-dcc8-436e-ade3-6c5ad6389cec"/>
+				<reportElement stretchType="RelativeToBandHeight" x="190" y="0" width="60" height="20" uuid="4c73b572-dcc8-436e-ade3-6c5ad6389cec"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -332,7 +332,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{fob_amt}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="270" y="0" width="95" height="20" uuid="9c4da3c6-1755-4b62-a779-5bef13edcac3"/>
+				<reportElement stretchType="RelativeToBandHeight" x="250" y="0" width="95" height="20" uuid="9c4da3c6-1755-4b62-a779-5bef13edcac3"/>
 				<box leftPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -346,7 +346,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{hamonize_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="365" y="0" width="60" height="20" uuid="88fb13e6-a53b-4b2c-a32c-df057c0c1536"/>
+				<reportElement stretchType="RelativeToBandHeight" x="345" y="0" width="60" height="20" uuid="88fb13e6-a53b-4b2c-a32c-df057c0c1536"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -360,7 +360,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{fob_amt_perunit}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="425" y="0" width="70" height="20" uuid="53c3ba5d-ce97-4d0e-91b0-457687faebf7"/>
+				<reportElement stretchType="RelativeToBandHeight" x="405" y="0" width="90" height="20" uuid="53c3ba5d-ce97-4d0e-91b0-457687faebf7"/>
 				<box leftPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -371,7 +371,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{destination_country}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{country_name_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="495" y="0" width="60" height="20" uuid="3732af90-24e2-4b3f-ae21-267af4803457"/>
@@ -391,7 +391,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 		<band height="20">
 			<printWhenExpression><![CDATA[$F{groupCode}=="z"]]></printWhenExpression>
 			<textField pattern="#,##0.00">
-				<reportElement isPrintRepeatedValues="false" x="130" y="0" width="70" height="20" uuid="e37b9a5a-d8a4-4a21-b9e9-f44b0623696c"/>
+				<reportElement isPrintRepeatedValues="false" x="130" y="0" width="60" height="20" uuid="e37b9a5a-d8a4-4a21-b9e9-f44b0623696c"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -405,7 +405,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{net_weight}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="0" width="285" height="20" uuid="c24bd318-1879-4f5d-9b1d-4aa85bf7a289"/>
+				<reportElement x="250" y="0" width="305" height="20" uuid="c24bd318-1879-4f5d-9b1d-4aa85bf7a289"/>
 				<box leftPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -419,7 +419,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$F{hamonize_th}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement isPrintRepeatedValues="false" x="200" y="0" width="70" height="20" uuid="72259569-84c2-491f-afa1-34da6bf465dc"/>
+				<reportElement isPrintRepeatedValues="false" x="190" y="0" width="60" height="20" uuid="72259569-84c2-491f-afa1-34da6bf465dc"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -483,7 +483,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA["รวมทั้งสิ้น"]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="200" y="0" width="70" height="20" uuid="dc1dddbb-5bb2-48b8-bcd8-766a4db12cca"/>
+				<reportElement x="190" y="0" width="60" height="20" uuid="dc1dddbb-5bb2-48b8-bcd8-766a4db12cca"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -497,7 +497,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$V{sum_fob}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="130" y="0" width="70" height="20" uuid="c1f1033c-3880-4c5a-b9be-86a50227a561"/>
+				<reportElement x="130" y="0" width="60" height="20" uuid="c1f1033c-3880-4c5a-b9be-86a50227a561"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -511,7 +511,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[$V{sum_weight}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="0" width="285" height="20" uuid="4653377e-382a-42b0-a958-32518d8ee0de"/>
+				<reportElement x="250" y="0" width="305" height="20" uuid="4653377e-382a-42b0-a958-32518d8ee0de"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -525,7 +525,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd">
-				<reportElement stretchType="RelativeToBandHeight" x="425" y="85" width="130" height="20" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
+				<reportElement stretchType="RelativeToBandHeight" x="319" y="85" width="236" height="20" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
 				<box leftPadding="0" rightPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -539,7 +539,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA["วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="425" y="65" width="130" height="20" uuid="effaee8b-bd0f-477e-85f2-f3970357ddb6"/>
+				<reportElement x="319" y="65" width="236" height="20" uuid="effaee8b-bd0f-477e-85f2-f3970357ddb6"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -550,10 +550,10 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[สำนักบริหารการค้าข้าว]]></text>
+				<text><![CDATA[กองบริหารการค้าข้าว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="425" y="45" width="130" height="20" uuid="dbc4aeb9-5888-4bf0-a562-5923ed16c54c"/>
+				<reportElement x="319" y="45" width="236" height="20" uuid="dbc4aeb9-5888-4bf0-a562-5923ed16c54c"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -564,7 +564,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ที่มา : กลุ่มบริหารข้อมูลและสถิติ]]></text>
+				<text><![CDATA[ที่มา : กลุ่มบริหารการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว]]></text>
 			</staticText>
 		</band>
 	</summary>
