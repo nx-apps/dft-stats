@@ -85,7 +85,7 @@ exports.li01 = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", `exec sp_qry_stats_license @refCode=?, @startDate= ?, @endDate= ?`, [req.params.code || '', s, e],
+    j.query("mssql", `exec sp_qry_stats_license @refCode=?, @startDate= ?, @endDate= ?`, [req.query.reference_code2 || '', s, e],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             // res.send(data);

@@ -95,7 +95,7 @@
             _setDate(e){
                 this.set('data.sdate',e.sdate)
                 this.set('data.edate',e.edate)
-                this.dispatchAction('HAMONIZE_CODE_SEARCH_R1',this.genUrl(this.data));
+                this.dispatchAction('LICENSE_SEARCH',this.genUrl(this.data));
                 // console.log(this.data);
             },
             getlicenseValue() {
@@ -107,13 +107,13 @@
                 // }
             },
             getlicenseValueReport() {
-                if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
+                // if (this.data.reference_code2 == undefined || this.data.reference_code2 == '') {
                     window.open('./api/report/li01?'+this.genUrl(this.data));
                     // console.log(this.data);
-                } else {
-                    // console.log(this.data);
-                    window.open('./api/report/li02/'+this.data.reference_code2);
-                }
+                // } else {
+                //     // console.log(this.data);
+                //     window.open('./api/report/li02/'+this.data.reference_code2);
+                // }
             },
             clearInput:function(){
                 this.set('data.reference_code2', '');

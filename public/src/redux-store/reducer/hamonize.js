@@ -78,7 +78,7 @@ export function hamonizeAction(store) {
                             }
                         });
                     }
-                    console.log(1111);
+                    // console.log(1111);
                     store.dispatch({ type: 'HAMONIZE_CODE_GET_CHILD', payload: response.data })
                     // return ha
                 })
