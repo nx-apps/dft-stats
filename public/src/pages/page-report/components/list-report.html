@@ -1,4 +1,5 @@
 <link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="./../../../../bower_components/gl-form/gl-form-input.html">
 
 <dom-module id="list-report">
     <template>
@@ -84,7 +85,9 @@
         <paper-dialog id="report">
             <div class="layout horizontal start-justified">
                 <div class="flex" style=" margin-right: 30px">
-                    <vaadin-date-picker always-float-label label="วันที่ที่ต้องการดู" value="{{data}}"></vaadin-date-picker>
+                    <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date"
+              value="{{data}}"></gl-form-input>
+                    <!--<vaadin-date-picker always-float-label label="วันที่ที่ต้องการดู" value="{{data}}"></vaadin-date-picker>-->
                 </div>
 
                 <div class="flex horizontal end-justified layout buttons">
@@ -106,24 +109,28 @@
                     value: [
                         {
                             report_id: 1,
-                            report_name: 'รายงาน1',
+                            report_name: 'รายงานขายข้าวประจำวัน',
                             report_link: '/stats/stats1'
                         },
-                        {
-                            report_id: 2,
-                            report_name: 'รายงาน2',
-                            report_link: '/stats/stats1'
-                        },
-                        {
-                            report_id: 3,
-                            report_name: 'รายงาน3',
-                            report_link: '/stats/stats1'
-                        },
+                        // {
+                        //     report_id: 2,
+                        //     report_name: 'รายงาน2',
+                        //     report_link: '/stats/stats1'
+                        // },
+                        // {
+                        //     report_id: 3,
+                        //     report_name: 'รายงาน3',
+                        //     report_link: '/stats/stats1'
+                        // },
                     ]
                 },
                 setType: {
                     type: Object,
                     value: {}
+                },
+                data:{
+                    type : String,
+                    value: '2016-05-25'
                 }
             },
             print(e) {
