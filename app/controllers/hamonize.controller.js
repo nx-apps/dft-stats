@@ -53,6 +53,28 @@ exports.child_code = function (req, res) {
             res.send(data)
         })
 }
+exports.rice_list = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT hamonize_code,
+                             hamonize_year,
+                             hamonize_th,
+                             hamonize_en
+                      FROM hamonize
+    `, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.rice_get = function (req, res) {
+    var j = req.jdbc;
+    // res.json(req.body);
+    j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
+        [req.body.year, req.body.hmcodes, req.body.date_start, req.body.date_end],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
 // exports.re01 = function (req, res) {
 //     var r = req.r;
 //     var s, e;
@@ -267,7 +289,7 @@ exports.sp01 = function (req, res) {
 
     // if (dataSourch === 'f3' || dataSourch === '' || dataSourch === undefined) {
     j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `,
-        [hmparent, hmchild, startDate, endDate,refDB],
+        [hmparent, hmchild, startDate, endDate, refDB],
         function (err, data) {
             res.send(data)
         })

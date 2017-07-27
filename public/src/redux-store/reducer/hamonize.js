@@ -7,7 +7,9 @@ const initialState = {
     list: [],
     date: { sdate: '', edate: '' },
     hamonizeCodeList: [],
-    hamonizeCodeChild: []
+    hamonizeCodeChild: [],
+    list_rice: [],
+    rice_list: []
     // listFiles:[]
 }
 
@@ -22,6 +24,10 @@ export function hamonizeReducer(state = initialState, action) {
             return Object.assign({}, state, { hamonizeCodeChild: action.payload });
         case 'HAMONIZE_CODE_SEARCH_R1':
             return Object.assign({}, state, { list: action.payload });
+        case 'HAMONIZE_RICE_LIST':
+            return Object.assign({}, state, { list_rice: action.payload })
+        case 'HAMONIZE_RICE_GET_LIST':
+            return Object.assign({}, state, { rice_list: action.payload })
         default:
             return state
     }
@@ -46,7 +52,7 @@ export function hamonizeAction(store) {
                     // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
                     // console.log(response.data);
                     // group by the `tag` property 
-                    
+
                     // console.log();
                     store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: groupArray(response.data, 'hamonize_year') })
                     // return ha
@@ -103,5 +109,18 @@ export function hamonizeAction(store) {
                     //console.log(error);
                 });
         },
+        HAMONIZE_RICE_LIST() {
+            axios.get('./hamonize/ricelist')
+                .then((response) => {
+                    store.dispatch({ type: 'HAMONIZE_RICE_LIST', payload: response.data });
+                })
+        },
+        HAMONIZE_RICE_GET(data){
+            // console.log(data);
+            axios.post('./hamonize/get',data)
+            .then((response) => {
+                store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
+            })
+        }
     }]
 };
