@@ -22,9 +22,9 @@
                         <th class="label-head" rowspan="2">ลำดับ</th>
                         <th class="label-head" rowspan="2">เลขพิกัดศุลกากร</th>
                         <th class="label-head" rowspan="2">ชนิดข้าว</th>
-                        <th class="label-head" colspan="2">นำเข้า</th>
+                        <th class="label-head" colspan="3">นำเข้า</th>
                         <!--<th class="label-head">มูลค่า (บาท)</th>-->
-                        <th class="label-head" colspan="2">ส่งออก</th>
+                        <th class="label-head" colspan="3">ส่งออก</th>
                         <!--<th class="label-head">มูลค่า (บาท)</th>-->
                     </tr>
                     <tr>
@@ -32,8 +32,10 @@
                         <!--<th class="label-head">ชนิดข้าว</th>-->
                         <th class="label-head">ปริมาณ (ตัน)</th>
                         <th class="label-head">มูลค่า (บาท)</th>
+                        <th class="label-head">มูลค่า (USD)</th>
                         <th class="label-head">ปริมาณ (ตัน)</th>
                         <th class="label-head">มูลค่า (บาท)</th>
+                        <th class="label-head">มูลค่า (USD)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,8 +52,10 @@
                             <td>[[item.hamonize_th]]</td>
                             <td class="format-number">[[formatNumber(item.net_weight_i)]]</td>
                             <td class="format-number">[[formatNumber(item.fob_amt_baht_i)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_i)]]</td>
                             <td class="format-number">[[formatNumber(item.net_weight_e)]]</td>
                             <td class="format-number">[[formatNumber(item.fob_amt_baht_e)]]</td>
+                            <td class="format-number">[[formatNumber(item.fob_amt_e)]]</td>
                         </tr>
                     </template>
                 </tbody>
@@ -62,8 +66,10 @@
                         <td>รวม</td>
                         <td class="total">[[formatNumber(total.net_weight_i)]]</td>
                         <td class="total">[[formatNumber(total.fob_amt_baht_i)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_i)]]</td>
                         <td class="total">[[formatNumber(total.net_weight_e)]]</td>
                         <td class="total">[[formatNumber(total.fob_amt_baht_e)]]</td>
+                        <td class="total">[[formatNumber(total.fob_amt_e)]]</td>
                     </tr>
                 </tfoot>
             </table>
@@ -95,8 +101,10 @@
             totalcal(dataList){
                 this.set('total.net_weight_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i , 0));
                 this.set('total.fob_amt_baht_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i , 0));
+                this.set('total.fob_amt_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i , 0));
                 this.set('total.net_weight_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e , 0));
                 this.set('total.fob_amt_baht_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e , 0));
+                this.set('total.fob_amt_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e , 0));
             },
         });
     </script>

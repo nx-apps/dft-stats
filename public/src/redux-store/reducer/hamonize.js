@@ -110,16 +110,26 @@ export function hamonizeAction(store) {
                 });
         },
         HAMONIZE_RICE_LIST() {
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.get('./hamonize/ricelist')
                 .then((response) => {
-                    store.dispatch({ type: 'HAMONIZE_RICE_LIST', payload: response.data });
+                    this.fire('toast', {
+                        status: 'success', text: 'โหลดข้อมูลสำเร็จ', callback() {
+                            store.dispatch({ type: 'HAMONIZE_RICE_LIST', payload: response.data });
+                        }
+                    });
                 })
         },
         HAMONIZE_RICE_GET(data){
             // console.log(data);
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.post('./hamonize/get',data)
             .then((response) => {
-                store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
+                this.fire('toast', {
+                    status: 'success', text: 'ค้นหาสำเร็จ', callback() {
+                        store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
+                    }
+                });
             })
         }
     }]
