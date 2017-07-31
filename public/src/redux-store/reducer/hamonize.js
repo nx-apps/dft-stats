@@ -7,7 +7,9 @@ const initialState = {
     list: [],
     date: { sdate: '', edate: '' },
     hamonizeCodeList: [],
-    hamonizeCodeChild: []
+    hamonizeCodeChild: [],
+    list_rice: [],
+    rice_list: []
     // listFiles:[]
 }
 
@@ -22,6 +24,10 @@ export function hamonizeReducer(state = initialState, action) {
             return Object.assign({}, state, { hamonizeCodeChild: action.payload });
         case 'HAMONIZE_CODE_SEARCH_R1':
             return Object.assign({}, state, { list: action.payload });
+        case 'HAMONIZE_RICE_LIST':
+            return Object.assign({}, state, { list_rice: action.payload })
+        case 'HAMONIZE_RICE_GET_LIST':
+            return Object.assign({}, state, { rice_list: action.payload })
         default:
             return state
     }
@@ -32,7 +38,7 @@ export function hamonizeAction(store) {
     return [commonAction(), {
         HAMONIZE_SET_DATE() {
             let date = new Object()
-            let today = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+            let today = new Date(new Date().setFullYear(new Date().getFullYear()))
             //console.log(today);
             date.sdate = today.toISOString().split('T')[0]
             date.edate = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
@@ -46,7 +52,7 @@ export function hamonizeAction(store) {
                     // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
                     // console.log(response.data);
                     // group by the `tag` property 
-                    
+
                     // console.log();
                     store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: groupArray(response.data, 'hamonize_year') })
                     // return ha
@@ -103,5 +109,28 @@ export function hamonizeAction(store) {
                     //console.log(error);
                 });
         },
+        HAMONIZE_RICE_LIST() {
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
+            axios.get('./hamonize/ricelist')
+                .then((response) => {
+                    this.fire('toast', {
+                        status: 'success', text: 'โหลดข้อมูลสำเร็จ', callback() {
+                            store.dispatch({ type: 'HAMONIZE_RICE_LIST', payload: response.data });
+                        }
+                    });
+                })
+        },
+        HAMONIZE_RICE_GET(data){
+            // console.log(data);
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
+            axios.post('./hamonize/get',data)
+            .then((response) => {
+                this.fire('toast', {
+                    status: 'success', text: 'ค้นหาสำเร็จ', callback() {
+                        store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
+                    }
+                });
+            })
+        }
     }]
 };

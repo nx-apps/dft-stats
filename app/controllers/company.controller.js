@@ -2,6 +2,7 @@ var today = new Date();
 var dd = today.getDate();
 var dt = today.getDate() + 1;
 var mm = today.getMonth() + 1; //January is 0!
+// var group = require('group-array');
 
 var yyyy = today.getFullYear();
 if (dd < 10) {
@@ -17,13 +18,41 @@ var today = '2016' + '-' + mm + '-' + dd;
 var tomorrow = '2016' + '-' + mm + '-' + dt;
 exports.list = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT 
-                         company_taxno as id,
-                         CONCAT(company_taxno,'  ',company_name_th) as label
-                        from company_info`, [],
-        // j.query("mssql", `select * from hamonize_type`, [],
+
+    var sql = `SELECT company_taxno,
+                    company_name_th,
+                    company_name_en
+             from v_company_info where ` + req.body.att_name + ` like '%` + req.body.val + `%' `
+    // res.json(sql);
+    j.query("mssql", sql, [],
         function (err, data) {
             res.send(data)
+        })
+}
+exports.search = function (req, res) {
+    console.log(req.body);
+    var j = req.jdbc;
+    j.query("mssql", `exec sp_stats_query_company @taxNo= ?, @dateStart= ?, @dateEnd= ?`,
+        [req.body.taxNo, req.body.dateStart, req.body.dateEnd],
+        function (err, data) {
+            res.send(data);
+            // console.log('--------------------');
+            // data = JSON.parse(data);
+            // data = group(data, 'company_taxno');
+            // console.log(data);
+            // data = JSON.parse(data);
+            // var groups = {};
+            // for (var i = 0; i < data.length; i++) {
+            //     var groupName = data[i].group;
+            //     if (!groups[groupName]) {
+            //         groups[groupName] = [];
+            //     }
+            //     groups[groupName].push(data[i].company_taxno);
+            // }
+            // data = [];
+            // for (var groupName in groups) {
+            //     data.push({group: groupName, company_taxno: groups[groupName]});
+            // }
         })
 }
 exports.spp01 = function (req, res) {
@@ -37,8 +66,8 @@ exports.spp01 = function (req, res) {
     }
     let company_taxno = req.query.company_taxno || ''
     // console.log(company_taxno,startDate, endDate);
-     j.query("mssql", `exec sp_qry_stats_company @taxno= ?, @startDate= ?, @endDate= ?`,
-      [company_taxno,startDate, endDate],
+    j.query("mssql", `exec sp_qry_stats_company @taxno= ?, @startDate= ?, @endDate= ?`,
+        [company_taxno, startDate, endDate],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)
