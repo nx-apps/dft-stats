@@ -1,6 +1,19 @@
 <link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../components/vaadin-gird-filter-common.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+
 <dom-module id="company-search">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        vaadin-grid {
+            margin: 0px;
+            width: 100%;
+        }
+        paper-input{
+            width: 95%;
+        }
+    </style>
     <template>
          <paper-material elevation="1">
             <div class="container">
@@ -21,14 +34,18 @@
                     <div class="flex2child">
                         <vaadin-date-picker class="textCenter" value="{{data.edate}}"></vaadin-date-picker>
                     </div>
+                    <div class="btn-search">                    
+                        <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
+                            <iron-icon icon="search"></iron-icon>
+                            ค้นหา
+                        </paper-button>
+                    </div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                 </div>
-                <div class="flex-horizontal-with-ratios">
+                <!-- <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
-                    <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
                     <div class="labelSearchDate">
                         เลขที่ผู้เสียภาษี : 
                     </div>
@@ -39,16 +56,6 @@
                             </template>
                         </gl-combo-box>
                     </div>
-                    <!--<div class="labelSearchDate">
-                        เรียงโดย : 
-                    </div>
-                    <div class="flexchild">
-                        <gl-combo-box id="companyOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>
-                    </div>-->
                     <div class="flexchild">
                         <div class="btn-search">                    
                             <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
@@ -57,36 +64,83 @@
                             </paper-button>
                         </div>
                     </div>
-                    <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
-                </div>
-                <div class="flex-horizontal-with-ratios">
+                </div>  -->
+                <!-- <div class="flex-horizontal-with-ratios">
                     <div class="flexchild">
                         <div class="btn-search">                    
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValueReport">
+                             <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValueReport">
                                 <iron-icon icon="assignment"></iron-icon>
                                 ออกรายงาน
-                            </paper-button>
+                            </paper-button> 
                         </div>
                     </div>
                     <div class="flex3child">
                     </div>
-                </div>
+                </div> -->
+
+                <div class="flex-horizontal-with-ratios">
+                    <vaadin-grid id="material" aria-label="Basic Binding Example" items="[[companyCodeList]]" inverted$="[[inverted]]">
+
+                        <vaadin-grid-column width="150px" flex-grow="0">
+                            <template class="header">
+                                <paper-checkbox on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">เลือกทั้งหมด</paper-checkbox>
+                            </template>
+                            <template>
+                                <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
+                            </template>
+                            <template class="footer">#</template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="200px" flex-grow="0">
+                            <template class="header">
+                                <!-- <vaadin-gird-filter-common aria-label="Company Taxno" path="company_taxno" value="[[_company_taxno]]">  
+                                </vaadin-gird-filter-common>   -->
+                                <vaadin-gird-filter>
+                                    <paper-input label="เลขประจำตัวผู้เสียภาษี" placeholder="ค้นหา" id="company_taxno" on-value-changed="searchInput" allowed-pattern="[0-9]"></paper-input>
+                                </vaadin-gird-filter>
+                            </template>
+                            <template>[[item.company_taxno]]</template>
+                            <template class="footer">เลขประจำตัวผู้เสียภาษี</template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="449px" flex-grow="0">
+                            <template class="header">
+                                <!-- <vaadin-gird-filter-common aria-label="Company Name" path="company_name_th" value="[[_company_name_th]]">
+                                </vaadin-gird-filter-common> -->
+                                <vaadin-gird-filter>
+                                    <paper-input label="ชื่อบริษัท (ไทย)" placeholder="ค้นหา" id="company_name_th" on-value-changed="searchInput" allowed-pattern="[ก-๙]"></paper-input>
+                                </vaadin-gird-filter>
+                            </template>
+                            <template>[[item.company_name_th]]</template>
+                            <template class="footer">ชื่อบริษัท (ไทย)</template>
+                        </vaadin-grid-column>
+
+                        <vaadin-grid-column width="449px" flex-grow="0">
+                            <template class="header">
+                                <!-- <vaadin-gird-filter-common aria-label="Company Name" path="company_name_en" value="[[_company_name_en]]">
+                                </vaadin-gird-filter-common> -->
+                                <vaadin-gird-filter>
+                                    <paper-input label="ชื่อบริษัท (อังกฤษ)" placeholder="ค้นหา" id="company_name_en" on-value-changed="searchInput" allowed-pattern="[a-zA-Z]"></paper-input>
+                                </vaadin-gird-filter>
+                            </template>
+                            <template>[[item.company_name_en]]</template>
+                            <template class="footer">ชื่อบริษัท (อังกฤษ)</template>
+                        </vaadin-grid-column>
+
+                    </vaadin-grid>
+                </div>  
+
             </div>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'company-search',
-            behaviors: [
-                ReduxBehavior,
-                MonthBehavior
-            ],
+            behaviors: [ReduxBehavior,MonthBehavior],
             properties:{
                 companyCodeList:{
                     statePath:'company.companyCodeList',
-                    observer: '_setItem'
+                    // observer: '_setItem'
                 },
                date:{
                     statePath:'hamonize.date',
@@ -124,7 +178,39 @@
                 data:{
                     type:Object,
                     value:{}
+                },
+                inverted: {
+                    type: Boolean,
+                    value: false
                 }
+            },
+            searchInput:function(e){
+                var val = e.detail.value;
+                var att_name = e.currentTarget.id;
+                if(typeof val !== 'undefined' && val !== ''){
+                let reg_num = new RegExp('[0-9]');
+                let reg_char_th = new RegExp('[ก-๙]');
+                let reg_char_en = new RegExp('[a-zA-Z]');
+                
+                this.debounce('searchInput', () => {
+                    if(typeof val !== 'undefined' && val.length >= 3){
+                        if(reg_num.test(val) === true){
+                            // console.log('ตัวเลข');
+                            this.dispatchAction('COMPANY_SEARCH_LIST', {att_name: att_name,val: val});
+                        }else if(reg_char_th.test(val) === true){
+                            // console.log('ไทย');
+                            this.dispatchAction('COMPANY_SEARCH_LIST', {att_name: att_name,val: val});
+                        }else if(reg_char_en.test(val) === true){
+                            // console.log('อังกฤษ')
+                            this.dispatchAction('COMPANY_SEARCH_LIST', {att_name: att_name,val: val});
+                        }
+                            // this.dispatchAction('COMPANY_GET_DATA_SEARCH', val);
+                    }else{
+                        // console.log('clear');
+                        this.dispatchAction('COMPANY_CLEAR_LIST_SEARCH');
+                    }
+                },500)
+                }  
             },
             _setDate(e){
                 this.set('data.sdate',e.sdate)
@@ -135,18 +221,31 @@
                 // console.log(this.data);
             },
             getCompanyValue(){
-                // if (this.data.orderby == '') {
-                //      let comboboxcompanyOrderBy = this.$$('#companyOrderBy')
-                //     comboboxcompanyOrderBy.value = 'company_name'
-                //     this.data.orderby =  'company_name'
-                // }
+                var selects = this.$.material.selectedItems;
+                let arr = [];
+                selects.map((taxno) => {
+                    arr.push(taxno.company_taxno)
+                })
+                var taxno = arr.join(',');
+                var data = {
+                    taxNo : taxno,
+                    dateStart : this.data.sdate,
+                    dateEnd : this.data.edate
+                };
+                this.dispatchAction('COMPANY_SEARCH', data);
+
+                // // if (this.data.orderby == '') {
+                // //      let comboboxcompanyOrderBy = this.$$('#companyOrderBy')
+                // //     comboboxcompanyOrderBy.value = 'company_name'
+                // //     this.data.orderby =  'company_name'
+                // // }
                 
-                // console.log(this.data.company_taxno == undefined || this.data.company_taxno == '');
-                // if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
-                    this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.data))
-                // }else {
-                //     this.dispatchAction('COMPANY_CODE_SEARCH_R2',this.genUrl(this.data))
-                // }
+                // // console.log(this.data.company_taxno == undefined || this.data.company_taxno == '');
+                // // if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
+                //     this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.data))
+                // // }else {
+                // //     this.dispatchAction('COMPANY_CODE_SEARCH_R2',this.genUrl(this.data))
+                // // }
             },
             getCompanyValueReport(){
                 // if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
@@ -155,6 +254,26 @@
                 // }else {
                     // window.open('./api/report/c02?'+this.genUrl(this.data))
                 // }
+            },
+            _invert: function (e) {
+                // console.log(this.$.material.selectedItems.length);
+                this.inverted = !this.inverted;
+            },
+            // iOS needs indeterminated + checked at the same time
+            _isChecked: function (inverted, indeterminate) {
+                return indeterminate || inverted;
+            },
+            _selectItem: function (e) {
+                if (e.target.checked === this.inverted) {
+                    this.$.material.deselectItem(e.model.item);
+                } else {
+                    this.$.material.selectItem(e.model.item);
+                }
+                // console.log(this.$.material.selectedItems.length);
+                this.indeterminate = this.$.material.selectedItems.length > 0;
+            },
+            _isSelected: function (inverted, selected) {
+                return inverted != selected;
             }
         });
     </script>
