@@ -2,7 +2,7 @@ var today = new Date();
 var dd = today.getDate();
 var dt = today.getDate() + 1;
 var mm = today.getMonth() + 1; //January is 0!
-// var group = require('group-array');
+var group = require('group-array');
 
 var yyyy = today.getFullYear();
 if (dd < 10) {
@@ -30,29 +30,37 @@ exports.list = function (req, res) {
         })
 }
 exports.search = function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
+    // res.json(req.body);
+    // [req.body.taxNo, req.body.dateStart, req.body.dateEnd] //รับค่า query หยอดใน mssql
+    // ['0105525018429,010552504657,0105527000365,0105526040991', '2016-02-27', '2016-03-01']
     var j = req.jdbc;
     j.query("mssql", `exec sp_stats_query_company @taxNo= ?, @dateStart= ?, @dateEnd= ?`,
-        [req.body.taxNo, req.body.dateStart, req.body.dateEnd],
+        ['3271164648,3031029262', '2012-02-29', '2012-03-01'],
         function (err, data) {
-            res.send(data);
-            // console.log('--------------------');
-            // data = JSON.parse(data);
-            // data = group(data, 'company_taxno');
-            // console.log(data);
-            // data = JSON.parse(data);
-            // var groups = {};
-            // for (var i = 0; i < data.length; i++) {
-            //     var groupName = data[i].group;
-            //     if (!groups[groupName]) {
-            //         groups[groupName] = [];
-            //     }
-            //     groups[groupName].push(data[i].company_taxno);
-            // }
-            // data = [];
-            // for (var groupName in groups) {
-            //     data.push({group: groupName, company_taxno: groups[groupName]});
-            // }
+            // res.send(data);
+            data = JSON.parse(data);
+            data = group(data, 'company_name_th', 'country_name_th');
+            var datas = [];
+            var data2 = []
+            let company_name_th = ''
+            // datas.company_name_th = data;
+            for (var key in data) {
+                for (var variable in data[key]) {
+                    data2.push(
+                        data[key][variable]
+                    )
+                    // console.log(variable);
+                }
+                datas.push({
+                    company_name_th : key,
+                    country_name_th : data2
+                })
+                company_name_th = '',
+                data2 = []
+            }
+            // console.log(datas);
+            res.json(datas);
         })
 }
 exports.spp01 = function (req, res) {

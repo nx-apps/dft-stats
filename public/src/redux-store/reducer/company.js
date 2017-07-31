@@ -43,16 +43,16 @@ export function companyAction(store) {
         });
     },
     COMPANY_SEARCH(data) {
-      // this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
+      this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
       // console.log(data);
       axios.post('/company/search', data)
         .then((response) => {
-          console.log(response.data);
-          // this.fire('toast', {
-          //   status: 'success', text: 'ค้นหาข้อมูลสำเร็จ', callback() {
-          //     store.dispatch({ type: 'COMPANY_SEARCH', payload: response.data })
-          //   }
-          // });
+          // console.log(response.data);
+          this.fire('toast', {
+            status: 'success', text: 'ค้นหาข้อมูลสำเร็จ', callback() {
+              store.dispatch({ type: 'COMPANY_SEARCH', payload: response.data })
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);
