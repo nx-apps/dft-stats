@@ -79,16 +79,17 @@
                 commonLogic
             ],
             properties:{
-                dataList:{
-                    statePath:'hamonize.list',
-                    observer:'totalcal'
-                },
+                // dataList:{
+                //     statePath:'hamonize.list',
+                //     observer:'totalcal'
+                // },
                 total:{
                     type: Object,
                     value:{}
                 },
                 riceList: {
-                    statePath: 'hamonize.rice_list'
+                    statePath: 'hamonize.rice_list',
+                    observer:'totalcal'
                 }
             },
             totalcal(dataList){

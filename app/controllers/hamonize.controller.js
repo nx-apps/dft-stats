@@ -69,7 +69,7 @@ exports.rice_get = function (req, res) {
     var j = req.jdbc;
     // res.json(req.body);
     j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
-        [req.body.year, req.body.hmcodes, req.body.date_start, req.body.date_end],
+        [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
             res.send(data)

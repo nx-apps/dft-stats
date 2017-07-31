@@ -24,6 +24,7 @@
                     <div class="flex2child">
                         <vaadin-date-picker class="textCenter" value="{{data.sdate}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>
                     </div>
+                    <!-- [[obDate(data.sdate)]] -->
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         ถึงวันที่ :
@@ -246,23 +247,25 @@
             },
             //  check box
             observers: ['_resetSelection(inverted)'],
-
+            // obDate: function(date){
+            //     if(typeof date !== 'undefined' && date !== ''){
+            //         var date = date.split('-')[0];
+            //         console.log(date);
+            //     }
+            // },
             _resetSelection: function (inverted) {
                 this.$.material.selectedItems = [];
                 this.updateStyles();
                 this.indeterminate = false;
             },
-
             _invert: function (e) {
                 // console.log(this.$.material.selectedItems.length);
                 this.inverted = !this.inverted;
             },
-
             // iOS needs indeterminated + checked at the same time
             _isChecked: function (inverted, indeterminate) {
                 return indeterminate || inverted;
             },
-
             _selectItem: function (e) {
                 if (e.target.checked === this.inverted) {
                     this.$.material.deselectItem(e.model.item);
@@ -272,7 +275,6 @@
                 // console.log(this.$.material.selectedItems.length);
                 this.indeterminate = this.$.material.selectedItems.length > 0;
             },
-
             _isSelected: function (inverted, selected) {
                 return inverted != selected;
             },
@@ -298,9 +300,7 @@
                         edate = new Date(this.data.edate).getFullYear()
                     this.setYearHamonize(sdate, edate)
                 } catch (e) {
-
                 }
-
             },
             setHamonizeEdate(data) {
                 try {
@@ -309,7 +309,6 @@
                         edate = new Date(data.detail.value).getFullYear()
                     this.setYearHamonize(sdate, edate)
                 } catch (e) {
-
                 }
             },
             _setItem(hmcode) {
@@ -320,7 +319,6 @@
                 // console.log(111);
             },
             setYearHamonize(Syear, Eyear) {
-
                 if (!Number.isNaN(Syear) && !Number.isNaN(Eyear)
                     && this.hamonizeCodeList !== undefined) {
                     let hm = this.hamonizeCodeList
@@ -346,27 +344,24 @@
                         this.set('hamonizeCodeList.use', newArr)
                         console.log(this.hamonizeCodeList.use.length);
                     }
-
                 }
             },
-            getChildHm(e) {
-                try {
-                    // console.log(e.detail.value.split(' ')[0]);
-                    let code = e.detail.value.split(' ')
-                    let hmparent = code[0]
-                    let year = code[code.length - 1].slice(0, 4)
-                    this.set('data.hamonizeYear', year)
-                    if (hmparent !== '' && hmparent !== undefined) {
-                        // console.log(this.data);
-                        let data = { 'hmparent': hmparent, 'year': this.data.hamonizeYear }
-                        this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
-                    }
-                } catch (e) {
-
-                }
-
-                // 
-            },
+            // getChildHm(e) {
+            //     try {
+            //         // console.log(e.detail.value.split(' ')[0]);
+            //         let code = e.detail.value.split(' ')
+            //         let hmparent = code[0]
+            //         let year = code[code.length - 1].slice(0, 4)
+            //         this.set('data.hamonizeYear', year)
+            //         if (hmparent !== '' && hmparent !== undefined) {
+            //             // console.log(this.data);
+            //             let data = { 'hmparent': hmparent, 'year': this.data.hamonizeYear }
+            //             this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
+            //         }
+            //     } catch (e) {
+            //     }
+            //     // 
+            // },
             selectAll() {
                 this.hmChild.map((set, index) => {
                     if (this.statusCheck) {
@@ -406,10 +401,10 @@
                 // console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
-                    year : this.data.year,
-                    hmcodes : hmcodes,
-                    date_start : this.data.sdate,
-                    date_end : this.data.edate
+                    hmYear : this.data.year,
+                    hmCode : hmcodes,
+                    dateStart : this.data.sdate,
+                    dateEnd : this.data.edate
                 }
                 // console.log(data);
                 this.dispatchAction('HAMONIZE_RICE_GET',data);

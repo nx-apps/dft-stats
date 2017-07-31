@@ -38,7 +38,7 @@ export function hamonizeAction(store) {
     return [commonAction(), {
         HAMONIZE_SET_DATE() {
             let date = new Object()
-            let today = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+            let today = new Date(new Date().setFullYear(new Date().getFullYear()))
             //console.log(today);
             date.sdate = today.toISOString().split('T')[0]
             date.edate = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
