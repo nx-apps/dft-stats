@@ -67,13 +67,14 @@ exports.rice_list = function (req, res) {
 }
 exports.rice_get = function (req, res) {
     var j = req.jdbc;
-    // res.json(req.body);
-    j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
-        [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
-        // j.query("mssql", `select * from hamonize_type`, [],
-        function (err, data) {
-            res.send(data)
-        })
+    res.json(req.body);
+    // j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
+    //     [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
+    //     // ['2007', '1006,100610,10061000,10061000001,10061000002', "2016-01-31", "2016-06-31"],
+    //     // j.query("mssql", `select * from hamonize_type`, [],
+    //     function (err, data) {
+    //         res.send(data)
+    //     })
 }
 // exports.re01 = function (req, res) {
 //     var r = req.r;
@@ -297,7 +298,6 @@ exports.sp01 = function (req, res) {
 
 }
 exports.sp02 = function (req, res) {
-    // console.log(22222222222222222222222222222222222222222222222222222222222222);
     var j = req.jdbc;
     var s = today, e = tomorrow;
     if (typeof req.query.sdate !== "undefined") {

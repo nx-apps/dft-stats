@@ -121,7 +121,7 @@ export function hamonizeAction(store) {
                 })
         },
         HAMONIZE_RICE_GET(data){
-            // console.log(data);
+            console.log(data);
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.post('./hamonize/get',data)
             .then((response) => {

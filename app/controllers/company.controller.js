@@ -34,12 +34,28 @@ exports.search = function (req, res) {
     // res.json(req.body);
     // [req.body.taxNo, req.body.dateStart, req.body.dateEnd] //รับค่า query หยอดใน mssql
     // ['0105525018429,010552504657,0105527000365,0105526040991', '2016-02-27', '2016-03-01']
+    // ['3271164648,3031029262', '2012-02-29', '2012-03-01']
     var j = req.jdbc;
     j.query("mssql", `exec sp_stats_query_company @taxNo= ?, @dateStart= ?, @dateEnd= ?`,
-        ['3271164648,3031029262', '2012-02-29', '2012-03-01'],
+        [req.body.taxNo, req.body.dateStart, req.body.dateEnd],
         function (err, data) {
             // res.send(data);
             data = JSON.parse(data);
+            // r.expr(data)
+            //     .group('company_taxno')
+            //     .ungroup()
+            //     .merge((item) => {
+            //         return {
+            //             x: item('reduction')
+            //         }
+            //     })
+            //     // reduction
+            //     .run()
+            //     .then(function (data) {
+            //         res.json(data);
+            //         // console.log(data);
+            //     }
+            //     )
             data = group(data, 'company_name_th', 'country_name_th');
             var datas = [];
             var data2 = []
@@ -50,7 +66,6 @@ exports.search = function (req, res) {
                     data2.push(
                         data[key][variable]
                     )
-                    // console.log(variable);
                 }
                 datas.push({
                     company_name_th : key,

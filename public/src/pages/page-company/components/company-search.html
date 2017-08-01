@@ -88,7 +88,6 @@
                             <template>
                                 <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
                             </template>
-                            <template class="footer">#</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="200px" flex-grow="0">
@@ -100,7 +99,6 @@
                                 </vaadin-gird-filter>
                             </template>
                             <template>[[item.company_taxno]]</template>
-                            <template class="footer">เลขประจำตัวผู้เสียภาษี</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="449px" flex-grow="0">
@@ -112,7 +110,6 @@
                                 </vaadin-gird-filter>
                             </template>
                             <template>[[item.company_name_th]]</template>
-                            <template class="footer">ชื่อบริษัท (ไทย)</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="449px" flex-grow="0">
@@ -124,7 +121,6 @@
                                 </vaadin-gird-filter>
                             </template>
                             <template>[[item.company_name_en]]</template>
-                            <template class="footer">ชื่อบริษัท (อังกฤษ)</template>
                         </vaadin-grid-column>
 
                     </vaadin-grid>
