@@ -9,8 +9,8 @@
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
-	<parameter name="date_start" class="java.lang.String"/>
-	<parameter name="date_end" class="java.lang.String"/>
+	<parameter name="dateStart" class="java.lang.String"/>
+	<parameter name="dateEnd" class="java.lang.String"/>
 	<field name="country_name_th" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="net_weight_i" class="java.lang.Double"/>
@@ -187,7 +187,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{date_start})+" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{date_end})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{dateStart})+" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{dateEnd})]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
