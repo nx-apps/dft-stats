@@ -115,8 +115,6 @@
                             <template>
                                 <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
                             </template>
-                            <!-- If necessary, the footer could be set using <template class="footer"> -->
-                            <template class="footer">#</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="200px" flex-grow="0">
@@ -125,7 +123,6 @@
                                 </vaadin-gird-filter-common>
                             </template>
                             <template>[[item.hamonize_code]]</template>
-                            <template class="footer">พิกัดข้าว</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="449px" flex-grow="0">
@@ -135,7 +132,6 @@
 
                             </template>
                             <template>[[item.hamonize_th]]</template>
-                            <template class="footer">ชื่อชนิดข้าว (ไทย)</template>
                         </vaadin-grid-column>
 
                         <vaadin-grid-column width="449px" flex-grow="0">
@@ -144,7 +140,6 @@
                                 </vaadin-gird-filter-common>
                             </template>
                             <template>[[item.hamonize_en]]</template>
-                            <template class="footer">ชื่อชนิดข้าว (อังกฤษ)</template>
                         </vaadin-grid-column>
 
                     </vaadin-grid>
@@ -214,11 +209,7 @@
                     value: [
                         {
                             id: 'f3',
-<<<<<<< HEAD
                             label: 'ข้อมูลจากกรมการค้าต่างประเทศ'
-=======
-                            label: 'ข้อมูลจาก บก.'
->>>>>>> 588324d340865348afade00e911345e66789057d
                         },
                         {
                             id: 'custom',

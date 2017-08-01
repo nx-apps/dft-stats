@@ -3,7 +3,7 @@
 <link rel="import" href="./../../components/common-logic.html">
 <dom-module id="company-list">
     <style include="page-style flex-style">
-         /* table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
+        /* table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
         table.gl-table-default > tfoot > tr > td:nth-child(2) {
             width: 15%;
         }
@@ -13,7 +13,7 @@
         } */
     </style>
     <template>
-        <paper-material elevation="1"  class="container">
+        <paper-material elevation="1" class="container">
             <template is="dom-if" if="[[checkData(list)]]">
                 <div style="text-align:center">ไม่พบข้อมูล</div>
             </template>
@@ -57,51 +57,67 @@
                             </template>
                         </template>
                     </tbody>
-                      <tfoot>
+                    <tfoot>
                         <tr>
+                            [[sumTotal(item)]]
                             <td></td>
                             <td>รวม</td>
-                            <td class="total">[[formatNumber(total.net_weight_i)]]</td>
-                            <td class="total">[[formatNumber(total.fob_amt_baht_i)]]</td>
-                            <td class="total">[[formatNumber(total.fob_amt_i)]]</td>
-                            <td class="total">[[formatNumber(total.net_weight_e)]]</td>
-                            <td class="total">[[formatNumber(total.fob_amt_baht_e)]]</td>
-                            <td class="total">[[formatNumber(total.fob_amt_e)]]</td>
+                            <td class="total">[[formatNumber(item.total_net_weight_i)]]</td>
+                            <td class="total">[[formatNumber(item.total_fob_amt_baht_i)]]</td>
+                            <td class="total">[[formatNumber(item.total_fob_amt_i)]]</td>
+                            <td class="total">[[formatNumber(item.total_net_weight_e)]]</td>
+                            <td class="total">[[formatNumber(item.total_fob_amt_baht_e)]]</td>
+                            <td class="total">[[formatNumber(item.total_fob_amt_e)]]</td>
                         </tr>
-                    </tfoot>  
+                    </tfoot>
                 </table>
-                <br><hr>
+                <br>
+                <hr>
             </template>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'company-list',
-            behaviors:[
+            behaviors: [
                 DataManageBehavior,
                 ReduxBehavior,
                 FormatNumberBehavior,
                 commonLogic
             ],
-            properties:{
-                list:{
+            properties: {
+                list: {
                     type: Array,
-                    statePath:'company.list',
+                    statePath: 'company.list',
                     // observer:'totalcal'
                 },
-                total:{
+                total: {
                     type: Object,
-                    value:{}
+                    value: {}
                 }
             },
-            // totalcal(data){
-            //     this.set('total.net_weight_i',Object.keys(data).reduce((previous, current) => previous + data[current].net_weight_i , 0));
-            //     this.set('total.fob_amt_baht_i',Object.keys(data).reduce((previous, current) => previous + data[current].fob_amt_baht_i , 0));
-            //     this.set('total.fob_amt_i',Object.keys(data).reduce((previous, current) => previous + data[current].fob_amt_i , 0));
-            //     this.set('total.net_weight_e',Object.keys(data).reduce((previous, current) => previous + data[current].net_weight_e , 0));
-            //     this.set('total.fob_amt_baht_e',Object.keys(data).reduce((previous, current) => previous + data[current].fob_amt_baht_e , 0));
-            //     this.set('total.fob_amt_e',Object.keys(data).reduce((previous, current) => previous + data[current].fob_amt_e , 0));
-            // }
+            sumTotal(data) {
+                // console.log(item.country_name_th);
+                let num = 0
+                data.total_net_weight_i = 0
+                data.total_fob_amt_baht_i = 0
+                data.total_fob_amt_i = 0
+                data.total_net_weight_e = 0
+                data.total_fob_amt_baht_e = 0
+                data.total_fob_amt_e = 0
+
+                let cal = (prop,item,sum)=>{
+                    return data[prop] + item.map((item2) => item2[sum]).reduce((acc, cur) => acc + cur, 0)
+                }
+                data.country_name_th.map((item, index) => {
+                    data.total_net_weight_i = cal('total_net_weight_i',item,'net_weight_i')
+                    data.total_fob_amt_baht_i = cal('total_fob_amt_baht_i',item,'fob_amt_baht_i')
+                    data.total_fob_amt_i = cal('total_fob_amt_i',item,'fob_amt_i')
+                    data.total_net_weight_e = cal('total_net_weight_e',item,'net_weight_e')
+                    data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e',item,'fob_amt_baht_e')
+                    data.total_fob_amt_e =  cal('total_fob_amt_e',item,'fob_amt_e')
+                })
+            }
         });
     </script>
 </dom-module>

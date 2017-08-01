@@ -23,7 +23,7 @@ export function licenseAction(store){
       LICENSE_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         // //console.log(data); 
-        axios.get('/license/re01?'+data)
+        axios.post('/license/get',data)
         .then( (response)=>{
             // //console.log(response);
             this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
