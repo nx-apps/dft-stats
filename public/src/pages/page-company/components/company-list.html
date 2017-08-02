@@ -76,8 +76,8 @@
                             [[sumTotal(item)]]
                             <td></td>
                             <td>รวม</td>
-                            <td class="total">[[item.total_fob_amt_e]]</td>
-                            <td class="total">[[item.total_fob_amt_baht_i]]</td>
+                            <td class="total">[[formatNumber(item.total_net_weight_i)]]</td>
+                            <td class="total">[[formatNumber(item.total_fob_amt_baht_i)]]</td>
                             <td class="total">[[formatNumber(item.total_fob_amt_i)]]</td>
                             <td class="total">[[formatNumber(item.total_net_weight_e)]]</td>
                             <td class="total">[[formatNumber(item.total_fob_amt_baht_e)]]</td>
@@ -114,27 +114,27 @@
             sumTotal(data) {
 
                 // console.log(item.country_name_th);
-                let num = 0
-                data.total_net_weight_i = 0
-                data.total_fob_amt_baht_i = 0
-                data.total_fob_amt_i = 0
-                data.total_net_weight_e = 0
-                data.total_fob_amt_baht_e = 0
-                data.total_fob_amt_e = 0
+                // let num = 0
+                // data.total_net_weight_i = 0
+                // data.total_fob_amt_baht_i = 0
+                // data.total_fob_amt_i = 0
+                // data.total_net_weight_e = 0
+                // data.total_fob_amt_baht_e = 0
+                // data.total_fob_amt_e = 0
 
-                let cal = (prop, item, sum) => {
-                    return data[prop] + item.map((item2) => item2[sum]).reduce((acc, cur) => acc + cur, 0)
-                }
-                data.country_name_th.map((item, index) => {
-                    data.total_net_weight_i = cal('total_net_weight_i', item, 'net_weight_i')
-                    data.total_fob_amt_baht_i = cal('total_fob_amt_baht_i', item, 'fob_amt_baht_i')
-                    data.total_fob_amt_i = cal('total_fob_amt_i', item, 'fob_amt_i')
-                    data.total_net_weight_e = cal('total_net_weight_e', item, 'net_weight_e')
-                    data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e', item, 'fob_amt_baht_e')
-                    data.total_fob_amt_e = cal('total_fob_amt_e', item, 'fob_amt_e')
-                })
+                // let cal = (prop, item, sum) => {
+                //     return data[prop] + item.map((item2) => item2[sum]).reduce((acc, cur) => acc + cur, 0)
+                // }
+                // data.country_name_th.map((item, index) => {
+                //     data.total_net_weight_i = cal('total_net_weight_i', item, 'net_weight_i')
+                //     data.total_fob_amt_baht_i = cal('total_fob_amt_baht_i', item, 'fob_amt_baht_i')
+                //     data.total_fob_amt_i = cal('total_fob_amt_i', item, 'fob_amt_i')
+                //     data.total_net_weight_e = cal('total_net_weight_e', item, 'net_weight_e')
+                //     data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e', item, 'fob_amt_baht_e')
+                //     data.total_fob_amt_e = cal('total_fob_amt_e', item, 'fob_amt_e')
+                // })
 
-                console.log(data);
+                // console.log(data);
             },
             printReportCompany(e) {
                 // console.log(this.search);
