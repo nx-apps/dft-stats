@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ec" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ddd44b8-791c-4368-a25b-eb22b896a7b5">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="34"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="141" y="57" width="250" height="56" uuid="41886b93-913e-4da8-a1ff-42b07fe44b00"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTMENT OF FOREIGN TRADE
+MINISTRY OF COMMERCE
+GOVERNMENT OF THAILAND]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="113" width="250" height="20" uuid="a60a0a76-f38d-4d37-89e3-525aae706591"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="149" width="235" height="20" uuid="6d7f57f9-e14f-43dd-a733-32ce68e761b6"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Export certificate subject to Regulation (EC) No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="321" y="149" width="100" height="20" uuid="83bd0034-6385-4877-bf17-0cf039de0e7a"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="181" width="543" height="20" uuid="e0877811-1778-4e61-add4-12962ca36f24"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Special form either for semi-milled or milled rice (code No 1006 30), husked rice (code No 1006 20), or broken rice (code No 1006 40 00)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="213" width="266" height="20" uuid="0610dc27-64fa-4033-a43a-5f2757e6d43f"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[1. Exporter]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="73" y="213" width="148" height="20" uuid="dc94d000-3df9-42b7-93cc-59380ac5c67d"/>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(name, address and country)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="276" y="213" width="266" height="20" uuid="ada5d4a6-4ba7-45d8-8d73-2a87acdf72e8"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[2. Importer]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="332" y="213" width="148" height="20" uuid="83c0dd0c-d46d-45df-bb2c-151c6d109d22"/>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(name, address and country)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="55" y="233" width="221" height="19" uuid="c50a1fe8-7b56-4da0-a5de-45cbe0572c9c"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CHAI PRSIT PRODUCTS CO.,LTD]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="271" width="221" height="19" uuid="9738b538-167d-48d4-9e50-36bb48770959"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[THAILAND]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="252" width="221" height="19" uuid="3ebc7f05-c109-4273-8607-68ebe380124e"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[648/4-5 BUMRUNGMUANG ROAD, WAT THEP SI RIN, POM PRAP SATTRU PHAI BANGKOK 10100]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="233" width="45" height="19" uuid="3b060fc0-9237-4252-ad6b-5fe65c3e5ed3"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="271" width="45" height="19" uuid="2b8976d3-2a61-4211-86f1-0fe229f79bb6"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Country :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="252" width="45" height="19" uuid="f2906510-6606-41a2-90f5-6b84447d9786"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="233" width="45" height="19" uuid="824e610e-cc69-4b8a-88c4-c0d4ecfd337d"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="252" width="45" height="19" uuid="e8804289-6676-46ad-861f-c2afb98e5226"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="271" width="45" height="19" uuid="8a85f6da-5061-4de6-ba2c-3e6e73305d58"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Country :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="321" y="271" width="221" height="19" uuid="64eb14bd-452e-457a-b61e-cc558617e569"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[UNITED KINGDOM]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="252" width="221" height="19" uuid="751aa9c0-c45d-4331-9780-2c092e16b513"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ORLAND HOUSE, MEAD LAND HERTFORD SG 7AX FELIXSTOWE]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="233" width="221" height="19" uuid="e110affa-b33e-4687-86e7-b1aa331db687"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[S.O.P INTERNATIONAL LIMITED]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="308" width="266" height="20" uuid="fe9363f9-d445-4850-8a3a-b1347b9b7ded"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[3. Shipped per]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="308" width="266" height="20" uuid="7f2412c2-9abb-4cd4-bdc5-89ecc0b843e0"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[4. Country/Countries of destination in EC]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="328" width="266" height="38" uuid="766a65f7-090f-4a5e-921e-bb6659a2f9a3"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[UNITED KINGDOM]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="347" width="28" height="19" uuid="464aed97-f71e-4218-876c-1c6ae0c8863f"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="39" y="347" width="238" height="19" uuid="b6cfa5ad-97da-4222-8d07-22cb9260b257"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Container]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="328" width="28" height="19" uuid="7749d376-5660-4aab-a055-1224b9a0a0b9"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="39" y="328" width="238" height="19" uuid="fbc3103c-5451-4cf5-910c-c4aecfac4790"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Conventional]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="467" width="266" height="20" uuid="b73293e3-de22-48cc-896f-a8faf8477063"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[8. No and date of Invoice]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="467" width="266" height="20" uuid="5e9a6605-2526-4693-8215-1fa42c90c3cd"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[9. No and date of B/L]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="487" width="266" height="39" uuid="7cf58b4f-10a0-4b43-8145-0084ae2ee177"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="10" y="487" width="266" height="39" uuid="2fa3cfb1-7af3-4e3c-a819-85b725c0c48d"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="533" width="532" height="20" uuid="e0af45e0-21bb-40b8-bc14-cf046df0638f"/>
+				<textElement textAlignment="Left">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[We hereby certify that abovementioned products are produced in and are exported from Thailand]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="682" width="532" height="28" uuid="055946c5-1c0e-4cf9-9940-8c73f8fc25ab"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[THIS CERTIFICATE IS VALID FOR 120 DAYS FROM THE DATE OF ISSUE AND IN ANY CASE ONLY UNTIL 31 DECEMBER OF THE YEAR OD ISSUE]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="721" width="532" height="48" uuid="fe5f9f98-c2c8-489a-a4bb-5a32eab8b90f"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[For use of EC authorities]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="388" width="177" height="20" uuid="fd5d1e24-4f05-4834-951c-cc4516b64875"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[5 Type of Thai rice/HS. Code No]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="388" width="177" height="20" uuid="2af6156e-0bde-45ea-8de3-ba8e60ac3950"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[6. Weight metric tonnes]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="388" width="178" height="20" uuid="a61ab759-498d-4ebc-bfe0-707640543fe6"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[7. Packing]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="408" width="178" height="39" uuid="b48bd890-f894-4fcd-afdb-08c1350c9fb7"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[5 kg. or less In 10 KGS PER PP BAG Oher]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="408" width="110" height="19" uuid="dd9ee979-e901-4453-a51d-eb7f85f1ae28"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[48.28800]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="408" width="177" height="39" uuid="5c648bf0-6c5e-4b1a-86d8-8dec40484183"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[THAI HOM MALI RICE (WHITE RICE 100% GRADE B)(1006.30)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="427" width="110" height="20" uuid="2f8df1b0-afc9-4c17-8b66-04ec722bae09"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[48.00000]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="408" width="67" height="19" uuid="4bc1d3a9-e581-4717-836d-6157c5b2b955"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Gross weight:]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="427" width="67" height="20" uuid="9cc52784-1606-4c19-b7a2-a8b65527c3e4"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Net weight:]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="562" width="131" height="17" uuid="d1260be9-343b-4fb3-b9eb-4dcbfa8e5c1f"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department of Foreign Trade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="593" width="131" height="17" uuid="14e47b37-8035-4f59-b7fd-e6e5fe442ed2"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[.............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="619" width="242" height="17" uuid="118be70c-3685-448e-a8e2-6d8eda32ccd6"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name and Signature of authorized offical and stamp]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="221" y="774" width="111" height="28" uuid="b42e2841-7e2d-48fc-aee9-230671453567"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[No 000567]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="332" y="654" width="183" height="17" uuid="cb1eb5dd-fd98-441c-b89a-9e10df671d20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date of issue .............................................]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
