@@ -37,7 +37,7 @@ exports.expt = function (req, res) {
     if (req.method == 'POST') {
         val = req.body;
     }
-    req.jdbc.query('mssql', 'exec sp_stats_rpt_reference_code @refCode=?',
+    req.jdbc.query('mssql', 'exec sp_stats_rpt_refcode @refCode=?',
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
