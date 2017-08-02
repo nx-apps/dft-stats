@@ -47,7 +47,7 @@
                                 <div class="text-center">PDF</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable" id="PDF" on-tap="print">
+                                <paper-button raised class="btnInTable" id="pdf" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/pdf.png"></iron-image>
                                     PDF</paper-button>
                             </template>
@@ -58,7 +58,7 @@
                                 <div class="text-center">WORD</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable" id="WORD" on-tap="print">
+                                <paper-button raised class="btnInTable" id="word" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Word_2013_logo.svg.png"></iron-image>
                                     WORD</paper-button>
                             </template>
@@ -69,7 +69,7 @@
                                 <div class="text-center">EXCEL</div>
                             </template>
                             <template>
-                                <paper-button raised class="btnInTable" id="EXCEL" on-tap="print">
+                                <paper-button raised class="btnInTable" id="excel" on-tap="print">
                                     <iron-image class="img" sizing="cover" preload src="/images/icon/type_report/Microsoft_Excel_2013_logo.svg.png"></iron-image>
                                     EXCEL</paper-button>
                             </template>
@@ -85,9 +85,7 @@
         <paper-dialog id="report">
             <div class="layout horizontal start-justified">
                 <div class="flex" style=" margin-right: 30px">
-                    <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date"
-              value="{{data}}"></gl-form-input>
-                    <!--<vaadin-date-picker always-float-label label="วันที่ที่ต้องการดู" value="{{data}}"></vaadin-date-picker>-->
+                    <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.date}}"></gl-form-input>
                 </div>
 
                 <div class="flex horizontal end-justified layout buttons">
@@ -95,6 +93,21 @@
                     <paper-button raised class="gl-btn-primary" on-tap="printReport" dialog-confirm autofocus>ออกรายงาน</paper-button>
                 </div>
         </paper-dialog>
+        <!--<paper-dialog id="reportsd">
+            <div class="layout horizontal start-justified">
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.sdate}}"></gl-form-input>
+                </div>
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-form-input label="ถึงวันที่:" placeholder="ถึงวันที่" type="date" value="{{data.edate}}"></gl-form-input>
+                </div>
+
+                <div class="flex horizontal end-justified layout buttons">
+                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
+                    <paper-button raised class="gl-btn-primary" on-tap="printReport" dialog-confirm autofocus>ออกรายงาน</paper-button>
+                </div>
+        </paper-dialog>-->
+
     </template>
     <script>
         Polymer({
@@ -109,41 +122,73 @@
                     value: [
                         {
                             report_id: 1,
-                            report_name: 'รายงานขายข้าวประจำวัน',
-                            report_link: '/stats/stats1'
+                            report_name: 'รับแจ้งขายข้าวประจำวัน',
+                            report_link: '/stats/stats1',
+                            report_prama: 'date'
                         },
-                        // {
-                        //     report_id: 2,
-                        //     report_name: 'รายงาน2',
-                        //     report_link: '/stats/stats1'
-                        // },
-                        // {
-                        //     report_id: 3,
-                        //     report_name: 'รายงาน3',
-                        //     report_link: '/stats/stats1'
-                        // },
+                        {
+                            report_id: 2,
+                            report_name: 'ประเทศผู้นำเข้าข้าวรายใหญ่ของประเทศไทยตามแจ้งขายข้าว',
+                            report_link: '/stats/stats1',
+                            report_prama: 'sDateendDate'
+                        },
+                        {
+                            report_id: 3,
+                            report_name: 'ราคาข้าวตามใบอนุญาตประจำวัน',
+                            report_link: '/stats/stats1',
+                            report_prama: 'date'
+                        },
                     ]
                 },
                 setType: {
                     type: Object,
                     value: {}
                 },
-                data:{
-                    type : String,
-                    value: '2016-05-25'
-                }
+                data: {
+                    type: Object,
+                    value: {}
+                },
+                param: {
+                    type: Object,
+                    value: {}
+                },
             },
             print(e) {
                 let link = e.model.item.report_link
                 let type = e.currentTarget.id
+                let report_prama = e.model.item.report_prama
                 this.set('date.type', type)
                 this.set('date.link', link)
+                this.set('param.report_id',e.model.item.report_id)
+                this.set('param.report_prama',report_prama)
                 // console.log(e.model.item);
                 // console.log(e.currentTarget.id);
-                this.$$('#report').open()
+                // console.log(report_prama === 'date');
+                // if (report_prama === 'date') {
+                    this.$$('#report').open()
+                // }else {
+                //     console.log(1111);
+                //     this.$$('#reportsd').open()
+                // }
             },
             printReport() {
-                window.open('./api/report/daily/company?date=' + this.data)
+                // console.log(this.date.type);
+                switch (this.param.report_id) {
+                    case 1:
+                        window.open('./api/report/daily/company?date=' + this.data.date+'&export='+this.date.type)
+                        break;
+                    case 2:
+                    let edata = this.data.date
+                    let sdate = new Date(new Date(edata).setDate(1)).toISOString().split('T')[0]
+                    window.open('./api/report/daily/country?sdate=' + sdate+'&edate='+edata+'&export='+this.date.type)
+                        break;
+                    case 3:
+                        window.open('./api/report/daily/pricerice?date=' + this.data.date+'&export='+this.date.type)
+                        break;
+                    default:
+                        break;
+                }
+                
             }
 
         });
