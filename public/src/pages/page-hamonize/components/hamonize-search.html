@@ -235,12 +235,6 @@
                 },
                 listYear: {
                     statePath: 'hamonize.hamonizeCodeYear',
-                    // type: Array,
-                    // value: [
-                    //     { year: '2007' },
-                    //     { year: '2012' },
-                    //     { year: '2017' }
-                    // ]
                 },
                 listRice: {
                     statePath: 'hamonize.list_rice'
@@ -278,8 +272,9 @@
             },
             checkYear(dateStart, listYear) {
                 let year = dateStart.split('-')[0]
-                // console.log(this.data.hmYear);
-                if(year <= this.data.hmYear)
+                // console.log(year);
+                // console.log(year <= this.data.hmYear);
+                if(year < this.data.hmYear)
                     this.set('data.hmYear','')
                 let hmYear = []
                 listYear.map((item)=>{

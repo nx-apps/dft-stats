@@ -70,7 +70,8 @@
             },
             printReportCent(e) {
                 let url = { refCode : e.currentTarget.data.reference_code2}
-                window.open('./api/report/search/referenceCode?' + this.genUrl(url))
+                console.log(e.currentTarget.data);
+                // window.open('./api/report/search/referenceCode?' + this.genUrl(url))
             }
         });
     </script>
