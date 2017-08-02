@@ -163,7 +163,7 @@ exports.get = function (req, res) {
     // console.log(val);
     // val
     // let reference_code2 = req.query.reference_code2 || ''
-    j.query("mssql", `exec sp_stats_query_reference_code @refCode= ? ,@dateStart= ?, @dateEnd= ?, @dataType= ?`,
+    j.query("mssql", `exec sp_stats_query_refcode @refCode= ? ,@dateStart= ?, @dateEnd= ?, @dataType= ?`,
         [val.refCode, val.dateStart, val.dateEnd,'cert'],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {

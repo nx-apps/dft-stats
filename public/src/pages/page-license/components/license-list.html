@@ -39,7 +39,7 @@
                     </template>
 
                     <template is="dom-repeat" items={{dataList}}>
-                        <tr on-tap="printReportLicense" style="cursor: pointer;"  data="[[item]]">
+                        <tr on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">
                             <td style="text-align: center;">[[_Obindex(index)]]</td>
                             <td>[[item.reference_code2]]</td>
                             <td>[[item.contract_type_name]]</td>
@@ -71,8 +71,10 @@
                 }
             },
             printReportLicense(e) {
-                let url = { refCode : e.currentTarget.data.reference_code2}
-                window.open('./api/report/search/referenceCode?' + this.genUrl(url))
+                let url = { refCode: e.currentTarget.data.invh_run_auto }
+
+                window.open('./api/report/search/expt?' + this.genUrl(url))
+
             }
         });
     </script>
