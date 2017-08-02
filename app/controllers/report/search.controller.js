@@ -41,8 +41,35 @@ exports.referenceCode = function (req, res) {
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
-            res.json(data);
-            // res.ireport("search/report1.jasper", req.query.export || "pdf", data);
+            var len = data.length;
+            var sub = [];
+            for (var i = 0; i < 4; i++) {
+                if (i < len) {
+                    sub.push({
+                        product_description: data[i].product_description,
+                        tariff_code: data[i].tariff_code,
+                        net_weight: data[i].net_weight,
+                        net_weight_unit: data[i].net_weight_unit,
+                        fob_amt_perunit: data[i].fob_amt_perunit,
+                        currency_code: data[i].currency_code,
+                        fob_amt_baht: data[i].fob_amt_baht
+                    });
+                } else {
+                    sub.push({
+                        product_description: '*********************************************************',
+                        tariff_code: '',
+                        net_weight: 0,
+                        net_weight_unit: '',
+                        fob_amt_perunit: 0,
+                        currency_code: '',
+                        fob_amt_baht: 0
+                    });
+                }
+            }
+            var main = data[0];
+            main.sub = sub;
+            // res.json(main);
+            res.ireport("search/report1.jasper", req.query.export || "pdf", [main], {});
 
         })
 }
