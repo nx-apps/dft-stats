@@ -1,16 +1,14 @@
 exports.hamonize = function (req, res) {
     var val = req.query;
-    var dateStart = req.query.dateStart;
-    var dateEnd = req.query.dateEnd;
-    if (req.method == 'POST') {
-        val = req.body;
-    }
+    // var dateStart = req.query.dateStart;
+    // var dateEnd = req.query.dateEnd;
+    if (req.method == 'POST') val = req.body;
     req.jdbc.query('mssql', 'exec sp_stats_query_hamonize @hmYear=?,@hmCode=?,@dateStart=?,@dateEnd=?',
-        [val.year, val.hmcodes, val.dateStart, val.dateEnd],
+        [val.hmYear, val.hmCode, val.dateStart, val.dateEnd],
         function (err, data) {
             data = JSON.parse(data);
             // res.json(data);
-            res.ireport("search/hamonize.jasper", req.query.export || "pdf", data, { dateStart, dateEnd });
+            res.ireport("search/hamonize.jasper", req.query.export || "pdf", data, val);
 
         })
 }
@@ -34,7 +32,7 @@ exports.company = function (req, res) {
 }
 exports.referenceCode = function (req, res) {
     var val = req.query;
-   
+
 
     if (req.method == 'POST') {
         val = req.body;

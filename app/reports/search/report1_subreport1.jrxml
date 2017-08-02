@@ -4,6 +4,14 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<import value="nylon.report.*"/>
+	<field name="product_description" class="java.lang.String"/>
+	<field name="currency_code" class="java.lang.String"/>
+	<field name="currency_rate" class="java.lang.String"/>
+	<field name="tariff_code" class="java.lang.String"/>
+	<field name="net_weight" class="java.lang.String"/>
+	<field name="net_weight_unit" class="java.lang.String"/>
+	<field name="fob_amt_baht" class="java.lang.String"/>
+	<field name="fob_amt_perunit" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
