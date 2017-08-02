@@ -77,7 +77,7 @@ exports.impt = function (req, res) {
     // res.ireport("search/import.jasper", req.query.export || "pdf", [{}], {});
     var val = req.query;
     if (req.method == 'POST') val = req.body;
-    req.jdbc.query('mssql', 'exec sp_stats_rpt_reference_code @refCode=?',
+    req.jdbc.query('mssql', 'exec sp_stats_rpt_refcode @refCode=?',
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
@@ -102,7 +102,7 @@ exports.ec = function (req, res) {
     // res.ireport("search/import.jasper", req.query.export || "pdf", [{}], {});
     var val = req.query;
     if (req.method == 'POST') val = req.body;
-    req.jdbc.query('mssql', 'exec sp_stats_rpt_reference_code @refCode=?',
+    req.jdbc.query('mssql', 'exec sp_stats_rpt_refcode @refCode=?',
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
