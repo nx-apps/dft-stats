@@ -1,0 +1,1424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="import" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07c115fd-d1d6-4da4-9f5d-4e0ed7c59241">
+	<property name="ireport.zoom" value="1.366026910730147"/>
+	<property name="ireport.x" value="72"/>
+	<property name="ireport.y" value="559"/>
+	<import value="nylon.report.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Multiplication" class="java.lang.String">
+		<defaultValueExpression><![CDATA["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"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NO_MONTH" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer($P{CURRENT_DATE}.split("-")[1])]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
+	<parameter name="KROT_BASE64" class="java.lang.String">
+		<defaultValueExpression><![CDATA["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"]]></defaultValueExpression>
+	</parameter>
+	<field name="contract_type" class="java.lang.String"/>
+	<field name="product_name" class="java.lang.String"/>
+	<field name="contract_type_name" class="java.lang.String"/>
+	<field name="company_name" class="java.lang.String"/>
+	<field name="company_address" class="java.lang.String"/>
+	<field name="company_province" class="java.lang.String"/>
+	<field name="company_phone" class="java.lang.String"/>
+	<field name="company_fax" class="java.lang.String"/>
+	<field name="company_taxno" class="java.lang.String"/>
+	<field name="form_no" class="java.lang.String"/>
+	<field name="destination_company" class="java.lang.String"/>
+	<field name="destination_address" class="java.lang.String"/>
+	<field name="destination_province" class="java.lang.String"/>
+	<field name="request_person" class="java.lang.String"/>
+	<field name="ship_by" class="java.lang.String"/>
+	<field name="vasel_name" class="java.lang.String"/>
+	<field name="port_name" class="java.lang.String"/>
+	<field name="reason_eu" class="java.lang.String"/>
+	<field name="form_name" class="java.lang.String"/>
+	<field name="reference_code2" class="java.lang.String"/>
+	<field name="expire_date" class="java.lang.String"/>
+	<field name="ob_name" class="java.lang.String"/>
+	<field name="ob_address" class="java.lang.String"/>
+	<field name="dest_receive_country" class="java.lang.String"/>
+	<field name="currency_code" class="java.lang.String"/>
+	<field name="currency_rate" class="java.lang.Double"/>
+	<field name="sub" class="java.lang.Object"/>
+	<field name="approve_date" class="java.lang.String"/>
+	<field name="form_namefull" class="java.lang.String"/>
+	<field name="product_description" class="java.lang.String"/>
+	<field name="product_description2" class="java.lang.String"/>
+	<field name="tariff_code" class="java.lang.String"/>
+	<field name="tariff_code2" class="java.lang.String"/>
+	<field name="net_weight" class="java.lang.Double"/>
+	<field name="net_weight2" class="java.lang.Double"/>
+	<field name="net_weight_unit" class="java.lang.String"/>
+	<field name="net_weight_unit2" class="java.lang.String"/>
+	<field name="fob_amt_baht" class="java.lang.Double"/>
+	<field name="fob_amt_baht2" class="java.lang.Double"/>
+	<field name="fob_amt_perunit" class="java.lang.Double"/>
+	<field name="fob_amt_perunit2" class="java.lang.Double"/>
+	<field name="quantity" class="java.lang.Double"/>
+	<field name="quantity2" class="java.lang.Double"/>
+	<field name="unit_code" class="java.lang.String"/>
+	<field name="unit_code2" class="java.lang.String"/>
+	<detail>
+		<band height="767">
+			<staticText>
+				<reportElement x="226" y="0" width="329" height="150" uuid="d6c4ff09-ef55-40cc-90d3-64b2911e2be1"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="226" height="150" uuid="216696d7-2c18-459a-92ee-4f82744b24c8"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="226" height="113" uuid="d1610d5e-0add-4743-9abd-c88c5393fb03"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="263" width="226" height="28" uuid="0be72198-f0f0-4540-8590-ca2d060e4b04"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="150" width="145" height="28" uuid="2352eb69-77dc-4b89-911e-10b80e7cc5f4"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="150" width="184" height="28" uuid="48080166-9d0c-41ba-b40e-5e6013a7ddd8"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="178" width="329" height="113" uuid="dc6c585f-b607-4aba-ae36-c1044fa9192d"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="291" width="329" height="28" uuid="d467c869-db9d-48e4-9c9a-d00ea86ea5a0"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="319" width="329" height="28" uuid="665fdee9-8e98-49c1-bb6e-25f017f2d79d"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="291" width="226" height="85" uuid="04ff2208-5a99-4597-b1c6-e9b037b7b393"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="376" width="226" height="17" uuid="acd80c33-197b-4d5f-a5ed-b3b56302d6ed"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="393" width="226" height="17" uuid="007b5a5c-6ffb-49f6-80f2-f412873bbb67"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="410" width="226" height="40" uuid="fac4b460-3ca6-4b4c-b31e-37e5ab422bd1"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="347" width="329" height="63" uuid="a3e3e689-9b42-405b-b9ce-50e10133faee"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="410" width="153" height="40" uuid="29619965-fe61-4edd-9fa9-c284c6819367"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="410" width="176" height="40" uuid="39c644e9-8e15-49af-a8fb-2086e23e7d03"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="138" height="20" uuid="d85af70d-842c-44da-9417-d086dbc2bd96"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้ส่ง/ผู้ขาย (ชื่อ, ที่อยู่)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="0" y="170" width="226" height="93" uuid="eeec9356-b5f4-433c-9483-43f477f6b39b"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{company_name}+"\n"+
+$F{company_address}+" "+$F{company_province}+
+"\nโทรศัพท์."+$F{company_phone}+" โทรสาร."+$F{company_fax}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize">
+				<reportElement isPrintRepeatedValues="false" x="379" y="3" width="25" height="25" uuid="d2c59872-870e-447f-8847-9fe4a446ffff"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode($P{KROT_BASE64}))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="342" y="44" width="145" height="15" uuid="7d23c06d-3c8f-4b34-bcae-da26d8ac8db6"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="29" width="329" height="15" uuid="751441a2-29e7-447c-afba-5eb754b24f84"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[หนังสือรับรองแสดงการได้รับสิทธิในการยกเว้นภาษีทั้งหมดหรือบางส่วน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="44" width="105" height="15" uuid="8ac31a12-6d66-41d8-aa88-652b8e8a48f9"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ตามความตกลง]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="226" y="77" width="329" height="20" uuid="bc03c026-1296-472d-b290-e8cefd301976"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["สำหรับภาษี"+($F{contract_type_name}.indexOf("นอก")>=0?"นอก":"ใน")+"โควตา"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="117" width="329" height="20" uuid="9ce61682-3fbb-428f-9f5e-8b002192dfd3"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ออกให้โดยกรมการค้าต่างประเทศ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="97" width="115" height="20" uuid="6b2c233f-a775-40e5-9f38-c677deb3b24c"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สินค้า]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="342" y="97" width="126" height="20" uuid="b9551a08-e502-43e3-8c91-8a2e8adf0ebd"/>
+				<box leftPadding="20">
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="150" width="138" height="20" uuid="71e91503-103d-4664-a6a6-559ab8f16514"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้นำเข้า (ชื่อ, ที่อยู่, โทรศัพท์, โทรสาร)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="0" y="20" width="226" height="150" uuid="352d980d-1bd4-468b-ad08-b33eb2e715d9"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{destination_company}+"\n"+
+$F{destination_address}+"\n"+
+$F{destination_province}+" "+$F{dest_receive_country}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="150" width="28" height="28" uuid="a2623f53-f60c-4ca0-93dd-5620ac11efc3"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เลขที่]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="254" y="150" width="156" height="28" uuid="81830874-dd6c-42c4-ac4b-f65133788090"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reference_code2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="150" width="58" height="28" uuid="486cbcbb-9201-4cd4-85f7-1f205f90e709"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ใช้ได้จนถึงวันที่]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="468" y="150" width="87" height="28" uuid="39771a3c-b4d4-426e-864a-c5697148fc80"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDateShort($F{expire_date})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="263" width="98" height="28" uuid="e12887cd-e89f-4cd6-ab42-e0e4290e0ef7"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เลขประจำตัวผู้เสียภาษีอากร]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="331" y="44" width="211" height="15" uuid="ab49bd6d-c427-41dd-ba13-80533a8a54e9"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{form_namefull}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="98" y="263" width="128" height="28" uuid="45ac3504-5a2e-4053-ad2d-82ca1efd2962"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{company_taxno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="291" width="138" height="20" uuid="99dd421c-90e3-48c4-aae3-5b4cfba3430b"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้ทำการแทนผู้นำเข้า (ชื่อ, ที่อยู่, ฐานะ)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="0" y="311" width="226" height="65" uuid="91f37e6d-cd62-4e2e-93f8-9043d9ed6c03"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{request_person}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="291" width="76" height="28" uuid="a4d744a1-00e6-4798-a856-e6c689bfc93e"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ประเทศต้นทาง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="319" width="76" height="28" uuid="3d7cae7f-51a9-44d0-9bab-51f847ec7ad3"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ประเทศกำเนิดสินค้า]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="302" y="291" width="128" height="28" uuid="d12d2c0b-1e48-4ee9-81e0-1a72c93bb0c9"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dest_receive_country}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="302" y="319" width="128" height="28" uuid="c6b8b5bf-9826-4d9c-8672-96ffc035c713"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dest_receive_country}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="376" width="55" height="17" uuid="524ca106-c304-433f-8eda-632e22143a91"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[นำเข้าโดยทาง]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="55" y="380" width="10" height="10" uuid="f119d558-3a97-499f-926a-0dfc0f3c44f3"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ship_by}=='0'?'X':'')]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="88" y="380" width="10" height="10" uuid="a819f383-48e2-4fd7-b6a5-200085744c2f"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ship_by}=='2'?'X':'')]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="65" y="376" width="20" height="17" uuid="21b7e209-ab42-4e78-afd2-a2012cace47e"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เรือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="376" width="19" height="17" uuid="10f09514-af6d-471f-a8f2-f1806d552758"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[บก]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="117" y="380" width="10" height="10" uuid="578e70e1-231e-42fc-b7a7-9cfb91a7388a"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ship_by}=='1'?'X':'')]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="376" width="26" height="17" uuid="2201403d-2885-4cba-9545-16c767d8189a"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[อากาศ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="153" y="380" width="10" height="10" uuid="2d5e2858-f392-4cf2-9640-1f3f45360b6f"/>
+				<box leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ship_by}=='3'?'X':'')]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="163" y="376" width="31" height="17" uuid="55ce4605-9b51-468c-8323-1735b0665d45"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ไปรษณีย์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="178" width="184" height="20" uuid="baa5fc3e-5e0d-499d-b883-0f4838b58b4b"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้ซื้อ (ชื่อ, ที่อยู่ ในกรณีที่เป็นคนละรายกับผู้นำเข้า)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="347" width="204" height="20" uuid="ce5ac4b4-bfe0-4223-8144-a2d7799fbce8"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สำหรับเจ้าหน้าที่ศุลกากรบันทึก (หากไม่พอให้ต่อด้านหลัง)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="393" width="55" height="17" uuid="1dbd0c5e-d901-4afb-a90e-423a63bdbe8d"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[พาหนะ/เที่ยว]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="65" y="393" width="161" height="17" uuid="8588df3e-2948-4452-8031-044b3b926f01"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vasel_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="410" width="65" height="17" uuid="01aec468-2742-4595-854a-6293654fe59a"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ท่าหรือที่นำเข้า]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="65" y="410" width="161" height="28" uuid="61ebe09d-3a77-46c2-a3f0-260cdd512292"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{port_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="410" width="38" height="17" uuid="f64d319c-e8bc-4d09-bb22-9957b1ad042f"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สกุลเงิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="410" width="65" height="17" uuid="a3097468-0033-4daf-9c19-7b05b8459ff8"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[อัตราแลกเปลี่ยน]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="264" y="410" width="115" height="28" uuid="c63be698-67da-414e-881a-4b181ee92dbb"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency_code}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0000" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="444" y="410" width="111" height="28" uuid="3e273a4a-8b53-4e67-bd8c-69e906b36ebc"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="450" width="226" height="80" uuid="dabe266a-b81f-43b0-9d6e-896832bdc0c3"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="490" width="176" height="20" uuid="74397c20-0ed6-469a-9cf9-8d32797ea25f"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวมมูลค่า ซี.ไอ.เอฟ. (เงินบาท)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="450" width="153" height="20" uuid="b00185e5-1095-4ae3-8534-8dfe4526362e"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ประเภทพิกัด"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="450" width="176" height="20" uuid="b00ededb-9436-4b1b-a00f-64ab05757807"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวมน้ำหนักสุทธิ (กก.)/ปริมาณ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="490" width="153" height="20" uuid="0276b1e1-48f6-4e96-bfc6-6de4d3cb13b2"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ราคาต่อหน่วย"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="379" y="510" width="176" height="20" uuid="dc62700d-22a9-46a0-8955-5ca8862b4a3c"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fob_amt_baht}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht},"#,##0.00")
++" CIF"
+)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="379" y="470" width="176" height="20" uuid="69d41d86-b73c-4185-98e5-64d64e28f23f"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{net_weight}==0 ? "":
+new nylon.utility.NumberFormat().toFormat($F{net_weight},"#,##0.00")
+    +" "+$F{net_weight_unit}+"/"+
+    new nylon.utility.NumberFormat().toFormat($F{quantity},"#,##0.##")
+    +" "+$F{unit_code}
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="470" width="153" height="20" uuid="aa527593-81e7-45f9-8795-291c3bf3d33d"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tariff_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="510" width="153" height="20" uuid="2d7e5094-9f83-40fc-9449-c047da95dc5f"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fob_amt_perunit}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_perunit},"#,##0.00")+
+" "+
+$F{currency_code}+"/"+$F{net_weight_unit}
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="530" width="153" height="20" uuid="c5dada06-10d2-454e-97a8-02cbed6bb7e9"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ประเภทพิกัด"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="379" y="550" width="176" height="20" uuid="cefd8b68-2cbb-4e00-8dc8-7c9905364509"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{net_weight2}==0 ? "":
+new nylon.utility.NumberFormat().toFormat($F{net_weight2},"#,##0.00")
+    +" "+$F{net_weight_unit2}+"/"+
+    new nylon.utility.NumberFormat().toFormat($F{quantity2},"#,##0.##")
+    +" "+$F{unit_code2}
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="590" width="153" height="20" uuid="4aabc0a3-bf5c-4e6c-b39f-1d51e542abf5"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fob_amt_perunit2}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_perunit2},"#,##0.00")+
+" "+
+$F{currency_code}+"/"+$F{net_weight_unit2}
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="530" width="226" height="80" uuid="9ea3df4a-4aa7-4cb8-a3af-f635e96deb66"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_description2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="570" width="176" height="20" uuid="641ffd94-9cbb-4531-825e-38bf797f8ccb"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวมมูลค่า ซี.ไอ.เอฟ. (เงินบาท)"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="379" y="590" width="176" height="20" uuid="575f24f4-b903-4923-8198-aad55b28da55"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fob_amt_baht2}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht2},"#,##0.00")
++" CIF"
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="530" width="176" height="20" uuid="2cd42f4a-b6a8-4d5c-849c-07c39c8dd757"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวมน้ำหนักสุทธิ (กก.)/ปริมาณ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="550" width="153" height="20" uuid="01c665a5-4aeb-4be6-9cc1-806a7c0e9165"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tariff_code2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="570" width="153" height="20" uuid="46906dd5-0403-42df-956c-9a78239eec9a"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ราคาต่อหน่วย"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="610" width="555" height="70" uuid="ece113b9-8176-4ec2-b5a2-65082b2f94db"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="610" width="65" height="20" uuid="3ba4b847-f7c3-4520-92f8-9606ebda2be5"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เงื่อนไขการรับรอง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="630" width="314" height="20" uuid="c2a4e392-6913-4d13-9b67-4cf0f5f24eef"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เป็นไปตามระเบียบและหลักเกณฑ์ที่กรมการค้าต่างประเทศกำหนดไว้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="680" width="555" height="86" uuid="8abc1b5d-9c96-41a0-8e29-e2dba3acbd71"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="680" width="264" height="30" uuid="93cb2aa6-f1b8-4ac0-b65b-39ef54978b35"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[กรมการค้าต่างประเทศขอรับรองว่าสินค้าตามปริมาณที่ระบุไว้ในหนังสือรับรองฯ
+ฉบับนี้ เป็นสินค้าที่ได้รับสิทธิในการยกเว้นภาษีทั้งหมดหรือบางส่วนตาม]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="55" y="720" width="219" height="46" uuid="4e87cfa7-3911-45d3-a658-c12321903660"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{form_namefull}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="55" y="720" width="209" height="15" uuid="196e97b4-4f3e-400e-9b9c-5181ebaf2474"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="720" width="55" height="15" uuid="51a5ad30-7670-495d-888d-325ef8ed8dff"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ตามความตกลง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="735" width="264" height="15" uuid="5da7e456-05f8-455f-b3c2-897ace871c38"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="314" y="690" width="60" height="20" uuid="284df5c1-a191-4385-8273-b4249121f572"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ออกให้เมื่อวันที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="690" width="134" height="15" uuid="002e01ca-2629-4313-99b0-1a2abf6c044f"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="#,##0.0000" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="380" y="688" width="111" height="20" uuid="ec1cea03-5c35-4f6e-bc84-13249f2a1eeb"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new nylon.utility.NumberFormat().toThaiDateShort($F{approve_date})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="720" width="55" height="15" uuid="e15ed038-7dd0-4f38-a820-fcd70931444d"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลายมือชื่อ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="720" width="164" height="15" uuid="e4d73172-5680-4092-aa5f-5432ee417454"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="720" width="55" height="15" uuid="31212c38-66ca-442a-a8f8-17a480fc2fe0"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้รับรอง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="742" width="39" height="15" uuid="5793b50e-6e16-4d87-946c-1b410c14cf82"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ตำแหน่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="742" width="153" height="15" uuid="d4cf40d7-8ae2-44e6-8945-b7dbd31d47db"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="0.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.5" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="314" y="-19" width="241" height="19" uuid="2475b674-bd72-43b9-8b9d-a811c9564d0d"/>
+				<box topPadding="5" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["แบบ "+$F{form_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
