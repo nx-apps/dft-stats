@@ -69,7 +69,9 @@ exports.expt = function (req, res) {
             var main = data[0];
             main.sub = sub;
             // res.json(main);
-            res.ireport("search/export.jasper", req.query.export || "pdf", [main], {});
+            res.ireport("search/export.jasper", req.query.export || "pdf", [main], {
+                OUTPUT_NAME: main.reference_code2
+            });
 
         })
 }
@@ -107,6 +109,8 @@ exports.ec = function (req, res) {
         function (err, data) {
             data = JSON.parse(data);
             // res.json(main);
-            res.ireport("search/ec.jasper", req.query.export || "pdf", data, {});
+            res.ireport("search/ec.jasper", req.query.export || "pdf", data, {
+                OUTPUT_NAME: data[0].reference_code2
+            });
         });
 }
