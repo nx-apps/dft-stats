@@ -11,7 +11,7 @@
 	<field name="net_weight" class="java.lang.Double"/>
 	<field name="net_weight_unit" class="java.lang.String"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
-	<field name="fob_amt_perunit" class="java.lang.String"/>
+	<field name="fob_amt_perunit" class="java.lang.Double"/>
 	<detail>
 		<band height="60">
 			<textField>
@@ -40,7 +40,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{net_weight}==0 ? " ":$F{net_weight}+$F{net_weight_unit})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{net_weight}==0 ? "":
+new nylon.utility.NumberFormat().toFormat($F{net_weight},"#,##0.00")
+    +" "+$F{net_weight_unit})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="439" y="44" width="116" height="16" uuid="f7a37a0d-984c-4ead-b44f-4a5369fd49a3"/>
@@ -54,7 +56,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{fob_amt_baht}==0 ? " ":$F{fob_amt_baht})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{fob_amt_baht}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_baht},"#,##0.00")
+)
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="439" y="30" width="116" height="16" uuid="6a6e856d-76da-4e88-ae1b-bfa1c90ee7cc"/>
@@ -84,7 +89,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tariff_code}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement x="349" y="44" width="90" height="16" uuid="1c6277f0-3398-474a-aa52-21e090c140ea"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
@@ -96,7 +101,12 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fob_amt_perunit}+$F{currency_code}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{fob_amt_perunit}==0? "":
+new nylon.utility.NumberFormat().toFormat($F{fob_amt_perunit},"#,##0.00")+
+" "+
+$F{currency_code}
+)
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="349" y="30" width="90" height="16" uuid="6175b407-c13d-44e0-95a9-3d6712601f20"/>
@@ -138,7 +148,8 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["\n"+$V{REPORT_COUNT}+". "+$F{product_description}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{REPORT_COUNT}==1?"รายละเอียดสินค้า\n":"")
++$V{REPORT_COUNT}+". "+$F{product_description}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
