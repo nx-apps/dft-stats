@@ -46,6 +46,11 @@ exports.search = function (req, res) {
             var data2 = []
             let company_name_th = ''
             // datas.company_name_th = data;
+            let cal = (data, sum) => {
+                return data.reduce((acc, cur) => acc.concat(cur), [])
+                    .map((item) => item[sum])
+                    .reduce((acc, cur) => acc + cur, 0)
+            }
             for (var key in data) {
                 for (var variable in data[key]) {
                     data2.push(
@@ -53,11 +58,17 @@ exports.search = function (req, res) {
                     )
                 }
                 datas.push({
-                    company_name_th : key,
-                    country_name_th : data2
+                    company_name_th: key,
+                    country_name_th: data2,
+                    total_net_weight_i:cal(data2, 'net_weight_i'),
+                    total_fob_amt_baht_i:cal(data2, 'fob_amt_baht_i'),
+                    total_fob_amt_i:cal(data2, 'fob_amt_i'),
+                    total_net_weight_e:cal(data2, 'net_weight_e'),
+                    total_fob_amt_baht_e:cal(data2, 'fob_amt_baht_e'),
+                    total_fob_amt_e: cal(data2, 'fob_amt_e')
                 })
                 company_name_th = '',
-                data2 = []
+                    data2 = []
             }
             // console.log(datas);
             res.json(datas);

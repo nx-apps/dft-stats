@@ -45,7 +45,7 @@
                     </div>
                     <div class="flex2child">
                         <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{listYear}}" item-label-path="year" item-value-path="year"
-                            value="{{data.year}}" on-value-changed="getYearRice">
+                            value="{{data.hmYear}}" on-value-changed="getYearRice">
                             <template>
                                 [[item.year]]
                             </template>
@@ -234,12 +234,13 @@
                     value: true
                 },
                 listYear: {
-                    type: Array,
-                    value: [
-                        { year: '2007' },
-                        { year: '2012' },
-                        { year: '2017' }
-                    ]
+                    statePath: 'hamonize.hamonizeCodeYear',
+                    // type: Array,
+                    // value: [
+                    //     { year: '2007' },
+                    //     { year: '2012' },
+                    //     { year: '2017' }
+                    // ]
                 },
                 listRice: {
                     statePath: 'hamonize.list_rice'
@@ -395,7 +396,7 @@
                 // console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
-                    hmYear: this.data.year,
+                    hmYear: this.data.hmYear,
                     hmCode: hmcodes,
                     dateStart: this.data.dateStart,
                     dateEnd: this.data.dateEnd

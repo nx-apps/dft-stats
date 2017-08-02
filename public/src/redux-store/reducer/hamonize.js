@@ -6,7 +6,7 @@ const initialState = {
     select: {},
     list: [],
     date: { sdate: '', edate: '' },
-    hamonizeCodeList: [],
+    hamonizeCodeYear: [],
     hamonizeCodeChild: [],
     list_rice: [],
     rice_list: []
@@ -19,7 +19,7 @@ export function hamonizeReducer(state = initialState, action) {
         case 'HAMONIZE_SET_DATE':
             return Object.assign({}, state, { date: action.payload });
         case 'HAMONIZE_CODE_GET':
-            return Object.assign({}, state, { hamonizeCodeList: action.payload });
+            return Object.assign({}, state, { hamonizeCodeYear: action.payload });
         case 'HAMONIZE_CODE_GET_CHILD':
             return Object.assign({}, state, { hamonizeCodeChild: action.payload });
         case 'HAMONIZE_CODE_SEARCH_R1':
@@ -47,14 +47,17 @@ export function hamonizeAction(store) {
         },
         HAMONIZE_CODE_GET(data) {
             // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-            axios.get('/hamonize/codelist')
+            axios.get('./hamonize/ricelist')
                 .then((response) => {
-                    // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-                    // console.log(response.data);
-                    // group by the `tag` property 
-
-                    // console.log();
-                    store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: groupArray(response.data, 'hamonize_year') })
+                    let year = groupArray(response.data, 'hamonize_year')
+                    let yearData = []
+                    for (var variable in year) {
+                        yearData.push({
+                            year: variable
+                        })
+                        // console.log(variable);
+                    }
+                    store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: yearData })
                     // return ha
                 })
                 .catch(function (error) {
@@ -113,6 +116,15 @@ export function hamonizeAction(store) {
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.get('./hamonize/ricelist')
                 .then((response) => {
+                    let year = groupArray(response.data, 'hamonize_year')
+                    let yearData = []
+                    for (var variable in year) {
+                        yearData.push({
+                            year: variable
+                        })
+                        // console.log(variable);
+                    }
+                    store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: yearData })
                     this.fire('toast', {
                         status: 'success', text: 'โหลดข้อมูลสำเร็จ', callback() {
                             store.dispatch({ type: 'HAMONIZE_RICE_LIST', payload: response.data });
@@ -120,17 +132,17 @@ export function hamonizeAction(store) {
                     });
                 })
         },
-        HAMONIZE_RICE_GET(data){
+        HAMONIZE_RICE_GET(data) {
             // console.log(data);
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-            axios.post('./hamonize/get',data)
-            .then((response) => {
-                this.fire('toast', {
-                    status: 'success', text: 'ค้นหาสำเร็จ', callback() {
-                        store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
-                    }
-                });
-            })
+            axios.post('./hamonize/get', data)
+                .then((response) => {
+                    this.fire('toast', {
+                        status: 'success', text: 'ค้นหาสำเร็จ', callback() {
+                            store.dispatch({ type: 'HAMONIZE_RICE_GET_LIST', payload: response.data });
+                        }
+                    });
+                })
         }
     }]
 };
