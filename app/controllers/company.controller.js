@@ -41,21 +41,6 @@ exports.search = function (req, res) {
         function (err, data) {
             // res.send(data);
             data = JSON.parse(data);
-            // r.expr(data)
-            //     .group('company_taxno')
-            //     .ungroup()
-            //     .merge((item) => {
-            //         return {
-            //             x: item('reduction')
-            //         }
-            //     })
-            //     // reduction
-            //     .run()
-            //     .then(function (data) {
-            //         res.json(data);
-            //         // console.log(data);
-            //     }
-            //     )
             data = group(data, 'company_name_th', 'country_name_th');
             var datas = [];
             var data2 = []

@@ -6,12 +6,9 @@
     <style include="page-style flex-style"></style>
     <template>
         <paper-material elevation="1" class="container">
-            <template is="dom-if" if="[[!checkData(dataList)]]">
+            <!--<template is="dom-if" if="[[!checkData(dataList)]]">
                 <div class="horizontal layout ">
                     <div class="flex-3">
-                        <!--<div class="company">
-                            ชื่อบริษัท : {{item.company_name_th}}
-                        </div>-->
                     </div>
                     <div class="flex layout end-justified ">
                         <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportLicense">
@@ -20,7 +17,7 @@
                         </paper-button>
                     </div>
                 </div>
-            </template>
+            </template>-->
             <table class="gl-table-default">
                 <thead>
                     <tr>
@@ -42,7 +39,7 @@
                     </template>
 
                     <template is="dom-repeat" items={{dataList}}>
-                        <tr>
+                        <tr on-tap="printReportLicense" style="cursor: pointer;"  data="[[item]]">
                             <td style="text-align: center;">[[_Obindex(index)]]</td>
                             <td>[[item.reference_code2]]</td>
                             <td>[[item.contract_type_name]]</td>
@@ -73,8 +70,9 @@
                     statePath: 'license.licenseList'
                 }
             },
-            printReportLicense() {
-                window.open('./api/report/search/referenceCode?' + this.genUrl(this.search))
+            printReportLicense(e) {
+                let url = { refCode : e.currentTarget.data.reference_code2}
+                window.open('./api/report/search/referenceCode?' + this.genUrl(url))
             }
         });
     </script>
