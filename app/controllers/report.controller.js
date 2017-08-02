@@ -123,7 +123,7 @@ exports.ce01 = function (req, res) {
 
 exports.dailyCompany = function (req, res) {
 
-    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_company @approveDate=?", [req.query.date], function (err, data) {
+    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_company @approveDate=?", [req.query.date], function (err, data) {
         // res.send(data);
         req.r.json(data).run().then(function (d2) {
             res.ireport("daily/rpt_invioce_company.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
@@ -143,7 +143,7 @@ exports.dailyCountry = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", "exec sp_rpt_stats_daily_country @startDate=?, @endDate=?", [s, e], 
+    j.query("mssql", "exec sp_stats_rpt_daily_country @startDate=?, @endDate=?", [s, e], 
     function (err, data) {
         // res.send(data);
         req.r.json(data).run().then(function (d2) {
@@ -153,7 +153,7 @@ exports.dailyCountry = function (req, res) {
 }
 exports.dailyPricerice= function (req, res) {
 
-    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
+    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
         // res.send(data);
         req.r.json(data).run().then(function (d2) {
             res.ireport("daily/rpt_invioce_pricerice.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });

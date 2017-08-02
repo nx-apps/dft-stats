@@ -391,7 +391,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 		<band height="20">
 			<printWhenExpression><![CDATA[$F{groupCode}=="z"]]></printWhenExpression>
 			<textField pattern="#,##0.00">
-				<reportElement isPrintRepeatedValues="false" x="130" y="0" width="60" height="20" uuid="e37b9a5a-d8a4-4a21-b9e9-f44b0623696c"/>
+				<reportElement x="130" y="0" width="60" height="20" uuid="e37b9a5a-d8a4-4a21-b9e9-f44b0623696c"/>
 				<box rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
