@@ -22,7 +22,7 @@
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.sdate}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>
                     </div>
                     <!-- [[obDate(data.sdate)]] -->
                     <div class="flexchild"></div>
@@ -30,7 +30,7 @@
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.edate}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>
+                        <vaadin-date-picker class="textCenter" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>
                     </div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
@@ -67,7 +67,7 @@
                             </template>
                         </gl-combo-box>
                     </div>-->
-                    <div class="labelSearchDate">
+                    <!--<div class="labelSearchDate">
                         แหล่งข้อมูล :
                     </div>
                     <div class="flexchild">
@@ -77,7 +77,7 @@
                                 [[item.label]]
                             </template>
                         </gl-combo-box>
-                    </div>
+                    </div>-->
                     <div class="flexchild">
                         <div class="btn-search">
                             <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
@@ -100,24 +100,26 @@
                     <div class="flex3child">
                     </div>
                 </div>
-                
+
                 <!-- <paper-button raised on-tap="getHm">กด</paper-button> -->
-                
+
                 <div class="flex-horizontal-with-ratios">
                     <!-- <div class="flexchild"></div> -->
                     <!-- <div class="flexchild"> -->
-                    <vaadin-grid id="material" aria-label="Basic Binding Example" items="[[hmChild]]" inverted$="[[inverted]]">
+                    <vaadin-grid id="material" items="[[hmChild]]" inverted$="[[inverted]]">
 
-                        <vaadin-grid-column width="150px" flex-grow="0">
+                        <vaadin-grid-column width="50px" flex-grow="0">
                             <template class="header">
-                                <paper-checkbox on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">เลือกทั้งหมด</paper-checkbox>
+                                <!--<paper-checkbox on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">เลือกทั้งหมด</paper-checkbox>-->
                             </template>
                             <template>
-                                <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
+                                <div class="text-center">
+                                    <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
+                                </div>
                             </template>
                         </vaadin-grid-column>
 
-                        <vaadin-grid-column width="200px" flex-grow="0">
+                        <vaadin-grid-column width="250px" flex-grow="0" resizable>
                             <template class="header">พิกัดข้าว
                                 <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
                                 </vaadin-gird-filter-common>
@@ -125,7 +127,7 @@
                             <template>[[item.hamonize_code]]</template>
                         </vaadin-grid-column>
 
-                        <vaadin-grid-column width="449px" flex-grow="0">
+                        <vaadin-grid-column width="450px" flex-grow="0" resizable>
                             <template class="header">ชื่อชนิดข้าว (ไทย)
                                 <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
                                 </vaadin-gird-filter-common>
@@ -219,7 +221,8 @@
                 },
                 data: {
                     type: Object,
-                    value: {}
+                    value: {},
+                    notify: true
                 },
                 hmChild: {
                     type: Array,
@@ -244,12 +247,6 @@
             },
             //  check box
             observers: ['_resetSelection(inverted)'],
-            // obDate: function(date){
-            //     if(typeof date !== 'undefined' && date !== ''){
-            //         var date = date.split('-')[0];
-            //         console.log(date);
-            //     }
-            // },
             _resetSelection: function (inverted) {
                 this.$.material.selectedItems = [];
                 this.updateStyles();
@@ -275,7 +272,7 @@
             _isSelected: function (inverted, selected) {
                 return inverted != selected;
             },
-            getHm(){
+            getHm() {
                 console.log(this.$.material.selectedItems);
             },
             // end check box
@@ -293,25 +290,25 @@
             setHamonizeSdate(data) {
                 try {
                     // console.log(data.detail.value);
-                    let sdate = new Date(data.detail.value).getFullYear(),
-                        edate = new Date(this.data.edate).getFullYear()
-                    this.setYearHamonize(sdate, edate)
+                    let dateStart = new Date(data.detail.value).getFullYear(),
+                        dateEnd = new Date(this.data.dateEnd).getFullYear()
+                    this.setYearHamonize(dateStart, dateEnd)
                 } catch (e) {
                 }
             },
             setHamonizeEdate(data) {
                 try {
                     // console.log(data.detail.value);
-                    let sdate = new Date(this.data.sdate).getFullYear(),
-                        edate = new Date(data.detail.value).getFullYear()
-                    this.setYearHamonize(sdate, edate)
+                    let dateStart = new Date(this.data.dateStart).getFullYear(),
+                        dateEnd = new Date(data.detail.value).getFullYear()
+                    this.setYearHamonize(dateStart, dateEnd)
                 } catch (e) {
                 }
             },
             _setItem(hmcode) {
-                let sdate = new Date(this.data.sdate).getFullYear(),
-                    edate = new Date(this.data.edate).getFullYear()
-                this.setYearHamonize(sdate, edate)
+                let dateStart = new Date(this.data.dateStart).getFullYear(),
+                    dateEnd = new Date(this.data.dateEnd).getFullYear()
+                this.setYearHamonize(dateStart, dateEnd)
                 // console.log(this.hamonizeCodeList);
                 // console.log(111);
             },
@@ -381,11 +378,11 @@
                 // this.fire('toast', { status: 'load' })
             },
             _setDate(e) {
-                this.set('data.sdate', e.sdate)
-                this.set('data.edate', e.edate);
-                this.set('data.refDB', 'f3');
+                this.set('data.dateStart', e.dateStart)
+                this.set('data.dateEnd', e.dateEnd);
+                // this.set('data.refDB', 'f3');
                 // data.dataSourch
-                // (e.edate != '') ? this.getRiceValue() : '';
+                // (e.dateEnd != '') ? this.getRiceValue() : '';
             },
             getRiceValue() {
                 // console.log(this.$.material.selectedItems);
@@ -398,13 +395,14 @@
                 // console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
-                    hmYear : this.data.year,
-                    hmCode : hmcodes,
-                    dateStart : this.data.sdate,
-                    dateEnd : this.data.edate
+                    hmYear: this.data.year,
+                    hmCode: hmcodes,
+                    dateStart: this.data.dateStart,
+                    dateEnd: this.data.dateEnd
                 }
+                this.set('data', data)
                 // console.log(data);
-                this.dispatchAction('HAMONIZE_RICE_GET',data);
+                this.dispatchAction('HAMONIZE_RICE_GET', data);
                 // this.data.hmchild = arr
                 // let code = this.data.hmparent.split(' ')
                 // let hmparent = code[0]

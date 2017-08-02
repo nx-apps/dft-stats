@@ -1,6 +1,8 @@
+<link rel="import" href="./../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="./../../../bower_components/gl-styles/gl-styles.html">
 <dom-module id="page-style">
     <template>
-        <style include="gl-size gl-styles gl-table gl-panel">
+        <style include="iron-flex iron-flex-factors iron-flex-alignment gl-styles gl-size gl-styles gl-table gl-panel">
             .container {
                 padding: 20px;
             }
@@ -75,7 +77,7 @@
                     height: 32px;
                 }
             }
-            vaadin-grid#material {
+                vaadin-grid#material {
                 font-family: 'CSChatThaiUI', sans-serif;
                 -webkit-font-smoothing: antialiased;
                 --divider-color: rgba(0, 0, 0, var(--dark-divider-opacity));
@@ -84,21 +86,27 @@
                 }
                 ;
                 --vaadin-grid-header-cell: {
-                    height: 64px;
+                    min-height: 64px;
                     color: rgba(0, 0, 0, var(--dark-secondary-opacity));
                     font-size: 16px;
+                    font-weight: bold;
+                    background-color: #F1F1F1;
+                    padding:5px 5px;
+                    /*border-bottom: 1px solid red;*/
+                    /*border: 0.5px solid rgba(0, 0, 0, var(--dark-secondary-opacity));*/
                 }
                 ;
                 --vaadin-grid-body-cell: {
-                    height: 48px;
+                    min-height: 48px;
                     color: rgba(0, 0, 0, var(--dark-primary-opacity));
                     word-warp font-size: 17px;
                 }
                 ;
                 --vaadin-grid-footer-cell: {
-                    height: 64px;
+                    min-height: 64px;
                     color: rgba(0, 0, 0, var(--dark-secondary-opacity));
                     font-size: 16px;
+                    font-weight: bold;
                 }
                 ;
                 --vaadin-grid-body-row-hover-cell: {
@@ -115,16 +123,53 @@
                 }
                 ;
             }
-            
+
+            vaadin-grid#material .text-left {
+                text-align: left;
+                padding-right: 10px;
+            }
+
             vaadin-grid#material .text-center {
                 text-align: center;
             }
+
             vaadin-grid#material .text-right {
                 text-align: right;
+                padding-right: 10px;
             }
-            
+
+
+
             vaadin-grid#material .cursor {
                 cursor: pointer
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            * {
+                font-family: 'CSChatThaiUI', sans-serif;
+                -webkit-font-smoothing: antialiased;
+                font-size: var(--font-size-h5);
+            }
+
+            .button-top {
+                margin: 20px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .text-head {
+                text-align: center;
+                padding: 10px 0px 10px 10px;
+                background-color: var(--paper-grey-100);
+                color: var(--paper-grey-600);
+                font-size: var(--font-size-h3);
+                /*font-family: 'rsuregular', sans-serif;
+        -webkit-font-smoothing: antialiased;*/
             }
         </style>
     </template>

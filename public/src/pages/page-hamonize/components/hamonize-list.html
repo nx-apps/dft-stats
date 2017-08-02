@@ -1,21 +1,34 @@
-
 <link rel="import" href="./../../components/format-number-behavior.html">
-
+<link rel="import" href="./../../components/month-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
 <dom-module id="hamonize-list">
     <style include="page-style flex-style">
-        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(2),
-        table.gl-table-default > tfoot > tr > td:nth-child(2) {
+        table.gl-table-default>thead>tr:nth-child(1)>th:nth-child(2),
+        table.gl-table-default>tfoot>tr>td:nth-child(2) {
             width: 15%;
         }
-        table.gl-table-default > thead > tr:nth-child(1) > th:nth-child(3),
-        table.gl-table-default > tfoot > tr > td:nth-child(3) {
+
+        table.gl-table-default>thead>tr:nth-child(1)>th:nth-child(3),
+        table.gl-table-default>tfoot>tr>td:nth-child(3) {
             width: 30%;
         }
     </style>
     <template>
         <paper-material elevation="1" class="container">
+            <template is="dom-if" if="[[!checkData(riceList)]]">
+                <div class="horizontal layout">
+                    <div class="flex-3">
+                        <!--<div style="margin:10px 0px 10px 0px;">ชื่อบริษัท : {{item.company_name_th}}</div>-->
+                    </div>
+                    <div class="flex layout end-justified ">
+                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportHamonize">
+                            <iron-icon icon="assignment"></iron-icon>
+                            ออกรายงาน
+                        </paper-button>
+                    </div>
+                </div>
+            </template>
             <table class="gl-table-default">
                 <thead>
                     <tr>
@@ -41,11 +54,12 @@
                 <tbody>
                     <template is="dom-if" if="[[checkData(riceList)]]">
                         <tr>
-                            <td colspan="7" class="no-data">ไม่พบข้อมูล</td>
+                            <td colspan="9" class="no-data">ไม่พบข้อมูล</td>
                         </tr>
                     </template>
-                    
-                    <template is="dom-repeat" items={{riceList}} >
+
+                    <template is="dom-repeat" items={{riceList}}>
+
                         <tr>
                             <td style="text-align: center;">[[_Obindex(index)]]</td>
                             <td>[[item.hmcode]]</td>
@@ -78,34 +92,39 @@
     <script>
         Polymer({
             is: 'hamonize-list',
-            behaviors:[
+            behaviors: [
                 DataManageBehavior,
                 ReduxBehavior,
                 FormatNumberBehavior,
-                commonLogic
+                commonLogic,
+                MonthBehavior
             ],
-            properties:{
+            properties: {
                 // dataList:{
                 //     statePath:'hamonize.list',
                 //     observer:'totalcal'
                 // },
-                total:{
+                total: {
                     type: Object,
-                    value:{}
+                    value: {}
                 },
                 riceList: {
                     statePath: 'hamonize.rice_list',
-                    observer:'totalcal'
+                    observer: 'totalcal'
                 }
             },
-            totalcal(dataList){
-                this.set('total.net_weight_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i , 0));
-                this.set('total.fob_amt_baht_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i , 0));
-                this.set('total.fob_amt_i',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i , 0));
-                this.set('total.net_weight_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e , 0));
-                this.set('total.fob_amt_baht_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e , 0));
-                this.set('total.fob_amt_e',Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e , 0));
+            totalcal(dataList) {
+                this.set('total.net_weight_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0));
+                this.set('total.fob_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0));
+                this.set('total.fob_amt_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i, 0));
+                this.set('total.net_weight_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0));
+                this.set('total.fob_amt_baht_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0));
+                this.set('total.fob_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0));
             },
+            printReportHamonize() {
+                // console.log(this.search);
+                window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
+            }
         });
     </script>
 </dom-module>

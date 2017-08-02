@@ -1,5 +1,6 @@
 <link rel="import" href="./../../components/format-number-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
+<link rel="import" href="./../../components/month-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
 <dom-module id="company-list">
     <style include="page-style flex-style">
@@ -11,6 +12,11 @@
         table.gl-table-default > tfoot > tr > td:nth-child(3) {
             width: 30%;
         } */
+        .company{
+            margin:10px 0px 10px 0px;
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
     <template>
         <paper-material elevation="1" class="container">
@@ -18,20 +24,28 @@
                 <div style="text-align:center">ไม่พบข้อมูล</div>
             </template>
             <template is="dom-repeat" items={{list}}>
-                <div style="margin:10px 0px 10px 0px;">ชื่อบริษัท : {{item.company_name_th}}</div>
+                <div class="horizontal layout ">
+                    <div class="flex-3">
+                        <div class="company">
+                            ชื่อบริษัท : {{item.company_name_th}}
+                        </div>
+                    </div>
+                    <div class="flex layout end-justified ">
+                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportCompany">
+                            <iron-icon icon="assignment"></iron-icon>
+                            ออกรายงาน
+                        </paper-button>
+                    </div>
+                </div>
                 <table class="gl-table-default">
                     <thead>
                         <tr>
                             <th class="label-head" rowspan="2">ประเทศ</th>
                             <th class="label-head" rowspan="2">ชนิดข้าว</th>
                             <th class="label-head" colspan="3">นำเข้า</th>
-                            <!--<th class="label-head">มูลค่า (บาท)</th>-->
                             <th class="label-head" colspan="3">ส่งออก</th>
-                            <!--<th class="label-head">มูลค่า (บาท)</th>-->
                         </tr>
                         <tr>
-                            <!--<th class="label-head">HM CODE</th>-->
-                            <!--<th class="label-head">ชนิดข้าว</th>-->
                             <th class="label-head">ปริมาณ (ตัน)</th>
                             <th class="label-head">มูลค่า (บาท)</th>
                             <th class="label-head">มูลค่า (USD)</th>
@@ -52,7 +66,6 @@
                                     <td class="format-number">[[formatNumber(country.net_weight_e)]]</td>
                                     <td class="format-number">[[formatNumber(country.fob_amt_baht_e)]]</td>
                                     <td class="format-number">[[formatNumber(country.fob_amt_e)]]</td>
-                                    <!-- <td class="format-number">[[formatNumber(item.fob_amt_baht_e)]]</td> -->
                                 </tr>
                             </template>
                         </template>
@@ -83,7 +96,8 @@
                 DataManageBehavior,
                 ReduxBehavior,
                 FormatNumberBehavior,
-                commonLogic
+                commonLogic,
+                MonthBehavior
             ],
             properties: {
                 list: {
@@ -106,17 +120,24 @@
                 data.total_fob_amt_baht_e = 0
                 data.total_fob_amt_e = 0
 
-                let cal = (prop,item,sum)=>{
+                let cal = (prop, item, sum) => {
                     return data[prop] + item.map((item2) => item2[sum]).reduce((acc, cur) => acc + cur, 0)
                 }
                 data.country_name_th.map((item, index) => {
-                    data.total_net_weight_i = cal('total_net_weight_i',item,'net_weight_i')
-                    data.total_fob_amt_baht_i = cal('total_fob_amt_baht_i',item,'fob_amt_baht_i')
-                    data.total_fob_amt_i = cal('total_fob_amt_i',item,'fob_amt_i')
-                    data.total_net_weight_e = cal('total_net_weight_e',item,'net_weight_e')
-                    data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e',item,'fob_amt_baht_e')
-                    data.total_fob_amt_e =  cal('total_fob_amt_e',item,'fob_amt_e')
+                    data.total_net_weight_i = cal('total_net_weight_i', item, 'net_weight_i')
+                    data.total_fob_amt_baht_i = cal('total_fob_amt_baht_i', item, 'fob_amt_baht_i')
+                    data.total_fob_amt_i = cal('total_fob_amt_i', item, 'fob_amt_i')
+                    data.total_net_weight_e = cal('total_net_weight_e', item, 'net_weight_e')
+                    data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e', item, 'fob_amt_baht_e')
+                    data.total_fob_amt_e = cal('total_fob_amt_e', item, 'fob_amt_e')
                 })
+            },
+            printReportCompany(e) {
+                console.log(this.search);
+                // this.search.taxNo = e.currentTarget.data.country_name_th[0][0].company_taxno
+                // console.log(e.currentTarget.data.country_name_th[0][0].company_taxno);
+                // console.log(this.genUrl(this.search));
+                window.open('./api/report/search/company?' + this.genUrl(this.search))
             }
         });
     </script>

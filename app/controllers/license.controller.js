@@ -20,15 +20,17 @@ exports.get = function (req, res) {
     var val = req.query;
     // console.log(req.query);
     if (req.method == "POST") val = req.body;
-    if (typeof val.dateStart === "undefined") dateStart = '';
-    if (typeof val.dateEnd === "undefined") dateEnd = '';
-    console.log(val);
+    if (typeof val.dateStart === "undefined") val.dateStart = '';
+    if (typeof val.dateEnd === "undefined") val.dateEnd = '';
+    if (typeof val.refCode === "undefined") val.refCode = '';
+    // console.log(val);
+    // val
     // let reference_code2 = req.query.reference_code2 || ''
-    j.query("mssql", `exec sp_stats_query_reference_code @refCode= ?, @dateStart= ?, @dateEnd= ?`,
+    j.query("mssql", `exec sp_stats_query_reference_code @refCode= ? ,@dateStart= ?, @dateEnd= ?`,
         [val.refCode, val.dateStart, val.dateEnd],
         // j.query("mssql", `select * from hamonize_type`, [],
         function (err, data) {
-            console.log(data);
+            // console.log(data);
             res.send(data)
         })
 }

@@ -7,11 +7,11 @@
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
            <section class="container">
-                <company-search></company-search>
+                <company-search data = "{{data}}"></company-search>
            </section>
            <section class="container">
                 <div class="header">ข้อมูลผู้นำเข้า/ส่งออกข้าว</div>
-                 <company-list></company-list>
+                 <company-list search = "[[data]]"></company-list>
            </section>
         </div>
     </template>
