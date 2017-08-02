@@ -23,7 +23,7 @@ export function certAction(store){
       CERT_SEARCH(data){
         this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
         // console.log(data); 
-        axios.get('/cert/re01?'+data)
+        axios.post('/cert/get',data)
         .then( (response)=>{
             // console.log(response);
             this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){

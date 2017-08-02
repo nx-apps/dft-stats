@@ -7,11 +7,11 @@
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
            <section class="container">
-                <license-search></license-search>
+                <license-search data="{{data}}"></license-search>
            </section>
            <section class="container">
                 <div class="header">ข้อมูลใบอนุญาตที่เกี่ยวกับสินค้าข้าว</div>
-                 <license-list></license-list>
+                 <license-list search = "[[data]]"></license-list>
            </section>
         </div>
     </template>

@@ -7,11 +7,11 @@
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
            <section class="container">
-                <cert-search></cert-search>
+                <cert-search data= "{{data}}"></cert-search>
            </section>
            <section class="container">
                <div class="header">ข้อมูลหนังสือรับรองการนำเข้าส่งออกสินค้าข้าว</div>
-                 <cert-list></cert-list>
+                 <cert-list search = "[[data]]"></cert-list>
            </section>
         </div>
     </template>

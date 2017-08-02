@@ -78,58 +78,71 @@
                     <div class="flex3child">
                     </div>
                 </div> -->
+                <div class="horizontal layout start">
+                    <div class="flex">
+                        <div class="flex-horizontal-with-ratios" style="width:90%">
+                            <vaadin-grid id="material" items="[[companyCodeList]]" inverted$="[[inverted]]">
 
-                <div class="flex-horizontal-with-ratios">
-                    <vaadin-grid id="material" items="[[companyCodeList]]" inverted$="[[inverted]]">
+                                <vaadin-grid-column width="200px" flex-grow="0">
+                                    <template class="header">
+                                        <vaadin-gird-filter>
+                                            <paper-input label="เลขประจำตัวผู้เสียภาษี" placeholder="ค้นหา" id="company_taxno" on-value-changed="searchInput" allowed-pattern="[0-9]"></paper-input>
+                                        </vaadin-gird-filter>
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="selectCompany">[[item.company_taxno]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
 
-                        <vaadin-grid-column width="50px" flex-grow="0">
-                            <template class="header">
-                                <!--<paper-checkbox on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">เลือกทั้งหมด</paper-checkbox>-->
-                            </template>
-                            <template>
-                                <div class="text-center">
-                                    <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
-                                </div>
-                            </template>
-                        </vaadin-grid-column>
+                                <vaadin-grid-column width="auto">
+                                    <template class="header">
+                                        <vaadin-gird-filter>
+                                            <paper-input label="ชื่อบริษัท (ไทย)" placeholder="ค้นหา" id="company_name_th" on-value-changed="searchInput" allowed-pattern="[ก-๙]"></paper-input>
+                                        </vaadin-gird-filter>
+                                    </template>
+                                    <template>
+                                        <div on-click="selectCompany">
+                                            [[item.company_name_th]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-horizontal-with-ratios" style="width:90%">
+                            <vaadin-grid id="material" items="{{selectedCompany}}">
+                                <vaadin-grid-column width="200px" flex-grow="0">
+                                    <template class="header">เลขประจำตัวผู้เสียภาษี
+                                        <!--<vaadin-gird-filter>
+                                            <paper-input label="เลขประจำตัวผู้เสียภาษี" placeholder="ค้นหา" id="company_taxno" on-value-changed="searchInput" allowed-pattern="[0-9]"></paper-input>
+                                        </vaadin-gird-filter>-->
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="deselectCompany">[[item.company_taxno]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
 
-                        <vaadin-grid-column width="200px" flex-grow="0">
-                            <template class="header">
-                                <!-- <vaadin-gird-filter-common aria-label="Company Taxno" path="company_taxno" value="[[_company_taxno]]">  
-                                </vaadin-gird-filter-common>   -->
-                                <vaadin-gird-filter>
-                                    <paper-input label="เลขประจำตัวผู้เสียภาษี" placeholder="ค้นหา" id="company_taxno" on-value-changed="searchInput" allowed-pattern="[0-9]"></paper-input>
-                                </vaadin-gird-filter>
-                            </template>
-                            <template>[[item.company_taxno]]</template>
-                        </vaadin-grid-column>
+                                <vaadin-grid-column width="auto">
+                                    <template class="header">ชื่อบริษัท (ไทย)
+                                        <!--<vaadin-gird-filter>
+                                            <paper-input label="ชื่อบริษัท (ไทย)" placeholder="ค้นหา" id="company_name_th" on-value-changed="searchInput" allowed-pattern="[ก-๙]"></paper-input>
+                                        </vaadin-gird-filter>-->
+                                    </template>
+                                    <template>
+                                        <div on-click="deselectCompany">[[item.company_name_th]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
 
-                        <vaadin-grid-column width="475px" flex-grow="0" resizable>
-                            <template class="header">
-                                <!-- <vaadin-gird-filter-common aria-label="Company Name" path="company_name_th" value="[[_company_name_th]]">
-                                </vaadin-gird-filter-common> -->
-                                <vaadin-gird-filter>
-                                    <paper-input label="ชื่อบริษัท (ไทย)" placeholder="ค้นหา" id="company_name_th" on-value-changed="searchInput" allowed-pattern="[ก-๙]"></paper-input>
-                                </vaadin-gird-filter>
-                            </template>
-                            <template>[[item.company_name_th]]</template>
-                        </vaadin-grid-column>
 
-                        <vaadin-grid-column width="475px" flex-grow="0" resizable>
-                            <template class="header">
-                                <!-- <vaadin-gird-filter-common aria-label="Company Name" path="company_name_en" value="[[_company_name_en]]">
-                                </vaadin-gird-filter-common> -->
-                                <vaadin-gird-filter>
-                                    <paper-input label="ชื่อบริษัท (อังกฤษ)" placeholder="ค้นหา" id="company_name_en" on-value-changed="searchInput" allowed-pattern="[a-zA-Z]"></paper-input>
-                                </vaadin-gird-filter>
-                            </template>
-                            <template>[[item.company_name_en]]</template>
-                        </vaadin-grid-column>
 
-                    </vaadin-grid>
                 </div>
-
-            </div>
         </paper-material>
     </template>
     <script>
@@ -179,6 +192,10 @@
                     value: {},
                     notify: true
                 },
+                selectedCompany: {
+                    type: Array,
+                    value: []
+                },
                 inverted: {
                     type: Boolean,
                     value: false
@@ -223,9 +240,10 @@
             getCompanyValue() {
                 var selects = this.$.material.selectedItems;
                 let arr = [];
-                selects.map((taxno) => {
+                this.selectedCompany.map((taxno) => {
                     arr.push(taxno.company_taxno)
                 })
+                // console.log(this.selectedCompany);
                 var taxno = arr.join(',');
                 var data = {
                     taxNo: taxno,
@@ -275,6 +293,15 @@
             },
             _isSelected: function (inverted, selected) {
                 return inverted != selected;
+            },
+            selectCompany(e) {
+                this.push('selectedCompany', e.model.__data__.item)
+                // console.log(e.model.__data__.item);
+            },
+            deselectCompany(e){
+                let index = e.model.__data__.index
+                this.splice('selectedCompany', index, 1);
+                // console.log(e.model.__data__.index);
             }
         });
     </script>

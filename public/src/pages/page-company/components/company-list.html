@@ -12,8 +12,9 @@
         table.gl-table-default > tfoot > tr > td:nth-child(3) {
             width: 30%;
         } */
-        .company{
-            margin:10px 0px 10px 0px;
+
+        .company {
+            margin: 10px 0px 10px 0px;
             font-size: 18px;
             font-weight: bold;
         }
@@ -75,8 +76,8 @@
                             [[sumTotal(item)]]
                             <td></td>
                             <td>รวม</td>
-                            <td class="total">[[formatNumber(item.total_net_weight_i)]]</td>
-                            <td class="total">[[formatNumber(item.total_fob_amt_baht_i)]]</td>
+                            <td class="total">[[item.total_fob_amt_e]]</td>
+                            <td class="total">[[item.total_fob_amt_baht_i]]</td>
                             <td class="total">[[formatNumber(item.total_fob_amt_i)]]</td>
                             <td class="total">[[formatNumber(item.total_net_weight_e)]]</td>
                             <td class="total">[[formatNumber(item.total_fob_amt_baht_e)]]</td>
@@ -111,6 +112,7 @@
                 }
             },
             sumTotal(data) {
+
                 // console.log(item.country_name_th);
                 let num = 0
                 data.total_net_weight_i = 0
@@ -131,9 +133,11 @@
                     data.total_fob_amt_baht_e = cal('total_fob_amt_baht_e', item, 'fob_amt_baht_e')
                     data.total_fob_amt_e = cal('total_fob_amt_e', item, 'fob_amt_e')
                 })
+
+                console.log(data);
             },
             printReportCompany(e) {
-                console.log(this.search);
+                // console.log(this.search);
                 // this.search.taxNo = e.currentTarget.data.country_name_th[0][0].company_taxno
                 // console.log(e.currentTarget.data.country_name_th[0][0].company_taxno);
                 // console.log(this.genUrl(this.search));

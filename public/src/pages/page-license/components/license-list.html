@@ -1,14 +1,30 @@
 <link rel="import" href="./../../components/format-number-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../components/month-behavior.html">
 <dom-module id="license-list">
     <style include="page-style flex-style"></style>
     <template>
         <paper-material elevation="1" class="container">
+            <template is="dom-if" if="[[!checkData(dataList)]]">
+                <div class="horizontal layout ">
+                    <div class="flex-3">
+                        <!--<div class="company">
+                            ชื่อบริษัท : {{item.company_name_th}}
+                        </div>-->
+                    </div>
+                    <div class="flex layout end-justified ">
+                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportLicense">
+                            <iron-icon icon="assignment"></iron-icon>
+                            ออกรายงาน
+                        </paper-button>
+                    </div>
+                </div>
+            </template>
             <table class="gl-table-default">
                 <thead>
                     <tr>
-                        <th class="label-head" >ลำดับ</th>
+                        <th class="label-head">ลำดับ</th>
                         <th class="label-head">เลขที่ใบอนุญาต</th>
                         <th class="label-head">ประเภทใบอนุญาต</th>
                         <th class="label-head" style="width:20%;">บริษัท</th>
@@ -49,12 +65,16 @@
                 DataManageBehavior,
                 ReduxBehavior,
                 FormatNumberBehavior,
-                commonLogic
+                commonLogic,
+                MonthBehavior
             ],
             properties: {
                 dataList: {
                     statePath: 'license.licenseList'
                 }
+            },
+            printReportLicense() {
+                window.open('./api/report/search/referenceCode?' + this.genUrl(this.search))
             }
         });
     </script>

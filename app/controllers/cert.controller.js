@@ -1,19 +1,19 @@
-var today = new Date();
-var dd = today.getDate();
-var dt = today.getDate() + 1;
-var mm = today.getMonth() + 1; //January is 0!
-var yyyy = today.getFullYear();
-if (dd < 10) {
-    dd = '0' + dd;
-}
-if (dt < 10) {
-    dt = '0' + dt;
-}
-if (mm < 10) {
-    mm = '0' + mm;
-}
-var today = '2016' + '-' + mm + '-' + dd;
-var tomorrow = '2016' + '-' + mm + '-' + dt;
+// var today = new Date();
+// var dd = today.getDate();
+// var dt = today.getDate() + 1;
+// var mm = today.getMonth() + 1; //January is 0!
+// var yyyy = today.getFullYear();
+// if (dd < 10) {
+//     dd = '0' + dd;
+// }
+// if (dt < 10) {
+//     dt = '0' + dt;
+// }
+// if (mm < 10) {
+//     mm = '0' + mm;
+// }
+// var today = '2016' + '-' + mm + '-' + dd;
+// var tomorrow = '2016' + '-' + mm + '-' + dt;
 
 // exports.re01 = function (req, res) {
 //     var r = req.r;
@@ -119,24 +119,24 @@ var tomorrow = '2016' + '-' + mm + '-' + dt;
 //         })
 
 // }
-exports.sp01 = function (req, res) {
-    var j = req.jdbc;
-    var startDate = today, e = tomorrow;
-    if (typeof req.query.sdate !== "undefined") {
-        startDate = req.query.sdate
-    }
-    if (typeof req.query.edate !== "undefined") {
-        endDate = req.query.edate
-    }
-    let reference_code2 = req.query.reference_code2 || ''
+// exports.sp01 = function (req, res) {
+//     var j = req.jdbc;
+//     var startDate = today, e = tomorrow;
+//     if (typeof req.query.sdate !== "undefined") {
+//         startDate = req.query.sdate
+//     }
+//     if (typeof req.query.edate !== "undefined") {
+//         endDate = req.query.edate
+//     }
+//     let reference_code2 = req.query.reference_code2 || ''
     
-    j.query("mssql", `exec sp_qry_stats_cert @refCode= ?, @startDate= ?, @endDate= ?`,
-     [reference_code2,startDate, endDate],
-        // j.query("mssql", `select * from hamonize_type`, [],
-        function (err, data) {
-            res.send(data)
-        })
-}
+//     j.query("mssql", `exec sp_qry_stats_cert @refCode= ?, @startDate= ?, @endDate= ?`,
+//      [reference_code2,startDate, endDate],
+//         // j.query("mssql", `select * from hamonize_type`, [],
+//         function (err, data) {
+//             res.send(data)
+//         })
+// }
 // exports.sp02 = function (req, res) {
 //     var j = req.jdbc;
 //     var s = today, e = tomorrow;
@@ -152,3 +152,22 @@ exports.sp01 = function (req, res) {
 //             res.send(data)
 //         })
 // }
+exports.get = function (req, res) {
+    var j = req.jdbc;
+    var val = req.query;
+    // console.log(req.query);
+    if (req.method == "POST") val = req.body;
+    if (typeof val.dateStart === "undefined") val.dateStart = '';
+    if (typeof val.dateEnd === "undefined") val.dateEnd = '';
+    if (typeof val.refCode === "undefined") val.refCode = '';
+    // console.log(val);
+    // val
+    // let reference_code2 = req.query.reference_code2 || ''
+    j.query("mssql", `exec sp_stats_query_reference_code @refCode= ? ,@dateStart= ?, @dateEnd= ?`,
+        [val.refCode, val.dateStart, val.dateEnd],
+        // j.query("mssql", `select * from hamonize_type`, [],
+        function (err, data) {
+            // console.log(data);
+            res.send(data)
+        })
+}
