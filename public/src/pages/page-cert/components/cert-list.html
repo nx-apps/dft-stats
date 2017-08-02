@@ -69,9 +69,13 @@
                 }
             },
             printReportCent(e) {
-                let url = { refCode : e.currentTarget.data.reference_code2}
-                console.log(e.currentTarget.data);
-                // window.open('./api/report/search/referenceCode?' + this.genUrl(url))
+                
+                let url = { refCode : e.currentTarget.data.invh_run_auto}
+                if (e.currentTarget.data.contract_type === "EC") {
+                    window.open('./api/report/search/ec?' + this.genUrl(url))
+                }else {
+                   window.open('./api/report/search/impt?' + this.genUrl(url)) 
+                }
             }
         });
     </script>
