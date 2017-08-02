@@ -121,7 +121,7 @@ exports.ec = function (req, res) {
         [val.refCode],
         function (err, data) {
             data = JSON.parse(data);
-            // res.json(main);
+            // res.json(data);
             res.ireport("search/ec.jasper", req.query.export || "pdf", data, {});
         });
 }
