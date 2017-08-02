@@ -44,8 +44,8 @@
                         <!-- เลขพิกัดศุลกากร : -->
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{listYear}}" item-label-path="year" item-value-path="year"
-                            value="{{data.hmYear}}" on-value-changed="getYearRice">
+                        <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{checkYear(data.dateStart,listYear)}}" item-label-path="year"
+                            item-value-path="year" value="{{data.hmYear}}" on-value-changed="getYearRice">
                             <template>
                                 [[item.year]]
                             </template>
@@ -274,7 +274,22 @@
                 return inverted != selected;
             },
             getHm() {
-                console.log(this.$.material.selectedItems);
+                // console.log(this.$.material.selectedItems);
+            },
+            checkYear(dateStart, listYear) {
+                let year = dateStart.split('-')[0]
+                // console.log(this.data.hmYear);
+                if(year <= this.data.hmYear)
+                    this.set('data.hmYear','')
+                let hmYear = []
+                listYear.map((item)=>{
+                    if(year >= item.year)
+                    hmYear.push({year :item.year})
+                    // console.log(item.year);
+                })
+                // console.log(hmYear);
+                return hmYear
+                
             },
             // end check box
             // obdata(data) { console.log(data) },
@@ -290,11 +305,11 @@
             },
             setHamonizeSdate(data) {
                 try {
-                    // console.log(data.detail.value);
                     let dateStart = new Date(data.detail.value).getFullYear(),
                         dateEnd = new Date(this.data.dateEnd).getFullYear()
                     this.setYearHamonize(dateStart, dateEnd)
                 } catch (e) {
+
                 }
             },
             setHamonizeEdate(data) {
@@ -304,6 +319,7 @@
                         dateEnd = new Date(data.detail.value).getFullYear()
                     this.setYearHamonize(dateStart, dateEnd)
                 } catch (e) {
+
                 }
             },
             _setItem(hmcode) {
