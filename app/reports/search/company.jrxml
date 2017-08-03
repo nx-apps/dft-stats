@@ -352,7 +352,7 @@
 	<detail>
 		<band height="20">
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="27" y="0" width="105" height="20" uuid="820e2d1d-0150-416f-b417-6d5201833b25"/>
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="27" y="0" width="105" height="20" uuid="820e2d1d-0150-416f-b417-6d5201833b25"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
