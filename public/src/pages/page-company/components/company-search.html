@@ -4,6 +4,10 @@
 <link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-filter.html">
 
+<link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
+
 <dom-module id="company-search">
     <style include="page-style flex-style">
         vaadin-grid {
@@ -80,9 +84,9 @@
                     <div class="flex3child">
                     </div>
                 </div> -->
-                <div class="horizontal layout start">
-                    <div class="flex">
-                        <div class="flex-horizontal-with-ratios" style="width:90%">
+                <div class="horizontal layout center">
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
                             <vaadin-grid id="material" items="[[companyCodeList]]" inverted$="[[inverted]]">
 
                                 <vaadin-grid-column width="200px" flex-grow="0">
@@ -113,7 +117,15 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <div class="flex-horizontal-with-ratios" style="width:90%">
+                        <div class="horizontal layout end">
+                            <div class="title">เลือกบริษัท</div>
+                            <iron-icon icon="arrow-forward"></iron-icon>
+                        </div>
+
+
+                    </div>
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
                             <vaadin-grid id="material" items="{{selectedCompany}}">
                                 <vaadin-grid-column width="200px" flex-grow="0">
                                     <template class="header">เลขประจำตัวผู้เสียภาษี
@@ -300,7 +312,7 @@
                 this.push('selectedCompany', e.model.__data__.item)
                 // console.log(e.model.__data__.item);
             },
-            deselectCompany(e){
+            deselectCompany(e) {
                 let index = e.model.__data__.index
                 this.splice('selectedCompany', index, 1);
                 // console.log(e.model.__data__.index);
