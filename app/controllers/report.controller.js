@@ -31,7 +31,7 @@ exports.h01 = function (req, res) {
     };
 
     j.query("mssql", ` exec sp_qry_stats_hmcode @hmparent= ?, @hmchild= ? ,@startDate= ?, @endDate= ?, @refDB = ? `, [
-        
+
         req.query.hmparent || '1006',
         req.query.hmchild,
         s,
@@ -143,15 +143,15 @@ exports.dailyCountry = function (req, res) {
         sdate: new Date(s).getFullYear() + "-" + (new Date(s).getMonth() + 1) + "-" + new Date(s).getDate(),
         edate: new Date(e).getFullYear() + "-" + (new Date(e).getMonth() + 1) + "-" + new Date(e).getDate(),
     };
-    j.query("mssql", "exec sp_stats_rpt_daily_country @startDate=?, @endDate=?", [s, e], 
-    function (err, data) {
-        // res.send(data);
-        req.r.json(data).run().then(function (d2) {
-            res.ireport("daily/rpt_invioce_country.jasper", req.query.export || "pdf", d2, param);
+    j.query("mssql", "exec sp_stats_rpt_daily_country @startDate=?, @endDate=?", [s, e],
+        function (err, data) {
+            // res.send(data);
+            req.r.json(data).run().then(function (d2) {
+                res.ireport("daily/rpt_invioce_country.jasper", req.query.export || "pdf", d2, param);
+            })
         })
-    })
 }
-exports.dailyPricerice= function (req, res) {
+exports.dailyPricerice = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
         // res.send(data);
@@ -160,13 +160,19 @@ exports.dailyPricerice= function (req, res) {
         })
     })
 }
-exports.dailyExportrice= function (req, res) {
+exports.dailyExportrice = function (req, res) {
 
-    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_exportrice @currentDate=?, @amountTime=?", [req.query.currentDate, req.query.amountTime], function (err, data) {
-        // res.send(data);
-        // req.r.json(data)
-        // .run().then(function (d2) {
-            res.ireport("daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data);
-        // })
-    })
+    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_exportrice @currentDate=?, @amountTime=?",
+        [req.query.currentDate, req.query.amountTime],
+        function (err, data) {
+            data = JSON.parse(data)
+            // res.send(data);
+            // req.r.json(data)
+            // .run().then(function (d2) {
+            res.ireport("daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data, {
+                OUTPUT_NAME: 'สรุปสถานการณ์ส่งออกข้าว' + req.query.currentDate.replace('-', '_'),
+                CURRENT_DATE: req.query.currentDate
+            });
+            // })
+        })
 }
