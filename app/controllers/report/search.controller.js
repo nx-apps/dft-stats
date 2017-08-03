@@ -31,6 +31,7 @@ exports.company = function (req, res) {
         })
 }
 exports.expt = function (req, res) {
+
     var val = req.query;
 
 

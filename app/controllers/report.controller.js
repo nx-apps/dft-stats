@@ -162,10 +162,11 @@ exports.dailyPricerice= function (req, res) {
 }
 exports.dailyExportrice= function (req, res) {
 
-    req.jdbc.query("mssql", "exec sp_rpt_stats_daily_exportrice ", [], function (err, data) {
+    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_exportrice @currentDate=?, @amountTime=?", [req.query.currentDate, req.query.amountTime], function (err, data) {
         // res.send(data);
-        req.r.json(data).run().then(function (d2) {
-            res.ireport("daily/rpt_invioce_exportrice.jasper", req.query.export || "pdf", d2, { approveDate: req.query.date });
-        })
+        // req.r.json(data)
+        // .run().then(function (d2) {
+            res.ireport("daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data);
+        // })
     })
 }
