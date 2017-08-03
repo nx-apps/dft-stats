@@ -207,7 +207,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{startMonth}+"-"+new nylon.utility.NumberFormat().toThaiDateShort($F{endMonth})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["1 - "+new nylon.utility.NumberFormat().toThaiDateShort($F{endMonth})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
 				<reportElement stretchType="RelativeToBandHeight" x="113" y="0" width="109" height="20" uuid="020fbde4-ff14-4a1f-bd18-46d5db6b97ab"/>
