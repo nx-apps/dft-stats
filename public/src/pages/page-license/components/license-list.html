@@ -2,56 +2,95 @@
 <link rel="import" href="./../../components/data-manage-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
 <link rel="import" href="./../../components/month-behavior.html">
+
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<link rel="import" href="./../../components/vaadin-gird-filter-common.html">
 <dom-module id="license-list">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        vaadin-grid {
+            height: 100vh;
+        }
+    </style>
     <template>
         <paper-material elevation="1" class="container">
-            <!--<template is="dom-if" if="[[!checkData(dataList)]]">
-                <div class="horizontal layout ">
-                    <div class="flex-3">
-                    </div>
-                    <div class="flex layout end-justified ">
-                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportLicense">
-                            <iron-icon icon="assignment"></iron-icon>
-                            ออกรายงาน
-                        </paper-button>
-                    </div>
-                </div>
-            </template>-->
-            <table class="gl-table-default">
-                <thead>
-                    <tr>
-                        <th class="label-head">ลำดับ</th>
-                        <th class="label-head">เลขที่ใบอนุญาต</th>
-                        <th class="label-head">ประเภทใบอนุญาต</th>
-                        <th class="label-head" style="width:20%;">บริษัท</th>
-                        <th class="label-head">ปริมาณ (ตัน)</th>
-                        <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head" style="width:10%;">วันที่อนุญาต</th>
-                        <th class="label-head" style="width:10%;">วันที่หมดอายุ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template is="dom-if" if="[[checkData(dataList)]]">
-                        <tr>
-                            <td colspan="9" class="no-data">ไม่พบข้อมูล</td>
-                        </tr>
-                    </template>
+            <vaadin-grid id="material" items="[[dataList]]">
 
-                    <template is="dom-repeat" items={{dataList}}>
-                        <tr on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">
-                            <td style="text-align: center;">[[_Obindex(index)]]</td>
-                            <td>[[item.reference_code2]]</td>
-                            <td>[[item.contract_type_name]]</td>
-                            <td>[[item.company_name]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht)]]</td>
-                            <td>[[item.approve_date]]</td>
-                            <td>[[item.expire_date]]</td>
-                        </tr>
+                <vaadin-grid-column width="10%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-center">
+                            ลำดับ
+                        </div>
                     </template>
-                </tbody>
-            </table>
+                    <template>
+                        <div class="text-center" on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">
+                            [[_Obindex(index)]]
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="23%" flex-grow="0" resizable>
+                    <template class="header">
+                        <div class="text-center">เลขที่หนังสือรับรอง</div>
+                        <vaadin-gird-filter-common path="reference_code2" value="[[_reference_code2]]">
+                        </vaadin-gird-filter-common>
+                    </template>
+                    <template>
+                        <div class="text-center" on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">[[item.reference_code2]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="23%" flex-grow="0" resizable>
+                    <template class="header">
+                        <div class="text-center">ประเภทหนังสือรับรอง</div>
+                        <vaadin-gird-filter-common path="contract_type_name" value="[[_contract_type_name]]">
+                        </vaadin-gird-filter-common>
+
+                    </template>
+                    <template>
+                        <div class="text-center" on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">[[item.contract_type_name]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-right">ปริมาณ (ตัน)</div>
+                    </template>
+                    <template>
+                        <div class="text-right" on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.net_weight)]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-right">มูลค่า (บาท)</div>
+                    </template>
+                    <template>
+                        <div class="text-right" on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.fob_amt_baht)]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="10%" flex-grow="0">
+                    <template class="header">วันที่อนุญาต
+                    </template>
+                    <template>
+                        <div on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">
+                            [[item.approve_date]]
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="10%" flex-grow="0">
+                    <template class="header">วันที่หมดอายุ
+                    </template>
+                    <template>
+                        <div on-tap="printReportLicense" style="cursor: pointer;" data="[[item]]">
+                            [[item.expire_date]]
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+
+            </vaadin-grid>
             </div>
         </paper-material>
     </template>

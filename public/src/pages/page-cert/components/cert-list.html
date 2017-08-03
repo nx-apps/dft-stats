@@ -1,56 +1,135 @@
 <link rel="import" href="./../../components/format-number-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
+
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<link rel="import" href="./../../components/vaadin-gird-filter-common.html">
+
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+
 <link rel="import" href="./../../components/month-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
 <dom-module id="cert-list">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        vaadin-grid {
+            height: 100vh;
+        }
+    </style>
     <template>
         <paper-material elevation="1" class="container">
-            <!--<template is="dom-if" if="[[!checkData(dataList)]]">
-                <div class="horizontal layout ">
-                    <div class="flex-3">
-                    </div>
-                    <div class="flex layout end-justified ">
-                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportCent">
-                            <iron-icon icon="assignment"></iron-icon>
-                            ออกรายงาน
-                        </paper-button>
-                    </div>
-                </div>
-            </template>-->
-            <table class="gl-table-default">
+            <vaadin-grid id="material" items="[[dataList]]" multi-sort>
 
-                <thead>
-                    <tr>
-                        <th class="label-head">ลำดับ</th>
-                        <th class="label-head">เลขที่หนังสือรับรอง</th>
-                        <th class="label-head">ประเภทหนังสือรับรอง</th>
-                        <th class="label-head">ปริมาณ (ตัน)</th>
-                        <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head" style="width:10%;">วันที่อนุญาต</th>
-                        <th class="label-head" style="width:10%;">วันที่หมดอายุ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template is="dom-if" if="[[checkData(dataList)]]">
-                        <tr>
-                            <td colspan="9" class="no-data">ไม่พบข้อมูล</td>
-                        </tr>
+                <vaadin-grid-column width="10%" flex-grow="0">
+                    <template class="header">
+                        <div class="text-center">
+                            ลำดับ
+                        </div>
                     </template>
+                    <template>
+                        <div class="text-center" on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">
+                            [[_Obindex(index)]]
+                        </div>
+                    </template>
+                    <template class="footer"></template>
+                </vaadin-grid-column>
 
-                    <template is="dom-repeat" items={{dataList}}>
-                        <tr on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">
-                            <td style="text-align: center;">[[_Obindex(index)]]</td>
-                            <td>[[item.reference_code2]]</td>
-                            <td>[[item.contract_type_name]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht)]]</td>
-                            <td>[[item.approve_date]]</td>
-                            <td>[[item.expire_date]]</td>
-                        </tr>
+                <vaadin-grid-column width="19%" flex-grow="0" resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="reference_code2">
+                            <div class="text-center">
+                                เลขที่
+                            </div>
+                        </vaadin-grid-sorter>
+                        <vaadin-gird-filter-common path="reference_code2" value="[[_reference_code2]]">
+                        </vaadin-gird-filter-common>
                     </template>
-                </tbody>
-            </table>
+                    <template>
+                        <div class="text-center" on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">[[item.reference_code2]]</div>
+                    </template>
+                    <template class="footer"></template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="17%" flex-grow="0" resizable>
+                    <template class="header">
+                        <vaadin-grid-sorter path="contract_type_name">
+                            <div class="text-center">ประเภท</div>
+                        </vaadin-grid-sorter>
+                        <vaadin-gird-filter-common path="contract_type_name" value="[[_contract_type_name]]">
+                        </vaadin-gird-filter-common>
+
+                    </template>
+                    <template>
+                        <div class="text-center" on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">[[item.contract_type_name]]</div>
+                    </template>
+                    <template class="footer">รวม</template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="15%" flex-grow="0">
+                    <template class="header">
+                        <vaadin-grid-sorter path="net_weight">
+                            <div class="text-right">ปริมาณ (ตัน)</div>
+                        </vaadin-grid-sorter>
+                    </template>
+                    <template>
+                        <div class="text-right" on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.net_weight)]]</div>
+                    </template>
+                    <template class="footer">
+                        <div class="text-right">
+                            [[formatNumber(sum.net_weight)]]
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="15%" flex-grow="0">
+                    <template class="header">
+                        <vaadin-grid-sorter path="fob_amt_baht">
+                            <div class="text-right">มูลค่า (บาท)</div>
+                        </vaadin-grid-sorter>
+                    </template>
+                    <template>
+                        <div class="text-right" on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">[[formatNumber(item.fob_amt_baht)]]</div>
+                    </template>
+                    <template class="footer">
+                        <div class="text-right">
+
+                            [[formatNumber(sum.fob_amt_baht)]]
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <vaadin-grid-sorter path="approve_date">
+                            <div class="text-center">วันที่อนุญาต</div>
+                        </vaadin-grid-sorter>
+                    </template>
+                    <template>
+                        <div class="text-center">
+                            <div on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">
+                                [[item.approve_date]]
+                            </div>
+                        </div>
+                    </template>
+                    <template class="footer"></template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="12%" flex-grow="0">
+                    <template class="header">
+                        <vaadin-grid-sorter path="expire_date">
+                            <div class="text-center">วันที่หมดอายุ</div>
+                        </vaadin-grid-sorter>
+                    </template>
+                    <template>
+                        <div class="text-center">
+                            <div on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">
+                                [[item.expire_date]]
+                            </div>
+                        </div>
+                    </template>
+                    <template class="footer"></template>
+                </vaadin-grid-column>
+
+            </vaadin-grid>
         </paper-material>
     </template>
     <script>
@@ -65,16 +144,33 @@
             ],
             properties: {
                 dataList: {
-                    statePath: 'cert.list'
+                    statePath: 'cert.list',
+                    observer: 'sumData'
+                },
+                sum: {
+                    type: Object,
+                    value: {
+                        net_weight: 0,
+                        fob_amt_baht: 0
+                    }
                 }
             },
+            sumData(data) {
+                // console.log(data);
+                let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
+                let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
+                this.set('sum.net_weight', net_weight)
+                this.set('sum.fob_amt_baht', fob_amt_baht)
+            },
             printReportCent(e) {
-                
-                let url = { refCode : e.currentTarget.data.invh_run_auto}
+
+                let url = { refCode: e.currentTarget.data.invh_run_auto }
                 if (e.currentTarget.data.contract_type === "EC") {
                     window.open('./api/report/search/ec?' + this.genUrl(url))
-                }else {
-                   window.open('./api/report/search/impt?' + this.genUrl(url)) 
+                } else if (e.currentTarget.data.contract_type.search('WTO') > -1) {
+                    window.open('./api/report/search/impt?' + this.genUrl(url))
+                } else {
+                    window.open('./api/report/search/expt?' + this.genUrl(url))
                 }
             }
         });

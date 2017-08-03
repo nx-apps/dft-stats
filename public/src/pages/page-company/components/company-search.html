@@ -26,14 +26,16 @@
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.dateStart}}"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateStart}}"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateStart}}"></vaadin-date-picker>-->
                     </div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.dateEnd}}"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateEnd}}"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}"></vaadin-date-picker>-->
                     </div>
                     <div class="btn-search">
                         <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">

@@ -22,7 +22,8 @@
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>-->
                     </div>
                     <!-- [[obDate(data.sdate)]] -->
                     <div class="flexchild"></div>
@@ -30,7 +31,8 @@
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>-->
                     </div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
