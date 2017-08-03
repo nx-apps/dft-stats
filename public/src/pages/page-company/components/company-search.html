@@ -7,7 +7,7 @@
 <link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
-
+<link rel="import" href="./../../components/common-logic.html">
 <dom-module id="company-search">
     <style include="page-style flex-style">
         vaadin-grid {
@@ -42,7 +42,7 @@
                         <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}"></vaadin-date-picker>-->
                     </div>
                     <div class="btn-search">
-                        <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
+                        <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue" >
                             <iron-icon icon="search"></iron-icon>
                             ค้นหา
                         </paper-button>
@@ -51,39 +51,6 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                 </div>
-                <!-- <div class="flex-horizontal-with-ratios">
-                    <div class="flexchild"></div>
-                    <div class="labelSearchDate">
-                        เลขที่ผู้เสียภาษี : 
-                    </div>
-                    <div class="flex2child">
-                        <gl-combo-box id="companySearch" class="textCenter" items="{{companyCodeList}}" item-label-path="label" item-value-path="id" value="{{data.company_taxno}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>
-                    </div>
-                    <div class="flexchild">
-                        <div class="btn-search">                    
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
-                                <iron-icon icon="search"></iron-icon>
-                                ค้นหา
-                            </paper-button>
-                        </div>
-                    </div>
-                </div>  -->
-                <!-- <div class="flex-horizontal-with-ratios">
-                    <div class="flexchild">
-                        <div class="btn-search">                    
-                             <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValueReport">
-                                <iron-icon icon="assignment"></iron-icon>
-                                ออกรายงาน
-                            </paper-button> 
-                        </div>
-                    </div>
-                    <div class="flex3child">
-                    </div>
-                </div> -->
                 <div class="horizontal layout center">
                     <div class="flex-5">
                         <div class="flex-horizontal-with-ratios" style="width:95%">
@@ -118,7 +85,7 @@
                     </div>
                     <div class="flex">
                         <div class="horizontal layout end">
-                            <div class="title">เลือกบริษัท</div>
+                            <div class="title">บริษัทที่เลือก</div>
                             <iron-icon icon="arrow-forward"></iron-icon>
                         </div>
 
@@ -162,7 +129,7 @@
     <script>
         Polymer({
             is: 'company-search',
-            behaviors: [ReduxBehavior, MonthBehavior],
+            behaviors: [ReduxBehavior, MonthBehavior,commonLogic],
             properties: {
                 companyCodeList: {
                     statePath: 'company.companyCodeList',
