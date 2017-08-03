@@ -153,6 +153,10 @@
                     value: {}
                 },
             },
+            ready(){
+                // console.log(this.data);
+                this.set('data.date',new Date().toISOString().split('T')[0])
+            },
             print(e) {
                 let link = e.model.item.report_link
                 let type = e.currentTarget.id
