@@ -4,7 +4,7 @@
 
 <link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
 
-<dom-module id="hamonize-search">
+<dom-module id="hamonize-search-two">
     <style include="page-style flex-style">
         vaadin-grid {
             margin: 0px;
@@ -106,47 +106,84 @@
                 <!-- <paper-button raised on-tap="getHm">กด</paper-button> -->
 
                 <div class="flex-horizontal-with-ratios">
-                    <!-- <div class="flexchild"></div> -->
-                    <!-- <div class="flexchild"> -->
-                    <vaadin-grid id="material" items="[[hmChild]]" inverted$="[[inverted]]">
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="[[hmChild]]" inverted$="[[inverted]]">
 
-                        <vaadin-grid-column width="50px" flex-grow="0">
-                            <template class="header">
-                                <!--<paper-checkbox on-click="_invert" checked="[[_isChecked(inverted, indeterminate)]]" indeterminate="[[indeterminate]]">เลือกทั้งหมด</paper-checkbox>-->
-                            </template>
-                            <template>
-                                <div class="text-center">
-                                    <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
-                                </div>
-                            </template>
-                        </vaadin-grid-column>
+                                <!--<vaadin-grid-column width="50px" flex-grow="0">
+                                    <template class="header">
+                                    </template>
+                                    <template>
+                                        <div class="text-center">
+                                            <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>-->
 
-                        <vaadin-grid-column width="250px" flex-grow="0" resizable>
-                            <template class="header">พิกัดข้าว
-                                <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
-                                </vaadin-gird-filter-common>
-                            </template>
-                            <template>[[item.hamonize_code]]</template>
-                        </vaadin-grid-column>
+                                <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                                    <template class="header">พิกัดข้าว
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="selectHamnoize">
+                                            [[item.hamonize_code]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
 
-                        <vaadin-grid-column width="450px" flex-grow="0" resizable>
-                            <template class="header">ชื่อชนิดข้าว (ไทย)
-                                <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
-                                </vaadin-gird-filter-common>
+                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
+                                    <template class="header">ชื่อชนิดข้าว (ไทย)
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="selectHamnoize">[[item.hamonize_th]]</div>
+                                    </template>
+                                </vaadin-grid-column>
 
-                            </template>
-                            <template>[[item.hamonize_th]]</template>
-                        </vaadin-grid-column>
+                                <!--<vaadin-grid-column width="449px" flex-grow="0">
+                                    <template class="header">ชื่อชนิดข้าว (อังกฤษ)
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_en" value="[[_hamonize_en]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>[[item.hamonize_en]]</template>
+                                </vaadin-grid-column>-->
+                            </vaadin-grid>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="horizontal layout end">
+                            <div class="title">ชนิดข้าวที่เลือก</div>
+                            <iron-icon icon="arrow-forward"></iron-icon>
+                        </div>
+                    </div>
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="{{seletedRice}}">
 
-                        <vaadin-grid-column width="449px" flex-grow="0">
-                            <template class="header">ชื่อชนิดข้าว (อังกฤษ)
-                                <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_en" value="[[_hamonize_en]]">
-                                </vaadin-gird-filter-common>
-                            </template>
-                            <template>[[item.hamonize_en]]</template>
-                        </vaadin-grid-column>
+                                <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                                    <template class="header">พิกัดข้าว
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="deselectHamnoize">[[item.hamonize_code]]</div>
+                                    </template>
+                                </vaadin-grid-column>
 
-                    </vaadin-grid>
+                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
+                                    <template class="header">ชื่อชนิดข้าว (ไทย)
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="deselectHamnoize">[[item.hamonize_th]]</div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
                     <!-- </div> -->
                     <!-- <div class="flexchild"></div> -->
                 </div>
@@ -157,7 +194,7 @@
     </template>
     <script>
         Polymer({
-            is: 'hamonize-search',
+            is: 'hamonize-search-two',
             behaviors: [
                 ReduxBehavior,
                 MonthBehavior
@@ -240,6 +277,10 @@
                 },
                 listRice: {
                     statePath: 'hamonize.list_rice'
+                },
+                seletedRice: {
+                    type: Array,
+                    value: [],
                 }
             },
             //  check box
@@ -286,12 +327,22 @@
                 // })
                 // // console.log(hmYear);
                 return listYear
-                
+
             },
             // end check box
             // obdata(data) { console.log(data) },
             getYearRice(e) {
                 var year = e.detail.value;
+                // console.log(this.seletedRice);
+                if (this.seletedRice !== undefined) {
+                    if (this.seletedRice.length > 0) {
+                        let yearHm = this.seletedRice[0].hamonize_year
+                        if (year !== yearHm) {
+                            this.seletedRice = []
+                        }
+                    }
+                }
+                // console.log(this.seletedRice);
                 if (year !== '' && typeof year !== 'undefined') {
                     // console.log(this.listRice);
                     // console.log(year);
@@ -350,7 +401,7 @@
                         //     console.log('Eyear',this.hamonizeCodeList[endyear]);
                         let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
                         this.set('hamonizeCodeList.use', newArr)
-                        console.log(this.hamonizeCodeList.use.length);
+                        // console.log(this.hamonizeCodeList.use.length);
                     }
                 }
             },
@@ -403,7 +454,7 @@
                 var selects = this.$.material.selectedItems;
                 let arr = []
                 // let rice = selects.filter((item) => item.checks === true)
-                selects.map((id) => {
+                this.seletedRice.map((id) => {
                     arr.push(id.hamonize_code)
                 })
                 // console.log(arr.join(','));
@@ -456,6 +507,15 @@
                 // } else {
                 //     window.open('./api/report/h02?' + this.genUrl(this.data))
                 // }
+            },
+            selectHamnoize(e) {
+                this.push('seletedRice', e.model.__data__.item)
+                // console.log(e.model.__data__.item);
+            },
+            deselectHamnoize(e) {
+                let index = e.model.__data__.index
+                this.splice('seletedRice', index, 1);
+                // console.log(e.model.__data__.index);
             }
         });
     </script>

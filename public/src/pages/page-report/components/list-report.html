@@ -192,9 +192,9 @@
                         window.open('./api/report/daily/company?date=' + this.data.date+'&export='+this.date.type)
                         break;
                     case 2:
-                    let edata = this.data.date
-                    let sdate = new Date(new Date(edata).setDate(1)).toISOString().split('T')[0]
-                    window.open('./api/report/daily/country?sdate=' + sdate+'&edate='+edata+'&export='+this.date.type)
+                        let edata = this.data.date
+                        let sdate = new Date(new Date(edata).setDate(1)).toISOString().split('T')[0]
+                        window.open('./api/report/daily/country?sdate=' + sdate+'&edate='+edata+'&export='+this.date.type)
                         break;
                     case 3:
                         window.open('./api/report/daily/pricerice?date=' + this.data.date+'&export='+this.date.type)
