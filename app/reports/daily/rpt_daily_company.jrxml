@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_invioce_company" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5253b07-f925-47df-b77b-8ee2bff3c6cf">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_daily_company" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e5253b07-f925-47df-b77b-8ee2bff3c6cf">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="approveDate" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new Integer(new SimpleDateFormat("yyyy").format(new Date()))-543]]></defaultValueExpression>
@@ -10,6 +11,7 @@
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="company_name_th" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="destination_country" class="java.lang.String"/>
@@ -184,8 +186,9 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 			</textField>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="20" splitType="Stretch">
+	<columnHeader>
+		<band height="20">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<staticText>
 				<reportElement x="0" y="0" width="130" height="20" uuid="19459e96-bc36-4778-a948-4b4cf038a640"/>
 				<box>
@@ -285,7 +288,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<text><![CDATA[ราคา FOB.US$]]></text>
 			</staticText>
 		</band>
-	</pageHeader>
+	</columnHeader>
 	<detail>
 		<band height="20">
 			<printWhenExpression><![CDATA[$F{groupCode}=="a"]]></printWhenExpression>
@@ -450,6 +453,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 	</detail>
 	<lastPageFooter>
 		<band height="20">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="425" y="0" width="130" height="20" uuid="52d9074d-5d68-457f-98a7-4f624b0d085f"/>
 				<box leftPadding="5" rightPadding="5">
@@ -467,7 +471,8 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="105" splitType="Stretch">
+		<band height="95" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField>
 				<reportElement x="0" y="0" width="130" height="20" uuid="bb5346e7-ac3d-4471-8cf8-daef36f70cd7"/>
 				<box>
@@ -525,7 +530,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd">
-				<reportElement stretchType="RelativeToBandHeight" x="319" y="30" width="236" height="75" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
+				<reportElement stretchType="RelativeToBandHeight" x="319" y="20" width="236" height="75" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
 				<box leftPadding="0" rightPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -533,7 +538,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ที่มา : กลุ่มบริหารการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว\n"+
