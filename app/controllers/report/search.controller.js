@@ -1,41 +1,3 @@
-exports.hamonize = function (req, res) {
-    var val = req.query;
-    var dateStart = req.query.dateStart;
-    var dateEnd = req.query.dateEnd;
-    if (req.method == 'POST') val = req.body;
-    req.jdbc.query('mssql', 'exec sp_stats_query_hamonize @hmYear=?,@hmCode=?,@dateStart=?,@dateEnd=?',
-        [val.hmYear, val.hmCode, val.dateStart, val.dateEnd],
-        function (err, data) {
-            data = JSON.parse(data);
-            // res.json(data);
-            res.ireport("search/hamonize.jasper", req.query.export || "pdf", data, {
-                dateStart, dateEnd,
-                FILE_TYPE: req.query.export
-            });
-
-        })
-}
-exports.company = function (req, res) {
-    var val = req.query;
-    var dateStart = req.query.dateStart;
-    var dateEnd = req.query.dateEnd;
-
-
-    if (req.method == 'POST') {
-        val = req.body;
-    }
-    req.jdbc.query('mssql', 'exec sp_stats_query_company @taxNo=?,@dateStart=?,@dateEnd=?',
-        [val.taxNo, val.dateStart, val.dateEnd],
-        function (err, data) {
-            data = JSON.parse(data);
-            // res.json(data);
-            res.ireport("search/company.jasper", req.query.export || "pdf", data, {
-                dateStart, dateEnd,
-                FILE_TYPE: req.query.export
-            });
-
-        })
-}
 exports.expt = function (req, res) {
 
     var val = req.query;
@@ -120,4 +82,105 @@ exports.ec = function (req, res) {
                 OUTPUT_NAME: data[0].reference_code2
             });
         });
+}
+exports.company = function (req, res) {
+    var val = req.query;
+    if (req.method == 'POST') val = req.body;
+
+    if (typeof val.field3 !== 'undefined') {
+        // res.json(3)
+        req.jdbc.query('mssql', 'exec sp_stats_search_company @tranType=?,@taxNo=?,@dateStart=?,@dateEnd=?,@field2=?,@field3=?',
+            [val.tranType, val.taxNo || '', val.dateStart, val.dateEnd, val.field2, val.field3],
+            function (err, data) {
+                data = JSON.parse(data);
+                res.ireport("search/rpt_raw3.jasper", req.query.export || "pdf", data, {
+                    COLUMN_NAME1: 'บริษัท',
+                    COLUMN_NAME2: (val.field2 == 'hamonize' ? 'ชนิดข้าว' : 'ประเทศ'),
+                    COLUMN_NAME3: (val.field3 == 'hamonize' ? 'ชนิดข้าว' : 'ประเทศ'),
+                    DATE_START: val.dateStart,
+                    DATE_END: val.dateEnd,
+                    TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : 'นำเข้า'),
+                    FILE_TYPE: req.query.export
+                });
+            })
+    } else if (typeof val.field2 !== 'undefined') {
+        // res.json(2)
+
+        req.jdbc.query('mssql', 'exec sp_stats_search_company @tranType=?,@taxNo=?,@dateStart=?,@dateEnd=?,@field2=?',
+            [val.tranType, val.taxNo || '', val.dateStart, val.dateEnd, val.field2],
+            function (err, data) {
+                data = JSON.parse(data);
+                res.ireport("search/rpt_raw2.jasper", req.query.export || "pdf", data, {
+                    COLUMN_NAME1: 'บริษัท',
+                    COLUMN_NAME2: (val.field2 == 'hamonize' ? 'ชนิดข้าว' : 'ประเทศ'),
+                    DATE_START: val.dateStart,
+                    DATE_END: val.dateEnd,
+                    TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : 'นำเข้า'),
+                    FILE_TYPE: req.query.export
+                });
+            })
+    } else {
+        // res.json(1)
+
+        req.jdbc.query('mssql', 'exec sp_stats_search_company @tranType=?,@taxNo=?,@dateStart=?,@dateEnd=?',
+            [val.tranType, val.taxNo || '', val.dateStart, val.dateEnd],
+            function (err, data) {
+                data = JSON.parse(data);
+                res.ireport("search/rpt_raw1.jasper", req.query.export || "pdf", data, {
+                    COLUMN_NAME1: 'บริษัท',
+                    DATE_START: val.dateStart,
+                    DATE_END: val.dateEnd,
+                    TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : 'นำเข้า'),
+                    FILE_TYPE: req.query.export
+                });
+
+            })
+    }
+
+}
+exports.hamonize = function (req, res) {
+    var val = req.query;
+    if (req.method == 'POST') val = req.body;
+    var params = {
+        COLUMN_NAME1: 'ชนิดข้าว',
+        COLUMN_NAME2: (val.field2 == 'company' ? 'บริษัท' : 'ประเทศ'),
+        COLUMN_NAME3: (val.field3 == 'company' ? 'บริษัท' : 'ประเทศ'),
+        DATE_START: val.dateStart,
+        DATE_END: val.dateEnd,
+        TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : 'นำเข้า'),
+        FILE_TYPE: req.query.export
+    };
+    if (typeof val.field3 !== 'undefined') {
+
+        req.jdbc.query('mssql', 'exec sp_stats_search_hamonize @tranType=?,@hmYear=?,@hmCode=?,@dateStart=?,@dateEnd=?,@field2=?,@field3=?',
+            [val.tranType, val.hmYear, val.hmCode || '', val.dateStart, val.dateEnd, val.field2, val.field3],
+            function (err, data) {
+                data = JSON.parse(data);
+                if (val.view = 'pivot') {
+                    res.ireport("search/rpt_pivot3.jasper", req.query.export || "pdf", data, params);
+                } else {
+                    res.ireport("search/rpt_raw3.jasper", req.query.export || "pdf", data, params);
+                }
+            });
+    } else if (typeof val.field2 !== 'undefined') {
+        req.jdbc.query('mssql', 'exec sp_stats_search_hamonize @tranType=?,@hmYear=?,@hmCode=?,@dateStart=?,@dateEnd=?,@field2=?',
+            [val.tranType, val.hmYear, val.hmCode || '', val.dateStart, val.dateEnd, val.field2],
+            function (err, data) {
+                data = JSON.parse(data);
+                if (val.view = 'pivot') {
+                    res.ireport("search/rpt_pivot2.jasper", req.query.export || "pdf", data, params);
+                } else {
+                    res.ireport("search/rpt_raw2.jasper", req.query.export || "pdf", data, params);
+                }
+            });
+    } else {
+        req.jdbc.query('mssql', 'exec sp_stats_search_hamonize @tranType=?,@hmYear=?,@hmCode=?,@dateStart=?,@dateEnd=?',
+            [val.tranType, val.hmYear, val.hmCode || '', val.dateStart, val.dateEnd],
+            function (err, data) {
+                data = JSON.parse(data);
+                res.ireport("search/rpt_raw1.jasper", req.query.export || "pdf", data, params);
+
+            });
+    }
+
 }
