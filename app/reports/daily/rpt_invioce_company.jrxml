@@ -525,7 +525,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd">
-				<reportElement stretchType="RelativeToBandHeight" x="319" y="85" width="236" height="20" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
+				<reportElement stretchType="RelativeToBandHeight" x="319" y="30" width="236" height="75" uuid="9865d979-3744-4ed9-a075-34dd05385fb6"/>
 				<box leftPadding="0" rightPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
@@ -536,36 +536,11 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ที่มา : กลุ่มบริหารการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว\n"+
+"กองบริหารการค้าข้าว\n"+
+"กรมการค้าต่างประเทศ\n"+
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="319" y="65" width="236" height="20" uuid="effaee8b-bd0f-477e-85f2-f3970357ddb6"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[กองบริหารการค้าข้าว]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="319" y="45" width="236" height="20" uuid="dbc4aeb9-5888-4bf0-a562-5923ed16c54c"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ที่มา : กลุ่มบริหารการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว]]></text>
-			</staticText>
 		</band>
 	</summary>
 </jasperReport>
