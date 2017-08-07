@@ -35,43 +35,52 @@ exports.search = function (req, res) {
     // [req.body.taxNo, req.body.dateStart, req.body.dateEnd] //รับค่า query หยอดใน mssql
     // ['0105525018429,010552504657,0105527000365,0105526040991', '2016-02-27', '2016-03-01']
     // ['3271164648,3031029262', '2012-02-29', '2012-03-01']
+    req.body.tranType = req.body.tranType || 'a'
+    req.body.taxNo = req.body.taxNo || ''
+    req.body.dateStart = req.body.dateStart || '2017-01-01'
+    req.body.dateEnd = req.body.dateEnd || '2017-01-30'
+    req.body.field2 = req.body.field2 ||''
+    req.body.field3 = req.body.field3 ||''
+    // console.log(req.body);
     var j = req.jdbc;
-    j.query("mssql", `exec sp_stats_query_company @taxNo= ?, @dateStart= ?, @dateEnd= ?`,
-        [req.body.taxNo, req.body.dateStart, req.body.dateEnd],
+    j.query("mssql", `exec sp_stats_search_company @tranType= ?,@taxNo= ?, @dateStart= ?, @dateEnd= ?,
+     @field2= ?, @field3= ?`,
+        [req.body.tranType ,req.body.taxNo, req.body.dateStart, req.body.dateEnd,req.body.field2 , req.body.field3],
         function (err, data) {
-            // res.send(data);
-            data = JSON.parse(data);
-            data = group(data, 'company_name_th', 'country_name_th');
-            var datas = [];
-            var data2 = []
-            let company_name_th = ''
-            // datas.company_name_th = data;
-            let cal = (data, sum) => {
-                return data.reduce((acc, cur) => acc.concat(cur), [])
-                    .map((item) => item[sum])
-                    .reduce((acc, cur) => acc + cur, 0)
-            }
-            for (var key in data) {
-                for (var variable in data[key]) {
-                    data2.push(
-                        data[key][variable]
-                    )
-                }
-                datas.push({
-                    company_name_th: key,
-                    country_name_th: data2,
-                    total_net_weight_i:cal(data2, 'net_weight_i'),
-                    total_fob_amt_baht_i:cal(data2, 'fob_amt_baht_i'),
-                    total_fob_amt_i:cal(data2, 'fob_amt_i'),
-                    total_net_weight_e:cal(data2, 'net_weight_e'),
-                    total_fob_amt_baht_e:cal(data2, 'fob_amt_baht_e'),
-                    total_fob_amt_e: cal(data2, 'fob_amt_e')
-                })
-                company_name_th = '',
-                    data2 = []
-            }
-            // console.log(datas);
-            res.json(datas);
+            console.log(data);
+            res.send(data);
+            // data = JSON.parse(data);
+            // data = group(data, 'company_name_th', 'country_name_th');
+            // var datas = [];
+            // var data2 = []
+            // let company_name_th = ''
+            // // datas.company_name_th = data;
+            // let cal = (data, sum) => {
+            //     return data.reduce((acc, cur) => acc.concat(cur), [])
+            //         .map((item) => item[sum])
+            //         .reduce((acc, cur) => acc + cur, 0)
+            // }
+            // for (var key in data) {
+            //     for (var variable in data[key]) {
+            //         data2.push(
+            //             data[key][variable]
+            //         )
+            //     }
+            //     datas.push({
+            //         company_name_th: key,
+            //         country_name_th: data2,
+            //         total_net_weight_i:cal(data2, 'net_weight_i'),
+            //         total_fob_amt_baht_i:cal(data2, 'fob_amt_baht_i'),
+            //         total_fob_amt_i:cal(data2, 'fob_amt_i'),
+            //         total_net_weight_e:cal(data2, 'net_weight_e'),
+            //         total_fob_amt_baht_e:cal(data2, 'fob_amt_baht_e'),
+            //         total_fob_amt_e: cal(data2, 'fob_amt_e')
+            //     })
+            //     company_name_th = '',
+            //         data2 = []
+            // }
+            // // console.log(datas);
+            // res.json(datas);
         })
 }
 exports.spp01 = function (req, res) {

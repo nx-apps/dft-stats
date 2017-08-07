@@ -283,8 +283,6 @@
                             { report_type: 'EXCEL', report_type_id: 'excel' }
                         ]
                     }
-
-
                 },
             },
             setText(text) {
@@ -313,26 +311,17 @@
             },
             printReportHamonize() {
                 this.$$('#report').open()
-                // console.log(this.search);
                 if ((this.search.exporter === false) && (this.search.importer === true)) {
                     this.search.tranType = 'i'
-                    // console.log('i')
-                    // console.log(this.search.imexport);
                 }else if ((this.search.exporter === true) && (this.search.importer === false)) {
                     this.search.tranType = 'e'
-                    // console.log('e')
                 }else {
                     this.search.tranType = 'a'
-                    // console.log('a')
-                    
-                }                // tranType
+                }
             },
             printReport() {
                 this.search.view = this.data.view
                 this.search.export = this.data.export
-                // console.log(this.search);
-                // console.log(this.search.field3);
-                // undefined  company
                 // if (this.search.field2 === undefined && this.search.field3 === undefined) {
                     window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
                     // console.log(this.genUrl(this.search));

@@ -5,14 +5,44 @@
 <link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-filter.html">
 
 <link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
-
+<link rel="import" href="./../../../../bower_components/nylon-tag/nylon-tag.html">
 <link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../components/page-style.html">
 <dom-module id="company-search">
     <style include="page-style flex-style">
         vaadin-grid {
             margin: 0px;
             width: 100%;
+        }
+
+        tag-module {
+            cursor: pointer;
+        }
+
+        .label {
+            font-size: var(--tag-module-form-label-font-size);
+            color: #737373;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item {
+            float: left;
+            margin: 5px;
+        }
+
+        .comBobox {
+            clear: both;
+        }
+
+        .sub-title {
+            display: block;
+            color: red;
+        }
+
+        p span {
+            display: block;
         }
 
         paper-input {
@@ -42,11 +72,51 @@
                         <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}"></vaadin-date-picker>-->
                     </div>
                     <div class="btn-search">
-                        <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue" >
+                        <!--<paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
                             <iron-icon icon="search"></iron-icon>
                             ค้นหา
-                        </paper-button>
+                        </paper-button>-->
                     </div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                        แสดงคอลัมน์ :
+                    </div>
+                    <div class="flex2child">
+                        <div class="vertical layout">
+                            <div>
+                                <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                            </div>
+                            <div>
+                                <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                        ลำดับที่ :
+                    </div>
+                    <div class="flex3child">
+                        <template is="dom-repeat" items="[[value]]">
+                            <div class="item">
+                                <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                            </div>
+                        </template>
+                        <div class="comBobox">
+                            <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                                <template>
+                                    [[item.id]]
+                                </template>
+                            </gl-combo-box>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
@@ -120,16 +190,29 @@
                             </vaadin-grid>
                         </div>
                     </div>
+                </div>
+                <div class="horizontal layout">
+                    <div class="flex">
 
+                    </div>
+                    <div class="flex">
 
-
+                    </div>
+                    <div class="end-justified">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>
+                    </div>
                 </div>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'company-search',
-            behaviors: [ReduxBehavior, MonthBehavior,commonLogic],
+            behaviors: [ReduxBehavior, MonthBehavior, commonLogic],
             properties: {
                 companyCodeList: {
                     statePath: 'company.companyCodeList',
@@ -165,6 +248,27 @@
                         {
                             id: 'fob_amt_baht_out',
                             label: 'มูลค่าส่งออก'
+                        }
+                    ]
+                },
+                value: {
+                    value: [],
+                    notify: true
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ข้าว',
+                            value: 'hamonize',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'ประเทศ',
+                            value: 'country',
+                            label: '',
+                            hidden: false
                         }
                     ]
                 },
@@ -213,13 +317,66 @@
             _setDate(e) {
                 this.set('data.dateStart', e.dateStart)
                 this.set('data.dateEnd', e.dateEnd);
-                this.dispatchAction('COMPANY_CODE_SEARCH_R1', this.genUrl(this.data))
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
+                // this.dispatchAction('COMPANY_CODE_SEARCH_R1', this.genUrl(this.data))
                 // console.log(111);
                 // (e.dateEnd != '')? this.getCompanyValue():'';
                 // console.log(this.data);
             },
+            selectTag: function (e) {
+                let value = e.detail.value
+                // console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // console.log(this.myItems[result]);
+                    this.push('value', value);
+                    e.detail.value = {}
+                    // console.log(e.detail.value);
+                    // console.log(this.$.priority.value)
+
+                }
+
+            },
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
+            },
+            deleteTag: function (e) {
+                // console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
+            },
+            getSeleted(filter) {
+                // console.log(filter.map((item) => item.hidden !== true));
+                let data = this.myItems.filter((item) => item.hidden === false)
+                return data
+            },
+
             getCompanyValue() {
-                var selects = this.$.material.selectedItems;
+                // var selects = this.$.material.selectedItems;
                 let arr = [];
                 this.selectedCompany.map((taxno) => {
                     arr.push(taxno.company_taxno)
@@ -228,9 +385,23 @@
                 var taxno = arr.join(',');
                 var data = {
                     taxNo: taxno,
+                    exporter: this.data.exporter,
+                    importer: this.data.importer,
                     dateStart: this.data.dateStart,
                     dateEnd: this.data.dateEnd
                 };
+                switch (this.value.length) {
+                    case 1:
+                        data.field2 = this.value[0].value
+                        break;
+                    case 2:
+                        data.field2 = this.value[0].value,
+                            data.field3 = this.value[1].value
+                        break;
+                    default:
+                        break;
+                }
+                console.log(data);
                 this.set('data', data)
                 this.dispatchAction('COMPANY_SEARCH', data);
 
@@ -254,26 +425,6 @@
                 // }else {
                 // window.open('./api/report/c02?'+this.genUrl(this.data))
                 // }
-            },
-            _invert: function (e) {
-                // console.log(this.$.material.selectedItems.length);
-                this.inverted = !this.inverted;
-            },
-            // iOS needs indeterminated + checked at the same time
-            _isChecked: function (inverted, indeterminate) {
-                return indeterminate || inverted;
-            },
-            _selectItem: function (e) {
-                if (e.target.checked === this.inverted) {
-                    this.$.material.deselectItem(e.model.item);
-                } else {
-                    this.$.material.selectItem(e.model.item);
-                }
-                // console.log(this.$.material.selectedItems.length);
-                this.indeterminate = this.$.material.selectedItems.length > 0;
-            },
-            _isSelected: function (inverted, selected) {
-                return inverted != selected;
             },
             selectCompany(e) {
                 this.push('selectedCompany', e.model.__data__.item)

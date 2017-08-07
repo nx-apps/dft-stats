@@ -6,8 +6,6 @@
 
 <link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
 
-<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
-
 <link rel="import" href="./../../components/page-style.html">
 
 <dom-module id="hamonize-search-two">
@@ -337,7 +335,7 @@
             },
             selectTag: function (e) {
                 let value = e.detail.value
-                console.log(value);
+                // console.log(value);
                 if (value !== null) {
 
                     let result = this.myItems.indexOf(value)
@@ -347,8 +345,8 @@
                     // console.log(this.myItems[result]);
                     this.push('value', value);
                     e.detail.value = {}
-                    console.log(e.detail.value);
-                    console.log(this.$.priority.value)
+                    // console.log(e.detail.value);
+                    // console.log(this.$.priority.value)
 
                 }
 
@@ -401,7 +399,7 @@
                        hmYear.push({year :item.year})
                     }
                 })
-                console.log(hmYear);
+                // console.log(hmYear);
                 return hmYear
 
             },
@@ -537,12 +535,12 @@
                 window.open('./api/report/h01?' + this.genUrl(newLink))
             },
             selectHamnoize(e) {
-                let _this = this
-                this.fire('toast', {
-                    status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
+                // let _this = this
+                // this.fire('toast', {
+                    // status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
                         _this.push('seletedRice', e.model.item)
-                    }
-                });
+                    // }
+                // });
                 // console.log(e.model.__data__.item);
             },
             deselectHamnoize(e) {
