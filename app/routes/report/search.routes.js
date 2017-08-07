@@ -6,4 +6,5 @@ module.exports = function (app) {
     app.route('/ec').get(controller.ec).post(controller.ec);
     app.get('/company',controller.company);
     app.get('/hamonize',controller.hamonize);
+    app.get('/country',controller.country);
 }
