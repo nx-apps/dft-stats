@@ -315,9 +315,9 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="40" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="40" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
+				<reportElement x="0" y="0" width="100" height="60" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -330,7 +330,7 @@
 				<textFieldExpression><![CDATA[$P{COLUMN_NAME1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="302" height="40" uuid="687e964f-adef-49fe-9025-ad95a716b009"/>
+				<reportElement x="100" y="0" width="302" height="60" uuid="687e964f-adef-49fe-9025-ad95a716b009"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -343,7 +343,7 @@
 				<textFieldExpression><![CDATA[$P{COLUMN_NAME2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="722" y="20" width="80" height="20" uuid="2a20fb0a-96ff-44fd-9a45-d7c3f6913635"/>
+				<reportElement x="722" y="40" width="80" height="20" uuid="2a20fb0a-96ff-44fd-9a45-d7c3f6913635"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -357,7 +357,7 @@
 				<text><![CDATA[ราคาเฉลี่ย (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="642" y="20" width="80" height="20" uuid="1ce941e0-cace-46d0-88c8-750ff110c118"/>
+				<reportElement x="642" y="40" width="80" height="20" uuid="1ce941e0-cace-46d0-88c8-750ff110c118"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -371,7 +371,7 @@
 				<text><![CDATA[มูลค่า ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="0" width="160" height="20" uuid="0cd268a5-e708-4bb9-bf95-0d4681568de1"/>
+				<reportElement x="482" y="20" width="160" height="20" uuid="0cd268a5-e708-4bb9-bf95-0d4681568de1"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -385,7 +385,7 @@
 				<text><![CDATA[บาท]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="642" y="0" width="160" height="20" uuid="07c31c80-18e2-43fc-bf67-f014120baae2"/>
+				<reportElement x="642" y="20" width="160" height="20" uuid="07c31c80-18e2-43fc-bf67-f014120baae2"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -399,7 +399,7 @@
 				<text><![CDATA[USD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="562" y="20" width="80" height="20" uuid="8dc9c7ba-5f46-4006-a003-b8e53b711e77"/>
+				<reportElement x="562" y="40" width="80" height="20" uuid="8dc9c7ba-5f46-4006-a003-b8e53b711e77"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -413,7 +413,7 @@
 				<text><![CDATA[ราคาเฉลี่ย (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="402" y="0" width="80" height="40" uuid="6f5557e7-f399-4be6-a7fe-3660e40d430f"/>
+				<reportElement x="402" y="20" width="80" height="40" uuid="6f5557e7-f399-4be6-a7fe-3660e40d430f"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -427,7 +427,7 @@
 				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="20" width="80" height="20" uuid="8999051b-61e5-4def-b887-f0b54f935807"/>
+				<reportElement x="482" y="40" width="80" height="20" uuid="8999051b-61e5-4def-b887-f0b54f935807"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -440,6 +440,19 @@
 				</textElement>
 				<text><![CDATA[มูลค่า ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="402" y="0" width="400" height="20" uuid="d8146d63-1b89-47f7-ae63-582017f44448"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TRAN_TYPE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
