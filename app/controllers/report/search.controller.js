@@ -260,8 +260,8 @@ exports.country = function (req, res) {
     if (req.method == 'POST') val = req.body;
     var params = {
         COLUMN_NAME1: 'ประเทศ',
-        COLUMN_NAME2: (val.field2 == 'country' ? 'ประเทศ' : 'ชนิดข้าว'),
-        COLUMN_NAME3: (val.field3 == 'country' ? 'ประเทศ' : 'ชนิดข้าว'),
+        COLUMN_NAME2: (val.field2 == 'company' ? 'บริษัท' : 'ชนิดข้าว'),
+        COLUMN_NAME3: (val.field3 == 'company' ? 'บริษัท' : 'ชนิดข้าว'),
         DATE_START: val.dateStart,
         DATE_END: val.dateEnd,
         TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : 'นำเข้า'),
