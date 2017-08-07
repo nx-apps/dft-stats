@@ -499,9 +499,9 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="40" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="40" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
+				<reportElement x="0" y="0" width="100" height="60" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -514,7 +514,7 @@
 				<textFieldExpression><![CDATA[$P{COLUMN_NAME1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="202" height="40" uuid="053236b8-b566-416d-bf29-17068a83377a"/>
+				<reportElement x="200" y="0" width="202" height="60" uuid="053236b8-b566-416d-bf29-17068a83377a"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -527,7 +527,7 @@
 				<textFieldExpression><![CDATA[$P{COLUMN_NAME3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="40" uuid="687e964f-adef-49fe-9025-ad95a716b009"/>
+				<reportElement x="100" y="0" width="100" height="60" uuid="687e964f-adef-49fe-9025-ad95a716b009"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -540,7 +540,7 @@
 				<textFieldExpression><![CDATA[$P{COLUMN_NAME2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="402" y="0" width="80" height="40" uuid="50b9de30-88cc-4826-a0b4-47d6d05078fc"/>
+				<reportElement x="402" y="20" width="80" height="40" uuid="50b9de30-88cc-4826-a0b4-47d6d05078fc"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -554,7 +554,7 @@
 				<text><![CDATA[ปริมาณ (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="0" width="160" height="20" uuid="7e723b86-79d6-436e-b9d7-24ff0c99f32b"/>
+				<reportElement x="482" y="20" width="160" height="20" uuid="7e723b86-79d6-436e-b9d7-24ff0c99f32b"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -568,7 +568,7 @@
 				<text><![CDATA[บาท]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="642" y="0" width="160" height="20" uuid="f8bf1f05-e6bf-4172-8025-8e25c7d0e0c2"/>
+				<reportElement x="642" y="20" width="160" height="20" uuid="f8bf1f05-e6bf-4172-8025-8e25c7d0e0c2"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -582,7 +582,7 @@
 				<text><![CDATA[USD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="642" y="20" width="80" height="20" uuid="c567209e-fcf4-4777-904c-2e84035b76cd"/>
+				<reportElement x="642" y="40" width="80" height="20" uuid="c567209e-fcf4-4777-904c-2e84035b76cd"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -596,7 +596,7 @@
 				<text><![CDATA[มูลค่า ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="722" y="20" width="80" height="20" uuid="ac6123e9-566a-4776-a748-e07bf0e7c783"/>
+				<reportElement x="722" y="40" width="80" height="20" uuid="ac6123e9-566a-4776-a748-e07bf0e7c783"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -610,7 +610,7 @@
 				<text><![CDATA[ราคาเฉลี่ย (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="562" y="20" width="80" height="20" uuid="5441b9b7-6089-46f5-99e5-f092801ee2f4"/>
+				<reportElement x="562" y="40" width="80" height="20" uuid="5441b9b7-6089-46f5-99e5-f092801ee2f4"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -624,7 +624,7 @@
 				<text><![CDATA[ราคาเฉลี่ย (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="20" width="80" height="20" uuid="5500e79f-263f-4d91-b7d9-822838830f0a"/>
+				<reportElement x="482" y="40" width="80" height="20" uuid="5500e79f-263f-4d91-b7d9-822838830f0a"/>
 				<box leftPadding="0">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -637,6 +637,19 @@
 				</textElement>
 				<text><![CDATA[มูลค่า ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="402" y="0" width="400" height="20" uuid="b72804b9-611c-44fc-be81-16a74623babc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TRAN_TYPE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
