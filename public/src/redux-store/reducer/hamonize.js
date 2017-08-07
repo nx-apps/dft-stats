@@ -124,6 +124,9 @@ export function hamonizeAction(store) {
                         })
                         // console.log(variable);
                     }
+                    response.data.map((item)=>{
+                        return item.hidden = false
+                    })
                     store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: yearData })
                     this.fire('toast', {
                         status: 'success', text: 'โหลดข้อมูลสำเร็จ', callback() {

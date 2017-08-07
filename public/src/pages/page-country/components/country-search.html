@@ -1,8 +1,55 @@
 <link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../components/vaadin-gird-filter-common.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="./../../../../bower_components/nylon-tag/nylon-tag.html">
+<link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../components/page-style.html">
 <dom-module id="country-search">
-    <style include="page-style flex-style"></style>
+    <style include="page-style flex-style">
+        vaadin-grid {
+            margin: 0px;
+            width: 100%;
+        }
+
+        tag-module {
+            cursor: pointer;
+        }
+
+        .label {
+            font-size: var(--tag-module-form-label-font-size);
+            color: #737373;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item {
+            float: left;
+            margin: 5px;
+        }
+
+        .comBobox {
+            clear: both;
+        }
+
+        .sub-title {
+            display: block;
+            color: red;
+        }
+
+        p span {
+            display: block;
+        }
+
+        paper-input {
+            width: 95%;
+        }
+    </style>
     <template>
-         <paper-material elevation="1">
+        <paper-material elevation="1">
             <div class="container">
                 <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
@@ -12,14 +59,22 @@
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.sdate}}"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateStart}}"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateStart}}"></vaadin-date-picker>-->
                     </div>
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
-                        <vaadin-date-picker class="textCenter" value="{{data.edate}}"></vaadin-date-picker>
+                        <gl-form-input type="date" value="{{data.dateEnd}}"></gl-form-input>
+                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}"></vaadin-date-picker>-->
+                    </div>
+                    <div class="btn-search">
+                        <!--<paper-button raised class="gl-btn-info gl-small" on-tap="getCountryValue">
+                            <iron-icon icon="search"></iron-icon>
+                            ค้นหา
+                        </paper-button>-->
                     </div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
@@ -27,91 +82,281 @@
                 </div>
                 <div class="flex-horizontal-with-ratios">
                     <div class="flexchild"></div>
+                    <div class="flexchild"></div>
                     <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
-                    <div class="labelSearchDate">
-                        เลขที่ผู้เสียภาษี : 
+                    <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                        แสดงคอลัมน์ :
                     </div>
                     <div class="flex2child">
-                        <gl-combo-box id="companySearch" class="textCenter"  value="{{data.company_taxno}}"></gl-combo-box>
+                        <div class="vertical layout">
+                            <div>
+                                <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                            </div>
+                            <div>
+                                <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flexchild">
-                        <div class="btn-search">                    
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValue">
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                        ลำดับที่ :
+                    </div>
+                    <div class="flex3child">
+                        <template is="dom-repeat" items="[[value]]">
+                            <div class="item">
+                                <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                            </div>
+                        </template>
+                        <div class="comBobox">
+                            <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                                <template>
+                                    [[item.id]]
+                                </template>
+                            </gl-combo-box>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="horizontal layout center">
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="{{countryList}}">
+                                <vaadin-grid-column width="200px" flex-grow="0">
+                                    <template class="header">รหัสประเทศ
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="country_code" value="[[_country_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="selectCountry" hidden="[[item.hidden]]">[[item.country_code]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                                <vaadin-grid-column width="auto">
+                                    <template class="header">ชื่อประเทศ
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="country_name_TH" value="[[_country_name_TH]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="selectCountry" hidden="[[item.hidden]]">
+                                            [[item.country_name_TH]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="horizontal layout end">
+                            <div class="title">ประเทศที่เลือก</div>
+                            <iron-icon icon="arrow-forward"></iron-icon>
+                        </div>
+                    </div>
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="{{selectedCountry}}">
+                                <vaadin-grid-column width="200px" flex-grow="0">
+                                    <template class="header">รหัสประเทศ
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="country_code" value="[[_country_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="deselectCountry" >[[item.country_code]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                                <vaadin-grid-column width="auto">
+                                    <template class="header">ชื่อประเทศ
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="country_name_TH" value="[[_country_name_TH]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div class="text-center" on-click="deselectCountry">
+                                            [[item.country_name_TH]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
+                </div>
+                <div class="horizontal layout">
+                    <div class="flex">
+
+                    </div>
+                    <div class="flex">
+
+                    </div>
+                    <div class="end-justified">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCountryValue">
                                 <iron-icon icon="search"></iron-icon>
                                 ค้นหา
                             </paper-button>
                         </div>
                     </div>
-                    <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
-                    <!--<div class="flexchild"></div>-->
                 </div>
-                <div class="flex-horizontal-with-ratios">
-                    <div class="flexchild">
-                        <div class="btn-search">                    
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getCompanyValueReport">
-                                <iron-icon icon="assignment"></iron-icon>
-                                ออกรายงาน
-                            </paper-button>
-                        </div>
-                    </div>
-                    <div class="flex3child">
-                    </div>
-                </div>
-            </div>
         </paper-material>
     </template>
     <script>
         Polymer({
             is: 'country-search',
-            behaviors: [
-                ReduxBehavior,
-                MonthBehavior
-            ],
-            properties:{
-            //     companyCodeList:{
-            //         statePath:'company.companyCodeList',
-            //         observer: '_setItem'
-            //     },
-            //    date:{
-            //         statePath:'hamonize.date',
-            //         observer: '_setDate'
-            //     },
-            //     data:{
-            //         type:Object,
-            //         value:{}
-            //     }
+            behaviors: [ReduxBehavior, MonthBehavior, commonLogic],
+            properties: {
+                countryList: {
+                    statePath: 'country.countryList',
+                    // observer: '_setItem'
+                },
+                date: {
+                    statePath: 'hamonize.date',
+                    observer: '_setDate'
+                },
+                value: {
+                    value: [],
+                    notify: true
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ข้าว',
+                            value: 'hamonize',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'บริษัท',
+                            value: 'company',
+                            label: '',
+                            hidden: false
+                        }
+                    ]
+                },
+                data: {
+                    type: Object,
+                    value: {},
+                    notify: true
+                },
+                selectedCountry: {
+                    type: Array,
+                    value: []
+                },
+                inverted: {
+                    type: Boolean,
+                    value: false
+                }
             },
-            // _setItem(companyCodeList){
-            //     let combobox = this.$$('#companySearch')
-            //     let newData = companyCodeList.map((company)=>{
-            //         return {label: company.company_taxno+' '+company.company_name, value: company.company_taxno}
-            //     })
-            //     combobox.items = newData;
-            // },
-            // _setDate(e){
-            //     this.set('data.sdate',e.sdate)
-            //     this.set('data.edate',e.edate);
-                
-            //     (e.edate != '')? this.getCompanyValue():'';
-            //     // console.log(this.data);
-            // },
-            // getCompanyValue(){
-            //     // console.log(this.data.company_taxno == undefined || this.data.company_taxno == '');
-            //     if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
-            //         this.dispatchAction('COMPANY_CODE_SEARCH_R1',this.genUrl(this.change2GMT7(this.data)))
-            //     }else {
-            //         this.dispatchAction('COMPANY_CODE_SEARCH_R2',this.genUrl(this.change2GMT7(this.data)))
-            //     }
-            // },
-            // getCompanyValueReport(){
-            //     if (this.data.company_taxno == undefined || this.data.company_taxno == '') {
-            //         window.open('./api/report/c01?'+this.genUrl(this.data))
-            //     }else {
-            //         window.open('./api/report/c02?'+this.genUrl(this.data))
-            //     }
-            // }
+           
+            _setDate(e) {
+                this.set('data.dateStart', e.dateStart)
+                this.set('data.dateEnd', e.dateEnd);
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
+                // this.dispatchAction('COMPANY_CODE_SEARCH_R1', this.genUrl(this.data))
+                // console.log(111);
+                // (e.dateEnd != '')? this.getCountryValue():'';
+                // console.log(this.data);
+            },
+            selectTag: function (e) {
+                let value = e.detail.value
+                // console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // console.log(this.myItems[result]);
+                    this.push('value', value);
+                    e.detail.value = {}
+
+                }
+
+            },
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
+            },
+            deleteTag: function (e) {
+                // console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
+            },
+            getSeleted(filter) {
+                // console.log(filter.map((item) => item.hidden !== true));
+                let data = this.myItems.filter((item) => item.hidden === false)
+                return data
+            },
+
+            getCountryValue() {
+                // var selects = this.$.material.selectedItems;
+                let arr = [];
+                this.selectedCountry.map((country_code) => {
+                    arr.push(country_code.country_code)
+                })
+                // console.log(this.selectedCountry);
+                var country_code = arr.join(',');
+                var data = {
+                    countryCode: country_code,
+                    exporter: this.data.exporter,
+                    importer: this.data.importer,
+                    dateStart: this.data.dateStart,
+                    dateEnd: this.data.dateEnd
+                };
+                switch (this.value.length) {
+                    case 1:
+                        data.field2 = this.value[0].value
+                        break;
+                    case 2:
+                        data.field2 = this.value[0].value,
+                            data.field3 = this.value[1].value
+                        break;
+                    default:
+                        break;
+                }
+                // console.log(data);
+                this.set('data', data)
+                this.dispatchAction('COUNTRY_SEARCH', data);
+
+            },
+            selectCountry(e) {
+                // console.log(e.model.item);
+                let country_code = e.model.item.country_code
+                let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
+                this.set('countryList.'+indexCountry+'.hidden',true)
+                // console.log(this.countryList[indexCountry]);
+                this.push('selectedCountry', e.model.item)
+                // console.log(e.model.__data__.item);
+            },
+            deselectCountry(e) {
+                let index = e.model.__data__.index
+                let country_code = e.model.item.country_code
+                let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
+                this.set('countryList.'+indexCountry+'.hidden',false)
+                // console.log(this.countryList[indexCountry]);
+                this.splice('selectedCountry', index, 1);
+                // console.log(e.model.__data__.index);
+            }
         });
     </script>
 </dom-module>

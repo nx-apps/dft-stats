@@ -34,19 +34,5 @@ export function licenseAction(store){
             //console.log(error);
         });
       },
-      // LICENSE_SEARCH_REFERENCE(data){
-      //   this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
-      //   // //console.log(data); 
-      //   axios.get('/license/re02/'+data)
-      //   .then( (response)=>{
-      //       // //console.log(response);
-      //       this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
-      //         store.dispatch({type:'LICENSE_SEARCH_REFERENCE',payload:response.data})
-      //       }});
-      //   })
-      //   .catch(function (error) {
-      //       //console.log(error);
-      //   });
-      // }
    }]
 };

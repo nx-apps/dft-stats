@@ -10,6 +10,7 @@ import {uploadReducer,uploadAction} from './reducer/upload'
 import {hamonizeReducer,hamonizeAction} from './reducer/hamonize'
 import {companyReducer,companyAction} from './reducer/company'
 import {licenseReducer,licenseAction} from './reducer/license'
+import {countryReducer,countryAction} from './reducer/country'
 import {certReducer,certAction} from './reducer/cert'
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 
     hamonize:hamonizeReducer,
     company:companyReducer,
+    country:countryReducer,
     license:licenseReducer,
     cert:certReducer,
 
@@ -39,6 +41,7 @@ window.uploadAction = uploadAction(storeApp);
 
 window.hamonizeAction = hamonizeAction(storeApp);
 window.companyAction = companyAction(storeApp);
-window.licenseAction = licenseAction(storeApp);
+window.companyAction = companyAction(storeApp);
+window.countryAction = countryAction(storeApp);
 window.certAction = certAction(storeApp);
 

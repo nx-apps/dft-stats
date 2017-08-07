@@ -12,11 +12,11 @@
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
            <section class="container">
-                <country-search></country-search>
+                <country-search data = "{{data}}"></country-search>
            </section>
            <section class="container">
-                <div class="header">ข้อมูลรายประเทศ / กลุ่มประเทศ</div>
-                 <country-list></country-list>
+                <div class="header">ข้อมูลรายประเทศ </div>
+                 <country-list search = "[[data]]"></country-list>
            </section>
         </div>
     </template>
@@ -24,10 +24,10 @@
         Polymer({
             is: 'page-country',
             behaviors: [
-                ReduxBehavior,nylonBehavior,companyAction,hamonizeAction
+                ReduxBehavior,nylonBehavior,countryAction,hamonizeAction
             ],
             nylonPageActive(){
-                this.dispatchAction('COMPANY_CODE_GET');
+                this.dispatchAction('COUNTRY_LIST');
                 this.dispatchAction('HAMONIZE_SET_DATE');
             }
         });

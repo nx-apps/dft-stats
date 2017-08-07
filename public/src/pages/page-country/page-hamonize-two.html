@@ -1,0 +1,33 @@
+
+<link rel="import" href="./components/hamonize-list-two.html">
+<link rel="import" href="./components/hamonize-search-two.html">
+
+<link rel="import" href="./../components/month-behavior.html">
+
+<dom-module id="page-hamonize-two">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+           <section class="container">
+                <hamonize-search-two data = "{{data}}"></hamonize-search-two>
+           </section>
+           <section class="container">
+                 <div class="header">ข้อมูลการส่งออกข้าวตามเลขพิกัดศุลกากร (Hamonized Code)</div>
+                 <hamonize-list-two search = "[[data]]"></hamonize-list-two>
+           </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-hamonize-two',
+            behaviors: [
+                ReduxBehavior,nylonBehavior,hamonizeAction
+            ],
+            nylonPageActive(){
+                // this.dispatchAction('HAMONIZE_CODE_GET');
+                this.dispatchAction('HAMONIZE_SET_DATE');
+                this.dispatchAction('HAMONIZE_RICE_LIST');
+            }
+        });
+    </script>
+</dom-module>
