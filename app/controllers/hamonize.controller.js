@@ -67,12 +67,27 @@ exports.rice_list = function (req, res) {
 }
 exports.rice_get = function (req, res) {
     var j = req.jdbc;
+    
+    req.body.tranType = req.body.tranType || 'a'
+    req.body.hmYear = req.body.hmYear || '2017'
+    req.body.hmCode = req.body.hmCode || '1006'
+    req.body.dateStart = req.body.dateStart || '2017-01-01'
+    req.body.dateEnd = req.body.dateEnd || '2017-01-30'
+    req.body.field2 = req.body.field2 ||''
+    req.body.field3 = req.body.field3 ||''
+    // console.log(req.body);
     // res.json(req.body);
-    j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
-        [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
-        // ['2007', '1006,100610,10061000,10061000001,10061000002', "2016-01-31", "2016-06-31"],
-        // j.query("mssql", `select * from hamonize_type`, [],
+    // j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
+    //     [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
+    //     function (err, data) {
+    //         res.send(data)
+    //     })
+    j.query("mssql", `exec sp_stats_search_hamonize  @tranType= ?, @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?
+    , @field2= ?, @field3= ?`,
+        [req.body.tranType,req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd,
+        req.body.field2,req.body.field3],
         function (err, data) {
+            console.log(data);
             res.send(data)
         })
 }

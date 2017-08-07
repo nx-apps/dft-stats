@@ -2,13 +2,48 @@
 <link rel="import" href="../../components/vaadin-gird-filter-common.html">
 <link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
 
+<link rel="import" href="./../../../../bower_components/nylon-tag/nylon-tag.html">
+
 <link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<link rel="import" href="./../../components/page-style.html">
 
 <dom-module id="hamonize-search-two">
     <style include="page-style flex-style">
         vaadin-grid {
             margin: 0px;
             width: 100%;
+        }
+
+        tag-module {
+            cursor: pointer;
+        }
+
+        .label {
+            font-size: var(--tag-module-form-label-font-size);
+            color: #737373;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item {
+            float: left;
+            margin: 5px;
+        }
+
+        .comBobox {
+            clear: both;
+        }
+
+        .sub-title {
+            display: block;
+            color: red;
+        }
+
+        p span {
+            display: block;
         }
     </style>
     <template>
@@ -18,23 +53,60 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
-                    <div class="labelSearchDate">
+                    <div class="flexchild labelSearchDate">
                         เริ่มวันที่ :
                     </div>
                     <div class="flex2child">
                         <gl-form-input type="date" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></gl-form-input>
-                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></vaadin-date-picker>-->
                     </div>
-                    <!-- [[obDate(data.sdate)]] -->
                     <div class="flexchild"></div>
-                    <div class="labelSearchDate">
+                    <div class="flexchild labelSearchDate">
                         ถึงวันที่ :
                     </div>
                     <div class="flex2child">
                         <gl-form-input type="date" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></gl-form-input>
-                        <!--<vaadin-date-picker class="textCenter" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></vaadin-date-picker>-->
                     </div>
                     <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                        แสดงคอลัมน์ :
+                    </div>
+                    <div class="flex2child">
+                        <div class="vertical layout">
+                            <div>
+                                <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                            </div>
+                            <div>
+                                <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                        ลำดับที่ :
+                    </div>
+                    <div class="flex3child">
+                        <template is="dom-repeat" items="[[value]]">
+                            <div class="item">
+                                <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                            </div>
+                        </template>
+                        <div class="comBobox">
+                            <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                                <template>
+                                    [[item.id]]
+                                </template>
+                            </gl-combo-box>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
@@ -43,90 +115,63 @@
                     <div class="flexchild"></div>
                     <div class="labelSearchDate">
                         ปีพิกัด (HS Code) :
-                        <!-- เลขพิกัดศุลกากร : -->
                     </div>
-                    <div class="flex2child">
-                        <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{checkYear(data.dateStart,listYear)}}" item-label-path="year"
-                            item-value-path="year" value="{{data.hmYear}}" on-value-changed="getYearRice">
+                    <div class="flexchild">
+                        <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{checkYear(data.dateStart,data.dateEnd,listYear)}}"
+                            item-label-path="year" item-value-path="year" value="{{data.hmYear}}" on-value-changed="getYearRice">
                             <template>
                                 [[item.year]]
                             </template>
                         </gl-combo-box>
-                        <!-- <gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList.use}}" item-label-path="label"
+                        <!--<gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList.use}}" item-label-path="label"
                             item-value-path="label" value="{{data.hmparent}}" on-value-changed="getChildHm">
                             <template>
                                 [[item.label]]
                             </template>
                         </gl-combo-box> -->
                     </div>
-                    <!--<div class="labelSearchDate">
-                        เรียงโดย : 
+                    <div class="labelSearchDate">
+                        <!--เรียงโดย : -->
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
+                        <!--<gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
                             <template>
                                 [[item.label]]
                             </template>
-                        </gl-combo-box>
-                    </div>-->
-                    <!--<div class="labelSearchDate">
-                        แหล่งข้อมูล :
+                        </gl-combo-box>-->
+                    </div>
+                    <div class="labelSearchDate">
+                        <!--แหล่งข้อมูล :-->
                     </div>
                     <div class="flexchild">
-                        <gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
+                        <!--<gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
                             value="{{data.refDB}}">
                             <template>
                                 [[item.label]]
                             </template>
-                        </gl-combo-box>
-                    </div>-->
+                        </gl-combo-box>-->
+                    </div>
                     <div class="flexchild">
-                        <div class="btn-search">
+                        <!--<div class="btn-search">
                             <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
                                 <iron-icon icon="search"></iron-icon>
                                 ค้นหา
                             </paper-button>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="flexchild"></div>
                 </div>
                 <div class="flex-horizontal-with-ratios">
-                    <div class="flexchild">
-                        <div class="btn-search">
-                            <!-- <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValueReport">
-                                <iron-icon icon="assignment"></iron-icon>
-                                ออกรายงาน
-                            </paper-button> -->
-                        </div>
-                    </div>
-                    <div class="flex3child">
-                    </div>
-                </div>
-
-                <!-- <paper-button raised on-tap="getHm">กด</paper-button> -->
-
-                <div class="flex-horizontal-with-ratios">
                     <div class="flex-5">
                         <div class="flex-horizontal-with-ratios" style="width:95%">
-                            <vaadin-grid id="material" items="[[hmChild]]" inverted$="[[inverted]]">
-
-                                <!--<vaadin-grid-column width="50px" flex-grow="0">
-                                    <template class="header">
-                                    </template>
-                                    <template>
-                                        <div class="text-center">
-                                            <paper-checkbox on-change="_selectItem" checked="[[_isSelected(inverted, selected)]]"></paper-checkbox>
-                                        </div>
-                                    </template>
-                                </vaadin-grid-column>-->
-
-                                <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                            <vaadin-grid id="material" items="{{hmChild}}">
+                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
                                     <template class="header">พิกัดข้าว
                                         <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
                                         </vaadin-gird-filter-common>
                                     </template>
                                     <template>
-                                        <div on-click="selectHamnoize">
+                                        <div on-click="selectHamnoize" style="padding-left:15px">
                                             [[item.hamonize_code]]
                                         </div>
                                     </template>
@@ -138,16 +183,14 @@
                                         </vaadin-gird-filter-common>
                                     </template>
                                     <template>
-                                        <div on-click="selectHamnoize">[[item.hamonize_th]]</div>
+                                        <div on-click="selectHamnoize" style="padding-left:15px"> [[item.hamonize_th]]</div>
                                     </template>
                                 </vaadin-grid-column>
-
-                                <!--<vaadin-grid-column width="449px" flex-grow="0">
-                                    <template class="header">ชื่อชนิดข้าว (อังกฤษ)
-                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_en" value="[[_hamonize_en]]">
-                                        </vaadin-gird-filter-common>
+                                <!--<vaadin-grid-column width="100px">
+                                    <template class="header">1111</template>
+                                    <template>
+                                        <paper-checkbox aria-label$="Show Details for [[item.hamonize_th]]" checked="{{expanded}}">Show Details</paper-checkbox>
                                     </template>
-                                    <template>[[item.hamonize_en]]</template>
                                 </vaadin-grid-column>-->
                             </vaadin-grid>
                         </div>
@@ -162,13 +205,13 @@
                         <div class="flex-horizontal-with-ratios" style="width:95%">
                             <vaadin-grid id="material" items="{{seletedRice}}">
 
-                                <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
                                     <template class="header">พิกัดข้าว
                                         <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
                                         </vaadin-gird-filter-common>
                                     </template>
                                     <template>
-                                        <div on-click="deselectHamnoize">[[item.hamonize_code]]</div>
+                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_code]]</div>
                                     </template>
                                 </vaadin-grid-column>
 
@@ -178,15 +221,33 @@
                                         </vaadin-gird-filter-common>
                                     </template>
                                     <template>
-                                        <div on-click="deselectHamnoize">[[item.hamonize_th]]</div>
+                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_th]]</div>
                                     </template>
                                 </vaadin-grid-column>
+
+
                             </vaadin-grid>
                         </div>
                     </div>
-                    <!-- </div> -->
-                    <!-- <div class="flexchild"></div> -->
                 </div>
+                <div class="horizontal layout">
+                    <div class="flex">
+
+                    </div>
+                    <div class="flex">
+
+                    </div>
+                    <div class="end-justified">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
 
@@ -207,43 +268,6 @@
                 date: {
                     statePath: 'hamonize.date',
                     observer: '_setDate'
-                },
-                inverted: {
-                    type: Boolean,
-                    value: false
-                },
-                indeterminate: {
-                    type: Boolean,
-                    value: false
-                },
-                hamonizeOrder: {
-                    type: Array,
-                    value: [
-                        {
-                            id: 'hamonize_code',
-                            label: 'เลขพิกัด'
-                        },
-                        {
-                            id: 'hamonize_th',
-                            label: 'ชนิดข้าว'
-                        },
-                        {
-                            id: 'net_weight_in',
-                            label: 'ปริมาณนำเข้า'
-                        },
-                        {
-                            id: 'net_weight_out',
-                            label: 'ปริมาณส่งออก'
-                        },
-                        {
-                            id: 'fob_amt_baht_in',
-                            label: 'มูลค่านำเข้า'
-                        },
-                        {
-                            id: 'fob_amt_baht_out',
-                            label: 'มูลค่าส่งออก'
-                        }
-                    ]
                 },
                 dataSourch: {
                     type: Array,
@@ -281,52 +305,104 @@
                 seletedRice: {
                     type: Array,
                     value: [],
+                },
+                value: {
+                    value: [],
+                    notify: true
+                },
+                label: {
+                    type: String,
+                    value: 'label'
+                },
+                items: {
+                    observer: 'obItems'
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ประเทศ',
+                            value: 'country',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'บริษัท',
+                            value: 'company',
+                            label: '',
+                            hidden: false
+                        }
+                    ]
                 }
             },
-            //  check box
-            observers: ['_resetSelection(inverted)'],
-            _resetSelection: function (inverted) {
-                this.$.material.selectedItems = [];
-                this.updateStyles();
-                this.indeterminate = false;
-            },
-            _invert: function (e) {
-                // console.log(this.$.material.selectedItems.length);
-                this.inverted = !this.inverted;
-            },
-            // iOS needs indeterminated + checked at the same time
-            _isChecked: function (inverted, indeterminate) {
-                return indeterminate || inverted;
-            },
-            _selectItem: function (e) {
-                if (e.target.checked === this.inverted) {
-                    this.$.material.deselectItem(e.model.item);
-                } else {
-                    this.$.material.selectItem(e.model.item);
+            selectTag: function (e) {
+                let value = e.detail.value
+                console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // console.log(this.myItems[result]);
+                    this.push('value', value);
+                    e.detail.value = {}
+                    console.log(e.detail.value);
+                    console.log(this.$.priority.value)
+
                 }
-                // console.log(this.$.material.selectedItems.length);
-                this.indeterminate = this.$.material.selectedItems.length > 0;
+
             },
-            _isSelected: function (inverted, selected) {
-                return inverted != selected;
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
             },
-            getHm() {
-                // console.log(this.$.material.selectedItems);
+            deleteTag: function (e) {
+                // console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
             },
-            checkYear(dateStart, listYear) {
-                // let year = dateStart.split('-')[0]
-                // // console.log(year);
-                // // console.log(year <= this.data.hmYear);
-                // if(year < this.data.hmYear)
-                //     this.set('data.hmYear','')
-                // let hmYear = []
-                // listYear.map((item)=>{
-                //     if(year >= item.year)
-                //     hmYear.push({year :item.year})
-                //     // console.log(item.year);
-                // })
-                // // console.log(hmYear);
-                return listYear
+            getSeleted(filter) {
+                // console.log(filter.map((item) => item.hidden !== true));
+                let data = this.myItems.filter((item) => item.hidden === false)
+                return data
+            },
+
+            checkYear(dateStart, dateEnd, listYear) {
+                let yearStart = dateStart.split('-')[0]
+                let yearEnd = dateEnd.split('-')[0]
+                let hmYear = []
+                listYear.map((item,index) => {
+                    item.yearStart = Number(item.year)
+                    if (listYear[index+1] !== undefined) {
+                        item.yearEnd = Number(listYear[index+1].year-1)
+                    }else {
+                        item.yearEnd = 9999
+                    }
+                    if (yearEnd >= item.yearStart && yearStart <= item.yearEnd) {
+                       hmYear.push({year :item.year})
+                    }
+                })
+                console.log(hmYear);
+                return hmYear
 
             },
             // end check box
@@ -346,7 +422,7 @@
                 if (year !== '' && typeof year !== 'undefined') {
                     // console.log(this.listRice);
                     // console.log(year);
-                    let list_rice = this.listRice.filter((item) => { return item.hamonize_year == year });
+                    let list_rice = this.listRice.filter((item) => item.hamonize_year == year);
                     // console.log(list_rice);
                     this.hmChild = list_rice;
                 }
@@ -405,49 +481,11 @@
                     }
                 }
             },
-            // getChildHm(e) {
-            //     try {
-            //         // console.log(e.detail.value.split(' ')[0]);
-            //         let code = e.detail.value.split(' ')
-            //         let hmparent = code[0]
-            //         let year = code[code.length - 1].slice(0, 4)
-            //         this.set('data.hamonizeYear', year)
-            //         if (hmparent !== '' && hmparent !== undefined) {
-            //             // console.log(this.data);
-            //             let data = { 'hmparent': hmparent, 'year': this.data.hamonizeYear }
-            //             this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
-            //         }
-            //     } catch (e) {
-            //     }
-            //     // 
-            // },
-            selectAll() {
-                this.hmChild.map((set, index) => {
-                    if (this.statusCheck) {
-                        this.$.material.selectItem(set)
-                    } else {
-                        this.$.material.deselectItem(set)
-                    }
-                    // this.set('hmChild.' + index + '.check', this.statusCheck)
-                })
-                // this.fire('toast', { status: 'load' })
-                // // console.log(this.statusCheck);
-                // this.hmChild.map((set, index) => {
-                //     // console.log(this.list_employees[index].budget_balance);
-                //     // if (this.hmChild[index].budget_balance !== 0)
-                //     this.set('hmChild.' + index + '.checks', this.statusCheck)
-                //     // console.log(this.list_employees[index].budget_balance);
-                // })
-                // // this.set('paperFab', !this.statusCheck)
-                // // console.log(this.paperFab);
-                // this.fire('toast', { status: 'load' })
-            },
             _setDate(e) {
                 this.set('data.dateStart', e.dateStart)
                 this.set('data.dateEnd', e.dateEnd);
-                // this.set('data.refDB', 'f3');
-                // data.dataSourch
-                // (e.dateEnd != '') ? this.getRiceValue() : '';
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
             },
             getRiceValue() {
                 // console.log(this.$.material.selectedItems);
@@ -457,37 +495,31 @@
                 this.seletedRice.map((id) => {
                     arr.push(id.hamonize_code)
                 })
+                // console.log(this.value);
                 // console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
                     hmYear: this.data.hmYear,
                     hmCode: hmcodes,
                     dateStart: this.data.dateStart,
-                    dateEnd: this.data.dateEnd
+                    dateEnd: this.data.dateEnd,
+                    exporter: this.data.exporter,
+                    importer: this.data.importer
+                }
+                switch (this.value.length) {
+                    case 1:
+                        data.field2 = this.value[0].value
+                        break;
+                    case 2:
+                        data.field2 = this.value[0].value,
+                        data.field3 = this.value[1].value
+                        break;
+                    default:
+                        break;
                 }
                 this.set('data', data)
                 // console.log(data);
                 this.dispatchAction('HAMONIZE_RICE_GET', data);
-                // this.data.hmchild = arr
-                // let code = this.data.hmparent.split(' ')
-                // let hmparent = code[0]
-                // // console.log(hmparent);
-                // let newLink = this.data
-                // newLink.hmparent = hmparent
-                // // console.log(this.data);
-                // // if (this.data.orderby == '') {
-                // //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
-                // //     comboboxhamonizeOrderBy.value = 'hamonize_code'
-                // //     this.data.orderby = 'hamonize_code'
-                // // }
-                // // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
-                // // console.log(1);
-                // this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(newLink))
-                // // } else {
-                // //     console.log(2);
-                // //     this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
-                // //     // this.dispatchAction('HAMONIZE_CODE_SEARCH_R2', this.genUrl(this.data))
-                // // }
             },
             getRiceValueReport() {
                 let arr = []
@@ -502,14 +534,15 @@
                 // console.log(hmparent);
                 let newLink = this.data
                 newLink.hmparent = hmparent
-                // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
                 window.open('./api/report/h01?' + this.genUrl(newLink))
-                // } else {
-                //     window.open('./api/report/h02?' + this.genUrl(this.data))
-                // }
             },
             selectHamnoize(e) {
-                this.push('seletedRice', e.model.__data__.item)
+                let _this = this
+                this.fire('toast', {
+                    status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
+                        _this.push('seletedRice', e.model.item)
+                    }
+                });
                 // console.log(e.model.__data__.item);
             },
             deselectHamnoize(e) {

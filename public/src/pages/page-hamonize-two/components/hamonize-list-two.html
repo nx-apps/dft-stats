@@ -2,6 +2,13 @@
 <link rel="import" href="./../../components/month-behavior.html">
 <link rel="import" href="./../../components/data-manage-behavior.html">
 <link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid-column-group.html">
+
+<link rel="import" href="./../../components/page-style.html">
+
+<!--vaadin-grid-column-group-->
 <dom-module id="hamonize-list-two">
     <style include="page-style flex-style">
         table.gl-table-default>thead>tr:nth-child(1)>th:nth-child(2),
@@ -13,13 +20,46 @@
         table.gl-table-default>tfoot>tr>td:nth-child(3) {
             width: 30%;
         }
+
+        vaadin-grid {
+            height: 100vh;
+        }
     </style>
     <template>
+        <paper-dialog id="report" modal>
+            <div class="layout start-justified">
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-combo-box always-float-label label="รูปแบบเอกสาร" placeholder="รูปแบบเอกสาร" value="{{data.view}}" item-label-path="cate"
+                        item-value-path="id" items="{{report.categoryReport}}">
+                        <template>
+                            [[item.cate]]
+                        </template>
+                    </gl-combo-box>
+                </div>
+
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-combo-box always-float-label label="ประเภทเอกสาร" placeholder="ประเภทเอกสาร" value="{{data.export}}" item-label-path="report_type"
+                        item-value-path="report_type_id" items="{{report.reportFile}}">
+                        <template>
+                            [[item.report_type]]
+                        </template>
+                    </gl-combo-box>
+                </div>
+
+                <div class="flex horizontal end-justified layout buttons">
+                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
+                    <paper-button raised class="gl-btn-primary" on-tap="printReport"  autofocus>ออกรายงาน</paper-button>
+                </div>
+            </div>
+        </paper-dialog>
         <paper-material elevation="1" class="container">
             <template is="dom-if" if="[[!checkData(riceList)]]">
                 <div class="horizontal layout">
                     <div class="flex-3">
                         <!--<div style="margin:10px 0px 10px 0px;">ชื่อบริษัท : {{item.company_name_th}}</div>-->
+                    </div>
+                    <div class="flex layout end-justified ">
+
                     </div>
                     <div class="flex layout end-justified ">
                         <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportHamonize">
@@ -29,64 +69,175 @@
                     </div>
                 </div>
             </template>
-            <table class="gl-table-default">
-                <thead>
-                    <tr>
-                        <th class="label-head" rowspan="2">ลำดับ</th>
-                        <th class="label-head" rowspan="2">เลขพิกัดศุลกากร</th>
-                        <th class="label-head" rowspan="2">ชนิดข้าว</th>
-                        <th class="label-head" colspan="3">นำเข้า</th>
-                        <!--<th class="label-head">มูลค่า (บาท)</th>-->
-                        <th class="label-head" colspan="3">ส่งออก</th>
-                        <!--<th class="label-head">มูลค่า (บาท)</th>-->
-                    </tr>
-                    <tr>
-                        <!--<th class="label-head">HM CODE</th>-->
-                        <!--<th class="label-head">ชนิดข้าว</th>-->
-                        <th class="label-head">ปริมาณ (ตัน)</th>
-                        <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head">มูลค่า (USD)</th>
-                        <th class="label-head">ปริมาณ (ตัน)</th>
-                        <th class="label-head">มูลค่า (บาท)</th>
-                        <th class="label-head">มูลค่า (USD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template is="dom-if" if="[[checkData(riceList)]]">
-                        <tr>
-                            <td colspan="9" class="no-data">ไม่พบข้อมูล</td>
-                        </tr>
+            <vaadin-grid id="material" items="[[riceList]]">
+                <vaadin-grid-column width="50px" flex-grow="0" resizable>
+                    <template class="header">
+                        <div class="text-center">ลำดับ</div>
                     </template>
-
-                    <template is="dom-repeat" items={{riceList}}>
-
-                        <tr>
-                            <td style="text-align: center;">[[_Obindex(index)]]</td>
-                            <td>[[item.hmcode]]</td>
-                            <td>[[item.hamonize_th]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight_i)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht_i)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_i)]]</td>
-                            <td class="format-number">[[formatNumber(item.net_weight_e)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_baht_e)]]</td>
-                            <td class="format-number">[[formatNumber(item.fob_amt_e)]]</td>
-                        </tr>
+                    <template>
+                        <div class="text-center"> [[_Obindex(index)]]</div>
                     </template>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>รวม</td>
-                        <td class="total">[[formatNumber(total.net_weight_i)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_baht_i)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_i)]]</td>
-                        <td class="total">[[formatNumber(total.net_weight_e)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_baht_e)]]</td>
-                        <td class="total">[[formatNumber(total.fob_amt_e)]]</td>
-                    </tr>
-                </tfoot>
-            </table>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                    <template class="header">ชนิดข้าว
+                        <vaadin-gird-filter-common aria-label="field1" path="field1" value="[[_field1]]">
+                        </vaadin-gird-filter-common>
+                    </template>
+                    <template>
+                        <div>[[item.field1]]</div>
+                    </template>
+                    <template class="footer">
+                        <div class="text-right">รวม</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="250px" flex-grow="0" resizable hidden="[[!search.field2]]">
+                    <template class="header">[[setText(search.field2)]]
+                        <vaadin-gird-filter-common aria-label="field2" path="field2" value="[[_field2]]">
+                        </vaadin-gird-filter-common>
+                    </template>
+                    <template>
+                        <div>[[item.field2]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column width="250px" flex-grow="0" resizable hidden="[[!search.field3]]">
+                    <template class="header">[[setText(search.field3)]]
+                        <vaadin-gird-filter-common aria-label="field3" path="field3" value="[[_field3]]">
+                        </vaadin-gird-filter-common>
+                    </template>
+                    <template>
+                        <div>[[item.field3]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <vaadin-grid-column-group width="750px" flex-grow="0" resizable hidden="[[!search.importer]]">
+                    <template class="header">
+                        <div class="text-center">นำเข้า</div>
+                    </template>
+                    <!--<template class="footer">I'm in the group footer</template>-->
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">ปริมาณ (ตัน)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.net_weight_i)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.net_weight_i)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_i)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.fob_amt_baht_i)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_i)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.avg_amt_baht_i)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_i)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.fob_amt_i)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_i)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.avg_amt_i)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group width="750px" flex-grow="0" resizable hidden="[[!search.exporter]]">
+                    <template class="header">
+                        <div class="text-center">ส่งออก</div>
+                    </template>
+                    <!--<template class="footer">I'm in the group footer</template>-->
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">ปริมาณ (ตัน)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.net_weight_e)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.net_weight_e)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_e)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.fob_amt_baht_e)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_e)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.avg_amt_baht_e)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_e)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.fob_amt_e)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_e)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[formatNumber(total.avg_amt_e)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
+            </vaadin-grid>
+
         </paper-material>
     </template>
     <script>
@@ -111,19 +262,81 @@
                 riceList: {
                     statePath: 'hamonize.rice_list',
                     observer: 'totalcal'
-                }
+                },
+                data: {
+                    type: Object,
+                    value: {
+                        view: 'table',
+                        export: 'pdf'
+                    }
+                },
+                report: {
+                    type: Object,
+                    value: {
+                        categoryReport: [
+                            { cate: 'ตาราง', id: 'table' },
+                            { cate: 'Pivot', id: 'pivot' }
+                        ],
+                        reportFile: [
+                            { report_type: 'PDF', report_type_id: 'pdf' },
+                            { report_type: 'WORD', report_type_id: 'word' },
+                            { report_type: 'EXCEL', report_type_id: 'excel' }
+                        ]
+                    }
+
+
+                },
+            },
+            setText(text) {
+                if (text === 'country')
+                    return 'ประเทศ'
+                return 'บริษัท'
             },
             totalcal(dataList) {
+
+                if (this.search !== undefined) {
+                    // console.log(this.search);
+                }
                 this.set('total.net_weight_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0));
                 this.set('total.fob_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0));
                 this.set('total.fob_amt_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i, 0));
+                this.set('total.avg_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_i, 0));
+                this.set('total.avg_amt_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_i, 0));
+
+
                 this.set('total.net_weight_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0));
                 this.set('total.fob_amt_baht_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0));
                 this.set('total.fob_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0));
+                this.set('total.avg_amt_baht_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0));
+                this.set('total.avg_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0));
+
             },
             printReportHamonize() {
+                this.$$('#report').open()
                 // console.log(this.search);
-                window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
+                if ((this.search.exporter === false) && (this.search.importer === true)) {
+                    this.search.tranType = 'i'
+                    // console.log('i')
+                    // console.log(this.search.imexport);
+                }else if ((this.search.exporter === true) && (this.search.importer === false)) {
+                    this.search.tranType = 'e'
+                    // console.log('e')
+                }else {
+                    this.search.tranType = 'a'
+                    // console.log('a')
+                    
+                }                // tranType
+            },
+            printReport() {
+                this.search.view = this.data.view
+                this.search.export = this.data.export
+                // console.log(this.search);
+                // console.log(this.search.field3);
+                // undefined  company
+                // if (this.search.field2 === undefined && this.search.field3 === undefined) {
+                    window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
+                    // console.log(this.genUrl(this.search));
+                // }
             }
         });
     </script>
