@@ -1,6 +1,8 @@
 <link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="./../../../../bower_components/gl-form/gl-form-input.html">
 
+<link rel="import" href="./../../components/page-style.html">
+
 <dom-module id="list-report">
     <template>
         <style include="page-style flex-style">
@@ -20,13 +22,16 @@
             .text-center {
                 text-align: center;
             }
+            paper-button{
+                width: 100px;
+            }
         </style>
         <paper-material elevation="1">
             <div class="container">
                 <div class="flex-horizontal-with-ratios">
                     <!--<div class="flexchild"></div>-->
                     <!--<div class="flex4child">-->
-                    <vaadin-grid aria-label="Report" class="material" items="[[report]]">
+                    <vaadin-grid aria-label="Report" id="material" items="[[report]]">
                         <vaadin-grid-column width="10%" flex-grow="0">
                             <template class="header ">
                                 <div class="text-center">ลำดับ</div>
@@ -83,12 +88,12 @@
 
         </paper-material>
         <paper-dialog id="report">
-            <div class="layout horizontal start-justified">
+            <div class="layout start-justified">
                 <div class="flex" style=" margin-right: 30px">
                     <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.date}}"></gl-form-input>
                 </div>
                 <div class="flex" style=" margin-right: 30px">
-                    <gl-form-input label="จำนวนเดือน:" placeholder="จำนวนเดือน" type="number" value="{{data.amountTime}}"></gl-form-input>
+                    <gl-form-input label="จำนวนเดือน:" placeholder="จำนวนเดือน" type="number"  hidden="[[checkReport(param.report_id)]]" value="{{data.amountTime}}"></gl-form-input>
                 </div>
 
                 <div class="flex horizontal end-justified layout buttons">
@@ -162,10 +167,10 @@
                     value: {}
                 },
             },
-            ready(){
+            ready() {
                 // console.log(this.data);
-                this.set('data.date',new Date().toISOString().split('T')[0])
-                this.set('data.amountTime',1)
+                this.set('data.date', new Date().toISOString().split('T')[0])
+                this.set('data.amountTime', 6)
             },
             print(e) {
                 let link = e.model.item.report_link
@@ -173,39 +178,45 @@
                 let report_prama = e.model.item.report_prama
                 this.set('date.type', type)
                 this.set('date.link', link)
-                this.set('param.report_id',e.model.item.report_id)
-                this.set('param.report_prama',report_prama)
+                this.set('param.report_id', e.model.item.report_id)
+                this.set('param.report_prama', report_prama)
+                // console.log(this.param.report_id);
                 // console.log(e.model.item);
                 // console.log(e.currentTarget.id);
                 // console.log(report_prama === 'date');
                 // if (report_prama === 'date') {
-                    this.$$('#report').open()
+                this.$$('#report').open()
                 // }else {
                 //     console.log(1111);
                 //     this.$$('#reportsd').open()
                 // }
             },
+            checkReport(report_id) {
+                if (report_id === 4)
+                    return false
+                return true
+            },
             printReport() {
                 // console.log(this.date.type);
                 switch (this.param.report_id) {
                     case 1:
-                        window.open('./api/report/daily/company?date=' + this.data.date+'&export='+this.date.type)
+                        window.open('./api/report/daily/company?date=' + this.data.date + '&export=' + this.date.type)
                         break;
                     case 2:
                         let edata = this.data.date
                         let sdate = new Date(new Date(edata).setDate(1)).toISOString().split('T')[0]
-                        window.open('./api/report/daily/country?sdate=' + sdate+'&edate='+edata+'&export='+this.date.type)
+                        window.open('./api/report/daily/country?sdate=' + sdate + '&edate=' + edata + '&export=' + this.date.type)
                         break;
                     case 3:
-                        window.open('./api/report/daily/pricerice?date=' + this.data.date+'&export='+this.date.type)
+                        window.open('./api/report/daily/pricerice?date=' + this.data.date + '&export=' + this.date.type)
                         break;
                     case 4:
-                        window.open('./api/report/daily/exportrice?currentDate=' + this.data.date+'&amountTime='+this.data.amountTime+'&export='+this.date.type)
+                        window.open('./api/report/daily/exportrice?currentDate=' + this.data.date + '&amountTime=' + this.data.amountTime + '&export=' + this.date.type)
                         break;
                     default:
                         break;
                 }
-                
+
             }
 
         });
