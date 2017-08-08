@@ -43,8 +43,8 @@ export function hamonizeAction(store) {
             let date = new Object()
             let today = new Date(new Date().setFullYear(new Date().getFullYear()))
             ////console.log(today);
-            date.dateStart = '2017-01-01'//today.toISOString().split('T')[0]
-            date.dateEnd = '2017-01-15'//new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
+            date.dateStart = today.toISOString().split('T')[0]
+            date.dateEnd = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
             ////console.log(date.edate);
             store.dispatch({ type: 'HAMONIZE_SET_DATE', payload: date })
         },
