@@ -250,7 +250,7 @@
                 this.indeterminate = false;
             },
             _invert: function (e) {
-                // console.log(this.$.material.selectedItems.length);
+                // //console.log(this.$.material.selectedItems.length);
                 this.inverted = !this.inverted;
             },
             // iOS needs indeterminated + checked at the same time
@@ -263,40 +263,40 @@
                 } else {
                     this.$.material.selectItem(e.model.item);
                 }
-                // console.log(this.$.material.selectedItems.length);
+                // //console.log(this.$.material.selectedItems.length);
                 this.indeterminate = this.$.material.selectedItems.length > 0;
             },
             _isSelected: function (inverted, selected) {
                 return inverted != selected;
             },
             getHm() {
-                // console.log(this.$.material.selectedItems);
+                // //console.log(this.$.material.selectedItems);
             },
             checkYear(dateStart, listYear) {
                 // let year = dateStart.split('-')[0]
-                // // console.log(year);
-                // // console.log(year <= this.data.hmYear);
+                // // //console.log(year);
+                // // //console.log(year <= this.data.hmYear);
                 // if(year < this.data.hmYear)
                 //     this.set('data.hmYear','')
                 // let hmYear = []
                 // listYear.map((item)=>{
                 //     if(year >= item.year)
                 //     hmYear.push({year :item.year})
-                //     // console.log(item.year);
+                //     // //console.log(item.year);
                 // })
-                // // console.log(hmYear);
+                // // //console.log(hmYear);
                 return listYear
                 
             },
             // end check box
-            // obdata(data) { console.log(data) },
+            // obdata(data) { //console.log(data) },
             getYearRice(e) {
                 var year = e.detail.value;
                 if (year !== '' && typeof year !== 'undefined') {
-                    // console.log(this.listRice);
-                    // console.log(year);
+                    // //console.log(this.listRice);
+                    // //console.log(year);
                     let list_rice = this.listRice.filter((item) => { return item.hamonize_year == year });
-                    // console.log(list_rice);
+                    // //console.log(list_rice);
                     this.hmChild = list_rice;
                 }
             },
@@ -311,7 +311,7 @@
             },
             setHamonizeEdate(data) {
                 try {
-                    // console.log(data.detail.value);
+                    // //console.log(data.detail.value);
                     let dateStart = new Date(this.data.dateStart).getFullYear(),
                         dateEnd = new Date(data.detail.value).getFullYear()
                     this.setYearHamonize(dateStart, dateEnd)
@@ -323,8 +323,8 @@
                 let dateStart = new Date(this.data.dateStart).getFullYear(),
                     dateEnd = new Date(this.data.dateEnd).getFullYear()
                 this.setYearHamonize(dateStart, dateEnd)
-                // console.log(this.hamonizeCodeList);
-                // console.log(111);
+                // //console.log(this.hamonizeCodeList);
+                // //console.log(111);
             },
             setYearHamonize(Syear, Eyear) {
                 if (!Number.isNaN(Syear) && !Number.isNaN(Eyear)
@@ -337,32 +337,32 @@
                             startyear = variable
                     }
                     if (Syear === Eyear) {
-                        // console.log(this.hamonizeCodeList[startyear]);
+                        // //console.log(this.hamonizeCodeList[startyear]);
                         this.set('hamonizeCodeList.use', this.hamonizeCodeList[startyear])
                     } else {
-                        // console.log(222);
+                        // //console.log(222);
                         for (var variable in hm) {
                             if (Number(variable) <= Eyear)
                                 endyear = variable
                         }
-                        //     console.log(222222);
-                        //    console.log(this.hamonizeCodeList[startyear]);
-                        //     console.log('Eyear',this.hamonizeCodeList[endyear]);
+                        //     //console.log(222222);
+                        //    //console.log(this.hamonizeCodeList[startyear]);
+                        //     //console.log('Eyear',this.hamonizeCodeList[endyear]);
                         let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
                         this.set('hamonizeCodeList.use', newArr)
-                        console.log(this.hamonizeCodeList.use.length);
+                        //console.log(this.hamonizeCodeList.use.length);
                     }
                 }
             },
             // getChildHm(e) {
             //     try {
-            //         // console.log(e.detail.value.split(' ')[0]);
+            //         // //console.log(e.detail.value.split(' ')[0]);
             //         let code = e.detail.value.split(' ')
             //         let hmparent = code[0]
             //         let year = code[code.length - 1].slice(0, 4)
             //         this.set('data.hamonizeYear', year)
             //         if (hmparent !== '' && hmparent !== undefined) {
-            //             // console.log(this.data);
+            //             // //console.log(this.data);
             //             let data = { 'hmparent': hmparent, 'year': this.data.hamonizeYear }
             //             this.dispatchAction('HAMONIZE_CODE_GET_CHILD', this.genUrl(data))
             //         }
@@ -380,15 +380,15 @@
                     // this.set('hmChild.' + index + '.check', this.statusCheck)
                 })
                 // this.fire('toast', { status: 'load' })
-                // // console.log(this.statusCheck);
+                // // //console.log(this.statusCheck);
                 // this.hmChild.map((set, index) => {
-                //     // console.log(this.list_employees[index].budget_balance);
+                //     // //console.log(this.list_employees[index].budget_balance);
                 //     // if (this.hmChild[index].budget_balance !== 0)
                 //     this.set('hmChild.' + index + '.checks', this.statusCheck)
-                //     // console.log(this.list_employees[index].budget_balance);
+                //     // //console.log(this.list_employees[index].budget_balance);
                 // })
                 // // this.set('paperFab', !this.statusCheck)
-                // // console.log(this.paperFab);
+                // // //console.log(this.paperFab);
                 // this.fire('toast', { status: 'load' })
             },
             _setDate(e) {
@@ -399,14 +399,14 @@
                 // (e.dateEnd != '') ? this.getRiceValue() : '';
             },
             getRiceValue() {
-                // console.log(this.$.material.selectedItems);
+                // //console.log(this.$.material.selectedItems);
                 var selects = this.$.material.selectedItems;
                 let arr = []
                 // let rice = selects.filter((item) => item.checks === true)
                 selects.map((id) => {
                     arr.push(id.hamonize_code)
                 })
-                // console.log(arr.join(','));
+                // //console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
                     hmYear: this.data.hmYear,
@@ -415,25 +415,25 @@
                     dateEnd: this.data.dateEnd
                 }
                 this.set('data', data)
-                // console.log(data);
+                // //console.log(data);
                 this.dispatchAction('HAMONIZE_RICE_GET', data);
                 // this.data.hmchild = arr
                 // let code = this.data.hmparent.split(' ')
                 // let hmparent = code[0]
-                // // console.log(hmparent);
+                // // //console.log(hmparent);
                 // let newLink = this.data
                 // newLink.hmparent = hmparent
-                // // console.log(this.data);
+                // // //console.log(this.data);
                 // // if (this.data.orderby == '') {
                 // //     let comboboxhamonizeOrderBy = this.$$('#hamonizeOrderBy')
                 // //     comboboxhamonizeOrderBy.value = 'hamonize_code'
                 // //     this.data.orderby = 'hamonize_code'
                 // // }
                 // // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {
-                // // console.log(1);
+                // // //console.log(1);
                 // this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(newLink))
                 // // } else {
-                // //     console.log(2);
+                // //     //console.log(2);
                 // //     this.dispatchAction('HAMONIZE_CODE_SEARCH_R1', this.genUrl(this.data))
                 // //     // this.dispatchAction('HAMONIZE_CODE_SEARCH_R2', this.genUrl(this.data))
                 // // }
@@ -444,11 +444,11 @@
                 rice.map((id) => {
                     arr.push(id.id)
                 })
-                // console.log(arr);
+                // //console.log(arr);
                 this.data.hmchild = arr
                 let code = this.data.hmparent.split(' ')
                 let hmparent = code[0]
-                // console.log(hmparent);
+                // //console.log(hmparent);
                 let newLink = this.data
                 newLink.hmparent = hmparent
                 // if (this.data.hamonize_code == undefined || this.data.hamonize_code == '') {

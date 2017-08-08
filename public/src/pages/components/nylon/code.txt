@@ -1,4 +1,4 @@
 nylonPageActive:function() {
-            // console.log('d ja');
+            // //console.log('d ja');
             this._getExporters();
           },

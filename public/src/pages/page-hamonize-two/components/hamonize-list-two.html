@@ -293,7 +293,7 @@
             totalcal(dataList) {
 
                 if (this.search !== undefined) {
-                    // console.log(this.search);
+                    // //console.log(this.search);
                 }
                 this.set('total.net_weight_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0));
                 this.set('total.fob_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0));
@@ -324,7 +324,7 @@
                 this.search.export = this.data.export
                 // if (this.search.field2 === undefined && this.search.field3 === undefined) {
                     window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
-                    // console.log(this.genUrl(this.search));
+                    // //console.log(this.genUrl(this.search));
                 // }
             }
         });

@@ -92,9 +92,9 @@ exports.hamonize2SQ = function (req, res) {
             for (var d in data) {
                 j.query("mssql", `insert into hamonize_type(hamonize_code,hamonize_th,hamonize_en)
                 values(?,?,?)`, [data[d].id, data[d].hamonize_th, data[d].hamonize_en], function (err, data) {
-                        console.log('ok');
+                        //console.log('ok');
                     });
-                // console.log(data[d].id);
+                // //console.log(data[d].id);
             }
             res.send('ok')
         })

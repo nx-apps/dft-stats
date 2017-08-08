@@ -28,7 +28,7 @@ export function companyReducer(state = initialState, action) {
 export function companyAction(store) {
   return [commonAction(), {
     COMPANY_CODE_GET(data) {
-      //console.log(1);
+      ////console.log(1);
       this.fire('toast', { status: 'load', text: 'กำลังโหลดข้อมูล...' })
       axios.get('/company/')
         .then((response) => {
@@ -39,15 +39,15 @@ export function companyAction(store) {
           });
         })
         .catch(function (error) {
-          console.log(error);
+          //console.log(error);
         });
     },
     COMPANY_SEARCH(data) {
       this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-      // console.log(data);
+      // //console.log(data);
       axios.post('/company/search', data)
         .then((response) => {
-          // console.log(response.data);
+          // //console.log(response.data);
           this.fire('toast', {
             status: 'success', text: 'ค้นหาข้อมูลสำเร็จ', callback() {
               store.dispatch({ type: 'COMPANY_SEARCH', payload: response.data })
@@ -55,15 +55,15 @@ export function companyAction(store) {
           });
         })
         .catch(function (error) {
-          console.log(error);
+          //console.log(error);
         });
     },
     COMPANY_SEARCH_LIST(data) {
       this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-      // console.log(data);
+      // //console.log(data);
       axios.post('/company', data)
         .then((response) => {
-          // console.log(response.data);
+          // //console.log(response.data);
           this.fire('toast', {
             status: 'success', text: 'ค้นหาข้อมูลสำเร็จ', callback() {
               store.dispatch({ type: 'COMPANY_SEARCH_LIST', payload: response.data })

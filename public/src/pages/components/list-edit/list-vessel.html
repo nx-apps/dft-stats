@@ -438,10 +438,10 @@
               this.$$('#removeButtom').removeAttribute("hidden");
             },
             // specialTap:function (e) {
-            //   console.log(e);
+            //   //console.log(e);
             // },
             attached: function() {
-              // console.log("created-2");
+              // //console.log("created-2");
               this.fire('vessel-insert-common',{node:this});
             },
             shipmentDelete:function (e) {
@@ -450,7 +450,7 @@
             },
             saveChangeShipment:function(e){
               var id = e.currentTarget.index;
-              // console.log(this.data.shipment_detail[id]);
+              // //console.log(this.data.shipment_detail[id]);
               // delete this.data.shipment_detail[id].shm_id;
               delete this.data.shipment_detail[id].carrier_name;
               delete this.data.shipment_detail[id].cl_name;
@@ -485,7 +485,7 @@
               delete this.data.shipment_detail[id].type_rice_name_th;
               this.data.shipment_detail[id].id=this.data.shipment_detail[id].shm_det_id
               delete this.data.shipment_detail[id].shm_det_id;
-              // console.log(this.data.shipment_detail[id]);
+              // //console.log(this.data.shipment_detail[id]);
 
               this.putDb(this.data.shipment_detail[e.currentTarget.index])
 
@@ -504,10 +504,10 @@
             },
             clickSubmit: function(){
               // this.data.id = this.data.shm_id;
-              // console.log(this.data);
+              // //console.log(this.data);
               // delete this.data.shm_id;
               // var eta_date=new Date (this.shipment.eta_date);//.concat('T00:00:00.000Z');
-              // console.log(this.shipment);
+              // //console.log(this.shipment);
               this.shipment.shm_id=this.data.shm_id;
               this.shipment.eta_date=new Date (this.shipment.eta_date);
               this.shipment.etd_date=new Date (this.shipment.etd_date);
@@ -519,12 +519,12 @@
               var check = 0;
               requested.reverse().map((el)=>{
                   if(el.value == undefined || el.value ==''){
-                    // console.log(el.value);
+                    // //console.log(el.value);
                     el.focus();
                     check += 1;
                   }
               })
-              // console.log(check);
+              // //console.log(check);
               //เช็คว่ายังเหลือค่าที่ไมไ่ด้เติมไหม ถา้ไม่ก็ส่งเลย
               if (check <= 0) {
                 this.glQuery('layoutMain').openToastSaveing();
@@ -536,9 +536,9 @@
               axios.post('./g2g/shipment/detail/insert', data)
               // axios.put('http://localhost:3000/api/g2g/shipment/update', data)
                         .then(function (response) {
-                          console.log("success");
-                          console.log(response);
-                          console.log(data);
+                          //console.log("success");
+                          //console.log(response);
+                          //console.log(data);
                           this.glQuery('addContract').shipMentDeatil(data.shm_id,false,'put');
                           this.shipment = {
                             seller_id:'',
@@ -572,25 +572,25 @@
                           this.clickCancel();
                         }.bind(this))
                         .catch(function (error) {
-                          console.log("error");
-                          console.log(error);
-                          console.log(data);
+                          //console.log("error");
+                          //console.log(error);
+                          //console.log(data);
                         })
             },
             //update
             putDb:function (data) {
               axios.put('./g2g/shipment/detail/update', data)
                         .then(function (response) {
-                          console.log("success");
-                          console.log(response);
-                          console.log(data);
+                          //console.log("success");
+                          //console.log(response);
+                          //console.log(data);
                           // this.glQuery('addContract').shipMentDeatil(data.shm_id,false);
                           this.clickCancel();
                           this.glQuery('addContract').shipMentDeatil(data.shm_id,false,'put');
                         }.bind(this))
                         .catch(function (error) {
-                          console.log("error");
-                          console.log(error);
+                          //console.log("error");
+                          //console.log(error);
                         })
             },
             deleteShipment:function () {
@@ -600,29 +600,29 @@
             deleteShipmentDb:function (dataId) {
               axios.delete('./g2g/shipment/delete/id/'+dataId)
                         .then(function (response) {
-                          console.log("success");
-                          console.log(response);
-                          console.log(11);
-                          // console.log(this.data.shm_id);
+                          //console.log("success");
+                          //console.log(response);
+                          //console.log(11);
+                          // //console.log(this.data.shm_id);
                           this.glQuery('addContract').getChange(true,'delete');
                         }.bind(this))
                         .catch(function (error) {
-                          console.log("error");
-                          // console.log(error);
+                          //console.log("error");
+                          // //console.log(error);
                         })
             },
             //delete shipment detail
             deleteDb:function (dataId) {
               axios.delete('./g2g/shipment/detail/delete/id/'+dataId)
                         .then(function (response) {
-                          console.log("success");
-                          console.log(response);
-                          console.log(this.data.shm_id);
+                          //console.log("success");
+                          //console.log(response);
+                          //console.log(this.data.shm_id);
                           this.glQuery('addContract').shipMentDeatil(data.shm_id,false,'delete');
                         }.bind(this))
                         .catch(function (error) {
-                          console.log("error");
-                          // console.log(error);
+                          //console.log("error");
+                          // //console.log(error);
                         })
             },
             clickCancel: function(){

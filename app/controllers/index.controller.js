@@ -4,7 +4,7 @@ exports.index=function(req,res){
 exports.db=function(req,res){
     req.logger.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     req.jdbc.query("mysql","SELECT *  FROM  vet_ages",[],function(err,data){
-        console.log(data);
+        //console.log(data);
     });
 
 
@@ -26,15 +26,15 @@ exports.db=function(req,res){
 
 
     }else{
-        console.log('is loged');
+        //console.log('is loged');
     }
 
-    console.log( req.ajv);
+    //console.log( req.ajv);
     var valid = req.ajv.validate('user', u);
-    if (!valid) console.log(req.ajv.errorsText());
+    if (!valid) //console.log(req.ajv.errorsText());
 
     req.r.table('session').coerceTo('array').run().then(function(result) {
-         console.log(result);
+         //console.log(result);
          res.json(result);
 
     });
@@ -43,7 +43,7 @@ exports.db=function(req,res){
 
 }
 exports.render=function(req,res){
-    console.log(req.user);
+    //console.log(req.user);
     res.render('index',{
         'title':"Hello",
         'message':"somchit",
@@ -105,7 +105,7 @@ exports.report=function(req,res){
    };
 
   var type=  req.param("type");
-  console.log(type);
+  //console.log(type);
   res.ireport("report1.jasper",type,datas,parameters);
 
 

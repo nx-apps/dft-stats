@@ -58,7 +58,7 @@
                     ];
         },
         toThaiDate(date){
-            // console.log(date);
+            // //console.log(date);
             let year = parseInt(date.split('-')[0])+543,
                 month = date.split('-')[1],
                 day = date.split('-')[2];
@@ -68,7 +68,7 @@
                 //ฟั่งชั่นแปลงค่า date จาก 2017-01-01 เป็น 2017/01/01 เพื่อให่เวลาเป็น gmt+7(แบบเก่า+0)
                 let newdata = new Object();
                 Object.getOwnPropertyNames(data).map((date)=>{
-                    // console.log(date.indexOf("date"));
+                    // //console.log(date.indexOf("date"));
                     if (date.indexOf("date") > -1) {
                         newdata[date] = data[date].replace("-", "/").replace("-", "/");
                     }else {
@@ -81,7 +81,7 @@
             let data = new String()
             let url_length = Object.getOwnPropertyNames(url).length
             let count = new Number()
-            // console.log(url);
+            // //console.log(url);
             for (var variable in url) {
                 if (url[variable] != ''){
                     data = data+variable+"="+ url[variable];
@@ -89,7 +89,7 @@
                 }
                 count++
             }
-            // console.log(data);
+            // //console.log(data);
             return data
         } 
     }

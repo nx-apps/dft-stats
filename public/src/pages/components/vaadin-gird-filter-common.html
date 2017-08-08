@@ -44,7 +44,7 @@
       observers: ['_filterChanged(path, value, isAttached)'],
 
       _filterChanged: function(path, value, isAttached) {
-          // console.log(isAttached);
+          // //console.log(isAttached);
         if (isAttached) {
           this.debounce('filter-changed', function() {
             this.fire('filter-changed');

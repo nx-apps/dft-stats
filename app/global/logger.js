@@ -3,5 +3,5 @@ exports.logger=function(){
 }
 
 exports.logger_write=function(){
-    console.log('Hello Global Util function');
+    //console.log('Hello Global Util function');
 }

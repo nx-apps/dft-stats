@@ -30,7 +30,7 @@ exports.list = function (req, res) {
         })
 }
 exports.search = function (req, res) {
-    // console.log(req.body);
+    // //console.log(req.body);
     // res.json(req.body);
     // [req.body.taxNo, req.body.dateStart, req.body.dateEnd] //รับค่า query หยอดใน mssql
     // ['0105525018429,010552504657,0105527000365,0105526040991', '2016-02-27', '2016-03-01']
@@ -41,13 +41,13 @@ exports.search = function (req, res) {
     req.body.dateEnd = req.body.dateEnd || '2017-01-30'
     req.body.field2 = req.body.field2 ||''
     req.body.field3 = req.body.field3 ||''
-    // console.log(req.body);
+    // //console.log(req.body);
     var j = req.jdbc;
     j.query("mssql", `exec sp_stats_search_company @tranType= ?,@taxNo= ?, @dateStart= ?, @dateEnd= ?,
      @field2= ?, @field3= ?`,
         [req.body.tranType ,req.body.taxNo, req.body.dateStart, req.body.dateEnd,req.body.field2 , req.body.field3],
         function (err, data) {
-            console.log(data);
+            // //console.log(data);
             res.send(data);
             // data = JSON.parse(data);
             // data = group(data, 'company_name_th', 'country_name_th');
@@ -79,7 +79,7 @@ exports.search = function (req, res) {
             //     company_name_th = '',
             //         data2 = []
             // }
-            // // console.log(datas);
+            // // //console.log(datas);
             // res.json(datas);
         })
 }
@@ -93,7 +93,7 @@ exports.spp01 = function (req, res) {
         endDate = req.query.edate
     }
     let company_taxno = req.query.company_taxno || ''
-    // console.log(company_taxno,startDate, endDate);
+    // //console.log(company_taxno,startDate, endDate);
     j.query("mssql", `exec sp_qry_stats_company @taxno= ?, @startDate= ?, @endDate= ?`,
         [company_taxno, startDate, endDate],
         // j.query("mssql", `select * from hamonize_type`, [],

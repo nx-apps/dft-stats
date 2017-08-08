@@ -42,7 +42,7 @@ exports.child_code = function (req, res) {
     var j = req.jdbc;
     let head = req.query.hmparent || '1006'
     let year = req.query.year
-    //   console.log('=>>>>>',req.query.hmparent);
+    //   //console.log('=>>>>>',req.query.hmparent);
     j.query("mssql", `select
                         hamonize_code as id,
                         CONCAT (hamonize_code,'  ',hamonize_th) as label
@@ -75,7 +75,7 @@ exports.rice_get = function (req, res) {
     req.body.dateEnd = req.body.dateEnd || '2017-01-30'
     req.body.field2 = req.body.field2 ||''
     req.body.field3 = req.body.field3 ||''
-    // console.log(req.body);
+    // //console.log(req.body);
     // res.json(req.body);
     // j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
     //     [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
@@ -87,7 +87,7 @@ exports.rice_get = function (req, res) {
         [req.body.tranType,req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd,
         req.body.field2,req.body.field3],
         function (err, data) {
-            console.log(data);
+            // //console.log(data);
             res.send(data)
         })
 }

@@ -34,7 +34,7 @@ exports.h01 = function (req, res) {
         function (err, data) {
             // res.send(data);
             // res.json(data);
-            // console.log(param);
+            // //console.log(param);
             r.json(data).run().then(function (d2) {
                 res.ireport("hamonize/report1.jasper", req.query.export || "pdf", d2, param);
             })

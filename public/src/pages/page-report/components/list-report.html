@@ -168,7 +168,7 @@
                 },
             },
             ready() {
-                // console.log(this.data);
+                // //console.log(this.data);
                 this.set('data.date', new Date().toISOString().split('T')[0])
                 this.set('data.amountTime', 6)
             },
@@ -180,15 +180,15 @@
                 this.set('date.link', link)
                 this.set('param.report_id', e.model.item.report_id)
                 this.set('param.report_prama', report_prama)
-                // console.log(this.param.report_id);
-                // console.log(e.model.item);
-                // console.log(e.currentTarget.id);
-                // console.log(report_prama === 'date');
+                // //console.log(this.param.report_id);
+                // //console.log(e.model.item);
+                // //console.log(e.currentTarget.id);
+                // //console.log(report_prama === 'date');
                 // if (report_prama === 'date') {
                     
                 this.$$('#report').open()
                 // }else {
-                //     console.log(1111);
+                //     //console.log(1111);
                 //     this.$$('#reportsd').open()
                 // }
             },
@@ -198,7 +198,7 @@
                 return true
             },
             printReport() {
-                // console.log(this.date.type);
+                // //console.log(this.date.type);
                 switch (this.param.report_id) {
                     case 1:
                         window.open('./api/report/daily/company?date=' + this.data.date + '&export=' + this.date.type)

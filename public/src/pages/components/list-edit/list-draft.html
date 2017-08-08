@@ -160,8 +160,8 @@ border: 1px solid #000;
             is: "list-draft",
             behaviors: [listEditBehavior,gl.behavior.core,gl.behavior.notification],
             attached: function() {
-              // console.log(this.dataround[0]);
-              // console.log(this.data[0].blNos[0]);
+              // //console.log(this.dataround[0]);
+              // //console.log(this.data[0].blNos[0]);
             },
             acceptMoney:function(e){
               if(e.target.getAttribute("icon") == 'check-box'){
@@ -170,9 +170,9 @@ border: 1px solid #000;
                 e.target.setAttribute("icon", 'check-box')
               }
 
-              // console.log(1);
-              //console.log(e.target.getAttribute("icon"));
-              // console.log(e.target.setAttribute("icon", 'check-box'));
+              // //console.log(1);
+              ////console.log(e.target.getAttribute("icon"));
+              // //console.log(e.target.setAttribute("icon", 'check-box'));
             },
             check:function () {
               this.glNotify('title','text','/images/rice-icon-192.png')

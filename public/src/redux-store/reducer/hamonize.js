@@ -4,6 +4,7 @@ import { commonAction } from '../config'
 import groupArray from './../../../../node_modules/group-array'
 const initialState = {
     select: {},
+    settingGroup:[],
     list: [],
     date: { sdate: '', edate: '' },
     hamonizeCodeYear: [],
@@ -18,6 +19,8 @@ export function hamonizeReducer(state = initialState, action) {
     switch (action.type) {
         case 'HAMONIZE_SET_DATE':
             return Object.assign({}, state, { date: action.payload });
+        case 'SETTINGGROUP':
+            return Object.assign({}, state, { settingGroup: action.payload });
         case 'HAMONIZE_CODE_GET':
             return Object.assign({}, state, { hamonizeCodeYear: action.payload });
         case 'HAMONIZE_CODE_GET_CHILD':
@@ -39,11 +42,20 @@ export function hamonizeAction(store) {
         HAMONIZE_SET_DATE() {
             let date = new Object()
             let today = new Date(new Date().setFullYear(new Date().getFullYear()))
-            //console.log(today);
+            ////console.log(today);
             date.dateStart = '2017-01-01'//today.toISOString().split('T')[0]
             date.dateEnd = '2017-01-15'//new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0]
-            //console.log(date.edate);
+            ////console.log(date.edate);
             store.dispatch({ type: 'HAMONIZE_SET_DATE', payload: date })
+        },
+        SETTINGGROUP() {
+            axios.get(window._config.externalServerCommon+'/api/group')
+                .then((response) => {
+                    store.dispatch({ type: 'SETTINGGROUP', payload: response.data })
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
         },
         HAMONIZE_CODE_GET(data) {
             // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
@@ -55,13 +67,13 @@ export function hamonizeAction(store) {
                         yearData.push({
                             year: variable
                         })
-                        // console.log(variable);
+                        // //console.log(variable);
                     }
                     store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: yearData })
                     // return ha
                 })
                 .catch(function (error) {
-                    //console.log(error);
+                    ////console.log(error);
                 });
         },
         HAMONIZE_CODE_GET_CHILD(hmparent) {
@@ -69,7 +81,7 @@ export function hamonizeAction(store) {
             axios.get('/hamonize/child?' + hmparent)
                 .then((response) => {
                     // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-                    // console.log(response.data);
+                    // //console.log(response.data);
                     if (response.data.length > 0) {
                         response.data.map((check) => {
                             check.checks = true
@@ -87,20 +99,20 @@ export function hamonizeAction(store) {
                             }
                         });
                     }
-                    // console.log(1111);
+                    // //console.log(1111);
                     store.dispatch({ type: 'HAMONIZE_CODE_GET_CHILD', payload: response.data })
                     // return ha
                 })
                 .catch(function (error) {
-                    //console.log(error);
+                    ////console.log(error);
                 });
         },
         HAMONIZE_CODE_SEARCH_R1(data = '') {
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
-            // console.log(data);
+            // //console.log(data);
             axios.get('/hamonize/re01?' + data)
                 .then((response) => {
-                    //console.log(response);
+                    ////console.log(response);
                     this.fire('toast', {
                         status: 'success', text: 'ค้นหาสำเร็จ', callback() {
                             store.dispatch({ type: 'HAMONIZE_CODE_SEARCH_R1', payload: response.data })
@@ -109,7 +121,7 @@ export function hamonizeAction(store) {
 
                 })
                 .catch(function (error) {
-                    //console.log(error);
+                    ////console.log(error);
                 });
         },
         HAMONIZE_RICE_LIST() {
@@ -122,9 +134,9 @@ export function hamonizeAction(store) {
                         yearData.push({
                             year: variable
                         })
-                        // console.log(variable);
+                        // //console.log(variable);
                     }
-                    response.data.map((item)=>{
+                    response.data.map((item) => {
                         return item.hidden = false
                     })
                     store.dispatch({ type: 'HAMONIZE_CODE_GET', payload: yearData })
@@ -136,7 +148,7 @@ export function hamonizeAction(store) {
                 })
         },
         HAMONIZE_RICE_GET(data) {
-            // console.log(data);
+            // //console.log(data);
             this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.post('./hamonize/get', data)
                 .then((response) => {

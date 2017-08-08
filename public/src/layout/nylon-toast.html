@@ -131,10 +131,10 @@
             },
             _toastManage:function(e){
 				this.data = e.detail.status;
-				//console.log('_toastManage');
-				//console.log(e.detail.status);
+				////console.log('_toastManage');
+				////console.log(e.detail.status);
 				if(e.detail.status == 'load'){
-					//console.log('load');
+					////console.log('load');
 					this.openToastLoading();
 				}
 				else if(e.detail.status == 'loadSuccess'){
@@ -142,7 +142,7 @@
 				}
 				if(e.detail.status == 'success'){
 					this.closeToastLoading(e.detail.callback);
-					// console.log(e.detail.text);
+					// //console.log(e.detail.text);
 					//Polymer.dom(this.root).setAttribute('class', 'toastSuccess')
 					this.status = {
 						class : 'toastSuccess',
@@ -151,7 +151,7 @@
 					}
 				}
 				if(e.detail.status == 'connectError'){
-					// console.log(e.detail.text);
+					// //console.log(e.detail.text);
 					this.status = {
 						content : e.detail.text
 					}

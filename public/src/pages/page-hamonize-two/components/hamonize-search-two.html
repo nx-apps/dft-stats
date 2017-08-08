@@ -335,18 +335,18 @@
             },
             selectTag: function (e) {
                 let value = e.detail.value
-                // console.log(value);
+                // //console.log(value);
                 if (value !== null) {
 
                     let result = this.myItems.indexOf(value)
                     let num = this.value.length + 1
                     this.set('myItems.' + result + '.hidden', true)
                     this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
-                    // console.log(this.myItems[result]);
+                    // //console.log(this.myItems[result]);
                     this.push('value', value);
                     e.detail.value = {}
-                    // console.log(e.detail.value);
-                    // console.log(this.$.priority.value)
+                    // //console.log(e.detail.value);
+                    // //console.log(this.$.priority.value)
 
                 }
 
@@ -360,7 +360,7 @@
                 }
             },
             deleteTag: function (e) {
-                // console.log(e.currentTarget.item);
+                // //console.log(e.currentTarget.item);
                 var index = this.value.indexOf(e.currentTarget.item);
                 var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
                 this.splice('value', index, 1);
@@ -379,7 +379,7 @@
                 }
             },
             getSeleted(filter) {
-                // console.log(filter.map((item) => item.hidden !== true));
+                // //console.log(filter.map((item) => item.hidden !== true));
                 let data = this.myItems.filter((item) => item.hidden === false)
                 return data
             },
@@ -399,15 +399,15 @@
                         hmYear.push({ year: item.year })
                     }
                 })
-                // console.log(hmYear);
+                // //console.log(hmYear);
                 return hmYear
 
             },
             // end check box
-            // obdata(data) { console.log(data) },
+            // obdata(data) { //console.log(data) },
             getYearRice(e) {
                 var year = e.detail.value;
-                // console.log(this.seletedRice);
+                // //console.log(this.seletedRice);
                 if (this.seletedRice !== undefined) {
                     if (this.seletedRice.length > 0) {
                         let yearHm = this.seletedRice[0].hamonize_year
@@ -416,12 +416,12 @@
                         }
                     }
                 }
-                // console.log(this.seletedRice);
+                // //console.log(this.seletedRice);
                 if (year !== '' && typeof year !== 'undefined') {
-                    // console.log(this.listRice);
-                    // console.log(year);
+                    // //console.log(this.listRice);
+                    // //console.log(year);
                     let list_rice = this.listRice.filter((item) => item.hamonize_year == year);
-                    // console.log(list_rice);
+                    // //console.log(list_rice);
                     this.hmChild = list_rice;
                 }
             },
@@ -436,7 +436,7 @@
             },
             setHamonizeEdate(data) {
                 try {
-                    // console.log(data.detail.value);
+                    // //console.log(data.detail.value);
                     let dateStart = new Date(this.data.dateStart).getFullYear(),
                         dateEnd = new Date(data.detail.value).getFullYear()
                     this.setYearHamonize(dateStart, dateEnd)
@@ -448,8 +448,8 @@
                 let dateStart = new Date(this.data.dateStart).getFullYear(),
                     dateEnd = new Date(this.data.dateEnd).getFullYear()
                 this.setYearHamonize(dateStart, dateEnd)
-                // console.log(this.hamonizeCodeList);
-                // console.log(111);
+                // //console.log(this.hamonizeCodeList);
+                // //console.log(111);
             },
             setYearHamonize(Syear, Eyear) {
                 if (!Number.isNaN(Syear) && !Number.isNaN(Eyear)
@@ -462,20 +462,20 @@
                             startyear = variable
                     }
                     if (Syear === Eyear) {
-                        // console.log(this.hamonizeCodeList[startyear]);
+                        // //console.log(this.hamonizeCodeList[startyear]);
                         this.set('hamonizeCodeList.use', this.hamonizeCodeList[startyear])
                     } else {
-                        // console.log(222);
+                        // //console.log(222);
                         for (var variable in hm) {
                             if (Number(variable) <= Eyear)
                                 endyear = variable
                         }
-                        //     console.log(222222);
-                        //    console.log(this.hamonizeCodeList[startyear]);
-                        //     console.log('Eyear',this.hamonizeCodeList[endyear]);
+                        //     //console.log(222222);
+                        //    //console.log(this.hamonizeCodeList[startyear]);
+                        //     //console.log('Eyear',this.hamonizeCodeList[endyear]);
                         let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
                         this.set('hamonizeCodeList.use', newArr)
-                        // console.log(this.hamonizeCodeList.use.length);
+                        // //console.log(this.hamonizeCodeList.use.length);
                     }
                 }
             },
@@ -486,15 +486,15 @@
                 this.set('data.importer', false)
             },
             getRiceValue() {
-                // console.log(this.$.material.selectedItems);
+                // //console.log(this.$.material.selectedItems);
                 var selects = this.$.material.selectedItems;
                 let arr = []
                 // let rice = selects.filter((item) => item.checks === true)
                 this.seletedRice.map((id) => {
                     arr.push(id.hamonize_code)
                 })
-                // console.log(this.value);
-                // console.log(arr.join(','));
+                // //console.log(this.value);
+                // //console.log(arr.join(','));
                 var hmcodes = arr.join(',');
                 var data = {
                     hmYear: this.data.hmYear,
@@ -516,7 +516,7 @@
                         break;
                 }
                 this.set('data', data)
-                // console.log(data);
+                // //console.log(data);
                 this.dispatchAction('HAMONIZE_RICE_GET', data);
             },
             // getRiceValueReport() {
@@ -525,11 +525,11 @@
             //     rice.map((id) => {
             //         arr.push(id.id)
             //     })
-            //     // console.log(arr);
+            //     // //console.log(arr);
             //     this.data.hmchild = arr
             //     let code = this.data.hmparent.split(' ')
             //     let hmparent = code[0]
-            //     // console.log(hmparent);
+            //     // //console.log(hmparent);
             //     let newLink = this.data
             //     newLink.hmparent = hmparent
             //     window.open('./api/report/h01?' + this.genUrl(newLink))
@@ -540,11 +540,11 @@
                 // status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
                 let indexHamonize = this.hmChild.findIndex((item) => item.hamonize_code === hamonize_code)
                 this.set('hmChild.' + indexHamonize + '.hidden', true)
-                    // console.log(this.hmChild);
+                    // //console.log(this.hmChild);
                 this.push('seletedRice', e.model.item)
                 // }
                 // });
-                // console.log(e.model.__data__.item);
+                // //console.log(e.model.__data__.item);
             },
             deselectHamnoize(e) {
                 let index = e.model.__data__.index
@@ -554,7 +554,7 @@
                 let indexHamonize = this.hmChild.findIndex((item) => item.hamonize_code === hamonize_code)
                 this.set('hmChild.' + indexHamonize + '.hidden', false)
                 this.splice('seletedRice', index, 1);
-                // console.log(e.model.__data__.index);
+                // //console.log(e.model.__data__.index);
             }
         });
     </script>

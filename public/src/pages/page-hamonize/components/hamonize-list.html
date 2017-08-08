@@ -122,7 +122,7 @@
                 this.set('total.fob_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0));
             },
             printReportHamonize() {
-                // console.log(this.search);
+                // //console.log(this.search);
                 window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
             }
         });

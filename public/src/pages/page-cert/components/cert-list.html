@@ -156,7 +156,7 @@
                 }
             },
             sumData(data) {
-                // console.log(data);
+                // //console.log(data);
                 let net_weight = data.map((item) => item.net_weight).reduce((acc, cur) => acc + cur, 0)
                 let fob_amt_baht = data.map((item) => item.fob_amt_baht).reduce((acc, cur) => acc + cur, 0)
                 this.set('sum.net_weight', net_weight)

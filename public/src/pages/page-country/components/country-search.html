@@ -8,6 +8,9 @@
 <link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="./../../components/common-logic.html">
 <link rel="import" href="./../../components/page-style.html">
+
+<link rel="import" href="./group-item.html">
+
 <dom-module id="country-search">
     <style include="page-style flex-style">
         vaadin-grid {
@@ -120,6 +123,7 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                 </div>
+                <!--<group-item groupdata="{{countryList}}" list="[[listGroup]]" group-by=""></group-item>-->
                 <div class="horizontal layout center">
                     <div class="flex-5">
                         <div class="flex-horizontal-with-ratios" style="width:95%">
@@ -209,6 +213,10 @@
                     statePath: 'country.countryList',
                     // observer: '_setItem'
                 },
+                listGroup: {
+                    statePath: 'hamonize.settingGroup',
+                    // observer: '_setItem'
+                },
                 date: {
                     statePath: 'hamonize.date',
                     observer: '_setDate'
@@ -255,20 +263,20 @@
                 this.set('data.exporter', true)
                 this.set('data.importer', false)
                 // this.dispatchAction('COMPANY_CODE_SEARCH_R1', this.genUrl(this.data))
-                // console.log(111);
+                // //console.log(111);
                 // (e.dateEnd != '')? this.getCountryValue():'';
-                // console.log(this.data);
+                // //console.log(this.data);
             },
             selectTag: function (e) {
                 let value = e.detail.value
-                // console.log(value);
+                // //console.log(value);
                 if (value !== null) {
 
                     let result = this.myItems.indexOf(value)
                     let num = this.value.length + 1
                     this.set('myItems.' + result + '.hidden', true)
                     this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
-                    // console.log(this.myItems[result]);
+                    // //console.log(this.myItems[result]);
                     this.push('value', value);
                     e.detail.value = {}
 
@@ -284,7 +292,7 @@
                 }
             },
             deleteTag: function (e) {
-                // console.log(e.currentTarget.item);
+                // //console.log(e.currentTarget.item);
                 var index = this.value.indexOf(e.currentTarget.item);
                 var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
                 this.splice('value', index, 1);
@@ -303,7 +311,7 @@
                 }
             },
             getSeleted(filter) {
-                // console.log(filter.map((item) => item.hidden !== true));
+                // //console.log(filter.map((item) => item.hidden !== true));
                 let data = this.myItems.filter((item) => item.hidden === false)
                 return data
             },
@@ -314,7 +322,7 @@
                 this.selectedCountry.map((country_code) => {
                     arr.push(country_code.country_code)
                 })
-                // console.log(this.selectedCountry);
+                // //console.log(this.selectedCountry);
                 var country_code = arr.join(',');
                 var data = {
                     countryCode: country_code,
@@ -334,28 +342,28 @@
                     default:
                         break;
                 }
-                // console.log(data);
+                // //console.log(data);
                 this.set('data', data)
                 this.dispatchAction('COUNTRY_SEARCH', data);
 
             },
             selectCountry(e) {
-                // console.log(e.model.item);
+                // //console.log(e.model.item);
                 let country_code = e.model.item.country_code
                 let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
                 this.set('countryList.'+indexCountry+'.hidden',true)
-                // console.log(this.countryList[indexCountry]);
+                // //console.log(this.countryList[indexCountry]);
                 this.push('selectedCountry', e.model.item)
-                // console.log(e.model.__data__.item);
+                // //console.log(e.model.__data__.item);
             },
             deselectCountry(e) {
                 let index = e.model.__data__.index
                 let country_code = e.model.item.country_code
                 let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
                 this.set('countryList.'+indexCountry+'.hidden',false)
-                // console.log(this.countryList[indexCountry]);
+                // //console.log(this.countryList[indexCountry]);
                 this.splice('selectedCountry', index, 1);
-                // console.log(e.model.__data__.index);
+                // //console.log(e.model.__data__.index);
             }
         });
     </script>
