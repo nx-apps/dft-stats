@@ -8,8 +8,8 @@ module.exports = function (app) {
     //  app.get('/li02/:code', controller.li02)
     app.get('/ce01', controller.ce01)
     //  app.get('/ce02/:code', controller.ce02)
-    app.get('/daily/company', controller.dailyCompany)
-    app.get('/daily/country', controller.dailyCountry)
-    app.get('/daily/pricerice', controller.dailyPricerice)
-    app.get('/daily/exportrice', controller.dailyExportrice)
+    // app.get('/daily/company', controller.dailyCompany)
+    // app.get('/daily/country', controller.dailyCountry)
+    // app.get('/daily/pricerice', controller.dailyPricerice)
+    // app.get('/daily/exportrice', controller.dailyExportrice)
 }
