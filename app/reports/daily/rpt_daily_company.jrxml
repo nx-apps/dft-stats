@@ -454,10 +454,10 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 	<lastPageFooter>
 		<band height="20">
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="425" y="0" width="130" height="20" uuid="52d9074d-5d68-457f-98a7-4f624b0d085f"/>
-				<box leftPadding="5" rightPadding="5">
-					<pen lineWidth="1.0"/>
+			<textField>
+				<reportElement x="505" y="0" width="30" height="20" uuid="2557cdab-82d5-4af7-b1b8-b08732926516"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
@@ -466,7 +466,21 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["หน้าที่ "+$V{CURRENT_PAGE}+"/"+$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["หน้า "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="535" y="0" width="20" height="20" uuid="b626dc2f-b93c-4d52-8778-0b04a16c4b99"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>
