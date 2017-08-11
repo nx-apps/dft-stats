@@ -39,11 +39,7 @@ exports.update = function (req, res) {
         'price_pakistan'
         ).forEach(function (fe) {
             return r.table('price').get(fe('id'))
-                .update(
-                fe.merge({
-                    price_date: r.ISO8601(fe('price_date')).inTimezone('+07')
-                })
-                )
+                .update(fe)
         })
         .run().then(function (data) {
             res.json(data)
