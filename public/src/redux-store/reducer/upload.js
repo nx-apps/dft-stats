@@ -21,9 +21,15 @@ export function uploadReducer(state = initialState,action){
 
 export function uploadAction(store){
     return [commonAction(),{
-      UPLOAD_DELETE(data){
-        this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-        axios.delete('/employee/delete/'+data)
+      UPLOAD_MC(file){
+        // console.log(data);
+        var data = new FormData();
+        
+            data.append('file', file[0]);
+
+            console.log(data);
+        // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
+        axios.post('/upload/mc/',data)
         .then( (response)=>{
             ////console.log(response);
             // store.dispatch({type:'UPLOAD_DELETE',payload:response.data})

@@ -1,0 +1,39 @@
+<link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="./../components/page-style.html">
+
+<link rel="import" href="./../components/month-behavior.html">
+<dom-module id="page-mc-upload">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+            <section class="container">
+                <div class="header">อัพโหลดเอกสาร มส. 24</div>
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+            <input type="file" id="myFile" style="width:300px;" >
+            <paper-button raised class="gl-btn-info gl-small" on-tap="_uploadFile">
+                    </paper-button>
+                </paper-material>
+
+            </section>
+            <section class="container">
+
+            </section>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-mc-upload',
+            behaviors: [
+                ReduxBehavior, nylonBehavior, MonthBehavior,uploadAction
+            ],
+            _uploadFile: function (e) {
+                // console.log(e.currentTarget.files)
+                var file = this.$.myFile.files;
+                // console.log(file);
+                this.dispatchAction('UPLOAD_MC', file)
+            },
+        });
+    </script>
+</dom-module>
