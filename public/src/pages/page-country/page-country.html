@@ -1,35 +1,43 @@
-
 <link rel="import" href="./components/country-list.html">
 
 <link rel="import" href="./components/country-search.html">
+
+<link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
+
 <dom-module id="page-country">
     <template>
         <style>
-            :host {
+             :host {
                 display: block;
             }
         </style>
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
-           <section class="container">
-                <country-search data = "{{data}}"></country-search>
-           </section>
-           <section class="container">
+            <section class="container">
                 <div class="header">ข้อมูลรายประเทศ </div>
-                 <country-list search = "[[data]]"></country-list>
-           </section>
+
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+                    <country-search data="{{data}}"></country-search>
+                    <country-list search="[[data]]"></country-list>
+                </paper-material>
+
+            </section>
+
         </div>
     </template>
     <script>
         Polymer({
             is: 'page-country',
             behaviors: [
-                ReduxBehavior,nylonBehavior,countryAction,hamonizeAction
+                ReduxBehavior, nylonBehavior, countryAction, hamonizeAction
             ],
-            nylonPageActive(){
+            nylonPageActive() {
                 this.dispatchAction('COUNTRY_LIST');
                 this.dispatchAction('HAMONIZE_SET_DATE');
-                this.dispatchAction('SETTINGGROUP')
+                this.dispatchAction('COUNTRY_LIST_GROUP');
+                // this.dispatchAction('SETTINGGROUP')
             }
         });
     </script>

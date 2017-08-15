@@ -1,0 +1,56 @@
+<link rel="import" href="./components/rice-price-list.html">
+<link rel="import" href="./components/rice-price-search.html">
+
+<link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="./../components/page-style.html">
+
+<link rel="import" href="./../components/month-behavior.html">
+
+
+<dom-module id="page-rice-price">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+            <section class="container">
+                <div class="header">อัพเดตราคาข้าวประจำวันที่ [[toEngDate(data.dateStart)]]</div>
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+                    <rice-price-search data = "{{data}}"></rice-price-search>
+                    <rice-price-list search = "{{data}}"></rice-price-list>
+                </paper-material>
+
+            </section>
+            <section class="container">
+
+            </section>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-rice-price',
+            behaviors: [
+                ReduxBehavior, nylonBehavior, hamonizeAction,pricehamonizeAction,MonthBehavior
+            ],
+            properties: {
+                data: {
+                    statePath: 'hamonize.date',
+                    observer:'searchPrice'
+                }
+            },
+            nylonPageActive() {
+                this.dispatchAction('HAMONIZE_SET_DATE');
+                // this.dispatchAction('HAMONIZE_SET_DATE');
+            },
+            searchPrice(date){
+                // console.log(date);
+                if (date.dateStart !== undefined) {
+                    this.dispatchAction('PRICEHAMONIZE_SEARCH',date)
+                    this.dispatchAction('PRICEHAMONIZE_COST_SEARCH',date)
+                }
+                
+            }
+        });
+    </script>
+</dom-module>

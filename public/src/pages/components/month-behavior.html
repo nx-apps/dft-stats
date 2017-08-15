@@ -64,6 +64,13 @@
                 day = date.split('-')[2];
           return day+'/'+month+'/'+year
         },
+        toEngDate(date){
+            // //console.log(date);
+            let year = parseInt(date.split('-')[0]),
+                month = date.split('-')[1],
+                day = date.split('-')[2];
+          return day+'/'+month+'/'+year
+        },
         change2GMT7(data){
                 //ฟั่งชั่นแปลงค่า date จาก 2017-01-01 เป็น 2017/01/01 เพื่อให่เวลาเป็น gmt+7(แบบเก่า+0)
                 let newdata = new Object();

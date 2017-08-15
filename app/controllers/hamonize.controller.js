@@ -67,15 +67,18 @@ exports.rice_list = function (req, res) {
 }
 exports.rice_get = function (req, res) {
     var j = req.jdbc;
-    
+    let date = new Object()
+    let today = new Date(new Date().setFullYear(new Date().getFullYear()))
+    ////console.log(today);
+    date.dateStart = today.toISOString().split
     req.body.tranType = req.body.tranType || 'a'
-    req.body.hmYear = req.body.hmYear || '2017'
-    req.body.hmCode = req.body.hmCode || '1006'
-    req.body.dateStart = req.body.dateStart || '2017-01-01'
-    req.body.dateEnd = req.body.dateEnd || '2017-01-30'
-    req.body.field2 = req.body.field2 ||''
-    req.body.field3 = req.body.field3 ||''
-    // //console.log(req.body);
+    req.body.hmYear = req.body.hmYear || ''
+    req.body.hmCode = req.body.hmCode || ''
+    req.body.dateStart = req.body.dateStart || date
+    req.body.dateEnd = req.body.dateEnd || today
+    req.body.field2 = req.body.field2 || ''
+    req.body.field3 = req.body.field3 || ''
+    // console.log(req.body.tranType);
     // res.json(req.body);
     // j.query("mssql", `exec sp_stats_query_hamonize @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?`,
     //     [req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd],
@@ -84,8 +87,8 @@ exports.rice_get = function (req, res) {
     //     })
     j.query("mssql", `exec sp_stats_search_hamonize  @tranType= ?, @hmYear= ?, @hmCode= ?, @dateStart= ?, @dateEnd= ?
     , @field2= ?, @field3= ?`,
-        [req.body.tranType,req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd,
-        req.body.field2,req.body.field3],
+        [req.body.tranType, req.body.hmYear, req.body.hmCode, req.body.dateStart, req.body.dateEnd,
+        req.body.field2, req.body.field3],
         function (err, data) {
             // //console.log(data);
             res.send(data)

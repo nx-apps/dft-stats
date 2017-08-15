@@ -1,0 +1,163 @@
+<link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="./../../../../bower_components/gl-form/gl-form-input.html">
+
+<link rel="import" href="./../../components/format-number-behavior.html">
+
+<dom-module id="rice-price-list">
+    <template>
+        <style include="page-style ">
+             :host {
+                display: block;
+            }
+
+            .text-left {
+                text-align: left;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+
+            table.gl-table-default>tbody.table-body>tr>td {
+                /*cursor: pointer;*/
+                padding: 0px 15px;
+            }
+        </style>
+        <br />
+        <div class="horizontal layout start">
+
+            <div class="flex"></div>
+            <div class="flex-10">
+                <div class="flex">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width:10%" rowspan="2">ลำดับ</th>
+                                <th style="width:20%" rowspan="2">ชนิดข้าว</th>
+                                <th style="width:70%; text-align: center; " colspan="8">ราคา</th>
+                                <!--<th style="width:15%; text-align: center;">สภาหอการค้าไทย</th>
+                                <th style="width:15%">กรมการค้าภายใน</th>-->
+                                <!--<th style="width:15%" rowspan="2">#</th>-->
+                            </tr>
+                            <tr>
+                                <th style="width:8%; text-align: right; ">คน.<br /> (บาท)</th>
+                                <th style="width:8%; text-align: right; ">สภาหอฯ <br /> (USD) </th>
+                                <th style="width:8%; text-align: right; ">โรงสี<br /> (บาท)</th>
+                                <th style="width:8%; text-align: right; ">ข้าวเปลือก<br /> (บาท)</th>
+                                <th style="width:8%; text-align: right; ">สหรัฐฯ<br /> (USD)</th>
+                                <th style="width:8%; text-align: right; ">เวียดนาม<br /> (USD)</th>
+                                <th style="width:8%; text-align: right; ">อินเดีย<br /> (USD)</th>
+                                <th style="width:8%; text-align: right; ">ปากีฯ<br /> (USD)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items="{{data}}">
+                                <tr>
+                                    <td style="width:10%">[[item.rice_id]]</td>
+                                    <td style="width:30%">[[item.typerice]]</td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_dit')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.dit}}"
+                                            format-number="on" value="{{item.price_dit}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_fob')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.fob}}"
+                                            format-number="on" value="{{item.price_fob}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_thai')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden={{!item.thai}}
+                                            format-number="on" value="{{item.price_thai}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_paddy')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.paddy}}"
+                                            format-number="on" value="{{item.price_paddy}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_usa')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.usa}}"
+                                            format-number="on" value="{{item.price_usa}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_vietnam')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.vietnam}}"
+                                            format-number="on" value="{{item.price_vietnam}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_india')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.india}}"
+                                            format-number="on" value="{{item.price_india}}"></gl-form-input>
+                                    </td>
+                                    <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_pakistan')]]
+                                        <gl-form-input class="number" allowed-pattern="[0-9||,||.]" no-label-float on-focus="_setSeleteValue" hidden="{{!item.pakistan}}"
+                                            format-number="on" value="{{item.price_pakistan}}"></gl-form-input>
+                                    </td>
+                                </tr>
+                            </template>
+                            <!--<template is="dom-if" if="[[_isShow(hamonizeSeleted,hamonizeSeleted.*)]]">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="flex"></div>
+        </div>
+        <br />
+        <div class="horizontal end-justified layout">
+            <paper-button raised class="gl-btn-success" on-tap="savePriceHamonize">บันทึก</paper-button>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'rice-price-list',
+            behaviors: [
+                ReduxBehavior, FormatNumberBehavior
+            ],
+            properties: {
+                data: {
+                    statePath: 'pricehamonize.list',
+                },
+                search: {
+                    type: Object
+                }
+            },
+            observers: [
+                'caldata(data,data.*)'
+            ],
+            caldata(data) {
+                try {
+
+
+                    this.set('data.11.price_dit', Math.round(((this.data[10].price_dit * 6) + this.data[15].price_dit) / 7))
+                    this.set('data.12.price_dit', Math.round(((this.data[8].price_dit * 2) + this.data[15].price_dit) / 3))
+                    this.set('data.13.price_dit', Math.round((this.data[8].price_dit + this.data[15].price_dit) / 2))
+                } catch (error) {
+
+                }
+                // console.log(data);
+
+                //12= ((rice11 *6)+rice16)/7
+                //13=((rice9*2)+rice16)/3
+                //14=(rice9+rice16)/2 
+            },
+            _setSeleteValue: function (e) {
+
+                let value = e.currentTarget
+                // value.value= ''
+                // console.log(value.updateValueAndPreserveCaret());
+                value.inputElement.select()
+            },
+            savePriceHamonize() {
+                this.data.map((item) => {
+                    item.price_date = item.price_date.split('T')[0] + 'T00:00:00+07:00'
+                })
+                // console.log(this.data);
+                // console.log(this.search);
+                this.dispatchAction('PRICEHAMONIZE_SAVE', this.data, this.search)
+
+            }
+        });
+    </script>
+</dom-module>

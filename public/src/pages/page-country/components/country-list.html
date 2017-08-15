@@ -20,7 +20,7 @@
         }
     </style>
     <template>
-       
+
         <paper-dialog id="report" modal>
             <div class="layout start-justified">
                 <div class="flex" style=" margin-right: 30px">
@@ -111,16 +111,15 @@
                     <template class="header">
                         <div class="text-center">นำเข้า</div>
                     </template>
-                    <!--<template class="footer">I'm in the group footer</template>-->
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
                         <template class="header">
                             <div class="text-right">ปริมาณ (ตัน)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.net_weight_i)]]</div>
+                            <div class="text-right">[[formatNumber(item.net_weight_i)]][[formatNumber(item.net_weight)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.net_weight_i)]]</div>
+                            <div class="text-right">[[total.net_weight_i]][[total.net_weight]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -128,10 +127,10 @@
                             <div class="text-right">มูลค่า (บาท)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.fob_amt_baht_i)]]</div>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_i)]][[formatNumber(item.fob_amt_baht)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.fob_amt_baht_i)]]</div>
+                            <div class="text-right">[[total.fob_amt_baht_i]][[total.fob_amt_baht]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -139,10 +138,10 @@
                             <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.avg_amt_baht_i)]]</div>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_i)]][[formatNumber(item.avg_amt_baht)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.avg_amt_baht_i)]]</div>
+                            <div class="text-right">[[total.avg_amt_baht_i]][[total.avg_amt_baht]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -150,10 +149,10 @@
                             <div class="text-right">มูลค่า (USD)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.fob_amt_i)]]</div>
+                            <div class="text-right">[[formatNumber(item.fob_amt_i)]][[formatNumber(item.fob_amt)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.fob_amt_i)]]</div>
+                            <div class="text-right">[[total.fob_amt_i]][[total.fob_amt]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -161,10 +160,10 @@
                             <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.avg_amt_i)]]</div>
+                            <div class="text-right">[[formatNumber(item.avg_amt_i)]][[formatNumber(item.avg_amt)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.avg_amt_i)]]</div>
+                            <div class="text-right">[[total.avg_amt_i]][[total.avg_amt]]</div>
                         </template>
                     </vaadin-grid-column>
                 </vaadin-grid-column-group>
@@ -173,16 +172,15 @@
                     <template class="header">
                         <div class="text-center">ส่งออก</div>
                     </template>
-                    <!--<template class="footer">I'm in the group footer</template>-->
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
                         <template class="header">
                             <div class="text-right">ปริมาณ (ตัน)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.net_weight_e)]]</div>
+                            <div class="text-right">[[formatNumber(item.net_weight_e)]][[formatNumber(item.net_weight)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.net_weight_e)]]</div>
+                            <div class="text-right">[[total.net_weight_e]][[total.net_weight]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -190,10 +188,10 @@
                             <div class="text-right">มูลค่า (บาท)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.fob_amt_baht_e)]]</div>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_e)]][[formatNumber(item.fob_amt_baht)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.fob_amt_baht_e)]]</div>
+                            <div class="text-right">[[total.fob_amt_baht_e]][[total.fob_amt_baht]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -201,10 +199,10 @@
                             <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.avg_amt_baht_e)]]</div>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_e)]][[formatNumber(item.avg_amt_baht)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.avg_amt_baht_e)]]</div>
+                            <div class="text-right">[[total.avg_amt_baht_e]][[total.avg_amt_baht]]</div>
                         </template>
                     </vaadin-grid-column>
                     <vaadin-grid-column width="15%" flex-grow="0" resizable>
@@ -212,10 +210,10 @@
                             <div class="text-right">มูลค่า (USD)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.fob_amt_e)]]</div>
+                            <div class="text-right">[[formatNumber(item.fob_amt_e)]][[formatNumber(item.fob_amt)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.fob_amt_e)]]</div>
+                            <div class="text-right">[[total.fob_amt_e]][[total.fob_amt]]</div>
                         </template>
                     </vaadin-grid-column>
 
@@ -224,10 +222,10 @@
                             <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
                         </template>
                         <template>
-                            <div class="text-right">[[formatNumber(item.avg_amt_e)]]</div>
+                            <div class="text-right">[[formatNumber(item.avg_amt_e)]][[formatNumber(item.avg_amt)]]</div>
                         </template>
                         <template class="footer">
-                            <div class="text-right">[[formatNumber(total.avg_amt_e)]]</div>
+                            <div class="text-right">[[total.avg_amt_e]][[total.avg_amt]]</div>
                         </template>
                     </vaadin-grid-column>
                 </vaadin-grid-column-group>
@@ -284,18 +282,30 @@
             },
             totalcal(dataList) {
 
-                this.set('total.net_weight_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0));
-                this.set('total.fob_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0));
-                this.set('total.fob_amt_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i, 0));
-                this.set('total.avg_amt_baht_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_i, 0));
-                this.set('total.avg_amt_i', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_i, 0));
+                let checkNaN = ((num) => {
+                    if (isNaN(num)) return ''
+                    // console.log(num)
+                    return this.formatNumber(num)
+                })
+                this.set('total.net_weight', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight, 0)))
+                this.set('total.fob_amt_baht', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht, 0)))
+                this.set('total.fob_amt', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt, 0)))
+                this.set('total.avg_amt_baht', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht, 0)))
+                this.set('total.avg_amt', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt, 0)))
+                // console.log(this.total.avg_amt_baht);
+                this.set('total.net_weight_i', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0)))
+                this.set('total.fob_amt_baht_i', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0)))
+                this.set('total.fob_amt_i', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i, 0)))
+                this.set('total.avg_amt_baht_i', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_i, 0)))
+                this.set('total.avg_amt_i', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_i, 0)))
 
+                // console.log(isNaN(this.total.avg_amt_baht_i));
 
-                this.set('total.net_weight_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0));
-                this.set('total.fob_amt_baht_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0));
-                this.set('total.fob_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0));
-                this.set('total.avg_amt_baht_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0));
-                this.set('total.avg_amt_e', Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0));
+                this.set('total.net_weight_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0)))
+                this.set('total.fob_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0)))
+                this.set('total.fob_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0)))
+                this.set('total.avg_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0)))
+                this.set('total.avg_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0)))
 
             },
             printReportCompany(e) {

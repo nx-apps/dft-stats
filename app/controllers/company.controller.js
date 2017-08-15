@@ -35,10 +35,12 @@ exports.search = function (req, res) {
     // [req.body.taxNo, req.body.dateStart, req.body.dateEnd] //รับค่า query หยอดใน mssql
     // ['0105525018429,010552504657,0105527000365,0105526040991', '2016-02-27', '2016-03-01']
     // ['3271164648,3031029262', '2012-02-29', '2012-03-01']
+    let date = new Object()
+    let today = new Date(new Date().setFullYear(new Date().getFullYear()))
     req.body.tranType = req.body.tranType || 'a'
     req.body.taxNo = req.body.taxNo || ''
-    req.body.dateStart = req.body.dateStart || '2017-01-01'
-    req.body.dateEnd = req.body.dateEnd || '2017-01-30'
+    req.body.dateStart = req.body.dateStart || date
+    req.body.dateEnd = req.body.dateEnd || today
     req.body.field2 = req.body.field2 ||''
     req.body.field3 = req.body.field3 ||''
     // //console.log(req.body);

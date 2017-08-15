@@ -1,0 +1,287 @@
+<link rel="import" href="./../../components/page-style.html">
+
+<link rel="import" href="./../../components/format-number-behavior.html">
+
+<link rel="import" href="./../../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="./../../../../bower_components/paper-tooltip/paper-tooltip.html">
+
+<link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<link rel="import" href="./../../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+
+<dom-module id="rice-price-search">
+    <template>
+        <style include="page-style ">
+             :host {
+                display: block;
+            }
+
+            paper-dialog {
+                width: 890px;
+                /*height: 550px;*/
+                overflow: auto;
+            }
+
+            gl-form-input {
+                text-align: right;
+            }
+
+            gl-form-input.left {
+                text-align: left;
+            }
+
+            table.gl-table-default>tbody.table-body>tr>td {
+                /*cursor: pointer;*/
+                padding: 0px 15px;
+            }
+            .title-header{
+                margin: 10px;
+            }
+        </style>
+        <div class="horizontal center layout">
+            <div class="flex-3"></div>
+            <div class="flex ">
+                เริ่มวันที่ :
+            </div>
+            <div class="flex-2">
+                <gl-form-input type="date" no-label-float value="{{date.dateStart}}"></gl-form-input>
+            </div>
+            <div class="flex">
+                <div class="btn-search">
+                    <paper-button raised class="gl-btn-info gl-small" on-tap="searchPriceHamonize">
+                        <iron-icon icon="search"></iron-icon>
+                        ค้นหา
+                    </paper-button>
+                </div>
+            </div>
+            <div class="flex-2 ">
+                อัตตราแลกเปลี่ยน :
+            </div>
+            <div class="flex">
+                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" readonly no-label-float value="[[data.rate_bank]]">
+                    <paper-icon-button style="width:35px; height:35px" suffix icon="create" on-tap="editConfirm"></paper-icon-button>
+                </gl-form-input>
+                <!--<paper-icon-button id="edit" class="crud" icon="settings" raised on-tap="editConfirm"></paper-icon-button>
+                <paper-tooltip for="edit" offset="0">ตั่งค่า</paper-tooltip>-->
+            </div>
+            <div class="flex-3"></div>
+        </div>
+
+        <paper-dialog id="setting" class="size-position" modal>
+            <h2>รายการ</h2>
+            <paper-dialog-scrollable>
+                <div class="horizontal start-justified layout">
+                    <div class="flex">
+                        <div class="vertical layout start">
+                            <div class="flex title-header">ตั้งค่าราคาต่างๆ</div>
+                            <div class="flex">
+                                <table class="gl-table-default">
+                                    <thead class="table-head">
+                                        <tr>
+                                            <th style="width: 40%">ชื่อ</th>
+                                            <th style="width: 30%; text-align: right;">WFR</th>
+                                            <th style="width: 30%; text-align: right">WR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body">
+
+                                        <tr>
+                                            <td>ค่ากระสอบ</td>[[changeString2Num(data.*,'wfr_package')]][[changeString2Num(data.*,'wr_package')]]
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wfr_package}}"></gl-form-input>
+                                            </td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wr_package}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ค่าใช้จ่ายในการลงเรื่อ</td>[[changeString2Num(data.*,'wfr_boat')]][[changeString2Num(data.*,'wr_boat')]]
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wfr_boat}}"></gl-form-input>
+                                            </td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wr_boat}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ค่าจัดระวาง</td>[[changeString2Num(data.*,'wfr_freight')]][[changeString2Num(data.*,'wr_freight')]]
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wfr_freight}}"></gl-form-input>
+                                            </td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.wr_freight}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>รวม</td>[[changeString2Num(data.*,'wfr_total')]][[changeString2Num(data.*,'wr_total')]]
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wfr_total}}"></gl-form-input>
+                                            </td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wr_total}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>อัตราแลกเปลี่ยน</td>[[changeString2Num(data.*,'rate_bank')]]
+                                            <td></td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float value="{{data.rate_bank}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ต้นทุนการบรรจุ</td>[[changeString2Num(data.*,'wfr_d')]][[changeString2Num(data.*,'wr_d')]]
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wfr_d}}"></gl-form-input>
+                                            </td>
+                                            <td>
+                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wr_d}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex" style="margin: 0px 0px 0px 5px">
+                        <div class="vertical layout start">
+                            <div class="flex title-header">ตั่งค่าชื่อ</div>
+                            <div class="flex">
+                                <table class="gl-table-default">
+                                    <thead class="table-head">
+                                        <tr>
+                                            <th>ปีโครงการ</th>
+                                            <th>ข้าว</th>
+                                            <th>ชื่อ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-body">
+                                        <tr>
+                                            <td>ปีโครงการ</td>
+                                            <td>ข.หอม</td>
+                                            <td>
+                                                <gl-form-input class="left" on-focus="_setSeleteValue" no-label-float value="{{data.project_wfr}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ปีโครงการ</td>
+                                            <td>ข.ข. 5%</td>
+                                            <td>
+                                                <gl-form-input class="left" on-focus="_setSeleteValue" no-label-float value="{{data.project_wr}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ปีโครงการ</td>
+                                            <td>ข.น 10%</td>
+                                            <td>
+                                                <gl-form-input class="left" on-focus="_setSeleteValue" no-label-float value="{{data.project_wg}}"></gl-form-input>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-dismiss>ปิด</paper-button>
+                <paper-button dialog-confirm autofocus class="gl-btn-success" raised on-tap="updateAndAddCost">บันทึก</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'rice-price-search',
+            behaviors: [
+                ReduxBehavior, FormatNumberBehavior
+            ],
+            properties: {
+                data: {
+                    statePath: 'pricehamonize.cost',
+                },
+                date: {
+                    statePath: 'hamonize.date',
+                    value: {
+                        dateStart: ''
+                    },
+                    notify: true,
+                    observer: '_setDate'
+                }
+            },
+            observers: [
+                'calCost(data,data.*)'
+            ],
+            _setDate(e) {
+                this.set('date.dateStart', e.dateStart)
+                // console.log(this.date.dateStart);
+                // this.set('data.dateEnd', e.dateEnd);
+                // this.set('data.refDB', 'f3');
+                // data.dataSourch
+                // (e.dateEnd != '') ? this.getRiceValue() : '';
+            },
+            calCost(data) {
+                // this.set('data.wfr_total',0)
+                // this.set('data.wr_total',0)
+                let wfr_total = this.data.wfr_package + this.data.wfr_boat + this.data.wfr_freight
+                let wr_total = this.data.wr_package + this.data.wr_boat + this.data.wr_freight
+                //  console.log(wr_total);
+                if (isNaN(wfr_total)) {
+                    wfr_total = 0
+                }
+                if (isNaN(wr_total)) {
+                    wr_total = 0
+                }
+                this.set('data.wfr_total', wfr_total)
+                this.set('data.wr_total', wr_total)
+                let rate_bank = 1
+                if (this.data.rate_bank !== undefined || this.data.rate_bank !== 0) {
+                    rate_bank = this.data.rate_bank
+                }
+                let wfr_d = wfr_total * rate_bank
+                let wr_d = wr_total * rate_bank
+                if (isNaN(wfr_d)) {
+                    wfr_d = 0
+                }
+                if (isNaN(wr_d)) {
+                    wr_d = 0
+                }
+
+                this.set('data.wfr_d', wfr_d)
+                this.set('data.wr_d', wr_d)
+                // console.log(data);
+            },
+            searchPriceHamonize() {
+
+                if (this.date.dateStart !== undefined) {
+                    this.dispatchAction('PRICEHAMONIZE_SEARCH', this.date)
+                    this.dispatchAction('PRICEHAMONIZE_COST_SEARCH', this.date)
+                }
+                // console.log(this.data.dateStart);
+            },
+            editConfirm() {
+                this.$.setting.open()
+                // console.log(1111);
+            },
+            updateAndAddCost() {
+                if (this.date.dateStart !== this.data.cost_date) {
+                    delete this.date.id
+                } else {
+                    this.data.cost_date += 'T00:00:00+07:00'
+                }
+                this.dispatchAction('PRICEHAMONIZE_COST_SAVE', this.data,this.date)
+
+                // console.log(this.data)
+            }
+        });
+    </script>
+</dom-module>

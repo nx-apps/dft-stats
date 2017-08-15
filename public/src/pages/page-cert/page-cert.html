@@ -1,4 +1,3 @@
-
 <link rel="import" href="./components/cert-list.html">
 <link rel="import" href="./components/cert-search.html">
 
@@ -6,22 +5,25 @@
     <template>
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
-           <section class="container">
-                <cert-search data= "{{data}}"></cert-search>
-           </section>
-           <section class="container">
-               <div class="header">ข้อมูลหนังสือรับรองการนำเข้าส่งออกสินค้าข้าว / ข้อมูลใบอนุญาตที่เกี่ยวกับสินค้าข้าว</div>
-                 <cert-list search = "[[data]]"></cert-list>
-           </section>
+            <section class="container">
+                <section class="container">
+                    <div class="header">ข้อมูลหนังสือรับรองการนำเข้าส่งออกสินค้าข้าว / ข้อมูลใบอนุญาตที่เกี่ยวกับสินค้าข้าว</div>
+                </section>
+                <paper-material elevation="1">
+                    <cert-search data="{{data}}"></cert-search>
+                    <cert-list search="[[data]]"></cert-list>
+                </paper-material>
+            </section>
+
         </div>
     </template>
     <script>
         Polymer({
             is: 'page-cert',
             behaviors: [
-                ReduxBehavior,nylonBehavior,certAction,hamonizeAction
+                ReduxBehavior, nylonBehavior, certAction, hamonizeAction
             ],
-            nylonPageActive(){
+            nylonPageActive() {
                 // this.dispatchAction('CERT_SEARCH','');
                 this.dispatchAction('HAMONIZE_SET_DATE');
             }

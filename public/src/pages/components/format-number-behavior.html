@@ -1,44 +1,56 @@
 <script>
     FormatNumberBehavior = {
-        properties:{
-            _defaultFormat:{
+        properties: {
+            _defaultFormat: {
                 type: String,
                 value: '0,0.00'
             }
         },
-        formatNumber:function(number){
-        //    //console.log(number);
-            if(number == null){
+        formatNumber: function (number, disabled = false) {
+            //    //console.log(number);
+            if (number == null) {
                 return "";
             }
             else {
-                if(Number.isInteger(number)== true){
+                if (Number.isInteger(number) == true) {
                     this._defaultFormat = '0,0'
                     var num = numeral(number).format(this._defaultFormat);
                     return num
                 }
-                else if(Number.isInteger(number)==false){
+                else if (Number.isInteger(number) == false) {
                     this._defaultFormat = '0,0.00'
                     var num = numeral(number).format(this._defaultFormat);
                     return num
                 }
             }
-           
+
         },
-        setFormat:function(format){
-            if(format == "" || format == "undefined"){
+        setFormat: function (format) {
+            if (format == "" || format == "undefined") {
                 format = '0,0';
                 this._defaultFormat = format;
             }
-            else{
+            else {
                 this._defaultFormat = format;
-            } 
+            }
             return this._defaultFormat;
         },
-        unFormat:function(number){
+        unFormat: function (number) {
             var num = numeral().unformat(number);
             return num;
-        }   
+        },
+        changeString2Num: function (ob, param) {
+            if (typeof ob.value == "string") {
+                var pathChange = ob.path.split(".");
+                // undefined
+                if (pathChange.length == 2) {
+                    if (pathChange[1] == param) {
+                        ob.base[param] = numeral().unformat(ob.value);
+                        // console.log(ob.base[param]);
+                    }
+                }
+            }
+        },
     }
-  
+
 </script>

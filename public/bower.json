@@ -55,6 +55,7 @@
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
     "nylon-toast": "^0.0.5",
     "nylon-tag": "^0.0.9",
-    "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0"
+    "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.0.0"
   }
 }

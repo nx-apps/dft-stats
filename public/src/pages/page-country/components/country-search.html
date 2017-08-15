@@ -1,18 +1,28 @@
 <link rel="import" href="./../../components/month-behavior.html">
-<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../../components/vaadin-gird-filter-common.html">
-<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
-<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-filter.html">
-<link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="./../../../../bower_components/nylon-tag/nylon-tag.html">
-<link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="./../../../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="./../../../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<link rel="import" href="./../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="./../../components/page-style.html">
+
+<link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="./../../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="./../../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="./group-item.html">
 
 <dom-module id="country-search">
-    <style include="page-style flex-style">
+    <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
         vaadin-grid {
             margin: 0px;
             width: 100%;
@@ -47,8 +57,90 @@
             display: block;
         }
 
-        paper-input {
-            width: 95%;
+        div.main {
+            /*background-color: red;*/
+            height: 300px;
+            overflow-y: scroll;
+            /*min-width: 300px;*/
+            border: solid darkblue 1px;
+        }
+
+        span.namesub {
+            display: inline-block;
+            /*background-color: blue;*/
+            width: 70%;
+        }
+
+        span.year {
+            display: inline-block;
+            width: 20%;
+            /*background-color: red;*/
+            /*display: inline;*/
+            /*float: right;*/
+        }
+
+        .collapse-content {
+            padding: 15px;
+            width: 500px;
+            border: 1px solid #dedede;
+        }
+
+        .header-item {
+            border: 1px solid #ddd;
+            background-color: #F1F1F1;
+            padding: 15px;
+        }
+
+        .subdiv {
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .main-item,
+        .sub-item {
+            padding: 15px 0px;
+            /*border: 1px solid #ddd;*/
+            border-bottom: 1px solid #ddd;
+        }
+
+        .main-item:hover,
+        .sub-item:hover {
+            background-color: #F1F1F1;
+        }
+
+        .sub-item {
+            padding-left: 60px;
+        }
+
+        paper-icon-button .hamonize {
+            margin-top: -50px;
+        }
+
+        paper-dialog.size-position {
+            width: 800px;
+            height: 550px;
+            overflow: auto;
+        }
+
+        tbody {
+            display: block;
+            height: 400px;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+
+        thead,
+        tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        table {
+            height: 380px;
         }
     </style>
     <template>
@@ -123,11 +215,11 @@
                     <div class="flexchild"></div>
                     <div class="flexchild"></div>
                 </div>
-                <!--<group-item groupdata="{{countryList}}" list="[[listGroup]]" group-by=""></group-item>-->
-                <div class="horizontal layout center">
+                <!--<group-item groupdata="{{countryListGroup}}" list="[[listGroup]]" group-by=""></group-item>-->
+                <!--<div class="horizontal layout center">
                     <div class="flex-5">
                         <div class="flex-horizontal-with-ratios" style="width:95%">
-                            <vaadin-grid id="material" items="{{countryList}}">
+                            <vaadin-grid id="material" items="{{countryListGroup}}">
                                 <vaadin-grid-column width="200px" flex-grow="0">
                                     <template class="header">รหัสประเทศ
                                         <vaadin-gird-filter-common aria-label="Rice Name" path="country_code" value="[[_country_code]]">
@@ -185,6 +277,48 @@
                             </vaadin-grid>
                         </div>
                     </div>
+                </div>-->
+                <div class="horizontal layout">
+                    <div class="flex-2"></div>
+                    <div class=" end-justified ">
+                        <!--<template is="dom-if" if=[[!_checkArrayTrue(commonState.btnDisabled)]]>-->
+                        <paper-button raised on-tap="addCountryTotable" class="gl-btn-primary">เลือกประเทศ</paper-button>
+                        <paper-button raised on-tap="DeleteAllCountryTotable" class="gl-btn-danger">ลบทั้งหมด</paper-button>
+                        <!--</template>-->
+                    </div>
+                </div>
+                <div class="flex">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width:10%"> ลำดับ</th>
+                                <th style="width:30%">รหัสประเทศ</th>
+                                <th style="width:30%">ชื่อประเทศ</th>
+                                <!--<th style="width:20%">ทวีป</th>-->
+                                <th style="width:10%">#</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items="{{CountrySeleted}}">
+                                <tr>
+                                    <td style="width:10%">[[_Obindex(index)]]</td>
+                                    <td style="width:30%">[[item.sub_id]]</td>
+                                    <td style="width:30%">[[item.country_name_th]]</td>
+                                    <!--<td style="width:20%">[[item.hamonize_year]]</td>-->
+                                    <td style="width:10%">
+                                        <div hidden="[[_checkArrayTrue(commonState.btnDisabled)]]">
+                                            <paper-icon-button data="{{item}}" icon="delete" on-tap="_deleteCountry"></paper-icon-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template is="dom-if" if="[[_isShow(CountrySeleted,CountrySeleted.*)]]">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="horizontal layout">
                     <div class="flex">
@@ -203,15 +337,157 @@
                     </div>
                 </div>
         </paper-material>
+
+        <paper-dialog id="countryGroup" class="size-position">
+            <h2>{{localizeContract.list_rice}}</h2>
+            <paper-dialog-scrollable>
+                <!--<gl-grid-row>-->
+                <!--<gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,12]]">-->
+                <div class="horizontal layout header-item" warp>
+                    <div class="header-div flex">
+                        <div style="padding: 10px 15px;">
+                            รูปแบบ
+                            <paper-radio-group selected="{{typeSelete}}">
+                                <paper-radio-button name="list">รายการ</paper-radio-button>
+                                <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                            </paper-radio-group>
+                        </div>
+                    </div>
+                    <div class="header-div flex">
+                        <!--<paper-dropdown-menu label="{{localizeContract.year}}">
+                            <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{data.hmYear}}" on-selected-changed="searchHamonizeInYear">
+                                <paper-item name="">ทุกปี</paper-item>
+                                <template is="dom-repeat" items={{hamonizeYear.year}}>
+                                    <paper-item name="{{item.label}}">{{item.label}}</paper-item>
+                                </template>
+                            </paper-listbox>
+                        </paper-dropdown-menu>-->
+                        <!--<gl-combo-box id="hamonizeYear" label="{{localizeContract.year}}" placeholder="{{localizeContract.year}}" items="[[hamonizeYear.year]]"
+              item-label-path="label" value="{{data.hmYear}}" item-value-path="label" on-value-changed="searchHamonizeInYear">
+              <template>
+                [[item.label]]
+              </template>
+            </gl-combo-box>-->
+                    </div>
+
+                </div>
+                <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                    <div name="list">
+                        <div class="horizontal layout header-item" warp>
+                            <div class="header-div flex"></div>
+                            <div class="header-div flex-3">
+                                <gl-form-input label="[[localizeContract.hm_code]]HM Code" always-float-label disabled="{{!dataSeleted.isYear}}" type="search"
+                                    value="{{dataSeleted.sub_id}}" on-value-changed="searchCountryCode"></gl-form-input>
+                            </div>
+                            <div class="header-div flex-3">
+                                <gl-form-input label="[[localizeContract.hm_name]]ชื่อข้าว" always-float-label style="padding-left:20px;" disabled="{{!dataSeleted.isYear}}"
+                                    value="{{dataSeleted.country_name_th}}" label="[[localizeCommon.search]]" type="search" on-value-changed="searchHamonizeTh"></gl-form-input>
+                            </div>
+                        </div>
+                        <div class="subdiv">
+                            <template is="dom-repeat" items={{countryList}} index-as="indexroot">
+                                <div hidden="{{item.hiddend}}">
+                                    <!--<template is="dom-repeat" items={{item.sub}} as="subChild">-->
+                                    <!--<div hidden="{{subChild.hiddend}}">-->
+                                    <div class="horizontal layout main-item">
+                                        <div class="row flex">
+                                            <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{item.check}}" disabled="[[commonState.btnDisabled]]">
+                                        </div>
+                                        <div class="row flex-3">[[item.country_code]]</div>
+                                        <div class="row flex-3">[[item.country_name_TH]]</div>
+                                    </div>
+                                    <!--</div>-->
+                                    <!--</template>-->
+                            </template>
+                            </div>
+                        </div>
+                        <div name="group">
+                            <div class="horizontal layout header-item" warp>
+                                <div class=""></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex-3">[[localizeContract.hm_group]]กลุ่มข้าว</div>
+                                <div class="header-div flex-3">
+                                    <gl-form-input label="[[localizeContract.hm_code]]HM Code" always-float-label type="search" disabled="{{!dataSeleted.isYear}}"
+                                        value="{{dataSeleted.sub_id}}" on-value-changed="searchCountryCode"></gl-form-input>
+                                </div>
+
+                                <div class="header-div flex-3">
+                                    <gl-form-input label="[[localizeContract.hm_name]]ชื่อข้าว" style="padding-left:20px;" always-float-label disabled="{{!dataSeleted.isYear}}"
+                                        value="{{dataSeleted.country_name_th}}" label="[[localizeCommon.search]]" type="search"
+                                        on-value-changed="searchHamonizeTh"></gl-form-input>
+                                </div>
+                                <!--<div class="header-div flex-2">[[localizeContract.hm_year]]ปี</div>-->
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{countryListGroup}} index-as="indexroot">
+                                    <div hidden="{{item.hiddend}}">
+                                        <div class="horizontal layout main-item">
+                                            <div class="">
+                                                <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
+                                            </div>
+                                            <div class="row flex">
+                                                <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild" disabled="[[commonState.btnDisabled]]">
+                                            </div>
+                                            <div class="row flex"></div>
+                                            <div class="row flex-3">[[item.name_th]]</div>
+                                            <div class="row flex-3"></div>
+
+                                            <div class="row flex-3">-</div>
+                                            <div class="row flex-2">-</div>
+                                        </div>
+                                    </div>
+                                    <iron-collapse id="collapse-[[indexroot]]">
+                                        <template is="dom-repeat" items={{item.sub}} as="subChild">
+                                            <div hidden="{{subChild.hiddend}}">
+                                                <div class="horizontal layout sub-item">
+                                                    <div class=""></div>
+                                                    <div class="row flex">
+                                                        <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}" on-tap="getSelect" disabled="[[commonState.btnDisabled]]">
+                                                    </div>
+                                                    <div class="row flex"></div>
+                                                    <div class="row flex-3">[[item.name_th]]</div>
+                                                    <div class="row flex-3">[[subChild.sub_id]]</div>
+
+                                                    <div class="row flex-3">[[subChild.country_name_th]]</div>
+                                                    <!--<div class="row flex-2">[[subChild.hamonize_year]]</div>-->
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </iron-collapse>
+                                </template>
+                            </div>
+                        </div>
+                </iron-pages>
+                <!--</gl-grid-col>-->
+                <!--</gl-grid-row>-->
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <!--<paper-button dialog-dismiss>Cancel</paper-button>-->
+                <paper-button dialog-confirm autofocus raised on-tap="checkAddCountry">ปิด</paper-button>
+            </div>
+        </paper-dialog>
     </template>
     <script>
         Polymer({
             is: 'country-search',
             behaviors: [ReduxBehavior, MonthBehavior, commonLogic],
             properties: {
-                countryList: {
+                countryListReal: {
                     statePath: 'country.countryList',
                     // observer: '_setItem'
+                },
+                countryListGroupReal: {
+                    statePath: 'country.countryListGroup',
+                    // observer: '_setItem'
+                },
+                countryListGroup: {
+                    type: Array,
+                    value: []
+                },
+                countryList: {
+                    type: Array,
+                    value: []
                 },
                 listGroup: {
                     statePath: 'hamonize.settingGroup',
@@ -247,16 +523,32 @@
                     value: {},
                     notify: true
                 },
+                dataSeleted: {
+                    type: Object,
+                    value: {
+                        sub_id: '',
+                        country_name_th: '',
+                        isYear: true
+                    }
+                },
                 selectedCountry: {
                     type: Array,
                     value: []
                 },
-                inverted: {
-                    type: Boolean,
-                    value: false
-                }
+                CountrySeleted: {
+                    type: Array,
+                    value: []
+                },
+                typeSelete: {
+                    type: String,
+                    value: 'list'
+                },
             },
-           
+            observers: [
+                'cloneCountryList(countryListReal,countryListGroupReal)',
+                // '_checkHamonize(countryListGroup)',
+            ],
+
             _setDate(e) {
                 this.set('data.dateStart', e.dateStart)
                 this.set('data.dateEnd', e.dateEnd);
@@ -319,15 +611,29 @@
             getCountryValue() {
                 // var selects = this.$.material.selectedItems;
                 let arr = [];
-                this.selectedCountry.map((country_code) => {
-                    arr.push(country_code.country_code)
+                // this.selectedCountry.map((country_code) => {
+                //     arr.push(country_code.country_code)
+                // })
+                this.CountrySeleted.map((id) => {
+                    arr.push(id.sub_id)
                 })
+                if ((this.data.exporter === false) && (this.data.importer === true)) {
+                    this.data.tranType = 'i'
+                    this.data.SelectAll = false
+                } else if ((this.data.exporter === true) && (this.data.importer === false)) {
+                    this.data.tranType = 'e'
+                    this.data.SelectAll = false
+                } else {
+                    this.data.tranType = 'a'
+                    this.data.SelectAll = true
+                }
                 // //console.log(this.selectedCountry);
                 var country_code = arr.join(',');
                 var data = {
                     countryCode: country_code,
                     exporter: this.data.exporter,
                     importer: this.data.importer,
+                    tranType: this.data.tranType,
                     dateStart: this.data.dateStart,
                     dateEnd: this.data.dateEnd
                 };
@@ -350,21 +656,337 @@
             selectCountry(e) {
                 // //console.log(e.model.item);
                 let country_code = e.model.item.country_code
-                let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
-                this.set('countryList.'+indexCountry+'.hidden',true)
-                // //console.log(this.countryList[indexCountry]);
+                let indexCountry = this.countryListGroup.findIndex((item) => item.country_code === country_code)
+                this.set('countryListGroup.' + indexCountry + '.hidden', true)
+                // //console.log(this.countryListGroup[indexCountry]);
                 this.push('selectedCountry', e.model.item)
                 // //console.log(e.model.__data__.item);
             },
             deselectCountry(e) {
                 let index = e.model.__data__.index
                 let country_code = e.model.item.country_code
-                let indexCountry = this.countryList.findIndex((item)=> item.country_code === country_code)
-                this.set('countryList.'+indexCountry+'.hidden',false)
-                // //console.log(this.countryList[indexCountry]);
+                let indexCountry = this.countryListGroup.findIndex((item) => item.country_code === country_code)
+                this.set('countryListGroup.' + indexCountry + '.hidden', false)
+                // //console.log(this.countryListGroup[indexCountry]);
                 this.splice('selectedCountry', index, 1);
                 // //console.log(e.model.__data__.index);
-            }
+            },
+
+            // ----------------------------------------------------------------------------------------
+            _isShow: function (data, dataLoop) {
+                try {
+                    let resulte = data.every((item) => item.hidden === true)
+                    // console.log(resulte);
+                    return resulte
+                } catch (error) {
+
+                }
+            },
+            cloneCountryList: function (countryListReal, countryListGroupReal) {
+                // JSON.parse(JSON.stringify(data));
+                this.set('countryList', JSON.parse(JSON.stringify(countryListReal)))
+                this.set('countryListGroup', JSON.parse(JSON.stringify(countryListGroupReal)))
+                // console.log(this.countryListGroup);
+            },
+            toggle: function (e) {
+                let index = e.currentTarget.index
+                if (e.currentTarget.icon === 'expand-more') {
+                    e.currentTarget.icon = 'chevron-right'
+                } else {
+                    e.currentTarget.icon = 'expand-more'
+                }
+                this.$$('#collapse-' + index).toggle()
+            },
+            setCountry: function (countryList, countryListGroup) {
+                // console.log(countryListGroup);
+                let hm = countryListGroup.map(item => item.sub).reduce((a, b) => a.concat(b), []).filter(item => item.check === true)
+                let hmNoGroup = countryList.filter(item => item.check === true).map(item => {
+                    item.id = item.country_code
+                    item.sub_id = item.country_code
+                    item.country_name_th = item.country_name_TH
+                    return item
+                })
+                let arr = []
+                let showHm = []
+                // จับ 2 อาเรย์มารวมกัน ยังไม่ได้ทำ
+                hm.concat(hmNoGroup).map((item) => {
+                    // console.log(item);
+                    arr[item.id] = item
+                })
+                for (var key in arr) {
+                    showHm.push(arr[key])
+                }
+                // console.log(showHm);
+                this.set('CountrySeleted', showHm)
+            },
+            addCountryTotable: function () {
+                this.$.countryGroup.open()
+            },
+            DeleteAllCountryTotable: function () {
+                // console.log(this.CountrySeleted);
+                let idCountry = this.CountrySeleted
+                // console.log(idCountry);
+                // this.fire('toast', {
+                //     status: 'openDialog',
+                //     text: 'ต้องการลบทั้งหมดใช่หรือไม่',
+                //     confirmed: (result) => {
+                //         if (result == true) {
+                //             let myFirstPromise = new Promise((resolve, reject) => {
+                for (var index3 = 0; index3 < idCountry.length; index3++) {
+                    // console.log(idCountry[index3]);
+                    for (var index = 0; index < this.countryListGroup.length; index++) {
+                        for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+                            // console.log(idCountry[index3].country_code);
+                            if (this.countryListGroup[index].sub[index2].sub_id === idCountry[index3].id) {
+                                this.set('countryListGroup.' + index + '.sub.' + index2 + '.check', false)
+                            }
+                            this.set('countryListGroup.' + index + '.check', false)
+                        }
+                    }
+                    for (var index4 = 0; index4 < this.countryList.length; index4++) {
+                        if (idCountry[index3].country_code === this.countryList[index4].country_code) {
+                            this.set('countryList.' + index4 + '.check', false)
+                        }
+                    }
+                }
+
+                //     resolve('ok')
+                // });
+                // myFirstPromise.then((res) => {
+                this.setCountry(this.countryList, this.countryListGroup)
+                //             })
+                //         }
+                //     }
+                // })
+            },
+            _deleteCountry: function (e) {
+                // console.log(11111);
+                let idCountry = e.currentTarget.data.id
+                // console.log(idCountry);
+                // this.fire('toast', {
+                //     status: 'openDialog',
+                //     text: 'ต้องการลบใช่หรือไม่',
+                //     confirmed: (result) => {
+                //         if (result == true) {
+                //             let myFirstPromise = new Promise((resolve, reject) => {
+                for (var index = 0; index < this.countryListGroup.length; index++) {
+                    for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+                        if (this.countryListGroup[index].sub[index2].sub_id === idCountry) {
+                            this.set('countryListGroup.' + index + '.sub.' + index2 + '.check', false)
+                        }
+                    }
+                    for (var index4 = 0; index4 < this.countryList.length; index4++) {
+                        if (idCountry === this.countryList[index4].country_code) {
+                            this.set('countryList.' + index4 + '.check', false)
+                        }
+                    }
+                }
+                //                 resolve('ok')
+                //             });
+                //             myFirstPromise.then((res) => {
+                this.setCountry(this.countryList, this.countryListGroup)
+                //             })
+                //         }
+                //     }
+                // })
+
+            },
+            checkAddCountry() {
+                this.setCountry(this.countryList, this.countryListGroup)
+            },
+            // _checkHamonize: function (data, countryListGroup, countryList, status = true) {
+            //     try {
+            //         if (data.contract_hamonize !== undefined && countryListGroup.length !== 0 && countryList.length !== 0) {
+            //             // console.log(data);
+            //             this.set('CountrySeleted', [])
+            //             let contract_hamonize = data.contract_hamonize
+            //             // เซ็ต กลับเป็นค่าเริ่มต้น
+            //             for (var index = 0; index < this.countryListGroup.length; index++) {
+            //                 for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+            //                     this.set('countryListGroup.' + index + '.sub.' + index2 + '.check', false)
+            //                 }
+            //             }
+            //             for (var index = 0; index < this.countryList.length; index++) {
+            //                 this.set('countryList.' + index + '.check', false)
+            //             }
+            //             // console.log(this.countryListGroup);
+            //             status = true
+            //             if (data.id === undefined) {
+            //                 status = false
+            //             }
+            //             // console.log(contract_hamonize);
+            //             for (var index = 0; index < contract_hamonize.length; index++) {
+            //                 for (var index2 = 0; index2 < countryListGroup.length; index2++) {
+            //                     for (var index3 = 0; index3 < countryListGroup[index2].sub.length; index3++) {
+            //                         // console.log(contract_hamonize[index].country_code);
+            //                         if (contract_hamonize[index].country_code === countryListGroup[index2].sub[index3].sub_id) {
+            //                             // console.log(status);
+            //                             this.set('countryListGroup.' + index2 + '.sub.' + index3 + '.check', status)
+            //                             // console.log(this.countryListGroup[index2].sub[index3]);
+            //                             // break
+            //                         }
+            //                     }
+            //                 }
+            //                 for (var index4 = 0; index4 < countryList.length; index4++) {
+            //                     if (contract_hamonize[index].country_code === countryList[index4].country_code) {
+            //                         this.set('countryList.' + index4 + '.check', status)
+            //                     }
+            //                 }
+            //             }
+            //             this.setCountry(this.countryList, this.countryListGroup)
+            //         }
+            //     } catch (e) {
+            //     }
+            // },
+            getCheckChild: function (e) {
+                let item = e.model.__data__.item
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                this.countryListGroup[indexRoot].sub.map((item, index) => {
+                    this.set('countryListGroup.' + indexRoot + '.sub.' + index + '.check', checkHost)
+                })
+            },
+            getSelect: function (e) {
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                let checkFalse = this.countryListGroup[indexRoot].sub.find((item) => item.check !== true)
+                this.set('countryListGroup.' + indexRoot + '.check', checkFalse === undefined)
+            },
+            editContract: function () {
+                this.dispatchAction('SET_STATE', {
+                    isInsert: false,
+                    btnDisabled: false,
+                    hiddend: true
+                })
+            },
+            // searchHamonizeInYear: function (year) {
+            //     try {
+            //         let seletedYear = year
+            //         // console.log(seletedYear);
+            //         this.countryList.map((item, index) => {
+            //             if (String(this.countryList[index].hamonize_year) === year) {
+            //                 this.set('countryList.' + index + '.hiddend', false)
+            //                 // console.log(3333);
+            //             } else {
+            //                 this.set('countryList.' + index + '.hiddend', true)
+            //                 // console.log(1212);
+            //             }
+            //         })
+            //         for (var index = 0; index < this.countryListGroup.length; index++) {
+            //             for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+            //                 if ((String(this.countryListGroup[index].sub[index2].hamonize_year) === seletedYear) ||
+            //                     (seletedYear === '' || seletedYear === undefined)) {
+            //                     this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', false)
+            //                 } else {
+            //                     this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', true)
+            //                 }
+            //             }
+            //             let checkkFalse = this.countryListGroup[index].sub.find((item) => item.hiddend === false)
+            //             if (checkkFalse === undefined) {
+            //                 this.set('countryListGroup.' + index + '.hiddend', true)
+            //             } else {
+            //                 this.set('countryListGroup.' + index + '.hiddend', false)
+            //             }
+            //         }
+
+            //     } catch (e) {
+
+            //     }
+
+            // },
+            // resetSearch(year) {
+            //     // console.log(year);
+            //     if (year === '' || year === undefined) {
+            //         this.set('dataSeleted.isYear', false)
+            //         // console.log(this.dataSeleted);
+            //     } else {
+            //         this.set('dataSeleted.isYear', true)
+            //         // console.log(this.dataSeleted);
+            //     }
+            // },
+            searchCountryCode: function (e) {
+                // try {
+                // console.log(this.dataSeleted.sub_id);
+                let sub_id = this.dataSeleted.sub_id || ''
+                let country_name_th = this.dataSeleted.country_name_th || ''
+                // console.log(seletedCode);
+                // if (this.typeSelete === 'list') {
+                // console.log(this.countryList.length);
+                // for (var index = 0; index < this.countryList.length; index++) {
+                this.countryList.map((item, index) => {
+                    if (String(this.countryList[index].country_code).search(String(sub_id)) > -1
+                        && String(this.countryList[index].country_name_TH).search(String(country_name_th)) > -1) {
+                        this.set('countryList.' + index + '.hiddend', false)
+                        // console.log(3333);
+                    } else {
+                        this.set('countryList.' + index + '.hiddend', true)
+                        // console.log(1212);
+                    }
+                })
+                // }
+                // } else {
+                for (var index = 0; index < this.countryListGroup.length; index++) {
+                    for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+                        if (String(this.countryListGroup[index].sub[index2].sub_id).search(String(sub_id)) > -1
+                            && String(this.countryListGroup[index].sub[index2].country_name_th).search(String(country_name_th)) > -1) {
+                            this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', false)
+                            // console.log(3333);
+                        } else {
+                            this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', true)
+                            // console.log(1212);
+                        }
+                    }
+                    let checkkFalse = this.countryListGroup[index].sub.find((item) => item.hiddend === false)
+                    if (checkkFalse === undefined) {
+                        this.set('countryListGroup.' + index + '.hiddend', true)
+                    } else {
+                        this.set('countryListGroup.' + index + '.hiddend', false)
+                    }
+                }
+                // }
+
+                // } catch (e) {
+
+                // }
+            },
+            searchHamonizeTh: function (e) {
+                try {
+                    let sub_id = this.dataSeleted.sub_id || ''
+                    let country_name_th = this.dataSeleted.country_name_th || ''
+                    let year = this.data.hmYear
+                    // console.log(seletedCode);
+                    this.countryList.map((item, index) => {
+                        if (String(this.countryList[index].country_code).search(String(sub_id)) > -1
+                            && String(this.countryList[index].country_name_TH).search(String(country_name_th)) > -1) {
+                            this.set('countryList.' + index + '.hiddend', false)
+                            // console.log(3333);
+                        } else {
+                            this.set('countryList.' + index + '.hiddend', true)
+                            // console.log(1212);
+                        }
+                    })
+                    for (var index = 0; index < this.countryListGroup.length; index++) {
+                        for (var index2 = 0; index2 < this.countryListGroup[index].sub.length; index2++) {
+                            // if (String(seletedCode).search(String(this.countryListGroup[index].sub[index2].sub_id)) > -1) {
+                            if (String(this.countryListGroup[index].sub[index2].country_name_th).search(String(country_name_th)) > -1
+                                && String(this.countryListGroup[index].sub[index2].sub_id).search(String(sub_id)) > -1) {
+                                this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', false)
+                            } else {
+                                this.set('countryListGroup.' + index + '.sub.' + index2 + '.hiddend', true)
+                            }
+                        }
+                        let checkkFalse = this.countryListGroup[index].sub.find((item) => item.hiddend === false)
+                        if (checkkFalse === undefined) {
+                            this.set('countryListGroup.' + index + '.hiddend', true)
+                        } else {
+                            this.set('countryListGroup.' + index + '.hiddend', false)
+                        }
+                    }
+                    // this.$$('#hamonizeYear').value = ''
+                } catch (e) {
+
+                }
+            },
         });
     </script>
 </dom-module>

@@ -1,0 +1,1200 @@
+<link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="../../components/vaadin-gird-filter-common.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="./../../../../bower_components/nylon-tag/nylon-tag.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="./../../../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="./../../../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<link rel="import" href="./../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="./../../components/page-style.html">
+
+<link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="./../../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="./../../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="hamonize-search-two">
+    <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
+        vaadin-grid {
+            margin: 0px;
+            width: 100%;
+        }
+
+        tag-module {
+            cursor: pointer;
+        }
+
+        .label {
+            font-size: var(--tag-module-form-label-font-size);
+            color: #737373;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item {
+            float: left;
+            margin: 5px;
+        }
+
+        .comBobox {
+            clear: both;
+        }
+
+        .sub-title {
+            display: block;
+            color: red;
+        }
+
+        p span {
+            display: block;
+        }
+
+        div.main {
+            /*background-color: red;*/
+            height: 300px;
+            overflow-y: scroll;
+            /*min-width: 300px;*/
+            border: solid darkblue 1px;
+        }
+
+        span.namesub {
+            display: inline-block;
+            /*background-color: blue;*/
+            width: 70%;
+        }
+
+        span.year {
+            display: inline-block;
+            width: 20%;
+            /*background-color: red;*/
+            /*display: inline;*/
+            /*float: right;*/
+        }
+
+        .collapse-content {
+            padding: 15px;
+            width: 500px;
+            border: 1px solid #dedede;
+        }
+
+        .header-item {
+            border: 1px solid #ddd;
+            background-color: #F1F1F1;
+            padding: 15px;
+        }
+
+        .subdiv {
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .main-item,
+        .sub-item {
+            padding: 15px 0px;
+            /*border: 1px solid #ddd;*/
+            border-bottom: 1px solid #ddd;
+        }
+
+        .main-item:hover,
+        .sub-item:hover {
+            background-color: #F1F1F1;
+        }
+
+        .sub-item {
+            padding-left: 60px;
+        }
+
+        paper-icon-button .hamonize {
+            margin-top: -50px;
+        }
+
+        paper-dialog.size-position {
+            width: 800px;
+            height: 550px;
+            overflow: auto;
+        }
+
+        tbody {
+            display: block;
+            height: 400px;
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+
+        thead,
+        tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        table {
+            height: 380px;
+        }
+    </style>
+    <template>
+        <!--<paper-material elevation="1">-->
+            <div class="container">
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild labelSearchDate">
+                        เริ่มวันที่ :
+                    </div>
+                    <div class="flex2child">
+                        <gl-form-input type="date" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></gl-form-input>
+                    </div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild labelSearchDate">
+                        ถึงวันที่ :
+                    </div>
+                    <div class="flex2child">
+                        <gl-form-input type="date" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></gl-form-input>
+                    </div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                        แสดงคอลัมน์ :
+                    </div>
+                    <div class="flex2child">
+                        <div class="vertical layout">
+                            <div>
+                                <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                            </div>
+                            <div>
+                                <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                        ลำดับที่ :
+                    </div>
+                    <div class="flex3child">
+                        <template is="dom-repeat" items="[[value]]">
+                            <div class="item">
+                                <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                            </div>
+                        </template>
+                        <div class="comBobox">
+                            <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                                <template>
+                                    [[item.id]]
+                                </template>
+                            </gl-combo-box>
+                        </div>
+                    </div>
+                    <!--<div class="flexchild"></div>-->
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <div class="flexchild"></div>
+                    <div class="labelSearchDate">
+                        ปีพิกัด (HS Code) :
+                    </div>
+                    <div class="flexchild">
+                        <gl-combo-box id="hamonizeSearch" placeholder="ปี" class="textCenter" items="{{checkYear(data.dateStart,data.dateEnd,listYear)}}"
+                            item-label-path="year" item-value-path="year" value="{{data.hmYear}}" on-value-changed="getYearRice">
+                            <template>
+                                [[item.year]]
+                            </template>
+                        </gl-combo-box>
+                        <!--<gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList.use}}" item-label-path="label"
+                            item-value-path="label" value="{{data.hmparent}}" on-value-changed="getChildHm">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box> -->
+                    </div>
+                    <div class="labelSearchDate">
+                        <!--เรียงโดย : -->
+                    </div>
+                    <div class="flexchild">
+                        <!--<gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>-->
+                    </div>
+                    <div class="labelSearchDate">
+                        <!--แหล่งข้อมูล :-->
+                    </div>
+                    <div class="flexchild">
+                        <!--<gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
+                            value="{{data.refDB}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>-->
+                    </div>
+                    <div class="flexchild">
+                        <!--<div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>-->
+                    </div>
+                    <div class="flexchild"></div>
+                </div>
+                <div class="horizontal layout">
+                    <div class="flex">
+
+                    </div>
+                    <div class="flex">
+
+                    </div>
+                    <div class=" end-justified ">
+                        <!--<template is="dom-if" if=[[!_checkArrayTrue(commonState.btnDisabled)]]>-->
+                        <paper-button raised on-tap="addHamonizeTotable" class="gl-btn-primary" disabled="{{!dataSeleted.isYear}}">เลือกเลขพิกัดข้าว</paper-button>
+                        <paper-button raised on-tap="DeleteAllHamonizeTotable" class="gl-btn-danger" disabled="{{!dataSeleted.isYear}}">ลบทั้งหมด</paper-button>
+                        <!--</template>-->
+                    </div>
+                </div>
+                <div class="flex">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th style="width:10%">[[localizeContract.order]] ลำดับ</th>
+                                <th style="width:30%">[[localizeContract.hm_code]] รหัส HS Code</th>
+                                <th style="width:30%">[[localizeContract.hm_name]] ชื่อ</th>
+                                <th style="width:20%">[[localizeContract.hm_year]] ปี</th>
+                                <th style="width:10%">#</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items="{{hamonizeSeleted}}">
+                                <tr>
+                                    <td style="width:10%">[[_Obindex(index)]]</td>
+                                    <td style="width:30%">[[item.hamonize_code]]</td>
+                                    <td style="width:30%">[[item.hamonize_th]]</td>
+                                    <td style="width:20%">[[item.hamonize_year]]</td>
+                                    <td style="width:10%">
+                                        <div hidden="[[_checkArrayTrue(commonState.btnDisabled)]]">
+                                            <paper-icon-button data="{{item}}" icon="delete" on-tap="_deleteHamonize"></paper-icon-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template is="dom-if" if="[[_isShow(hamonizeSeleted,hamonizeSeleted.*)]]">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-horizontal-with-ratios">
+                    <!--<div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="{{hmChild}}">
+                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
+                                    <template class="header">พิกัดข้าว
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="selectHamnoize" style="padding-left:15px" hidden="[[item.hidden]]">
+                                            [[item.hamonize_code]]
+                                        </div>
+                                    </template>
+                                </vaadin-grid-column>
+
+                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
+                                    <template class="header">ชื่อชนิดข้าว (ไทย)
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="selectHamnoize" style="padding-left:15px" hidden="[[item.hidden]]"> [[item.hamonize_th]]</div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="horizontal layout end">
+                            <div class="title">ชนิดข้าวที่เลือก</div>
+                            <iron-icon icon="arrow-forward"></iron-icon>
+                        </div>
+                    </div>
+                    <div class="flex-5">
+                        <div class="flex-horizontal-with-ratios" style="width:95%">
+                            <vaadin-grid id="material" items="{{seletedRice}}">
+
+                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
+                                    <template class="header">พิกัดข้าว
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_code]]</div>
+                                    </template>
+                                </vaadin-grid-column>
+
+                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
+                                    <template class="header">ชื่อชนิดข้าว (ไทย)
+                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
+                                        </vaadin-gird-filter-common>
+                                    </template>
+                                    <template>
+                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_th]]</div>
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="horizontal layout">
+                    <div class="flex">
+
+                    </div>
+                    <div class="flex">
+
+                    </div>
+                    <div class="end-justified">
+                        <div class="btn-search">
+                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
+                                <iron-icon icon="search"></iron-icon>
+                                ค้นหา
+                            </paper-button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        <!--</paper-material>-->
+        <paper-dialog id="hamonizeGroup" class="size-position">
+            <h2>{{localizeContract.list_rice}}</h2>
+            <paper-dialog-scrollable>
+                <!--<gl-grid-row>-->
+                <!--<gl-grid-col width="[[getWidth]]" grid="[[300,12],[500,12]]">-->
+                <div class="horizontal layout header-item" warp>
+                    <div class="header-div flex">
+                        <div style="padding: 10px 15px;">
+                            รูปแบบ
+                            <paper-radio-group selected="{{typeSelete}}">
+                                <paper-radio-button name="list">รายการ</paper-radio-button>
+                                <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                            </paper-radio-group>
+                        </div>
+                    </div>
+                    <div class="header-div flex">
+                        <!--<paper-dropdown-menu label="{{localizeContract.year}}">
+                            <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{data.hmYear}}" on-selected-changed="searchHamonizeInYear">
+                                <paper-item name="">ทุกปี</paper-item>
+                                <template is="dom-repeat" items={{hamonizeYear.year}}>
+                                    <paper-item name="{{item.label}}">{{item.label}}</paper-item>
+                                </template>
+                            </paper-listbox>
+                        </paper-dropdown-menu>-->
+                        <!--<gl-combo-box id="hamonizeYear" label="{{localizeContract.year}}" placeholder="{{localizeContract.year}}" items="[[hamonizeYear.year]]"
+              item-label-path="label" value="{{data.hmYear}}" item-value-path="label" on-value-changed="searchHamonizeInYear">
+              <template>
+                [[item.label]]
+              </template>
+            </gl-combo-box>-->
+                    </div>
+
+                </div>
+                <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                    <div name="list">
+                        <div class="horizontal layout header-item" warp>
+                            <div class="header-div flex"></div>
+                            <div class="header-div flex-3">
+                                <gl-form-input label="[[localizeContract.hm_code]]HM Code" always-float-label disabled="{{!dataSeleted.isYear}}" type="search"
+                                    value="{{dataSeleted.hamonize_code}}" on-value-changed="searchHamonizeCode"></gl-form-input>
+                            </div>
+                            <div class="header-div flex-3">
+                                <gl-form-input label="[[localizeContract.hm_name]]ชื่อข้าว" always-float-label style="padding-left:20px;" disabled="{{!dataSeleted.isYear}}"
+                                    value="{{dataSeleted.hamonize_th}}" label="[[localizeCommon.search]]" type="search" on-value-changed="searchHamonizeTh"></gl-form-input>
+                            </div>
+                        </div>
+                        <div class="subdiv">
+                            <template is="dom-repeat" items={{hamonizeListNoGroup}} index-as="indexroot">
+                                <div hidden="{{item.hiddend}}">
+                                    <!--<template is="dom-repeat" items={{item.sub}} as="subChild">-->
+                                    <!--<div hidden="{{subChild.hiddend}}">-->
+                                    <div class="horizontal layout main-item">
+                                        <div class="row flex">
+                                            <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{item.check}}" disabled="[[commonState.btnDisabled]]">
+                                        </div>
+                                        <div class="row flex-3">[[item.hamonize_code]]</div>
+                                        <div class="row flex-3">[[item.hamonize_th]]</div>
+                                    </div>
+                                    <!--</div>-->
+                                    <!--</template>-->
+                            </template>
+                            </div>
+                        </div>
+                        <div name="group">
+                            <div class="horizontal layout header-item" warp>
+                                <div class=""></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex-3">[[localizeContract.hm_group]]กลุ่มข้าว</div>
+                                <div class="header-div flex-3">
+                                    <gl-form-input label="[[localizeContract.hm_code]]HM Code" always-float-label type="search" disabled="{{!dataSeleted.isYear}}"
+                                        value="{{dataSeleted.hamonize_code}}" on-value-changed="searchHamonizeCode"></gl-form-input>
+                                </div>
+
+                                <div class="header-div flex-3">
+                                    <gl-form-input label="[[localizeContract.hm_name]]ชื่อข้าว" style="padding-left:20px;" always-float-label disabled="{{!dataSeleted.isYear}}"
+                                        value="{{dataSeleted.hamonize_th}}" label="[[localizeCommon.search]]" type="search" on-value-changed="searchHamonizeTh"></gl-form-input>
+                                </div>
+                                <div class="header-div flex-2">[[localizeContract.hm_year]]ปี</div>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{hamonizeList}} index-as="indexroot">
+                                    <div hidden="{{item.hiddend}}">
+                                        <div class="horizontal layout main-item">
+                                            <div class="">
+                                                <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
+                                            </div>
+                                            <div class="row flex">
+                                                <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild" disabled="[[commonState.btnDisabled]]">
+                                            </div>
+                                            <div class="row flex"></div>
+                                            <div class="row flex-3">[[item.name_th]]</div>
+                                            <div class="row flex-3"></div>
+
+                                            <div class="row flex-3">-</div>
+                                            <div class="row flex-2">-</div>
+                                        </div>
+                                    </div>
+                                    <iron-collapse id="collapse-[[indexroot]]">
+                                        <template is="dom-repeat" items={{item.sub}} as="subChild">
+                                            <div hidden="{{subChild.hiddend}}">
+                                                <div class="horizontal layout sub-item">
+                                                    <div class=""></div>
+                                                    <div class="row flex">
+                                                        <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}" on-tap="getSelect" disabled="[[commonState.btnDisabled]]">
+                                                    </div>
+                                                    <div class="row flex"></div>
+                                                    <div class="row flex-3">[[item.name_th]]</div>
+                                                    <div class="row flex-3">[[subChild.hamonize_code]]</div>
+
+                                                    <div class="row flex-3">[[subChild.hamonize_th]]</div>
+                                                    <div class="row flex-2">[[subChild.hamonize_year]]</div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </iron-collapse>
+                                </template>
+                            </div>
+                        </div>
+                </iron-pages>
+                <!--</gl-grid-col>-->
+                <!--</gl-grid-row>-->
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <!--<paper-button dialog-dismiss>Cancel</paper-button>-->
+                <paper-button dialog-confirm autofocus raised on-tap="checkAddHamonize">ปิด</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'hamonize-search-two',
+            behaviors: [
+                ReduxBehavior,
+                MonthBehavior,
+                commonLogic
+            ],
+            properties: {
+                hamonizeCodeList: {
+                    statePath: 'hamonize.hamonizeCodeList',
+                    observer: '_setItem'
+                },
+                date: {
+                    statePath: 'hamonize.date',
+                    observer: '_setDate'
+                },
+                dataSourch: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'f3',
+                            label: 'ข้อมูลจากกรมการค้าต่างประเทศ'
+                        },
+                        {
+                            id: 'custom',
+                            label: 'ข้อมูลจากกรมศุลกากร'
+                        }
+                    ]
+                },
+                data: {
+                    type: Object,
+                    value: {},
+                    notify: true
+                },
+                hmChild: {
+                    type: Array,
+                    value: []
+                    // statePath: 'hamonize.hamonizeCodeChild',
+                },
+                statusCheck: {
+                    type: Boolean,
+                    value: true
+                },
+                listYear: {
+                    statePath: 'hamonize.hamonizeYear',
+                },
+                hamonizeListReal: {
+                    statePath: 'hamonize.hamonizeList',
+                    // observer: 'cloneHamonizeList'
+                },
+                hamonizeListNoGroupReal: {
+                    statePath: 'hamonize.hamonizeListNoGroup',
+                    // observer: 'cloneHamonizeList'
+                },
+                hamonizeList: {
+                    type: Array,
+                    value: []
+                },
+                hamonizeListNoGroup: {
+                    type: Array,
+                    value: []
+                },
+                seletedRice: {
+                    type: Array,
+                    value: [],
+                },
+                value: {
+                    value: [],
+                    notify: true
+                },
+                label: {
+                    type: String,
+                    value: 'label'
+                },
+                items: {
+                    observer: 'obItems'
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ประเทศ',
+                            value: 'country',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'บริษัท',
+                            value: 'company',
+                            label: '',
+                            hidden: false
+                        }
+                    ]
+                },
+                hamonizeSeleted: {
+                    type: Array,
+                    value: []
+                },
+                dataSeleted: {
+                    type: Object,
+                    value: {
+                        hamonize_code: '',
+                        hamonize_th: '',
+                        isYear: false
+                    }
+                },
+                typeSelete: {
+                    type: String,
+                    value: 'list'
+                },
+            },
+            observers: [
+                'cloneHamonizeList(hamonizeListReal,hamonizeListNoGroupReal)',
+                '_checkHamonize(hamonizeList)',
+                'resetSearch(data.hmYear)'
+            ],
+            selectTag: function (e) {
+                let value = e.detail.value
+                // //console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // //console.log(this.myItems[result]);
+                    this.push('value', value);
+                    e.detail.value = {}
+
+                }
+
+            },
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
+            },
+            deleteTag: function (e) {
+                // //console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
+            },
+            getSeleted(filter) {
+                // //console.log(filter.map((item) => item.hidden !== true));
+                let data = this.myItems.filter((item) => item.hidden === false)
+                return data
+            },
+
+            checkYear(dateStart, dateEnd, listYear) {
+                let yearStart = dateStart.split('-')[0]
+                let yearEnd = dateEnd.split('-')[0]
+                let hmYear = []
+                // console.log(listYear.year);
+                if (listYear.year !== undefined) {
+                    listYear.year.map((item, index) => {
+                        item.yearStart = Number(item.value)
+                        // console.log(item.yearStart);
+                        if (listYear.year[index + 1] !== undefined) {
+                            item.yearEnd = Number(listYear.year[index + 1].value - 1)
+                        } else {
+                            item.yearEnd = 9999
+                        }
+                        if (yearEnd >= item.yearStart && yearStart <= item.yearEnd) {
+                            hmYear.push({ year: item.value })
+                        }
+                        // console.log(hmYear);
+                    })
+                    return hmYear
+                }
+            },
+            // end check box
+            // obdata(data) { //console.log(data) },
+            getYearRice(e) {
+                var year = e.detail.value;
+                // console.log(year);
+                // //console.log(this.seletedRice);
+                this.searchHamonizeInYear(year)
+                // if (this.seletedRice !== undefined) {
+                //     if (this.seletedRice.length > 0) {
+                //         let yearHm = this.seletedRice[0].hamonize_year
+                //         if (year !== yearHm) {
+                //             this.seletedRice = []
+                //         }
+                //     }
+                // }
+                // // //console.log(this.seletedRice);
+                // if (year !== '' && typeof year !== 'undefined') {
+                //     // //console.log(this.listRice);
+                //     // //console.log(year);
+                //     let list_rice = this.listRice.filter((item) => item.hamonize_year == year);
+                //     // //console.log(list_rice);
+                //     this.hmChild = list_rice;
+                // }
+            },
+            setHamonizeSdate(data) {
+                try {
+                    let dateStart = new Date(data.detail.value).getFullYear(),
+                        dateEnd = new Date(this.data.dateEnd).getFullYear()
+                    this.setYearHamonize(dateStart, dateEnd)
+                } catch (e) {
+
+                }
+            },
+            setHamonizeEdate(data) {
+                try {
+                    // //console.log(data.detail.value);
+                    let dateStart = new Date(this.data.dateStart).getFullYear(),
+                        dateEnd = new Date(data.detail.value).getFullYear()
+                    this.setYearHamonize(dateStart, dateEnd)
+                } catch (e) {
+
+                }
+            },
+            _setItem(hmcode) {
+                let dateStart = new Date(this.data.dateStart).getFullYear(),
+                    dateEnd = new Date(this.data.dateEnd).getFullYear()
+                this.setYearHamonize(dateStart, dateEnd)
+                // //console.log(this.hamonizeCodeList);
+                // //console.log(111);
+            },
+            setYearHamonize(Syear, Eyear) {
+                if (!Number.isNaN(Syear) && !Number.isNaN(Eyear)
+                    && this.hamonizeCodeList !== undefined) {
+                    let hm = this.hamonizeCodeList
+                    let startyear = '',
+                        endyear = ''
+                    for (var variable in hm) {
+                        if (Number(variable) <= Syear)
+                            startyear = variable
+                    }
+                    if (Syear === Eyear) {
+                        // //console.log(this.hamonizeCodeList[startyear]);
+                        this.set('hamonizeCodeList.use', this.hamonizeCodeList[startyear])
+                    } else {
+                        // //console.log(222);
+                        for (var variable in hm) {
+                            if (Number(variable) <= Eyear)
+                                endyear = variable
+                        }
+                        //     //console.log(222222);
+                        //    //console.log(this.hamonizeCodeList[startyear]);
+                        //     //console.log('Eyear',this.hamonizeCodeList[endyear]);
+                        let newArr = this.hamonizeCodeList[startyear].concat(this.hamonizeCodeList[endyear])
+                        this.set('hamonizeCodeList.use', newArr)
+                        // //console.log(this.hamonizeCodeList.use.length);
+                    }
+                }
+            },
+            _setDate(e) {
+                this.set('data.dateStart', e.dateStart)
+                this.set('data.dateEnd', e.dateEnd);
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
+            },
+            getRiceValue() {
+                // //console.log(this.$.material.selectedItems);
+                // var selects = this.$.material.selectedItems;
+                let arr = []
+                // let rice = selects.filter((item) => item.checks === true)
+                // this.seletedRice.map((id) => {
+                //     arr.push(id.hamonize_code)
+                // })
+                // hamonize_code
+                // console.log(this.hamonizeSeleted);
+                this.hamonizeSeleted.map((id) => {
+                    arr.push(id.hamonize_code)
+                })
+                if ((this.data.exporter === false) && (this.data.importer === true)) {
+                    this.data.tranType = 'i'
+                    this.data.SelectAll = false
+                } else if ((this.data.exporter === true) && (this.data.importer === false)) {
+                    this.data.tranType = 'e'
+                    this.data.SelectAll = false
+                } else {
+                    this.data.tranType = 'a'
+                    this.data.SelectAll = true
+                }
+                // //console.log(this.value);
+                // console.log(arr.join(','));
+                var hmcodes = arr.join(',');
+                var data = {
+                    hmYear: this.data.hmYear,
+                    hmCode: hmcodes,
+                    dateStart: this.data.dateStart,
+                    dateEnd: this.data.dateEnd,
+                    exporter: this.data.exporter,
+                    importer: this.data.importer,
+                    tranType: this.data.tranType
+                }
+                switch (this.value.length) {
+                    case 1:
+                        data.field2 = this.value[0].value
+                        break;
+                    case 2:
+                        data.field2 = this.value[0].value,
+                            data.field3 = this.value[1].value
+                        break;
+                    default:
+                        break;
+                }
+                this.set('data', data)
+                // //console.log(data);
+                this.dispatchAction('HAMONIZE_RICE_GET', data);
+            },
+            // getRiceValueReport() {
+            //     let arr = []
+            //     let rice = this.hmChild.filter((item) => item.checks === true)
+            //     rice.map((id) => {
+            //         arr.push(id.id)
+            //     })
+            //     // //console.log(arr);
+            //     this.data.hmchild = arr
+            //     let code = this.data.hmparent.split(' ')
+            //     let hmparent = code[0]
+            //     // //console.log(hmparent);
+            //     let newLink = this.data
+            //     newLink.hmparent = hmparent
+            //     window.open('./api/report/h01?' + this.genUrl(newLink))
+            // },
+            selectHamnoize(e) {
+                let hamonize_code = e.model.item.hamonize_code
+                // this.fire('toast', {
+                // status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
+                let indexHamonize = this.hmChild.findIndex((item) => item.hamonize_code === hamonize_code)
+                this.set('hmChild.' + indexHamonize + '.hidden', true)
+                // //console.log(this.hmChild);
+                this.push('seletedRice', e.model.item)
+                // }
+                // });
+                // //console.log(e.model.__data__.item);
+            },
+            deselectHamnoize(e) {
+                let index = e.model.__data__.index
+                let hamonize_code = e.model.item.hamonize_code
+                // this.fire('toast', {
+                // status: 'success', text: 'เพิ่ม ' + e.model.item.hamonize_th, callback() {
+                let indexHamonize = this.hmChild.findIndex((item) => item.hamonize_code === hamonize_code)
+                this.set('hmChild.' + indexHamonize + '.hidden', false)
+                this.splice('seletedRice', index, 1);
+                // //console.log(e.model.__data__.index);
+            },
+            // ----------------------------------------------------------------------------------------
+            _isShow: function (data, dataLoop) {
+                try {
+                    let resulte = data.every((item) => item.hidden === true)
+                    // console.log(resulte);
+                    return resulte
+                } catch (error) {
+
+                }
+            },
+            toggle: function (e) {
+                let index = e.currentTarget.index
+                if (e.currentTarget.icon === 'expand-more') {
+                    e.currentTarget.icon = 'chevron-right'
+                } else {
+                    e.currentTarget.icon = 'expand-more'
+                }
+                this.$$('#collapse-' + index).toggle()
+            },
+
+
+            cloneHamonizeList: function (hamonizeListReal, hamonizeListNoGroupReal) {
+                // JSON.parse(JSON.stringify(data));
+                this.set('hamonizeList', JSON.parse(JSON.stringify(hamonizeListReal)))
+                this.set('hamonizeListNoGroup', JSON.parse(JSON.stringify(hamonizeListNoGroupReal)))
+                // console.log(this.hamonizeList);
+            },
+            setHamonize: function (Hamonize, hamonizeListNoGroup) {
+
+                let hm = Hamonize.map(item => item.sub).reduce((a, b) => a.concat(b), []).filter(item => item.check === true)
+                let hmNoGroup = hamonizeListNoGroup.filter(item => item.check === true).map(item => {
+                    item.id = item.hamonize_id
+                    return item
+                })
+                let arr = []
+                let showHm = []
+                // จับ 2 อาเรย์มารวมกัน ยังไม่ได้ทำ
+                hm.concat(hmNoGroup).map((item) => {
+                    // console.log(item);
+                    arr[item.id] = item
+                })
+                for (var key in arr) {
+                    showHm.push(arr[key])
+                }
+                // console.log(showHm);
+                this.set('hamonizeSeleted', showHm)
+            },
+            addHamonizeTotable: function () {
+                this.$.hamonizeGroup.open()
+            },
+            DeleteAllHamonizeTotable: function () {
+                // console.log(this.hamonizeSeleted);
+                let idHm = this.hamonizeSeleted
+                // this.fire('toast', {
+                //     status: 'openDialog',
+                //     text: 'ต้องการลบทั้งหมดใช่หรือไม่',
+                //     confirmed: (result) => {
+                //         if (result == true) {
+                //             let myFirstPromise = new Promise((resolve, reject) => {
+                for (var index3 = 0; index3 < idHm.length; index3++) {
+                    // console.log(idHm[index].id);
+                    for (var index = 0; index < this.hamonizeList.length; index++) {
+                        for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+                            if (this.hamonizeList[index].sub[index2].id === idHm[index3].id) {
+                                this.set('hamonizeList.' + index + '.sub.' + index2 + '.check', false)
+                            }
+                        }
+                    }
+                    for (var index4 = 0; index4 < this.hamonizeListNoGroup.length; index4++) {
+                        if (idHm[index3].id === this.hamonizeListNoGroup[index4].hamonize_id) {
+                            this.set('hamonizeListNoGroup.' + index4 + '.check', false)
+                        }
+                    }
+                }
+
+                //     resolve('ok')
+                // });
+                // myFirstPromise.then((res) => {
+                this.setHamonize(this.hamonizeList, this.hamonizeListNoGroup)
+                //             })
+                //         }
+                //     }
+                // })
+            },
+            _deleteHamonize: function (e) {
+                // console.log(11111);
+                let idHm = e.currentTarget.data.id
+                // console.log(idHm);
+                // this.fire('toast', {
+                //     status: 'openDialog',
+                //     text: 'ต้องการลบใช่หรือไม่',
+                //     confirmed: (result) => {
+                //         if (result == true) {
+                //             let myFirstPromise = new Promise((resolve, reject) => {
+                for (var index = 0; index < this.hamonizeList.length; index++) {
+                    for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+                        if (this.hamonizeList[index].sub[index2].id === idHm) {
+                            this.set('hamonizeList.' + index + '.sub.' + index2 + '.check', false)
+                        }
+                    }
+                    for (var index4 = 0; index4 < this.hamonizeListNoGroup.length; index4++) {
+                        if (idHm === this.hamonizeListNoGroup[index4].hamonize_id) {
+                            this.set('hamonizeListNoGroup.' + index4 + '.check', false)
+                        }
+                    }
+                }
+                //                 resolve('ok')
+                //             });
+                //             myFirstPromise.then((res) => {
+                this.setHamonize(this.hamonizeList, this.hamonizeListNoGroup)
+                //             })
+                //         }
+                //     }
+                // })
+
+            },
+            checkAddHamonize() {
+                this.setHamonize(this.hamonizeList, this.hamonizeListNoGroup)
+            },
+            // _checkHamonize: function (data, hamonizeList, hamonizeListNoGroup, status = true) {
+            //     try {
+            //         if (data.contract_hamonize !== undefined && hamonizeList.length !== 0 && hamonizeListNoGroup.length !== 0) {
+            //             // console.log(data);
+            //             this.set('hamonizeSeleted', [])
+            //             let contract_hamonize = data.contract_hamonize
+            //             // เซ็ต กลับเป็นค่าเริ่มต้น
+            //             for (var index = 0; index < this.hamonizeList.length; index++) {
+            //                 for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+            //                     this.set('hamonizeList.' + index + '.sub.' + index2 + '.check', false)
+            //                 }
+            //             }
+            //             for (var index = 0; index < this.hamonizeListNoGroup.length; index++) {
+            //                 this.set('hamonizeListNoGroup.' + index + '.check', false)
+            //             }
+            //             // console.log(this.hamonizeList);
+            //             status = true
+            //             if (data.id === undefined) {
+            //                 status = false
+            //             }
+            //             // console.log(contract_hamonize);
+            //             for (var index = 0; index < contract_hamonize.length; index++) {
+            //                 for (var index2 = 0; index2 < hamonizeList.length; index2++) {
+            //                     for (var index3 = 0; index3 < hamonizeList[index2].sub.length; index3++) {
+            //                         // console.log(contract_hamonize[index].hamonize_id);
+            //                         if (contract_hamonize[index].hamonize_id === hamonizeList[index2].sub[index3].sub_id) {
+            //                             // console.log(status);
+            //                             this.set('hamonizeList.' + index2 + '.sub.' + index3 + '.check', status)
+            //                             // console.log(this.hamonizeList[index2].sub[index3]);
+            //                             // break
+            //                         }
+            //                     }
+            //                 }
+            //                 for (var index4 = 0; index4 < hamonizeListNoGroup.length; index4++) {
+            //                     if (contract_hamonize[index].hamonize_id === hamonizeListNoGroup[index4].hamonize_id) {
+            //                         this.set('hamonizeListNoGroup.' + index4 + '.check', status)
+            //                     }
+            //                 }
+            //             }
+            //             this.setHamonize(this.hamonizeList, this.hamonizeListNoGroup)
+            //         }
+            //     } catch (e) {
+            //     }
+            // },
+            getCheckChild: function (e) {
+                let item = e.model.__data__.item
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                let year = Number(this.dataSeleted.year)
+                this.hamonizeList[indexRoot].sub.map((item, index) => {
+                    if (this.hamonizeList[indexRoot].sub[index].hamonize_year === year) {
+                        this.set('hamonizeList.' + indexRoot + '.sub.' + index + '.check', checkHost)
+                    }
+                    if (year === 0) {
+                        this.set('hamonizeList.' + indexRoot + '.sub.' + index + '.check', checkHost)
+                    }
+                })
+            },
+            getSelect: function (e) {
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                let checkFalse = this.hamonizeList[indexRoot].sub.find((item) => item.check !== true)
+                this.set('hamonizeList.' + indexRoot + '.check', checkFalse === undefined)
+            },
+            editContract: function () {
+                this.dispatchAction('SET_STATE', {
+                    isInsert: false,
+                    btnDisabled: false,
+                    hiddend: true
+                })
+            },
+            searchHamonizeInYear: function (year) {
+                try {
+                    let seletedYear = year
+                    // console.log(seletedYear);
+                    this.hamonizeListNoGroup.map((item, index) => {
+                        if (String(this.hamonizeListNoGroup[index].hamonize_year) === year) {
+                            this.set('hamonizeListNoGroup.' + index + '.hiddend', false)
+                            // console.log(3333);
+                        } else {
+                            this.set('hamonizeListNoGroup.' + index + '.hiddend', true)
+                            // console.log(1212);
+                        }
+                    })
+                    for (var index = 0; index < this.hamonizeList.length; index++) {
+                        for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+                            if ((String(this.hamonizeList[index].sub[index2].hamonize_year) === seletedYear) ||
+                                (seletedYear === '' || seletedYear === undefined)) {
+                                this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', false)
+                            } else {
+                                this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', true)
+                            }
+                        }
+                        let checkkFalse = this.hamonizeList[index].sub.find((item) => item.hiddend === false)
+                        if (checkkFalse === undefined) {
+                            this.set('hamonizeList.' + index + '.hiddend', true)
+                        } else {
+                            this.set('hamonizeList.' + index + '.hiddend', false)
+                        }
+                    }
+
+                } catch (e) {
+
+                }
+
+            },
+            resetSearch(year) {
+                // console.log(year);
+                if (year === '' || year === undefined) {
+                    this.set('dataSeleted.isYear', false)
+                    // console.log(this.dataSeleted);
+                } else {
+                    this.set('dataSeleted.isYear', true)
+                    // console.log(this.dataSeleted);
+                }
+            },
+            searchHamonizeCode: function (e) {
+                // try {
+                // console.log(this.dataSeleted.hamonize_code);
+                let hamonize_code = this.dataSeleted.hamonize_code || ''
+                let hamonize_th = this.dataSeleted.hamonize_th || ''
+                let year = this.data.hmYear
+                // console.log(seletedCode);
+                // if (this.typeSelete === 'list') {
+                // console.log(this.hamonizeListNoGroup.length);
+                // for (var index = 0; index < this.hamonizeListNoGroup.length; index++) {
+                this.hamonizeListNoGroup.map((item, index) => {
+                    if (String(this.hamonizeListNoGroup[index].hamonize_code).search(String(hamonize_code)) > -1
+                        && String(this.hamonizeListNoGroup[index].hamonize_th).search(String(hamonize_th)) > -1
+                        && String(this.hamonizeListNoGroup[index].hamonize_year) === year) {
+                        this.set('hamonizeListNoGroup.' + index + '.hiddend', false)
+                        // console.log(3333);
+                    } else {
+                        this.set('hamonizeListNoGroup.' + index + '.hiddend', true)
+                        // console.log(1212);
+                    }
+                })
+                // }
+                // } else {
+                for (var index = 0; index < this.hamonizeList.length; index++) {
+                    for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+                        if (String(this.hamonizeList[index].sub[index2].hamonize_code).search(String(hamonize_code)) > -1
+                            && String(this.hamonizeList[index].sub[index2].hamonize_th).search(String(hamonize_th)) > -1
+                            && String(this.hamonizeList[index].sub[index2].hamonize_year) === year) {
+                            this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', false)
+                            // console.log(3333);
+                        } else {
+                            this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', true)
+                            // console.log(1212);
+                        }
+                    }
+                    let checkkFalse = this.hamonizeList[index].sub.find((item) => item.hiddend === false)
+                    if (checkkFalse === undefined) {
+                        this.set('hamonizeList.' + index + '.hiddend', true)
+                    } else {
+                        this.set('hamonizeList.' + index + '.hiddend', false)
+                    }
+                }
+                // }
+
+                // } catch (e) {
+
+                // }
+            },
+            searchHamonizeTh: function (e) {
+                try {
+                    let hamonize_code = this.dataSeleted.hamonize_code || ''
+                    let hamonize_th = this.dataSeleted.hamonize_th || ''
+                    let year = this.data.hmYear
+                    // console.log(seletedCode);
+                    this.hamonizeListNoGroup.map((item, index) => {
+                        if (String(this.hamonizeListNoGroup[index].hamonize_code).search(String(hamonize_code)) > -1
+                            && String(this.hamonizeListNoGroup[index].hamonize_th).search(String(hamonize_th)) > -1
+                            && String(this.hamonizeListNoGroup[index].hamonize_year) === year) {
+                            this.set('hamonizeListNoGroup.' + index + '.hiddend', false)
+                            // console.log(3333);
+                        } else {
+                            this.set('hamonizeListNoGroup.' + index + '.hiddend', true)
+                            // console.log(1212);
+                        }
+                    })
+                    for (var index = 0; index < this.hamonizeList.length; index++) {
+                        for (var index2 = 0; index2 < this.hamonizeList[index].sub.length; index2++) {
+                            // if (String(seletedCode).search(String(this.hamonizeList[index].sub[index2].hamonize_code)) > -1) {
+                            if (String(this.hamonizeList[index].sub[index2].hamonize_th).search(String(hamonize_th)) > -1
+                                && String(this.hamonizeList[index].sub[index2].hamonize_code).search(String(hamonize_code)) > -1
+                                && String(this.hamonizeList[index].sub[index2].hamonize_year) === year) {
+                                this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', false)
+                            } else {
+                                this.set('hamonizeList.' + index + '.sub.' + index2 + '.hiddend', true)
+                            }
+                        }
+                        let checkkFalse = this.hamonizeList[index].sub.find((item) => item.hiddend === false)
+                        if (checkkFalse === undefined) {
+                            this.set('hamonizeList.' + index + '.hiddend', true)
+                        } else {
+                            this.set('hamonizeList.' + index + '.hiddend', false)
+                        }
+                    }
+                    // this.$$('#hamonizeYear').value = ''
+                } catch (e) {
+
+                }
+            },
+        });
+    </script>
+</dom-module>

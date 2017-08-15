@@ -1,32 +1,37 @@
-
-<link rel="import" href="./components/hamonize-list.html">
-<link rel="import" href="./components/hamonize-search.html">
+<link rel="import" href="./components/hamonize-list-two.html">
+<link rel="import" href="./components/hamonize-search-two.html">
 
 <link rel="import" href="./../components/month-behavior.html">
+
+<link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
 
 <dom-module id="page-hamonize">
     <template>
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
-           <section class="container">
-                <hamonize-search data = "{{data}}"></hamonize-search>
-           </section>
-           <section class="container">
-                 <div class="header">ข้อมูลการส่งออกข้าวตามเลขพิกัดศุลกากร (Hamonized Code)</div>
-                 <hamonize-list search = "[[data]]"></hamonize-list>
-           </section>
+            <section class="container">
+                <div class="header">ข้อมูลการส่งออกข้าวตามเลขพิกัดศุลกากร (Hamonized Code)</div>
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+                    <hamonize-search-two data="{{data}}"></hamonize-search-two>
+                    <hamonize-list-two search="[[data]]"></hamonize-list-two>
+                </paper-material>
+
+            </section>
+
         </div>
     </template>
     <script>
         Polymer({
             is: 'page-hamonize',
             behaviors: [
-                ReduxBehavior,nylonBehavior,hamonizeAction
+                ReduxBehavior, nylonBehavior, hamonizeAction
             ],
-            nylonPageActive(){
-                // this.dispatchAction('HAMONIZE_CODE_GET');
-                this.dispatchAction('HAMONIZE_SET_DATE');
+            nylonPageActive() {
                 this.dispatchAction('HAMONIZE_RICE_LIST');
+                this.dispatchAction('HAMONIZE_SET_DATE');
+                this.dispatchAction('HAMONIZE_RICE_LIST_GROUP');
             }
         });
     </script>

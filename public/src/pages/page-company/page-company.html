@@ -1,4 +1,3 @@
-
 <link rel="import" href="./components/company-list.html">
 <link rel="import" href="./components/company-search.html">
 
@@ -6,22 +5,27 @@
     <template>
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
-           <section class="container">
-                <company-search data = "{{data}}"></company-search>
-           </section>
-           <section class="container">
+            <section class="container">
                 <div class="header">ข้อมูลผู้นำเข้า/ส่งออกข้าว</div>
-                 <company-list search = "[[data]]"></company-list>
-           </section>
+
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+                    <company-search data="{{data}}"></company-search>
+                    <company-list search="[[data]]"></company-list>
+                    
+                </paper-material>
+            </section>
+
         </div>
     </template>
     <script>
         Polymer({
             is: 'page-company',
             behaviors: [
-                ReduxBehavior,nylonBehavior,companyAction,hamonizeAction
+                ReduxBehavior, nylonBehavior, companyAction, hamonizeAction
             ],
-            nylonPageActive(){
+            nylonPageActive() {
                 // this.dispatchAction('COMPANY_CODE_GET');
                 this.dispatchAction('HAMONIZE_SET_DATE');
             }
