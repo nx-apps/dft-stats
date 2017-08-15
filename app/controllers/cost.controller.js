@@ -1,11 +1,12 @@
 exports.today = function (req, res) {
     var costDate = req.query.costDate + 'T00:00:00+07:00';
-    r.table('cost').filter(function (f) {
+    var cost = r.table('cost').filter(function (f) {
         return f('cost_date').inTimezone('+07').date().le(r.ISO8601(costDate))
             .and(
             f('cost_end').inTimezone('+07').date().ge(r.ISO8601(costDate))
             )
-    }).coerceTo('array')
+    }).coerceTo('array');
+    r.branch(cost.eq([]), [], cost(0))
         .run()
         .then(function (data) {
             res.json(data)
