@@ -1,5 +1,6 @@
 exports.today = function (req, res) {
-    var price = r.table('price').getAll(r.ISO8601(req.query.priceDate + 'T00:00:00+07:00'), { index: 'price_date' }).coerceTo('array');
+    var priceDate = req.query.priceDate + 'T00:00:00+07:00';
+    var price = r.table('price').getAll(r.ISO8601(priceDate), { index: 'price_date' }).coerceTo('array');
     var newprice = r.table('price_config')
         .eqJoin('rice_id', r.table('typerice')).without({ right: 'id' }).zip()
         .merge({
@@ -11,14 +12,15 @@ exports.today = function (req, res) {
             price_india: 0,
             price_vietnam: 0,
             price_pakistan: 0,
-            price_date: r.now().inTimezone('+07').date()
+            price_date: r.ISO8601(priceDate)
         });
     r.branch(price.eq([]),
         r.table('price').insert(newprice).do(function (d) {
-            return price
+            return newprice
         }),
         price
-    ).orderBy('rice_id')
+    )
+        .orderBy('rice_id')
         .run()
         .then(function (data) {
             res.json(data)
