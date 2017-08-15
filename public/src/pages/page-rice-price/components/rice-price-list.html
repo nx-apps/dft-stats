@@ -150,8 +150,22 @@
                 value.inputElement.select()
             },
             savePriceHamonize() {
+                const setZero = (popBoollearn,price)=>{
+                    if(popBoollearn)
+                        return price
+                    return 0
+                }
                 this.data.map((item) => {
                     item.price_date = item.price_date.split('T')[0] + 'T00:00:00+07:00'
+                    item.price_dit = setZero(item.dit,item.price_dit)
+                    item.price_fob = setZero(item.fob,item.price_fob)
+                    item.price_thai = setZero(item.thai,item.price_thai)
+                    item.price_paddy = setZero(item.paddy,item.price_paddy)
+                    item.price_usa = setZero(item.usa,item.price_usa)
+                    item.price_india = setZero(item.india,item.price_india)
+                    item.price_pakistan = setZero(item.pakistan,item.price_pakistan)
+                    item.price_vietnam = setZero(item.vietnam,item.price_vietnam)
+                    return item
                 })
                 // console.log(this.data);
                 // console.log(this.search);
