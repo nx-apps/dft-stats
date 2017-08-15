@@ -16,7 +16,7 @@ exports.today = function (req, res) {
         });
     r.branch(price.eq([]),
         r.table('price').insert(newprice).do(function (d) {
-            return newprice
+            return price
         }),
         price
     )
