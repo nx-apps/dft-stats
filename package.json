@@ -29,6 +29,6 @@
     "multiparty": "^4.1.3",
     "polymer-redux": "^0.3.0",
     "redux": "^3.6.0",
-    "xlsx": "^0.8.3"
+    "xlsx": "^0.8.8"
   }
 }
