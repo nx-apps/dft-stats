@@ -19,7 +19,11 @@ exports.today = function (req, res) {
             .do(function (d) {
                 return price
             }),
-        price
+        price.merge(function (m) {
+            return {
+                typerice: r.table('typerice').get(m('rice_id')).getField('typerice')
+            }
+        })
     )
         .orderBy('rice_id')
         .run()
