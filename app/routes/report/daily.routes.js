@@ -5,4 +5,5 @@ module.exports = function (app) {
     app.get('/country', controller.dailyCountry)
     app.get('/pricerice', controller.dailyPricerice)
     app.get('/exportrice', controller.dailyExportrice)
+    app.get('/cost',controller.dailyCost)
 }
