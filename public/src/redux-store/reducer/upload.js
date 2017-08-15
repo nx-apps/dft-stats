@@ -1,45 +1,58 @@
 import axios from '../axios'
-import {commonAction} from '../config'
+import { commonAction } from '../config'
 
 const initialState = {
-    select:{},
-    list:[],
-    fileIdUpload:{},
+    select: {},
+    list: [],
+    fileIdUpload: {},
     // listFiles:[]
 }
 
-export function uploadReducer(state = initialState,action){
+export function uploadReducer(state = initialState, action) {
 
     switch (action.type) {
         case 'UPLOAD_LIST':
-          return Object.assign({},state,{list:action.payload});
+            return Object.assign({}, state, { list: action.payload });
+        // case 'UPLOAD_LIST':
+        //     return Object.assign({}, state, { list: action.payload });
         default:
-          return state
+            return state
     }
 
 }
 
-export function uploadAction(store){
-    return [commonAction(),{
-      UPLOAD_MC(file){
-        // console.log(data);
-        var data = new FormData();
-        
-            data.append('file', file[0]);
-
-            console.log(data);
-        // this.fire('toast',{status:'load',text:'กำลังบันทึกข้อมูล...'})
-        axios.post('/upload/mc/',data)
-        .then( (response)=>{
-            ////console.log(response);
-            // store.dispatch({type:'UPLOAD_DELETE',payload:response.data})
-            this.fire('toast',{status:'success',text:'บันทึกสำเร็จ',callback:function(){
-              ////console.log('success');
-            }});
-        })
-        .catch(function (error) {
-            ////console.log(error);
-        });
-      }
-   }]
+export function uploadAction(store) {
+    return [commonAction(), {
+        UPLOAD_LIST() {
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
+            // //console.log(data); 
+            axios.get('/upload')
+                .then((response) => {
+                    // console.log(response);
+                    this.fire('toast', {
+                        status: 'success', text: 'ค้นหาสำเร็จ', callback() {
+                            store.dispatch({ type: 'UPLOAD_LIST', payload: response.data })
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    ////console.log(error);
+                });
+        },
+        UPLOAD_MC(file) {
+            // console.log(data);
+            var data = new FormData()
+            data.append('file', file[0])
+            axios.post('/upload/mc/', data)
+                .then((response) => {
+                    this.fire('toast', {
+                        status: 'success', text: 'บันทึกสำเร็จ', callback: function () {
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    ////console.log(error);
+                });
+        }
+    }]
 };

@@ -3,6 +3,16 @@ var path = require('path');
 var multiparty = require('multiparty');
 var stream = require('stream');
 
+exports.listUpload = function (req, res) {
+    r.db('stats').table('upload')
+        .orderBy(r.desc('data_uploaded'))
+        .run()
+        .then(function (result) {
+            res.json(result);
+        }).catch(function (err) {
+            res.json(err);
+        })
+}
 exports.uploadMc = function (req, res) {
     var form = new multiparty.Form();
 
