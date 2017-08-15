@@ -18,7 +18,7 @@ exports.uploadMc = function (req, res) {
 
     form.parse(req, function (err, fields, files) {
         var prefile = files.file[0];
-        let time = new Date().toISOString().split('T')[0]
+        let time = new Date().getTime()
         let fileName = prefile.headers['content-disposition'].split('"')[3]
         let newFileName = time + '-' + fileName
         // console.log(fileName[3]);

@@ -152,6 +152,12 @@
                             report_link: '/stats/stats1',
                             report_prama: 'date'
                         },
+                        {
+                            report_id: 5,
+                            report_name: 'ข้อมูลส่งออกข้าว ต้นทุนและราคาข้าวชนิดต่างๆ',
+                            report_link: '/stats/stats1',
+                            report_prama: 'date'
+                        },
                     ]
                 },
                 setType: {
@@ -213,6 +219,9 @@
                         break;
                     case 4:
                         window.open('./api/report/daily/exportrice?currentDate=' + this.data.date + '&amountTime=' + this.data.amountTime + '&export=' + this.date.type)
+                        break;
+                    case 5:
+                        window.open('./api/report/daily/cost?date=' + this.data.date+ '&export=' + this.date.type)
                         break;
                     default:
                         break;
