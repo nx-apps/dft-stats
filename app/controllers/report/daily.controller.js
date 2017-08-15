@@ -66,7 +66,7 @@ exports.dailyCost = function (req, res) {
             .and(f('cost_end').inTimezone('+07').date().ge(r.ISO8601(priceDate)))
     });
     r.expr({
-        cost: r.branch(costPrice.count().eq(0), null, costPrice(0)),
+        cost: r.branch(costPrice.count().eq(0), null, costPrice(0).merge({ current_date: req.query.date })),
         price: r.table('price').getAll(r.ISO8601(priceDate), { index: 'price_date' })
             .filter(function (f) {
                 return r.expr([2, 3, 4, 7, 8, 9, 11, 12, 15, 17, 18, 22]).contains(f('rice_id'))
@@ -92,7 +92,21 @@ exports.dailyCost = function (req, res) {
         .run()
         .then(function (data) {
             var param = rpt.keysToUpper(data['cost']);
-            res.json(data['price'])
+            // res.json(data['price'])
+            var datas = data['price'];
+            datas.push({
+                typerice: 'อื่นๆ',
+                rice_id: 99,
+                price_dit: 0,
+                price_fob: 0,
+                price_thai: 0,
+                price_paddy: 0,
+                price_usa: 0,
+                price_india: 0,
+                price_vietnam: 0,
+                price_pakistan: 0
+            });
+            res.ireport("daily/report2.jasper", req.query.export || "pdf", datas, param);
             // res.json(param)
         })
 }
