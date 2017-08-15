@@ -1,7 +1,7 @@
 exports.today = function (req, res) {
     var priceDate = req.query.priceDate + 'T00:00:00+07:00';
     var price = r.table('price').getAll(r.ISO8601(priceDate), { index: 'price_date' }).coerceTo('array');
-    var newprice = r.table('price_config')
+    var newprice = r.table('price_config').without('id')
         .eqJoin('rice_id', r.table('typerice')).without({ right: 'id' }).zip()
         .merge({
             price_dit: 0,
@@ -14,10 +14,11 @@ exports.today = function (req, res) {
             price_pakistan: 0,
             price_date: r.ISO8601(priceDate)
         });
-    r.branch(price.eq([]),
-        r.table('price').insert(newprice).do(function (d) {
-            return price
-        }),
+    r.branch(price.count().eq(0),
+        r.table('price').insert(newprice)
+            .do(function (d) {
+                return price
+            }),
         price
     )
         .orderBy('rice_id')
