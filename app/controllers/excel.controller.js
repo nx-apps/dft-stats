@@ -26,7 +26,7 @@ exports.read = function (req, res) {
 
             var file = workbook.Sheets;
             // res.json(file);
-            var data = {};
+            var data = [];
             var temp = { db: "", col: [], maxCol: "" };
             var keyIndex = 1; //num row has field_key
             var row = {};
@@ -36,10 +36,14 @@ exports.read = function (req, res) {
                     if (key !== '!ref' && key !== '!margins' && key !== '!autofilter' && key !== '!range') {
                         // console.log('data ',c++);
                         if (str2NumOnly(key) == keyIndex) {
-                            temp.col[str2CharOnly(key)] = getKeyByValue(indexArr, file[sheet][key].v);
+                            // temp.col[str2CharOnly(key)] = getKeyByValue(indexArr, file[sheet][key].v);
+                            temp.col[str2CharOnly(key)] = file[sheet][key].v;
                             temp.maxCol = str2CharOnly(key);
                         } else {
-                            if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
+                            // if(temp.col[str2CharOnly(key)]=='วันที่ออก มส.24'){
+                            //     console.log(file[sheet][key]);
+                            // }
+                            if (temp.col[str2CharOnly(key)].indexOf("วันที่") > -1) {
                                 row[temp.col[str2CharOnly(key)]] = file[sheet][key].w;
                             } else {
                                 row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
