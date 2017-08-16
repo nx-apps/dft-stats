@@ -5,20 +5,28 @@
 <link rel="import" href="./components/mc-upload-list.html">
 <link rel="import" href="./components/mc-upload.html">
 
+<link rel="import" href="./components/mc-preview.html">
+
 
 <dom-module id="page-mc-upload">
     <template>
         <style include="page-style flex-style">
+
         </style>
         <div class="xcontainer">
             <section class="container">
                 <div class="header">ข้อมูลการส่งออกข้าวของกองมาตรฐานสินค้านำเข้าส่งออก</div>
             </section>
             <section class="container">
-                
-                    <mc-upload></mc-upload>
+
+                <mc-upload></mc-upload>
+
+                <iron-pages selected="{{page}}">
                     <mc-upload-list></mc-upload-list>
-                
+                    <mc-preview></mc-preview>
+                </iron-pages>
+
+
 
             </section>
             <section class="container">
@@ -31,19 +39,26 @@
             behaviors: [
                 ReduxBehavior, nylonBehavior, MonthBehavior, uploadAction
             ],
-            // properties: {
-            //     data: {
-            //         statePath: 'upload.list',
-            //         observer: 'totalcal'
-            //     },
-            // },
+            properties: {
+                page: {
+                    type:Number,
+                    value:0
+                },
+            },
+            listeners: {
+                '_getDetail': 'getDetail',
+            },
             totalcal(data) {
                 console.log(data);
             },
             nylonPageActive() {
                 this.dispatchAction('UPLOAD_LIST');
             },
-           
+            getDetail(e){
+                this.set('page',e.detail)
+                 console.log(e.detail);   
+            }
+
         });
     </script>
 </dom-module>

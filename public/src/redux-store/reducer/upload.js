@@ -2,7 +2,7 @@ import axios from '../axios'
 import { commonAction } from '../config'
 
 const initialState = {
-    select: {},
+    select: [],
     list: [],
     fileIdUpload: {},
     // listFiles:[]
@@ -13,8 +13,8 @@ export function uploadReducer(state = initialState, action) {
     switch (action.type) {
         case 'UPLOAD_LIST':
             return Object.assign({}, state, { list: action.payload });
-        // case 'UPLOAD_LIST':
-        //     return Object.assign({}, state, { list: action.payload });
+        case 'UPLOAD_PREVIEW':
+            return Object.assign({}, state, { select: action.payload });
         default:
             return state
     }
@@ -55,6 +55,23 @@ export function uploadAction(store) {
                 .catch(function (error) {
                     ////console.log(error);
                 });
-        }
+        },
+        UPLOAD_PREVIEW(id) {
+            this.fire('toast', { status: 'load', text: 'กำลังดึงข้อมูล...' })
+            // //console.log(data); 
+            axios.get('/excel/read?id='+id)
+                .then((response) => {
+                    // console.log(response);
+                    this.fire('toast', {
+                        status: 'success', text: 'ดึงข้อมูลสำเร็จ', callback() {
+                            store.dispatch({ type: 'UPLOAD_PREVIEW', payload: response.data })
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    ////console.log(error);
+                });
+        },
+
     }]
 };

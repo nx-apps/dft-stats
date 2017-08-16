@@ -1,15 +1,20 @@
 <link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../../../bower_components/iron-icon/iron-icon.html">
 <dom-module id="mc-upload">
     <template>
         <style include="page-style flex-style">
             .input-upload {
                 margin: 15px;
             }
+            iron-icon{
+                margin: 0px 5px;
+            }
         </style>
         <paper-material elevation="1">
             <div class="horizontal center-justified layout">
                 <div class="input-upload"><input type="file" id="myFile" style="width:300px;">
-                    <paper-button raised class="gl-btn-info gl-small" on-tap="_uploadFile">อัพโหลดเอกสาร
+                    <paper-button raised class="gl-btn-info gl-small" on-tap="_uploadFile">
+                        <iron-icon icon="file-upload"></iron-icon>อัพโหลดเอกสาร
                     </paper-button>
                 </div>
             </div>
