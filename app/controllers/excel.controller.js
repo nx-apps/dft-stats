@@ -23,52 +23,59 @@ exports.read = function (req, res) {
         .run()
         .then(function (fileUpload) {
             var workbook = XLSX.readFile('../dft-stats/public/files/' + fileUpload.file_path);
-
             var file = workbook.Sheets;
-            // res.json(file);
-            var data = {};
-            var temp = { db: "", col: [], maxCol: "" };
-            var keyIndex = 1; //num row has field_key
-            var row = {};
-            // // res.json(file);
+            var data = [];
             for (var sheet in file) {
-                for (var key in file[sheet]) {
-                    if (key !== '!ref' && key !== '!margins' && key !== '!autofilter' && key !== '!range') {
-                        // console.log('data ',c++);
-                        if (str2NumOnly(key) == keyIndex) {
-                            // temp.col[str2CharOnly(key)] = getKeyByValue(indexArr, file[sheet][key].v);
-                            temp.col[str2CharOnly(key)] = file[sheet][key].v;
-                            temp.maxCol = str2CharOnly(key);
-                        } else {
-                            // if(temp.col[str2CharOnly(key)]=='วันที่ออก มส.24'){
-                            //     console.log(file[sheet][key]);
-                            // }
-                            if (temp.col[str2CharOnly(key)].indexOf("วันที่") > -1) {
-                                row[temp.col[str2CharOnly(key)]] = file[sheet][key].w;
-                            } else {
-                                row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
-                            }
-                            if (str2CharOnly(key) == temp.maxCol) {
-                                data[temp.db].push(row);
-                                // data.push(row);
-                                row = {};
-                            }
-                        }
+                data.push({
+                    sheet_name: sheet,
+                    data: XLSX.utils.sheet_to_json(file[sheet])
+                });
+            }
+            res.json(data);
+            // // res.json(file);
+            // var data = {};
+            // var temp = { db: "", col: [], maxCol: "" };
+            // var keyIndex = 1; //num row has field_key
+            // var row = {};
+            // // // res.json(file);
+            // for (var sheet in file) {
+            //     for (var key in file[sheet]) {
+            //         if (key !== '!ref' && key !== '!margins' && key !== '!autofilter' && key !== '!range') {
+            //             // console.log('data ',c++);
+            //             if (str2NumOnly(key) == keyIndex) {
+            //                 // temp.col[str2CharOnly(key)] = getKeyByValue(indexArr, file[sheet][key].v);
+            //                 temp.col[str2CharOnly(key)] = file[sheet][key].v;
+            //                 temp.maxCol = str2CharOnly(key);
+            //             } else {
+            //                 // if(temp.col[str2CharOnly(key)]=='วันที่ออก มส.24'){
+            //                 //     console.log(file[sheet][key]);
+            //                 // }
+            //                 if (temp.col[str2CharOnly(key)].indexOf("วันที่") > -1) {
+            //                     row[temp.col[str2CharOnly(key)]] = file[sheet][key].w;
+            //                 } else {
+            //                     row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+            //                 }
+            //                 if (str2CharOnly(key) == temp.maxCol) {
+            //                     data[temp.db].push(row);
+            //                     // data.push(row);
+            //                     row = {};
+            //                 }
+            //             }
 
-                    } else {
-                        temp.col = [];
-                        temp.db = sheet;
-                        if (!data.hasOwnProperty(sheet)) {
-                            data[sheet] = [];
-                        }
-                    }
-                }
-            }
-            var dataSheet = [];
-            for (table in data) {
-                dataSheet.push({ sheet: table, data: data[table] });
-            }
-            res.json(dataSheet);
+            //         } else {
+            //             temp.col = [];
+            //             temp.db = sheet;
+            //             if (!data.hasOwnProperty(sheet)) {
+            //                 data[sheet] = [];
+            //             }
+            //         }
+            //     }
+            // }
+            // var dataSheet = [];
+            // for (table in data) {
+            //     dataSheet.push({ sheet: table, data: data[table] });
+            // }
+            // res.json(dataSheet);
         })
 
 }
