@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91a82e65-913a-49fa-8e24-5f043fe1af21">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="477"/>
 	<property name="ireport.y" value="0"/>
 	<field name="month" class="java.lang.String"/>
 	<field name="date" class="java.lang.String"/>
@@ -639,7 +639,7 @@
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Bottom" markup="none">
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวหอม 100%]]></text>
@@ -805,7 +805,7 @@
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Bottom" markup="none">
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปขข.]]></text>
@@ -1125,6 +1125,7 @@ A1
 			<textField>
 				<reportElement x="612" y="0" width="35" height="15" uuid="565c7b72-16e8-4cf2-99cc-342770baf797"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
@@ -1134,6 +1135,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="717" y="0" width="35" height="15" uuid="12d47f75-07a1-4466-9268-e8e8c00597a5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1141,6 +1145,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="202" y="0" width="30" height="15" uuid="809b75d7-b963-48c2-b4ef-20ce93041ede"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1149,6 +1156,7 @@ A1
 			<textField>
 				<reportElement x="502" y="0" width="30" height="15" uuid="e0b3c682-d108-4fba-a239-1e58df1b64f3"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
@@ -1158,6 +1166,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="682" y="0" width="35" height="15" uuid="b56b0838-4155-4b4c-bf0d-a079805544e6"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1166,6 +1177,7 @@ A1
 			<textField>
 				<reportElement x="562" y="0" width="50" height="15" uuid="e35de318-3e8a-4192-a0a5-09f1faef94d7"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
@@ -1176,6 +1188,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="292" y="0" width="30" height="15" uuid="3cc8461f-9755-4cf3-b05a-859af6e35f77"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1183,6 +1198,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="262" y="0" width="30" height="15" uuid="451fe5fa-3ec4-4a55-8733-fcb1e3553ec8"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1191,6 +1209,7 @@ A1
 			<textField>
 				<reportElement x="752" y="0" width="50" height="15" uuid="9aab9a50-381d-410c-9df3-80589479ce9e"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
@@ -1202,6 +1221,7 @@ A1
 			<textField>
 				<reportElement x="152" y="0" width="50" height="15" uuid="3abcb5d6-3239-48bb-b070-7b80014c1ac1"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
@@ -1212,6 +1232,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="472" y="0" width="30" height="15" uuid="916a531e-2abd-4b24-ba89-01f6c8c25652"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1220,6 +1243,7 @@ A1
 			<textField>
 				<reportElement x="82" y="0" width="35" height="15" uuid="b9892861-514c-448b-b334-815dc83b89de"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
@@ -1229,6 +1253,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="412" y="0" width="30" height="15" uuid="6e7371e5-cd6e-4480-8661-d67bb4f53e89"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1236,6 +1263,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="442" y="0" width="30" height="15" uuid="8b6c9184-fe70-4212-a749-d70c140e0ae7"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1244,6 +1274,7 @@ A1
 			<textField>
 				<reportElement x="532" y="0" width="30" height="15" uuid="f548dd34-978f-420e-9eca-abd5c65e0b88"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
@@ -1253,6 +1284,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="647" y="0" width="35" height="15" uuid="a09629f5-d25f-4cee-9948-38ab783c7f44"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1260,6 +1294,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="322" y="0" width="30" height="15" uuid="99fa0451-370a-40ca-bc7c-b9b4ca0962b0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1267,6 +1304,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="382" y="0" width="30" height="15" uuid="73ede234-0ffb-424c-bbc8-3fe0de536bcb"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1274,6 +1314,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="232" y="0" width="30" height="15" uuid="1d88abc3-0615-41c9-bf27-0b00f7072990"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1282,6 +1325,7 @@ A1
 			<textField>
 				<reportElement x="117" y="0" width="35" height="15" uuid="d3c744a5-b7b2-4e8b-924e-43a97ed6fe25"/>
 				<box>
+					<topPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
@@ -1291,6 +1335,9 @@ A1
 			</textField>
 			<textField>
 				<reportElement x="352" y="0" width="30" height="15" uuid="e4ddf53a-e0d4-4e5b-b8aa-7c268e47ddfc"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
