@@ -1,3 +1,4 @@
+const arrMonth = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
 exports.keysToUpper = function (param) {
     var keyname = Object.keys(param);
     for (var i = 0; i < keyname.length; i++) {
@@ -9,4 +10,10 @@ exports.keysToUpper = function (param) {
         }
     }
     return param;
+}
+exports.getMonthName = function (index) {
+    return arrMonth[index];
+}
+exports.getMonthNameRethink = function (index) {
+    return r.expr(arrMonth)(index);
 }

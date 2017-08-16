@@ -110,3 +110,116 @@ exports.dailyCost = function (req, res) {
             // res.json(param)
         })
 }
+exports.dailyfob = function (req, res, next) {
+    var data = [];
+    var date = new Date(req.query.date);
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    var back = Number(req.query.back) - 1;
+    var m = 12;
+    for (var x = year - back; x <= year; x++) {
+        if (x == year) {
+            m = month;
+        }
+        for (var y = 1; y <= m; y++) {
+            var checker = x == year && y == m;
+            data.push({
+                year: x,
+                month: y,
+                date_start: new Date(x, y - 1, 1),
+                date_end: new Date(x, (checker ? y - 1 : y), (checker ? day : 0)),
+                type: (checker ? 'date' : 'month')
+            });
+        }
+    }
+    var init = r.expr(data)
+        .merge(function (m) {
+            return {
+                date: "",
+                prices: r.table('price').filter(function (f) {
+                    return f('price_date').during(
+                        m('date_start'), m('date_end'), { rightBound: 'closed' }
+                    )
+                }).coerceTo('array').pluck('price_date', 'price_fob', 'rice_id').orderBy('rice_id')
+                    .group('price_date').ungroup()
+                    .map(function (m2) {
+                        return m2('reduction').map(function (m3) {
+                            return [r.expr('rice_').add(m3('rice_id').coerceTo('string')), m3('price_fob')]
+                        }).coerceTo('object')
+                            .merge({ date: m2('group').day(), month: 0, year: m2('group').year(), type: 'date' })
+                    })
+
+            }
+        })
+        .merge(function (m) {
+            return {
+                "rice_1": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_1'), 0),
+                "rice_10": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_10'), 0),
+                "rice_11": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_11'), 0),
+                "rice_12": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_12'), 0),
+                "rice_13": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_13'), 0),
+                "rice_14": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_14'), 0),
+                "rice_15": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_15'), 0),
+                "rice_16": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_16'), 0),
+                "rice_17": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_17'), 0),
+                "rice_18": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_18'), 0),
+                "rice_19": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_19'), 0),
+                "rice_2": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_2'), 0),
+                "rice_20": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_20'), 0),
+                "rice_21": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_21'), 0),
+                "rice_22": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_22'), 0),
+                "rice_3": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_3'), 0),
+                "rice_4": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_4'), 0),
+                "rice_5": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_5'), 0),
+                "rice_6": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_6'), 0),
+                "rice_7": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_7'), 0),
+                "rice_8": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_8'), 0),
+                "rice_9": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_9'), 0)
+            }
+        });
+    r.expr([init.without('prices')])
+        .append(init.filter({ type: 'date' })(0).getField('prices').orderBy('date'))
+        .reduce(function (left, right) {
+            return left.add(right)
+        })
+        .merge(function (m) {
+            return {
+                month: rpt.getMonthNameRethink(m('month')),
+                year: m('year').add(543)
+            }
+        })
+        .append({
+            year: year + 543,
+            month: 'เฉลี่ยรายเดือน',
+            date: '',
+            type: 'month',
+            "rice_1": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_1'), 0),
+            "rice_10": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_10'), 0),
+            "rice_11": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_11'), 0),
+            "rice_12": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_12'), 0),
+            "rice_13": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_13'), 0),
+            "rice_14": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_14'), 0),
+            "rice_15": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_15'), 0),
+            "rice_16": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_16'), 0),
+            "rice_17": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_17'), 0),
+            "rice_18": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_18'), 0),
+            "rice_19": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_19'), 0),
+            "rice_2": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_2'), 0),
+            "rice_20": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_20'), 0),
+            "rice_21": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_21'), 0),
+            "rice_22": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_22'), 0),
+            "rice_3": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_3'), 0),
+            "rice_4": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_4'), 0),
+            "rice_5": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_5'), 0),
+            "rice_6": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_6'), 0),
+            "rice_7": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_7'), 0),
+            "rice_8": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_8'), 0),
+            "rice_9": r.branch(init.filter({ type: 'date' })(0).getField('prices').count().gt(0), init.filter({ type: 'date' })(0).getField('prices').avg('rice_9'), 0)
+        })
+        .run()
+        .then(function (data) {
+            // res.json(data)
+            res.ireport("daily/report1.jasper", req.query.export || "pdf", data);
+        })
+}
