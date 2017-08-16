@@ -22,7 +22,8 @@
             .text-center {
                 text-align: center;
             }
-            paper-button{
+
+            paper-button {
                 width: 130px;
             }
         </style>
@@ -93,7 +94,10 @@
                     <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.date}}"></gl-form-input>
                 </div>
                 <div class="flex" style=" margin-right: 30px">
-                    <gl-form-input label="จำนวนเดือน:" placeholder="จำนวนเดือน" type="number"  hidden="[[checkReport(param.report_id)]]" value="{{data.amountTime}}"></gl-form-input>
+                    <gl-form-input label="จำนวนเดือน:" placeholder="จำนวนเดือน" type="number" hidden="[[checkReport(param.report_id)]]" value="{{data.amountTime}}"></gl-form-input>
+                </div>
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-form-input label="จำนวนปีที่ต้องการดู:" placeholder="จำนวนปีที่ต้องการดู" type="number" hidden="[[checkReportYear(param.report_id)]]" value="{{data.amountYear}}"></gl-form-input>
                 </div>
 
                 <div class="flex horizontal end-justified layout buttons">
@@ -158,6 +162,12 @@
                             report_link: '/stats/stats1',
                             report_prama: 'date'
                         },
+                        {
+                            report_id: 6,
+                            report_name: 'ข้อมูลราคาข้าว FOB กรุงเทพฯ',
+                            report_link: '/stats/stats1',
+                            report_prama: 'date'
+                        },
                     ]
                 },
                 setType: {
@@ -177,6 +187,7 @@
                 // //console.log(this.data);
                 this.set('data.date', new Date().toISOString().split('T')[0])
                 this.set('data.amountTime', 6)
+                this.set('data.amountYear', 2)
             },
             print(e) {
                 let link = e.model.item.report_link
@@ -191,7 +202,7 @@
                 // //console.log(e.currentTarget.id);
                 // //console.log(report_prama === 'date');
                 // if (report_prama === 'date') {
-                    
+
                 this.$$('#report').open()
                 // }else {
                 //     //console.log(1111);
@@ -200,6 +211,11 @@
             },
             checkReport(report_id) {
                 if (report_id === 4)
+                    return false
+                return true
+            },
+            checkReportYear(report_id) {
+                if (report_id === 6)
                     return false
                 return true
             },
@@ -221,7 +237,10 @@
                         window.open('./api/report/daily/exportrice?currentDate=' + this.data.date + '&amountTime=' + this.data.amountTime + '&export=' + this.date.type)
                         break;
                     case 5:
-                        window.open('./api/report/daily/cost?date=' + this.data.date+ '&export=' + this.date.type)
+                        window.open('./api/report/daily/cost?date=' + this.data.date + '&export=' + this.date.type)
+                        break;
+                    case 6:
+                        window.open('./api/report/daily/fob?date=' + this.data.date + '&back=' + this.data.amountYear + '&export=' + this.date.type)
                         break;
                     default:
                         break;
