@@ -26,7 +26,7 @@ exports.read = function (req, res) {
 
             var file = workbook.Sheets;
             // res.json(file);
-            var data = [];
+            var data = {};
             var temp = { db: "", col: [], maxCol: "" };
             var keyIndex = 1; //num row has field_key
             var row = {};
@@ -49,26 +49,26 @@ exports.read = function (req, res) {
                                 row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
                             }
                             if (str2CharOnly(key) == temp.maxCol) {
-                                // data[temp.db].push(row);
-                                data.push(row);
+                                data[temp.db].push(row);
+                                // data.push(row);
                                 row = {};
                             }
                         }
 
                     } else {
                         temp.col = [];
-                        // temp.db = sheet;
-                        // if (!data.hasOwnProperty(sheet)) {
-                        //     data[sheet] = [];
-                        // }
+                        temp.db = sheet;
+                        if (!data.hasOwnProperty(sheet)) {
+                            data[sheet] = [];
+                        }
                     }
                 }
             }
-            // var dataSheet = [];
-            // for (table in data) {
-            //     dataSheet.push({ table: table, data: data[table] });
-            // }
-            res.json(data);
+            var dataSheet = [];
+            for (table in data) {
+                dataSheet.push({ sheet: table, data: data[table] });
+            }
+            res.json(dataSheet);
         })
 
 }
