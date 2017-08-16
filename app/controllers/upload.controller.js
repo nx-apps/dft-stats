@@ -5,6 +5,11 @@ var stream = require('stream');
 
 exports.listUpload = function (req, res) {
     r.db('stats').table('upload')
+        .merge((item) => {
+            return {
+                data_uploads: item('data_uploaded').toISO8601().split('T')(0)
+            }
+        })
         .orderBy(r.desc('data_uploaded'))
         .run()
         .then(function (result) {

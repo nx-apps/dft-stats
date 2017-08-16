@@ -41,12 +41,14 @@ export function uploadAction(store) {
         },
         UPLOAD_MC(file) {
             // console.log(data);
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             var data = new FormData()
             data.append('file', file[0])
             axios.post('/upload/mc/', data)
                 .then((response) => {
                     this.fire('toast', {
-                        status: 'success', text: 'บันทึกสำเร็จ', callback: function () {
+                        status: 'success', text: 'บันทึกสำเร็จ', callback: ()=> {
+                            this.UPLOAD_LIST()
                         }
                     });
                 })

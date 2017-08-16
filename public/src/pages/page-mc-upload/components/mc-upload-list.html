@@ -1,0 +1,87 @@
+<link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<dom-module id="mc-upload-list">
+    <template>
+        <style include="page-style flex-style">
+            /*vaadin-grid {
+                align-items: center;
+                width: 95%;
+            }*/
+
+            .btnInTable {
+                width: 70%;
+            }
+        </style>
+        <paper-material elevation="1">
+            <div class="container">
+                <vaadin-grid id="material" items='[[data]]'>
+                    <vaadin-grid-column width="10%">
+                        <template class="header">
+                            <div class="text-center">ลำดับ</div>
+                        </template>
+                        <template>
+                            <div class="text-center">[[_Obindex(index)]]</div>
+                        </template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="50%">
+                        <template class="header">ชื่อไฟล์</template>
+                        <template>[[item.file_name]]</template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="10%">
+                        <template class="header">
+                            <div class="text-center">วันที่อัพ</div>
+                        </template>
+                        <template>
+                            <div class="text-center">[[item.data_uploads]]</div>
+                        </template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="15%">
+                        <template class="header">
+                            <div class="text-center">ดูเอกสาร</div>
+                        </template>
+                        <template>
+                            <div class="text-center">
+                                <paper-button raised class="btnInTable" id="excel" on-tap="print">ดูเอกสาร</paper-button>
+                            </div>
+                        </template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="15%">
+                        <template class="header">
+                            <div class="text-center">ดาวโหลดเอกสาร</div>
+                        </template>
+                        <template>
+                            <div class="text-center">
+                                <paper-button raised class="btnInTable" id="excel" on-tap="download">ดาวโหลด</paper-button>
+                            </div>
+                        </template>
+                    </vaadin-grid-column>
+
+                </vaadin-grid>
+            </div>
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'mc-upload-list',
+            behaviors: [
+                ReduxBehavior, nylonBehavior, MonthBehavior,commonLogic
+            ],
+            properties: {
+                data: {
+                    statePath: 'upload.list',
+                    observer: 'totalcal'
+                },
+            },
+            download(e){
+                window.open('./files/'+e.model.item.file_path)
+                console.log(e.model.item);
+            }
+        });
+    </script>
+</dom-module>

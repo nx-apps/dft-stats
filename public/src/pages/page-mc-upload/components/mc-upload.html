@@ -1,0 +1,34 @@
+<link rel="import" href="./../../components/page-style.html">
+<dom-module id="mc-upload">
+    <template>
+        <style include="page-style flex-style">
+            .input-upload {
+                margin: 15px;
+            }
+        </style>
+        <paper-material elevation="1">
+            <div class="horizontal center-justified layout">
+                <div class="input-upload"><input type="file" id="myFile" style="width:300px;">
+                    <paper-button raised class="gl-btn-info gl-small" on-tap="_uploadFile">อัพโหลดเอกสาร
+                    </paper-button>
+                </div>
+            </div>
+
+
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: 'mc-upload',
+            behaviors: [
+                ReduxBehavior, nylonBehavior
+            ],
+            _uploadFile: function (e) {
+                // console.log(e.currentTarget.files)
+                var file = this.$.myFile.files;
+                // console.log(file);
+                this.dispatchAction('UPLOAD_MC', file)
+            },
+        });
+    </script>
+</dom-module>

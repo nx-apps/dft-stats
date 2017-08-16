@@ -1,47 +1,24 @@
 <link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
-
-<link rel="import" href="./../components/page-style.html">
-
-<link rel="import" href="./../components/month-behavior.html">
-
 <link rel="import" href="./../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="./../components/page-style.html">
+<link rel="import" href="./../components/month-behavior.html">
+<link rel="import" href="./components/mc-upload-list.html">
+<link rel="import" href="./components/mc-upload.html">
+
+
 <dom-module id="page-mc-upload">
     <template>
         <style include="page-style flex-style">
-        vaadin-grid{
-            align-items: center;
-            width: 95%;
-        }
         </style>
         <div class="xcontainer">
             <section class="container">
                 <div class="header">อัพโหลดเอกสาร มส. 24</div>
             </section>
             <section class="container">
-                <paper-material elevation="1">
-                    <input type="file" id="myFile" style="width:300px;">
-                    <paper-button raised class="gl-btn-info gl-small" on-tap="_uploadFile">
-                    </paper-button>
-                    <hr>
-                    <vaadin-grid id="material" items='[[data]]'>
-                        <vaadin-grid-column>
-                            <template class="header">ลำดับ</template>
-                            <template>[[index]]</template>
-                        </vaadin-grid-column>
-                        <vaadin-grid-column>
-                            <template class="header">ชื่อไฟล์</template>
-                            <template>[[item.file_name]]</template>
-                        </vaadin-grid-column>
-                        <vaadin-grid-column>
-                            <template class="header">วันที่อัพ</template>
-                            <template>[[item.data_uploaded]]</template>
-                        </vaadin-grid-column>
-                        <vaadin-grid-column>
-                            <template class="header">จัดการ</template>
-                            <template>[[item.data_uploaded]]</template>
-                        </vaadin-grid-column>
-                    </vaadin-grid>
-                </paper-material>
+                
+                    <mc-upload></mc-upload>
+                    <mc-upload-list></mc-upload-list>
+                
 
             </section>
             <section class="container">
@@ -54,24 +31,19 @@
             behaviors: [
                 ReduxBehavior, nylonBehavior, MonthBehavior, uploadAction
             ],
-            properties: {
-                data: {
-                    statePath: 'upload.list',
-                    observer: 'totalcal'
-                },
-            },
+            // properties: {
+            //     data: {
+            //         statePath: 'upload.list',
+            //         observer: 'totalcal'
+            //     },
+            // },
             totalcal(data) {
                 console.log(data);
             },
             nylonPageActive() {
                 this.dispatchAction('UPLOAD_LIST');
             },
-            _uploadFile: function (e) {
-                // console.log(e.currentTarget.files)
-                var file = this.$.myFile.files;
-                // console.log(file);
-                this.dispatchAction('UPLOAD_MC', file)
-            },
+           
         });
     </script>
 </dom-module>
