@@ -1,5 +1,24 @@
 var XLSX = require('xlsx');
 exports.read = function (req, res) {
+    var indexArr = {
+        ref_code: 'เลขที่อ้างอิง',
+        std_code: 'เลขที่ มส.24',
+        std_date: 'วันที่ออก มส.24',
+        company_name: 'ผู้ส่งออก',
+        product_name: 'สินค้า',
+        type_name: 'ประเภท/ชนิด/ชั้น',
+        std_no: 'รายการที่',
+        quantity: 'ปริมาณ',
+        unit_desc: 'หน่วย',
+        weight_km: 'น้ำหนักเฉพาะ (กก.)',
+        weight_ton: 'น้ำหนัก (เมตริกตัน)',
+        value_b: 'มูลค่า (บาท)',
+        rate_bank: 'อัตราแลกเปลี่ยน',
+        dest_city: 'เมืองตราส่ง',
+        dest_country: 'ประเทศ',
+        buyer_name: 'ชื่อผู้ซื้อต่างประเทศ',
+        buyer_country: 'ประเทศผู้ซื้อ'
+    };
     r.table('upload').get(req.query.id)
         .run()
         .then(function (fileUpload) {
@@ -14,29 +33,30 @@ exports.read = function (req, res) {
             // // res.json(file);
             for (var sheet in file) {
                 for (var key in file[sheet]) {
-                    if (key !== '!ref' && key !== '!margins' && key !== '!autofilter' && key !== '!sort') {
+                    if (key !== '!ref' && key !== '!margins' && key !== '!autofilter' && key !== '!range') {
+                        // console.log('data ',c++);
                         if (str2NumOnly(key) == keyIndex) {
-                            console.log(file[sheet][key].v);
-                            // temp.col[str2CharOnly(key)] = file[sheet][key].v;
-                            // temp.maxCol = str2CharOnly(key);
+                            temp.col[str2CharOnly(key)] = getKeyByValue(indexArr, file[sheet][key].v);
+                            temp.maxCol = str2CharOnly(key);
                         } else {
-                            // if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
-                            //     row[temp.col[str2CharOnly(key)]] = file[sheet][key].w;
-                            // } else {
-                            //     row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
-                            // }
-                            // if (str2CharOnly(key) == temp.maxCol) {
-                            //     data[temp.db].push(row);
-                            //     row = {};
-                            // }
+                            if (temp.col[str2CharOnly(key)].indexOf("date") > -1) {
+                                row[temp.col[str2CharOnly(key)]] = file[sheet][key].w;
+                            } else {
+                                row[temp.col[str2CharOnly(key)]] = file[sheet][key].v;
+                            }
+                            if (str2CharOnly(key) == temp.maxCol) {
+                                // data[temp.db].push(row);
+                                data.push(row);
+                                row = {};
+                            }
                         }
 
                     } else {
                         temp.col = [];
-                        temp.db = sheet;
-                        if (!data.hasOwnProperty(sheet)) {
-                            data[sheet] = [];
-                        }
+                        // temp.db = sheet;
+                        // if (!data.hasOwnProperty(sheet)) {
+                        //     data[sheet] = [];
+                        // }
                     }
                 }
             }
@@ -44,8 +64,7 @@ exports.read = function (req, res) {
             // for (table in data) {
             //     dataSheet.push({ table: table, data: data[table] });
             // }
-
-            res.json(fileUpload);
+            res.json(data);
         })
 
 }
@@ -66,4 +85,7 @@ function str2CharOnly(string) { //input AB123  => output AB
         }
     }
     return String.fromCharCode.apply(String, t);
+}
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
 }
