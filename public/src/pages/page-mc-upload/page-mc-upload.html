@@ -48,15 +48,12 @@
             listeners: {
                 '_getDetail': 'getDetail',
             },
-            totalcal(data) {
-                console.log(data);
-            },
             nylonPageActive() {
                 this.dispatchAction('UPLOAD_LIST');
             },
             getDetail(e){
                 this.set('page',e.detail)
-                 console.log(e.detail);   
+                //  console.log(e.detail);   
             }
 
         });
