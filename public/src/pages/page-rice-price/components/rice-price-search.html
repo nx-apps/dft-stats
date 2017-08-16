@@ -1,18 +1,14 @@
 <link rel="import" href="./../../components/page-style.html">
-
 <link rel="import" href="./../../components/format-number-behavior.html">
-
 <link rel="import" href="./../../../../bower_components/paper-icon-button/paper-icon-button.html">
-
 <link rel="import" href="./../../../../bower_components/paper-tooltip/paper-tooltip.html">
-
 <link rel="import" href="./../../../../bower_components/iron-icons/iron-icons.html">
-
 <link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
-
 <link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
-
 <link rel="import" href="./../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./../../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="./../../../../bower_components/paper-item/paper-item.html">
 
 
 <dom-module id="rice-price-search">
@@ -40,23 +36,32 @@
                 /*cursor: pointer;*/
                 padding: 0px 15px;
             }
-            .title-header{
+
+            .title-header {
                 margin: 10px;
+            }
+
+            .printd {
+                width: auto
             }
         </style>
         <div class="horizontal center layout">
-            <div class="flex-3"></div>
+            <div class="flex"></div>
             <div class="flex ">
                 เริ่มวันที่ :
             </div>
             <div class="flex-2">
                 <gl-form-input type="date" no-label-float value="{{date.dateStart}}"></gl-form-input>
             </div>
-            <div class="flex">
+            <div class="flex-4">
                 <div class="btn-search">
                     <paper-button raised class="gl-btn-info gl-small" on-tap="searchPriceHamonize">
                         <iron-icon icon="search"></iron-icon>
                         ค้นหา
+                    </paper-button>
+                    <paper-button raised class="gl-btn-info gl-small" on-tap="print">
+                        <iron-icon icon="print"></iron-icon>
+                        ออกรายงาน
                     </paper-button>
                 </div>
             </div>
@@ -70,9 +75,32 @@
                 <!--<paper-icon-button id="edit" class="crud" icon="settings" raised on-tap="editConfirm"></paper-icon-button>
                 <paper-tooltip for="edit" offset="0">ตั่งค่า</paper-tooltip>-->
             </div>
-            <div class="flex-3"></div>
+            <div class="flex-2"></div>
         </div>
+        <paper-dialog id="printDia" class="printd" style=" " class="size-position" modal>
+            <h2>รายการ</h2>
+            <paper-dialog-scrollable>
+                <!--<paper-dropdown-menu label="รูปแบบรายงาน">{{report_types}}//
+                    <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{printReport.export}}">
+                        <template is="dom-repeat" items={{report_type}}>
+                            <paper-item name="[[item.report_type_id]]">[[item.report_type]]</paper-item>
+                        </template>
+                    </paper-listbox>
+                </paper-dropdown-menu>-->
 
+                <paper-dropdown-menu label="รูปแบบรายงาน">
+                    <paper-listbox class="dropdown-content" slot="dropdown-content" attr-for-selected="name" selected="{{printReport.export}}">
+                        <template is="dom-repeat" items={{report_types}}>
+                            <paper-item name="[[item.report_type_id]]">[[item.report_type]]</paper-item>
+                        </template>
+                    </paper-listbox>
+                </paper-dropdown-menu>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-dismiss>ปิด</paper-button>
+                <paper-button dialog-confirm autofocus class="gl-btn-success" raised on-tap="_printReport">ออกรายงาน</paper-button>
+            </div>
+        </paper-dialog>
         <paper-dialog id="setting" class="size-position" modal>
             <h2>รายการ</h2>
             <paper-dialog-scrollable>
@@ -216,7 +244,19 @@
                     },
                     notify: true,
                     observer: '_setDate'
-                }
+                },
+                printReport: {
+                    type: Object,
+                    value: { export: 'pdf', }
+                },
+                report_types: {
+                    type: Array,
+                    value: [
+                        { report_type: 'PDF', report_type_id: 'pdf' },
+                        { report_type: 'WORD', report_type_id: 'word' },
+                        { report_type: 'EXCEL', report_type_id: 'excel' }
+                    ]
+                },
             },
             observers: [
                 'calCost(data,data.*)'
@@ -278,9 +318,17 @@
                 } else {
                     this.data.cost_date += 'T00:00:00+07:00'
                 }
-                this.dispatchAction('PRICEHAMONIZE_COST_SAVE', this.data,this.date)
+                this.dispatchAction('PRICEHAMONIZE_COST_SAVE', this.data, this.date)
 
                 // console.log(this.data)
+            },
+            print() {
+                this.$.printDia.open()
+            },
+            _printReport() {
+                // console.log(1111);
+                window.open('./api/report/daily/cost?date=' + this.date.dateStart+ '&export=' + this.printReport.export)
+                // console.log();
             }
         });
     </script>
