@@ -3,18 +3,25 @@ exports.today = function (req, res) {
     var price = r.table('price').getAll(r.ISO8601(priceDate), { index: 'price_date' }).coerceTo('array');
     var newprice = r.table('price_config')
         .eqJoin('id', r.table('typerice')).without({ right: 'id' }).zip()
-        .merge({
-            rice_id: r.row('id'),
-            price_dit: 0,
-            price_fob: 0,
-            price_thai: 0,
-            price_paddy: 0,
-            price_usa: 0,
-            price_india: 0,
-            price_vietnam: 0,
-            price_pakistan: 0,
-            price_date: r.ISO8601(priceDate)
+        .merge(function (m) {
+            var lastPrice = r.table('price').filter(function (f) {
+                return f('price_date').lt(r.ISO8601(priceDate))
+                    .and(f('rice_id').eq(m('id')))
+            }).orderBy(r.desc('price_date'));
+            return {
+                rice_id: m('id'),
+                price_dit: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_dit')),
+                price_fob: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_fob')),
+                price_thai: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_thai')),
+                price_paddy: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_paddy')),
+                price_usa: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_usa')),
+                price_india: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_india')),
+                price_vietnam: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_vietnam')),
+                price_pakistan: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_pakistan')),
+                price_date: r.ISO8601(priceDate)
+            }
         });
+
     r.branch(price.count().eq(0),
         newprice.without('id')
         // r.table('price').insert(newprice.without('id'))
