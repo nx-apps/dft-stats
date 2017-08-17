@@ -10,7 +10,9 @@ exports.dailyCompany = function (req, res) {
 }
 exports.dailyCountry = function (req, res) {
     var j = req.jdbc;
-    var s = new Date(), e = new Date();
+    let time = new Date();
+    var s = new Date(time.setHours(time.getHours() + 7)).toISOString().split('T')[0];
+    var e = s;
     if (typeof req.query.sdate !== "undefined") {
         s = req.query.sdate
     }
