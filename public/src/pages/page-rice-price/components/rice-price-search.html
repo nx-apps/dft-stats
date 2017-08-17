@@ -165,10 +165,10 @@
                                         <tr>
                                             <td>ต้นทุนการบรรจุ</td>[[changeString2Num(data.*,'wfr_d')]][[changeString2Num(data.*,'wr_d')]]
                                             <td>
-                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wfr_d}}"></gl-form-input>
+                                                <gl-form-input class="number"  allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wfr_d}}"></gl-form-input>
                                             </td>
                                             <td>
-                                                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wr_d}}"></gl-form-input>
+                                                <gl-form-input class="number"  allowed-pattern="[0-9||,||.]" format-number="on" on-focus="_setSeleteValue" no-label-float readonly value="{{data.wr_d}}"></gl-form-input>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -287,8 +287,8 @@
                 if (this.data.rate_bank !== undefined || this.data.rate_bank !== 0) {
                     rate_bank = this.data.rate_bank
                 }
-                let wfr_d = wfr_total * rate_bank
-                let wr_d = wr_total * rate_bank
+                let wfr_d = wfr_total / rate_bank
+                let wr_d = wr_total / rate_bank
                 if (isNaN(wfr_d)) {
                     wfr_d = 0
                 }
