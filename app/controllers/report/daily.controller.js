@@ -133,6 +133,11 @@ exports.dailyfob = function (req, res, next) {
             });
         }
     }
+    var costDate = req.query.date + "T00:00:00+07:00";
+    var costPrice = r.table('cost').filter(function (f) {
+        return f('cost_date').inTimezone('+07').date().le(r.ISO8601('2017-08-02T00:00:00+07:00'))
+            .and(f('cost_end').inTimezone('+07').date().ge(r.ISO8601('2017-08-02T00:00:00+07:00')))
+    });
     var init = r.expr(data)
         .merge(function (m) {
             return {
@@ -141,11 +146,21 @@ exports.dailyfob = function (req, res, next) {
                     return f('price_date').during(
                         m('date_start'), m('date_end'), { rightBound: 'closed' }
                     )
-                }).coerceTo('array').pluck('price_date', 'price_fob', 'rice_id').orderBy('rice_id')
+                }).coerceTo('array').pluck('price_date', 'price_dit', 'rice_id').orderBy('rice_id')
+                    .merge(function (m2) {
+                        var cost = r.branch(costPrice.count().eq(0), 0,
+                            m2('rice_id').eq(1).or(m2('rice_id').eq(2)), costPrice(0)('wfr_b'),
+                            costPrice(0)('wr_b')
+                        );
+                        var rate = r.branch(costPrice.count().eq(0), 1, costPrice(0)('rate_bank'));
+                        return {
+                            price_dit: r.branch(m2('price_dit').eq(0), 0, r.round(m2('price_dit').add(cost).div(rate)))
+                        }
+                    })
                     .group('price_date').ungroup()
                     .map(function (m2) {
                         return m2('reduction').map(function (m3) {
-                            return [r.expr('rice_').add(m3('rice_id').coerceTo('string')), m3('price_fob')]
+                            return [r.expr('rice_').add(m3('rice_id').coerceTo('string')), m3('price_dit')]
                         }).coerceTo('object')
                             .merge({ date: m2('group').day(), month: 0, year: m2('group').year(), type: 'date' })
                     })
