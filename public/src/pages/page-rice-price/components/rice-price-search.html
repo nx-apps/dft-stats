@@ -313,10 +313,13 @@
                 // console.log(1111);
             },
             updateAndAddCost() {
+                let time = new Date(this.data.cost_date)
+                this.data.cost_date = new Date(time.setHours(time.getHours() + 7)).toISOString()
+                this.data.cost_date = this.data.cost_date.split("T")[0]+ 'T00:00:00+07:00'
                 if (this.date.dateStart !== this.data.cost_date) {
                     delete this.date.id
                 } else {
-                    this.data.cost_date += 'T00:00:00+07:00'
+                    // this.data.cost_date += 'T00:00:00+07:00'
                 }
                 this.dispatchAction('PRICEHAMONIZE_COST_SAVE', this.data, this.date)
 
@@ -327,7 +330,7 @@
             },
             _printReport() {
                 // console.log(1111);
-                window.open('./api/report/daily/cost?date=' + this.date.dateStart+ '&export=' + this.printReport.export)
+                window.open('./api/report/daily/cost?date=' + this.date.dateStart + '&export=' + this.printReport.export)
                 // console.log();
             }
         });
