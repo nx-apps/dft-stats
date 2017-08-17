@@ -10,7 +10,7 @@ exports.dailyCompany = function (req, res) {
 }
 exports.dailyCountry = function (req, res) {
     var j = req.jdbc;
-    var s = today, e = tomorrow;
+    var s = new Date(), e = new Date();
     if (typeof req.query.sdate !== "undefined") {
         s = req.query.sdate
     }
