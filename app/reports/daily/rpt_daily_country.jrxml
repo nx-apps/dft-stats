@@ -4,8 +4,8 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
-	<parameter name="sdate" class="java.lang.String"/>
-	<parameter name="edate" class="java.lang.String"/>
+	<parameter name="SDATE" class="java.lang.String"/>
+	<parameter name="EDATE" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new Integer(new SimpleDateFormat("yyyy").format(new Date()))-543]]></defaultValueExpression>
 	</parameter>
@@ -44,7 +44,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ประจำวันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{sdate})+" ถึง "+new  nylon.utility.NumberFormat().toThaiDate($P{edate})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ประจำวันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{SDATE})+" ถึง "+new  nylon.utility.NumberFormat().toThaiDate($P{EDATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
