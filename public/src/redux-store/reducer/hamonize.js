@@ -168,7 +168,8 @@ export function hamonizeAction(store) {
                 });
         },
         HAMONIZE_RICE_LIST() {
-            axios.get(window._config.externalServerCommon + '/api/hamonize?orderby=hamonize_code_num')
+            // axios.get(window._config.externalServerCommon + '/api/hamonize?orderby=hamonize_code_num')
+            axios.get('./hamonize/ricelist')
                 .then((response) => {
                     for (var index = 0; index < response.data.length; index++) {
                         response.data[index].check = false

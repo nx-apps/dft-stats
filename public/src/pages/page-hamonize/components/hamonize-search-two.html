@@ -1039,13 +1039,18 @@
                 let item = e.model.__data__.item
                 let indexRoot = e.currentTarget.id
                 let checkHost = e.currentTarget.checked
-                let year = Number(this.dataSeleted.year)
+                let year = Number(this.data.hmYear)
+                // console.log(year);
+                // console.log(this.hamonizeList[indexRoot].sub);
                 this.hamonizeList[indexRoot].sub.map((item, index) => {
+                    // console.log(111);
                     if (this.hamonizeList[indexRoot].sub[index].hamonize_year === year) {
                         this.set('hamonizeList.' + indexRoot + '.sub.' + index + '.check', checkHost)
+                        // console.log(1);
                     }
                     if (year === 0) {
                         this.set('hamonizeList.' + indexRoot + '.sub.' + index + '.check', checkHost)
+                        // console.log(2);
                     }
                 })
             },
