@@ -373,7 +373,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE13}== 0?'-':$V{SUM_RICE13})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE13}== 0||$V{SUM_RICE13}==null?'-':$V{SUM_RICE13})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="532" y="0" width="30" height="15" uuid="5d06199f-26b2-4936-9e80-7c95809ffec9"/>
@@ -384,7 +384,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE16}== 0?'-':$V{SUM_RICE16})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE16}== 0||$V{SUM_RICE16}==null?'-':$V{SUM_RICE16})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="502" y="0" width="30" height="15" uuid="99832bb2-11fb-4d92-8ec5-ba94a67a5ea3"/>
@@ -396,7 +396,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE15}== 0?'-':$V{SUM_RICE15})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE15}== 0||$V{SUM_RICE15}==null?'-':$V{SUM_RICE15})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="117" y="0" width="35" height="15" uuid="c8a68b87-f4f1-413b-8f8f-693c37d074bf"/>
@@ -407,7 +407,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE2}== 0?'-':$V{SUM_RICE2})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE2}== 0||$V{SUM_RICE2}==null?'-':$V{SUM_RICE2})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="472" y="0" width="30" height="15" uuid="7ab55949-2cc8-4c85-889f-46c0972f35db"/>
@@ -418,7 +418,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE14}== 0?'-':$V{SUM_RICE14})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE14}== 0||$V{SUM_RICE14}==null?'-':$V{SUM_RICE14})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="612" y="0" width="35" height="15" uuid="82010b2a-705a-4c43-93da-bb5ba8eea0bf"/>
@@ -429,7 +429,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE17}== 0?'-':$V{SUM_RICE17})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE17}== 0||$V{SUM_RICE17}==null?'-':$V{SUM_RICE17})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="717" y="0" width="35" height="15" uuid="cff3673e-4c3b-4024-b53d-3a1ce0d2bca3"/>
@@ -440,7 +440,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE20}== 0?'-':$V{SUM_RICE20})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE20}== 0||$V{SUM_RICE20}==null?'-':$V{SUM_RICE20})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="562" y="0" width="50" height="15" uuid="d72c65d2-6030-4b5a-9212-f9692ae824d1"/>
@@ -453,7 +453,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE22}== 0?'-':$V{SUM_RICE22})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE22}== 0||$V{SUM_RICE22}==null?'-':$V{SUM_RICE22})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="202" y="0" width="30" height="15" uuid="e35a0088-3f60-4d35-8cef-ee9b892ae683"/>
@@ -464,7 +464,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE4}== 0?'-':$V{SUM_RICE4})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE4}== 0||$V{SUM_RICE4}==null?'-':$V{SUM_RICE4})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="382" y="0" width="30" height="15" uuid="7c09b84f-b697-410c-90fc-5d5530cc1dd2"/>
@@ -475,7 +475,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE11}== 0?'-':$V{SUM_RICE11})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE11}== 0||$V{SUM_RICE11}==null?'-':$V{SUM_RICE11})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="752" y="0" width="50" height="15" uuid="30ee2309-7d95-4190-94aa-659400bcd593"/>
@@ -488,7 +488,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE21}== 0?'-':$V{SUM_RICE21})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE21}== 0||$V{SUM_RICE21}==null?'-':$V{SUM_RICE21})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="82" y="0" width="35" height="15" uuid="a35ef0ae-c0e4-476f-969f-f5d13f95be5d"/>
@@ -499,7 +499,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE1}== 0?'-':$V{SUM_RICE1})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE1}== 0||$V{SUM_RICE1}==null?'-':$V{SUM_RICE1})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="292" y="0" width="30" height="15" uuid="5e2a9ebf-4065-447e-9e15-d33914f1f3d3"/>
@@ -510,7 +510,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE7}== 0?'-':$V{SUM_RICE7})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE7}== 0||$V{SUM_RICE7}==null?'-':$V{SUM_RICE7})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="232" y="0" width="30" height="15" uuid="4eade6e6-15d6-4e20-8096-fe289fefd15a"/>
@@ -521,7 +521,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE5}== 0?'-':$V{SUM_RICE5})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE5}== 0||$V{SUM_RICE5}==null?'-':$V{SUM_RICE5})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="152" y="0" width="50" height="15" uuid="6a7e0b8f-adbd-449b-a387-aa44f98bdcbd"/>
@@ -534,7 +534,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE3}== 0?'-':$V{SUM_RICE3})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE3}== 0||$V{SUM_RICE3}==null?'-':$V{SUM_RICE3})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="647" y="0" width="35" height="15" uuid="c34cda0b-84c8-432b-b4ae-fc75cc0b40c0"/>
@@ -545,7 +545,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE18}== 0?'-':$V{SUM_RICE18})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE18}== 0||$V{SUM_RICE18}==null?'-':$V{SUM_RICE18})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="352" y="0" width="30" height="15" uuid="89c5e0ce-be1f-41c6-ba2f-7b74c856e4f0"/>
@@ -556,7 +556,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE9}== 0?'-':$V{SUM_RICE9})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE9}== 0||$V{SUM_RICE9}==null?'-':$V{SUM_RICE9})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="322" y="0" width="30" height="15" uuid="a523ad63-f2ec-49fc-9c88-5caf73272d49"/>
@@ -567,7 +567,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE8}== 0?'-':$V{SUM_RICE8})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE8}== 0||$V{SUM_RICE8}==null?'-':$V{SUM_RICE8})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="682" y="0" width="35" height="15" uuid="481e2e9a-8374-47e9-91c2-d0916c6ddb73"/>
@@ -578,7 +578,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE19}== 0?'-':$V{SUM_RICE19})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE19}== 0||$V{SUM_RICE19}==null?'-':$V{SUM_RICE19})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="412" y="0" width="30" height="15" uuid="99262957-9fd4-4aeb-97b4-c384f1bbf805"/>
@@ -589,7 +589,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE12}== 0?'-':$V{SUM_RICE12})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE12}== 0||$V{SUM_RICE12}==null?'-':$V{SUM_RICE12})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
 					<reportElement x="262" y="0" width="30" height="15" uuid="e043f066-e894-46d4-aef3-74d5d34bf8e4"/>
@@ -600,7 +600,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE6}== 0?'-':$V{SUM_RICE6})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_RICE6}== 0||$V{SUM_RICE6}==null?'-':$V{SUM_RICE6})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
