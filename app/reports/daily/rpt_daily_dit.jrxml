@@ -756,7 +756,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[25% เลิศ]]></text>
+				<text><![CDATA[25% ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="412" y="30" width="30" height="15" uuid="1d077b51-7316-4239-84da-0fbafe3fae38"/>
