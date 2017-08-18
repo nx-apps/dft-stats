@@ -56,7 +56,7 @@
                         </thead>
                         <tbody class="table-body">
                             <template is="dom-repeat" items="{{data}}">
-                                <tr>
+                                <tr style="[[setUseFunction(index)]]">
                                     <td style="width:10%">[[item.rice_id]]</td>
                                     <td style="width:30%">[[item.typerice]]</td>
                                     <td style="width:15%;text-align: right; ">[[changeString2Num(item.*,'price_dit')]]
@@ -141,6 +141,12 @@
                 //12= ((rice11 *6)+rice16)/7
                 //13=((rice9*2)+rice16)/3
                 //14=(rice9+rice16)/2 
+            },
+            setUseFunction(index){
+                if (index > 10 && index < 14) {
+                    return 'background-color: #F1F1F1;'
+                }
+                // console.log(index);
             },
             _setSeleteValue: function (e) {
 
