@@ -4,31 +4,24 @@ exports.today = function (req, res) {
     var newprice = r.table('price_config')
         .eqJoin('id', r.table('typerice')).without({ right: 'id' }).zip()
         .merge(function (m) {
-            var lastPrice = r.table('price').filter(function (f) {
-                return f('price_date').lt(r.ISO8601(priceDate))
-                    .and(f('rice_id').eq(m('id')))
-            }).orderBy(r.desc('price_date'));
-            return {
+            var lastPrice = r.table('price').getAll(m('id'), { index: 'rice_id' })
+                .filter(function (f) {
+                    return f('price_date').lt(r.ISO8601(priceDate))
+                });
+            var keyPrice = m.without('id', 'typerice').keys();
+            return r.branch(lastPrice.count().eq(0),
+                keyPrice.map(function (m2) {
+                    return [r.expr('price_').add(m2), 0]
+                }).coerceTo('object'),
+                lastPrice.max('price_date').without('id', 'date_created', 'date_updated')
+            ).merge({
                 rice_id: m('id'),
-                price_dit: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_dit')),
-                price_fob: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_fob')),
-                price_thai: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_thai')),
-                price_paddy: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_paddy')),
-                price_usa: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_usa')),
-                price_india: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_india')),
-                price_vietnam: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_vietnam')),
-                price_pakistan: r.branch(lastPrice.count().eq(0), 0, lastPrice(0)('price_pakistan')),
                 price_date: r.ISO8601(priceDate)
-            }
+            })
         });
 
     r.branch(price.count().eq(0),
-        newprice.without('id')
-        // r.table('price').insert(newprice.without('id'))
-        //     .do(function (d) {
-        //         return price
-        //     })
-        ,
+        newprice.without('id'),
         price.eqJoin('rice_id', r.table('price_config')).without({ right: 'id' }).zip()
             .merge(function (m) {
                 return {
