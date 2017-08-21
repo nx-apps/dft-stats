@@ -53,7 +53,11 @@ exports.update = function (req, res) {
         //     )
         .forEach(function (fe) {
             return r.branch(fe.hasFields('id'),
-                r.table('price').get(fe('id')).update(fe.merge({ date_updated: r.now().inTimezone('+07') })),
+                r.table('price').get(fe('id')).update(fe.merge({
+                    price_date: r.ISO8601(fe('price_date')).inTimezone('+07'),
+                    date_updated: r.now().inTimezone('+07'),
+                    date_created: r.ISO8601(fe('date_created'))
+                })),
                 r.table('price').insert(fe.merge({
                     price_date: r.ISO8601(fe('price_date')).inTimezone('+07'),
                     date_created: r.now().inTimezone('+07'),
