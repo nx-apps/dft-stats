@@ -74,7 +74,7 @@ exports.dailyExportrice = function (req, res) {
             // req.r.json(data)
             // .run().then(function (d2) {
             res.ireport("daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data, {
-                OUTPUT_NAME: req.query.currentDate.replace(/-/g, '')+'_สรุปสถานการณ์ส่งออกข้าว',
+                OUTPUT_NAME: req.query.currentDate.replace(/-/g, '') + '_สรุปสถานการณ์ส่งออกข้าว',
                 CURRENT_DATE: req.query.currentDate,
                 REF_DATA: refData
             });
@@ -174,11 +174,14 @@ exports.dailyDit = function (req, res, next) {
         .merge(function (m) {
             return {
                 date: "",
-                prices: r.table('price').filter(function (f) {
-                    return f('price_date').during(
-                        m('date_start'), m('date_end'), { rightBound: 'closed' }
-                    )
-                }).coerceTo('array').pluck('price_date', 'price_dit', 'rice_id').orderBy('rice_id')
+                prices: r.table('price')
+                .between(m('date_start'), m('date_end').add(1), { index: 'price_date' })
+                // .filter(function (f) {
+                //     return f('price_date').during(
+                //         m('date_start'), m('date_end'), { rightBound: 'closed' }
+                //     )
+                // })
+                .coerceTo('array').pluck('price_date', 'price_dit', 'rice_id').orderBy('rice_id')
                     .merge(function (m2) {
                         var cost = r.branch(costPrice.count().eq(0), 0,
                             m2('rice_id').eq(1).or(m2('rice_id').eq(2)), costPrice(0)('wfr_b'),
@@ -278,11 +281,14 @@ exports.dailyFob = function (req, res, next) {
         .merge(function (m) {
             return {
                 date: "",
-                prices: r.table('price').filter(function (f) {
-                    return f('price_date').during(
-                        m('date_start'), m('date_end'), { rightBound: 'closed' }
-                    )
-                }).coerceTo('array').pluck('price_date', 'price_fob', 'rice_id').orderBy('rice_id')
+                prices: r.branch(m('type').eq('date'), r.table('price')
+                    .between(m('date_start'), m('date_end').add(1), { index: 'price_date' })
+                    // .filter(function (f) {
+                    //     return f('price_date').during(
+                    //         m('date_start'), m('date_end'), { rightBound: 'closed' }
+                    //     )
+                    // })
+                    .coerceTo('array').pluck('price_date', 'price_fob', 'rice_id')
                     .group('price_date').ungroup()
                     .map(function (m2) {
                         return m2('reduction').map(function (m3) {
@@ -290,18 +296,38 @@ exports.dailyFob = function (req, res, next) {
                         }).coerceTo('object')
                             .merge({ date: m2('group').day(), month: 0, year: m2('group').year(), type: 'date' })
                     })
+                    , [])
             }
         })
+        // .merge(function (m) {
+        //     var key = r.branch(m('prices').ne([]), m('prices')(0).without('date', 'month', 'type', 'year').keys(), []);
+        //     return r.branch(key.eq([]).or(m('type').eq('date')), {},
+        //         key.map(function (m2) {
+        //             return [r.expr(m2), m('prices').avg(m2)]
+        //         }).coerceTo('object')
+        //     )
+        // })
         .merge(function (m) {
-            var key = r.branch(m('prices').ne([]), m('prices')(0).without('date', 'month', 'type', 'year').keys(), []);
-            return r.branch(key.eq([]).or(m('type').eq('date')), {},
+
+            var dataMonth = r.branch(m('type').eq('month'),
+                r.table('price')
+                    .between(m('date_start'), m('date_end').add(1), { index: 'price_date' })
+                    // .filter(function (f) {
+                    //     return f('price_date').during(
+                    //         m('date_start'), m('date_end'), { rightBound: 'closed' }
+                    //     )
+                    // })
+                    .group('rice_id').avg('price_fob').ungroup(),
+                []
+            );
+            var key = r.branch(dataMonth.count().eq(0), [], dataMonth.getField('group'));
+
+            return r.branch(key.count().gt(0),
                 key.map(function (m2) {
-                    return [r.expr(m2), m('prices').avg(m2)]
-                }).coerceTo('object')
+                    return [r.expr('rice_').add(m2.coerceTo('string')), dataMonth.filter({ group: m2 })(0)('reduction')]
+                }).coerceTo('object'),
+                {}
             )
-            //{
-            // "rice_1": r.branch(m('type').eq('date'), 0, m('prices').count().gt(0), m('prices').avg('rice_1'), 0),
-            //}
         })
     r.expr([init.without('prices')])
         .append(init.filter({ type: 'date' })(0).getField('prices').orderBy('date'))
@@ -314,29 +340,33 @@ exports.dailyFob = function (req, res, next) {
                 year: m('year').add(543)
             }
         })
-        .do(function (d) {
-            var initDate = init.filter({ type: 'date' })(0).getField('prices');
-            var key = r.branch(initDate.count().gt(0), initDate(0).without('date', 'month', 'type', 'year').keys(), []);
-            return d.append(
-                r.branch(key.eq([]), {},
-                    key.map(function (m2) {
-                        return [r.expr(m2), initDate.avg(m2)]
-                    }).coerceTo('object')
-                ).merge({
-                    year: year + 543,
-                    month: 'เฉลี่ย (เดือน)',
-                    date: '',
-                    type: 'month'
-                })
-            )
-        })
         .run()
         .then(function (data) {
-            var lastDate = data[data.length - 2];
-            params = rpt.keysToUpper(params);
-            params.LAST_DATE = year + "-" + (month < 10 ? "0" : "") + month + "-" + lastDate.date;
-            params.OUTPUT_NAME = params.LAST_DATE.replace(/-/g, '') + '_ราคาข้าวสารส่งออก_FOB_กรุงเทพ';
-            // res.json(params)
-            res.ireport("daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
+            var initDate = r.expr(data).filter({ type: 'date', month: '' });
+            var key = r.branch(initDate.count().gt(0), initDate(0).without('date', 'month', 'type', 'year').keys(), []);
+            r.expr(data)
+                .append(
+                r.branch(key.eq([]), {}
+                    , key.map(function (m2) {
+                        return [r.expr(m2), initDate.avg(m2)]
+                    }).coerceTo('object')
+                )
+                    .merge({
+                        year: year + 543,
+                        month: 'เฉลี่ย (เดือน)',
+                        date: '',
+                        type: 'month'
+                    })
+                )
+                .run().then(function (data) {
+                    var lastDate = data[data.length - 2];
+                    params = rpt.keysToUpper(params);
+                    params.LAST_DATE = year + "-" + (month < 10 ? "0" : "") + month + "-" + lastDate.date;
+                    params.OUTPUT_NAME = params.LAST_DATE.replace(/-/g, '') + '_ราคาข้าวสารส่งออก_FOB_กรุงเทพ';
+                    // res.json(data)
+                    res.ireport("daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
+                })
+
+
         })
 }
