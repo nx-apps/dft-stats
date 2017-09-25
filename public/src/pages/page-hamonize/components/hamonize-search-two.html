@@ -683,7 +683,7 @@
                 let yearStart = dateStart.split('-')[0]
                 let yearEnd = dateEnd.split('-')[0]
                 let hmYear = []
-                // console.log(listYear.year);
+                
                 if (listYear.year !== undefined) {
                     listYear.year.map((item, index) => {
                         item.yearStart = Number(item.value)
@@ -698,6 +698,7 @@
                         }
                         // console.log(hmYear);
                     })
+                    this.set('data.hmYear',hmYear[0].year)
                     return hmYear
                 }
             },
