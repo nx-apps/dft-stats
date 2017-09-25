@@ -1,0 +1,37 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/nylon-app.html",
+  "fragments": [
+    "src/pages/page-hamonize/page-hamonize.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json",
+    "fonts/**/*",
+    "bower_components/gl-font/**/*"
+  ],
+  "extraDependencies": [
+    "src/redux-store.js",
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ],
+  "builds": [
+    {
+      "name": "default",
+      "bundle": true,
+      "html": {
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "js": {
+        "minify": true,
+        "compile": false
+      },
+      "addServiceWorker": false,
+      "addPushManifest": false
+    }
+  ]
+}

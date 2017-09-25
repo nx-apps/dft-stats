@@ -1,12 +1,22 @@
 {
-  "name": "oauth",
+  "name": "dft-stats",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel nylon redux",
+    "start": "npm-run-all --parallel webpack nylon",
+    "dev": "npm-run-all --parallel webpack polymer",
+    "build": "cd public && polymer build",
+    "polyserve": "polymer serve ./public/build/default --port 8086",
     "nylon": "nylon-cli serve",
-    "redux": "webpack"
+    "bower": "cd ./public && bower install",
+    "webpack": "webpack",
+    "server:build":"npm-run-all polyserve nylon",
+    "polymer": "polymer serve ./public --port 8080",
+    "build:dev":"npm-run-all webpack:dev build polyserve nylon",
+    "build:dist":"npm-run-all webpack:dist build polyserve nylon",
+    "webpack:dev": "webpack --env=dev",
+    "webpack:dist": "webpack --env=prod"
   },
   "author": "",
   "license": "ISC",

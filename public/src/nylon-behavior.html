@@ -1,4 +1,9 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
 <script>
+    /**
+	 * 
+	 * @polymerBehavior
+	 */ 
     nylonBehavior = {
         observers:['_checkPageActive(path,currentPath)'],
         _checkPageActive:function(route,currentRoute){
@@ -23,7 +28,7 @@
             nylonLocalize.onNext(lang);
         }
     }
-    nylonLocalizeBehavior = [ Polymer.AppLocalizeBehavior, nylonLocalize ]
+    window.nylonLocalizeBehavior = [ Polymer.AppLocalizeBehavior, nylonLocalize ]
 
 
 </script>
