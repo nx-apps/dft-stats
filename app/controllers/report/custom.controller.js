@@ -13,7 +13,7 @@ exports.exportrice = function (req, res) {
         var n = (i < 10 ? '0' + i : i);
         monthArr.push(n)
     }
-    req.jdbc.query("mssql", "exec sp_stats_rpt_custom_exportrice @month=?, @year=?", [monthArr.join(','), req.query.year,],
+    req.jdbc.query("mssql", "exec sp_stats_rpt_custom_exportrice @month=?, @year=?, @zone=?", [monthArr.join(','), req.query.year, req.query.zone],
         function (err, data) {
             // res.send(data);
             // console.log(req.query.year)
