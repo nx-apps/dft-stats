@@ -907,8 +907,8 @@
                     item.id = item.hamonize_id
                     return item
                 })
-                console.log(hm);
-                console.log(hmNoGroup);
+                // console.log(hm);
+                // console.log(hmNoGroup);
                 let arr = []
                 let showHm = []
                 // จับ 2 อาเรย์มารวมกัน ยังไม่ได้ทำ
@@ -916,11 +916,11 @@
                     // console.log(item);
                     arr[item.hamonize_code] = item
                 })
-                console.log(arr);
+                // console.log(arr);
                 for (var key in arr) {
                     showHm.push(arr[key])
                 }
-                console.log(showHm);
+                // console.log(showHm);
                 this.set('hamonizeSeleted', showHm)
             },
             addHamonizeTotable: function () {
@@ -963,7 +963,7 @@
             _deleteHamonize: function (e) {
                 // console.log(11111);
                 let idHm = e.currentTarget.data.hamonize_code
-                console.log(idHm);
+                // console.log(idHm);
                 // this.fire('toast', {
                 //     status: 'openDialog',
                 //     text: 'ต้องการลบใช่หรือไม่',
@@ -1044,8 +1044,8 @@
                 let indexRoot = e.currentTarget.id
                 let checkHost = e.currentTarget.checked
                 let year = Number(this.data.hmYear)
-                console.log(this.dataSeleted.hamonize_code, this.dataSeleted.hamonize_th);
-                console.log(item, indexRoot, checkHost, year);
+                // console.log(this.dataSeleted.hamonize_code, this.dataSeleted.hamonize_th);
+                // console.log(item, indexRoot, checkHost, year);
                 // console.log(year);
 
                 // console.log(this.hamonizeList[indexRoot].sub);
