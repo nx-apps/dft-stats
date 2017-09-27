@@ -218,41 +218,18 @@
                             [[item.year]]
                         </template>
                     </gl-combo-box>
-                    <!--<gl-combo-box id="hamonizeSearch" placeholder="เลือกเลขพิกัดข้าว" class="textCenter" items="{{hamonizeCodeList.use}}" item-label-path="label"
-                            item-value-path="label" value="{{data.hmparent}}" on-value-changed="getChildHm">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box> -->
                 </div>
                 <div class="labelSearchDate">
                     <!--เรียงโดย : -->
                 </div>
                 <div class="flexchild">
-                    <!--<gl-combo-box id="hamonizeOrderBy" class="textCenter" item-label-path="label" item-value-path="id" value="{{data.orderby}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>-->
                 </div>
                 <div class="labelSearchDate">
                     <!--แหล่งข้อมูล :-->
                 </div>
                 <div class="flexchild">
-                    <!--<gl-combo-box id="hamonizeSourch" class="textCenter" items="{{dataSourch}}" item-label-path="label" item-value-path="id"
-                            value="{{data.refDB}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>-->
                 </div>
                 <div class="flexchild">
-                    <!--<div class="btn-search">
-                            <paper-button raised class="gl-btn-info gl-small" on-tap="getRiceValue">
-                                <iron-icon icon="search"></iron-icon>
-                                ค้นหา
-                            </paper-button>
-                        </div>-->
                 </div>
                 <div class="flexchild"></div>
             </div>
@@ -304,65 +281,6 @@
                 </table>
             </div>
             <div class="flex-horizontal-with-ratios">
-                <!--<div class="flex-5">
-                        <div class="flex-horizontal-with-ratios" style="width:95%">
-                            <vaadin-grid id="material" items="{{hmChild}}">
-                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
-                                    <template class="header">พิกัดข้าว
-                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
-                                        </vaadin-gird-filter-common>
-                                    </template>
-                                    <template>
-                                        <div on-click="selectHamnoize" style="padding-left:15px" hidden="[[item.hidden]]">
-                                            [[item.hamonize_code]]
-                                        </div>
-                                    </template>
-                                </vaadin-grid-column>
-
-                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
-                                    <template class="header">ชื่อชนิดข้าว (ไทย)
-                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
-                                        </vaadin-gird-filter-common>
-                                    </template>
-                                    <template>
-                                        <div on-click="selectHamnoize" style="padding-left:15px" hidden="[[item.hidden]]"> [[item.hamonize_th]]</div>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="horizontal layout end">
-                            <div class="title">ชนิดข้าวที่เลือก</div>
-                            <iron-icon icon="arrow-forward"></iron-icon>
-                        </div>
-                    </div>
-                    <div class="flex-5">
-                        <div class="flex-horizontal-with-ratios" style="width:95%">
-                            <vaadin-grid id="material" items="{{seletedRice}}">
-
-                                <vaadin-grid-column width="150px" flex-grow="0" resizable>
-                                    <template class="header">พิกัดข้าว
-                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_code" value="[[_hamonize_code]]">
-                                        </vaadin-gird-filter-common>
-                                    </template>
-                                    <template>
-                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_code]]</div>
-                                    </template>
-                                </vaadin-grid-column>
-
-                                <vaadin-grid-column width="450px" flex-grow="0" resizable>
-                                    <template class="header">ชื่อชนิดข้าว (ไทย)
-                                        <vaadin-gird-filter-common aria-label="Rice Name" path="hamonize_th" value="[[_hamonize_th]]">
-                                        </vaadin-gird-filter-common>
-                                    </template>
-                                    <template>
-                                        <div on-click="deselectHamnoize" style="padding-left:15px">[[item.hamonize_th]]</div>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid>
-                        </div>
-                    </div>-->
             </div>
             <div class="horizontal layout">
                 <div class="flex">
@@ -400,20 +318,6 @@
                         </div>
                     </div>
                     <div class="header-div flex">
-                        <!--<paper-dropdown-menu label="{{localizeContract.year}}">
-                            <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{data.hmYear}}" on-selected-changed="searchHamonizeInYear">
-                                <paper-item name="">ทุกปี</paper-item>
-                                <template is="dom-repeat" items={{hamonizeYear.year}}>
-                                    <paper-item name="{{item.label}}">{{item.label}}</paper-item>
-                                </template>
-                            </paper-listbox>
-                        </paper-dropdown-menu>-->
-                        <!--<gl-combo-box id="hamonizeYear" label="{{localizeContract.year}}" placeholder="{{localizeContract.year}}" items="[[hamonizeYear.year]]"
-              item-label-path="label" value="{{data.hmYear}}" item-value-path="label" on-value-changed="searchHamonizeInYear">
-              <template>
-                [[item.label]]
-              </template>
-            </gl-combo-box>-->
                     </div>
 
                 </div>
