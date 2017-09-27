@@ -1,0 +1,197 @@
+<link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="../../components/vaadin-gird-filter-common.html">
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="../../../../bower_components/nylon-tag/nylon-tag.html">
+
+<link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
+
+
+<link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<dom-module id="search-search">
+    <template>
+        <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
+             :host {
+                display: block;
+            }
+
+            tag-module {
+                cursor: pointer;
+            }
+
+            .item {
+                float: left;
+                margin: 5px;
+            }
+            .comBobox {
+            clear: both;
+        }
+        </style>
+        <div class="container">
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex3child"></div>
+                <div class="flexchild labelSearchDate">
+                    เริ่มวันที่ :
+                </div>
+                <div class="flex2child">
+                    <!-- {{date}} -->
+                    <gl-form-input type="date" value="{{data.dateStart}}" on-value-changed="setHamonizeSdate"></gl-form-input>
+                </div>
+                <div class="flexchild"></div>
+                <div class="flexchild labelSearchDate">
+                    ถึงวันที่ :
+                </div>
+                <div class="flex2child">
+                    <gl-form-input type="date" value="{{data.dateEnd}}" on-value-changed="setHamonizeEdate"></gl-form-input>
+                </div>
+                <div class="flex3child"></div>
+                <div class="flexchild"></div>
+            </div>
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex2child"></div>
+                <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                    แสดงคอลัมน์ :
+                </div>
+                <div class="flex2child">
+                    <div class="horizontal layout">
+                        <div>
+                            <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                        </div>&nbsp;&nbsp;
+                        <div>
+                            <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                    ลำดับที่ :
+                </div>
+                <div class="flex3child">
+                    <template is="dom-repeat" items="[[value]]">
+                        <div class="item">
+                            <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                        </div>
+                    </template>
+                    <div class="comBobox">
+                        <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                            <template>
+                                [[item.id]]
+                            </template>
+                        </gl-combo-box>
+                    </div>
+                </div>
+                <div class="flex3child"></div>
+            </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'search-search',
+            behaviors: [
+                ReduxBehavior,
+                MonthBehavior,
+                commonLogic
+            ],
+            properties: {
+                value: {
+                    value: [],
+                    notify: true
+                },
+                date: {
+                    statePath: 'hamonize.date',
+                    observer: '_setDate'
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ชนิดข้าว',
+                            value: 'hamonize',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'ประเทศ',
+                            value: 'country',
+                            label: '',
+                            hidden: false
+                        },
+                        {
+                            id: 'บริษัท',
+                            value: 'company',
+                            label: '',
+                            hidden: false
+                        }
+                    ]
+                },
+                data:{
+                    type:Object,
+                    value:{}
+                }
+            },
+            //tag
+            selectTag: function (e) {
+                let value = e.detail.value
+                // //console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // //console.log(this.myItems[result]);
+                    this.push('value', value);
+                    
+                    e.detail.value = ''
+                    console.log(e.currentTarget.cancel());
+                }
+
+            },
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
+            },
+            deleteTag: function (e) {
+                // //console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
+            },
+            getSeleted(filter) {
+                // //console.log(filter.map((item) => item.hidden !== true));
+                let data = this.myItems.filter((item) => item.hidden === false)
+                console.log(data);
+                return data
+            },
+            // end tag
+
+            _setDate(e) {
+                console.log(e);
+                this.set('data.dateStart', e.dateStart)
+                this.set('data.dateEnd', e.dateEnd);
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
+            },
+        });
+    </script>
+</dom-module>
