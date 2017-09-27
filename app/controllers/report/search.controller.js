@@ -83,6 +83,41 @@ exports.ec = function (req, res) {
             });
         });
 }
+exports.threeinone = function (req, res) {
+    var val = req.query;
+    if (req.method == 'POST') val = req.body;
+    var params = {
+        COLUMN_NAME1: (val.field1 == 'hamonize' ? 'ชนิดข้าว' : (val.field1 == 'country' ? 'ประเทศ' : 'บริษัท')),
+        COLUMN_NAME2: (val.field2 == 'hamonize' ? 'ชนิดข้าว' : (val.field2 == 'country' ? 'ประเทศ' : 'บริษัท')),
+        COLUMN_NAME3: (val.field3 == 'hamonize' ? 'ชนิดข้าว' : (val.field3 == 'country' ? 'ประเทศ' : 'บริษัท')),
+        DATE_START: val.dateStart,
+        DATE_END: val.dateEnd,
+        TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : (val.tranType == 'i' ? 'นำเข้า' : 'นำเข้า-ส่งออก')),
+        FILE_TYPE: req.query.export
+    };
+    req.jdbc.query("mssql", `exec sp_stats_search_3in1 
+                @tranType=?,
+                @dateStart=?,
+                @dateEnd=?,
+                @field1=?,
+                @field2=?,
+                @field3=?,
+                @value1=?,
+                @value2=?,
+                @value3=?`,
+        [val.tranType || '', val.dateStart || null, val.dateEnd || null,
+        val.field1 || '', val.field2 || '', val.field3 || '',
+        val.value1 || '', val.value2 || '', val.value3 || ''],
+        function (err, data) {
+            data = JSON.parse(data);
+            console.log(val.field3);
+            var filename = 'rpt_' + val.view
+                + (val.field3 != '' && typeof val.field3 !== 'undefined' ? '3' : (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1'))
+                + (val.tranType == 'a' ? '_all' : '');
+            res.ireport("search/" + filename + ".jasper", req.query.export || "pdf", data, params);
+        });
+
+}
 exports.company = function (req, res) {
     var val = req.query;
     if (req.method == 'POST') val = req.body;
