@@ -1,6 +1,8 @@
 module.exports = function (app) {
     var controller = require('../controllers/hamonize.controller')
     // app.get('/', controller.list)
+    app.get('/', controller.getHamonize);
+    app.get('/group',controller.getGroup);
     app.get('/codelist', controller.listha)
     app.get('/child', controller.child_code)
     app.get('/re01', controller.sp01)

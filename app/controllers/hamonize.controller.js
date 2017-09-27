@@ -23,6 +23,33 @@ var tomorrow = '2016' + '-' + mm + '-' + dt;
 //             res.json(data)
 //         })
 // }
+exports.getHamonize = function (req, res) {
+    var j = req.jdbc;
+
+    j.query("mssql", `SELECT * from fn_stats_get_hamonize(?,?,?) order by hamonize_code,hamonize_year`, [req.query.tranType || 'e', req.query.dateStart, req.query.dateEnd],
+        function (err, data) {
+            res.send(data)
+        })
+}
+exports.getGroup = function (req, res) {
+    var j = req.jdbc;
+
+    j.query("mssql", `SELECT * from fn_stats_get_hamonize_group(?,?,?) order by typerice_name,hamonize_code,hamonize_year`, [req.query.tranType || 'e', req.query.dateStart, req.query.dateEnd],
+        function (err, data) {
+            data = JSON.parse(data);
+            var arr = [];
+            var temp = '';
+            for (var i = 0; i < data.length; i++) {
+                if (temp != data[i].typerice_name) {
+                    arr.push({ group_name: data[i].typerice_name, group_item: [] })
+                    temp = data[i].typerice_name
+                }
+                arr.filter((f) => f.group_name == data[i].typerice_name)[0].group_item.push(data[i])
+                // console.log(i)
+            }
+            res.json(arr)
+        })
+}
 exports.listha = function (req, res) {
     var j = req.jdbc;
     j.query("mssql", `SELECT 
