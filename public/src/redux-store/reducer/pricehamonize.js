@@ -34,18 +34,20 @@ export function pricehamonizeReducer(state = initialState, action) {
 export function pricehamonizeAction(store) {
   return [commonAction(), {
     PRICEHAMONIZE_SEARCH(date) {
-      this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
+      // this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
       // console.log(date); 
       axios.get('price/today?priceDate=' + date.dateStart)
         .then((response) => {
           this.fire('toast', {
             status: 'success', text: 'ค้นหาสำเร็จ', callback() {
               store.dispatch({ type: 'PRICEHAMONIZE_SEARCH', payload: response.data })
+              // console.log(111);
             }
           });
+
+
         })
         .catch(function (error) {
-          ////console.log(error);
         });
     },
     PRICEHAMONIZE_SAVE(data, search) {
@@ -66,16 +68,13 @@ export function pricehamonizeAction(store) {
         });
     },
     PRICEHAMONIZE_COST_SEARCH(date) {
-      // this.fire('toast',{status:'load',text:'กำลังค้นหาข้อมูล...'})
+      this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
       // console.log(date); 
       axios.get('cost/today?costDate=' + date.dateStart)
         .then((response) => {
-          // cutDataInObject(response.data, [ 'contract_date']
           let data = cutDataInObject(response.data, ['cost_date'])
-          // console.log(data);
-          // this.fire('toast',{status:'success',text:'ค้นหาสำเร็จ',callback(){
           store.dispatch({ type: 'PRICEHAMONIZE_COST_SEARCH', payload: data })
-          // }});
+          this.PRICEHAMONIZE_SEARCH(date)
         })
         .catch(function (error) {
           ////console.log(error);
