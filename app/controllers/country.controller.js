@@ -1,3 +1,10 @@
+exports.getCountry = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT * from fn_stats_get_country(?,?,?) order by label`, [req.query.tranType || 'e', req.query.dateStart, req.query.dateEnd],
+        function (err, data) {
+            res.send(data)
+        })
+}
 exports.list = function (req, res) {
     // //console.log(1111);
     var j = req.jdbc;

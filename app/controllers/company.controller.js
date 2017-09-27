@@ -16,6 +16,14 @@ if (mm < 10) {
 }
 var today = '2016' + '-' + mm + '-' + dd;
 var tomorrow = '2016' + '-' + mm + '-' + dt;
+exports.getCompany = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT * from fn_stats_get_company(?,?,?) order by label`, [req.query.tranType || 'e', req.query.dateStart, req.query.dateEnd],
+        function (err, data) {
+            res.send(data)
+        })
+}
+
 exports.list = function (req, res) {
     var j = req.jdbc;
 
