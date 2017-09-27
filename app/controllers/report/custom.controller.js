@@ -84,17 +84,3 @@ exports.hommalirice = function (req, res) {
             })
         })
 }
-// var rpt = require('../../global/report')
-//     req.query.year = 2560;
-//     req.query.startMonth = '01';
-//     param.startMonth = rpt.getMonthName(Number(req.query.startMonth));
-//     param.startMonth = rpt.getMonthName(Number(req.query.startMonth));
-//     req.query.endMonth = '04';
-//     var monthArr = ['01', '02', '03', '04'];
-//     // for(var i = Number(req.query.startMonth );i<=Number(req.query.endMonth );i++){
-//     //     //01
-//     //     //02
-//     //     //03
-//     //     monthArr.push(i)
-//     // }
-//     monthArr.join(',') //=> @month= '01,02,03,04' ==> fn_split(@month,',')
