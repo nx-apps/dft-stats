@@ -6,6 +6,7 @@
 	<parameter name="STARTMONTH" class="java.lang.String"/>
 	<parameter name="ENDMONTH" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String"/>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="weight" class="java.lang.Integer"/>
 	<field name="value_b" class="java.lang.Double"/>
@@ -1315,7 +1316,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="10">
+		<band height="50">
 			<staticText>
 				<reportElement x="0" y="0" width="82" height="10" uuid="4051b8e0-1680-4bbe-bb38-82a9cdad87e4"/>
 				<box>
@@ -1641,6 +1642,58 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B3}==0?"":$V{TOTAL_VALUE_B3})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="697" y="32" width="105" height="10" uuid="5975afaf-a201-4e00-9a88-05a3335dbd45"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="105" height="10" uuid="65bc1fa6-4a75-4d5d-968f-98aed6ca77c0"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ที่มา : กรมศุลกากร]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="22" width="105" height="10" uuid="93f489c2-3a38-4051-baf5-e399615d28f0"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[กรมการค้าต่างประเทศ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="12" width="105" height="10" uuid="5ba67850-2fd6-4078-9890-1965ddf42991"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[กลุ่มบริหารข้อมูลและสถิติ]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
