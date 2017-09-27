@@ -2,15 +2,20 @@
 <link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="./../../components/page-style.html">
 <link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="../../../../bower_components/iron-collapse/iron-collapse.html">
 
 <link rel="import" href="../../../../bower_components/nylon-tag/nylon-tag.html">
 
 <link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
 
-
 <link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
 <dom-module id="search-search">
     <template>
         <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
@@ -29,6 +34,74 @@
 
             .comBobox {
                 clear: both;
+            }
+
+            div.main {
+                /*background-color: red;*/
+                height: 300px;
+                overflow-y: scroll;
+                /*min-width: 300px;*/
+                border: solid darkblue 1px;
+            }
+
+            span.namesub {
+                display: inline-block;
+                /*background-color: blue;*/
+                width: 70%;
+            }
+
+            span.year {
+                display: inline-block;
+                width: 20%;
+                /*background-color: red;*/
+                /*display: inline;*/
+                /*float: right;*/
+            }
+
+            .collapse-content {
+                padding: 15px;
+                width: 500px;
+                border: 1px solid #dedede;
+            }
+
+            .header-item {
+                border: 1px solid #ddd;
+                background-color: #F1F1F1;
+                padding: 15px;
+            }
+
+            .subdiv {
+                border-bottom: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                border-left: 1px solid #ddd;
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+            .main-item,
+            .sub-item {
+                padding: 15px 0px;
+                /*border: 1px solid #ddd;*/
+                border-bottom: 1px solid #ddd;
+            }
+
+            .main-item:hover,
+            .sub-item:hover {
+                background-color: #F1F1F1;
+            }
+
+            .sub-item {
+                padding-left: 60px;
+            }
+
+            paper-icon-button .hamonize {
+                margin-top: -50px;
+            }
+
+            paper-dialog.size-position {
+                width: 800px;
+                height: 550px;
+                overflow: auto;
             }
         </style>
         <div class="container">
@@ -120,6 +193,38 @@
                 <div class="flex-4"></div>
             </div>
         </div>
+
+        <paper-dialog id="itemGroup" class="size-position">
+            <h2>รายชื่อรายการ</h2>
+            <!-- <paper-dialog-scrollable> -->
+            <div name="list">
+                <div class="horizontal layout header-item" warp>
+                    <div class="header-div flex"></div>
+                    <template is="dom-repeat" items={{columns}}>
+                        <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                            <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                        </div>
+                    </template>
+                </div>
+                <div class="subdiv">
+                    <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main">
+                        <div hidden="{{main.hidden}}">
+                            <div class="horizontal layout main-item">
+                                <div class="row flex">
+                                    <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
+                                </div>
+                                <template is="dom-repeat" items={{columns}}>
+                                    <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
+                                </template>
+                            </div>
+                    </template>
+                    </div>
+                </div>
+                <!-- </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
+            </div> -->
+        </paper-dialog>
     </template>
     <script>
         Polymer({
@@ -138,6 +243,29 @@
                     statePath: 'hamonize.date',
                     observer: '_setDate'
                 },
+                hamonizeList: {
+                    statePath: 'search.hamonizeList',
+                    observer: '_cloneDataHamonize'
+                },
+                companyList: {
+                    statePath: 'search.companyList',
+                    observer: '_cloneDataCompany'
+                },
+                countryList: {
+                    statePath: 'search.countryList',
+                    observer: '_cloneDataCountry'
+                },
+                dataSelect: {
+                    type: Object,
+                    value: {
+                        hamonizeList: [],
+                        companyList: [],
+                        countryList: [],
+                    }
+                },
+                dataUse: {
+                    type: Array
+                },
                 myItems: {
                     type: Array,
                     value: [
@@ -145,26 +273,51 @@
                             id: 'ชนิดข้าว',
                             value: 'hamonize',
                             label: '',
-                            hidden: false
+                            hidden: false,
+                            fields: ['value', 'label']
                         },
                         {
                             id: 'ประเทศ',
                             value: 'country',
                             label: '',
-                            hidden: false
+                            hidden: false,
+                            fields: ['value', 'label']
                         },
                         {
                             id: 'บริษัท',
                             value: 'company',
                             label: '',
-                            hidden: false
+                            hidden: false,
+                            fields: ['value', 'label']
                         }
                     ]
                 },
                 data: {
                     type: Object,
                     value: {}
-                }
+                },
+                columns: Array,
+            },
+            observers: [
+                'checkPullData(data,data.*)'
+            ],
+            _cloneDataHamonize(hamonize) {
+                this._cloneData(hamonize, 'hamonizeList')
+            },
+            _cloneDataCompany(company) {
+                this._cloneData(company, 'companyList')
+            },
+            _cloneDataCountry(country) {
+                this._cloneData(country, 'countryList')
+            },
+            _cloneData(data, name) {
+                let newData = JSON.parse(JSON.stringify(data))
+                newData.map(item => {
+                    item.hidden = false
+                    item.check = false
+                    return item
+                })
+                this.set(`dataSelect.${name}`, newData)
             },
             //tag
             selectTag: function (e) {
@@ -215,15 +368,106 @@
             },
             // end tag
             _setDate(e) {
+                e.dateStart = '2017-09-01'
+                e.dateEnd = '2017-09-22'
                 this.set('data.dateStart', e.dateStart)
                 this.set('data.dateEnd', e.dateEnd);
                 this.set('data.exporter', true)
                 this.set('data.importer', false)
             },
+            checkIsValue(value) {
+                if (value === 'value') {
+                    return 'header-div flex-2'
+                } else {
+                    return 'header-div flex-3'
+                }
+                // console.log(value);
+            },
             getSelete(e) {
                 let data = e.model.__data__
                 let value = data.item.value
-                console.log(value)
+                // console.log(data.item.fields)
+                switch (value) {
+                    case 'hamonize':
+                        this.set('dataUse', this.dataSelect.hamonizeList)
+                        break;
+                    case 'country':
+                        this.set('dataUse', this.dataSelect.countryList)
+                        break;
+                    case 'company':
+                        this.set('dataUse', this.dataSelect.companyList)
+                        break;
+                    default:
+                        break;
+                }
+                // console.log(this.dataUse);
+                this.set('columns', data.item.fields)
+                // columns
+
+                this.$.itemGroup.open()
+                // console.log(value)
+            },
+            _showData(main, item) {
+                console.log(main, item);
+                return main[item]
+            },
+            searchItem(e) {
+                let data = {},
+                    countPropertity = 0
+                for (var index = 0; index < this.columns.length; index++) {
+                    var element = this.columns[index]
+                    let inputElement = 'input_' + element
+                    if (Polymer.dom(this.root).querySelector('#' + inputElement) !== undefined &&
+                        Polymer.dom(this.root).querySelector('#' + inputElement) !== null &&
+                        Polymer.dom(this.root).querySelector('#' + inputElement).value !== '') {
+                        data[element] = Polymer.dom(this.root).querySelector('#' + inputElement).value
+                        countPropertity++
+                    }
+                }
+                if (countPropertity > 0) {
+                    const checkIsHave = (data, index, properties) => {
+                        // console.log(data,index,properties);
+                        let arrIsTrue = []
+                        for (var key in properties) {
+                            if (properties.hasOwnProperty(key)) {
+                                let prop = properties[key]
+                                let str1 = String(data[index][key]),
+                                    str2 = String(properties[key])
+                                // gเช็ดดว่าเป็นภาษาอังกฏษเปล่า
+                                if (/^[a-zA-Z]+$/.test(String(properties[key]))) {
+                                    str1 = str1.toLowerCase()
+                                    str2 = str2.toLowerCase()
+                                }
+                                arrIsTrue.push(str1.search(str2.toLowerCase()) > -1 ? false : true)
+                            }
+                        }
+                        return arrIsTrue.every(elem => elem == true)
+                    }
+                    this.dataUse.map((item, index) => {
+                        this.set('dataUse.' + index + '.hidden', checkIsHave(this.dataUse, [index], data))
+                    })
+                }
+            },
+            checkPullData(data, actionData) {
+                if (data.dateStart !== undefined && data.dateEnd !== undefined) {
+                    if ((data.exporter === false) && (data.importer === true)) {
+                        data.tranType = 'i'
+                        data.SelectAll = false
+                    } else if ((data.exporter === true) && (data.importer === false)) {
+                        data.tranType = 'e'
+                        data.SelectAll = false
+                    } else {
+                        data.tranType = 'a'
+                        data.SelectAll = true
+                    }
+                    this.dispatchAction('GET_SEARCH_HAMONIZE', this.genUrl(data))
+                    // this.dispatchAction('GET_SEARCH_HAMONIZE_GROUP', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_COMPANY', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_COUNTRY', this.genUrl(data))
+                    console.log(this.genUrl(data))
+                    // this.genUrl()
+                }
+
             }
         });
     </script>
