@@ -83,8 +83,8 @@ export function searchAction(store) {
                     ////console.log(error);
                 });
         },
-        GET_SEARCH_ALL(date) {
-            axios.post('/license/get', data)
+        GET_SEARCH_ALL(data) {
+            axios.post('/search', data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_ALL', payload: response.data })
                 })
@@ -92,5 +92,6 @@ export function searchAction(store) {
                     ////console.log(error);
                 });
         }
+
     }]
 };

@@ -21,49 +21,8 @@
         }
     </style>
     <template>
-        <paper-dialog id="report" modal>
-            <div class="layout start-justified">
-                <div class="flex" style=" margin-right: 30px">
-                    <gl-combo-box always-float-label label="รูปแบบเอกสาร" placeholder="รูปแบบเอกสาร" value="{{data.view}}" item-label-path="cate"
-                        item-value-path="id" items="{{report.categoryReport}}">
-                        <template>
-                            [[item.cate]]
-                        </template>
-                    </gl-combo-box>
-                </div>
-
-                <div class="flex" style=" margin-right: 30px">
-                    <gl-combo-box always-float-label label="ประเภทเอกสาร" placeholder="ประเภทเอกสาร" value="{{data.export}}" item-label-path="report_type"
-                        item-value-path="report_type_id" items="{{report.reportFile}}">
-                        <template>
-                            [[item.report_type]]
-                        </template>
-                    </gl-combo-box>
-                </div>
-
-                <div class="flex horizontal end-justified layout buttons">
-                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
-                    <paper-button raised class="gl-btn-primary" on-tap="printReport" autofocus>ออกรายงาน</paper-button>
-                </div>
-            </div>
-        </paper-dialog>
         <div class="container">
-            <template is="dom-if" if="[[!checkData(riceList)]]">
-                <div class="horizontal layout">
-                    <div class="flex-3">
-                    </div>
-                    <div class="flex layout end-justified ">
-
-                    </div>
-                    <div class="flex layout end-justified ">
-                        <paper-button raised class="gl-btn-info gl-small" data="{{item}}" on-tap="printReportHamonize">
-                            <iron-icon icon="assignment"></iron-icon>
-                            ออกรายงาน
-                        </paper-button>
-                    </div>
-                </div>
-            </template>
-            <vaadin-grid id="material" items="[[riceList]]">
+            <vaadin-grid id="material" items="[[dataList]]">
                 <vaadin-grid-column width="50px" flex-grow="0" resizable>
                     <template class="header">
                         <div class="text-center">ลำดับ</div>
@@ -243,84 +202,52 @@
                 MonthBehavior
             ],
             properties: {
-                // dataList:{
-                //     statePath:'hamonize.list',
-                //     observer:'totalcal'
-                // },
+                dataList:{
+                    statePath:'search.searchList',
+                    observer:'totalcal'
+                },
                 total: {
                     type: Object,
                     value: {}
                 },
-                riceList: {
-                    statePath: 'hamonize.rice_list',
-                    observer: 'totalcal'
-                },
-                data: {
-                    type: Object,
-                    value: {
-                        view: 'table',
-                        export: 'pdf'
-                    }
-                },
-                report: {
-                    type: Object,
-                    value: {
-                        categoryReport: [
-                            { cate: 'ตาราง', id: 'table' },
-                            { cate: 'Pivot', id: 'pivot' }
-                        ],
-                        reportFile: [
-                            { report_type: 'PDF', report_type_id: 'pdf' },
-                            { report_type: 'WORD', report_type_id: 'word' },
-                            { report_type: 'EXCEL', report_type_id: 'excel' }
-                        ]
-                    }
-                },
             },
-            // setText(text) {
-            //     if (text === 'country')
-            //         return 'ประเทศ'
-            //     return 'บริษัท'
-            // },
-            // totalcal(dataList) {
-            //     let checkNaN = ((num)=> {
-            //         if (isNaN(num)) return ''
-            //         // console.log(num)
-            //         return this.formatNumber(num)
-            //     })
-            //     this.set('total.net_weight', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight, 0)))
-            //     this.set('total.fob_amt_baht',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht, 0)))
-            //     this.set('total.fob_amt',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt, 0)))
-            //     this.set('total.avg_amt_baht',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht, 0)))
-            //     this.set('total.avg_amt',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt, 0)))
-            //     // console.log(this.total.avg_amt_baht);
-            //     this.set('total.net_weight_i',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_i, 0)))
-            //     this.set('total.fob_amt_baht_i',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_i, 0)))
-            //     this.set('total.fob_amt_i',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_i, 0)))
-            //     this.set('total.avg_amt_baht_i',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_i, 0)))
-            //     this.set('total.avg_amt_i',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_i, 0)))
+            setText(text) {
+                if (text === 'country')
+                    return 'ประเทศ'
+                return 'บริษัท'
+            },
+            totalcal(dataList) {
+                let checkNaN = ((num)=> {
+                    if (isNaN(num)) return ''
+                    // console.log(num)
+                    return this.formatNumber(num)
+                })
                 
-            //     // console.log(isNaN(this.total.avg_amt_baht_i));
+                const calNum = (prop)=>{
+                    return checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current][prop], 0))
+                }
+                // checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight, 0))
+                this.set('total.net_weight', calNum('net_weight'))
+                this.set('total.fob_amt_baht',  calNum('fob_amt_baht'))
+                this.set('total.fob_amt',  calNum('fob_amt'))
+                this.set('total.avg_amt_baht',  calNum('avg_amt_baht'))
+                this.set('total.avg_amt',  calNum('avg_amt'))
+                // console.log(this.total.avg_amt_baht);
+                this.set('total.net_weight_i',  calNum('net_weight_i'))
+                this.set('total.fob_amt_baht_i',  calNum('fob_amt_baht_i'))
+                this.set('total.fob_amt_i',  calNum('fob_amt_i'))
+                this.set('total.avg_amt_baht_i',  calNum('avg_amt_baht_i'))
+                this.set('total.avg_amt_i',  calNum('avg_amt_i'))
+                
+                // console.log(isNaN(this.total.avg_amt_baht_i));
 
-            //     this.set('total.net_weight_e',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0)))
-            //     this.set('total.fob_amt_baht_e',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0)))
-            //     this.set('total.fob_amt_e',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0)))
-            //     this.set('total.avg_amt_baht_e',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0)))
-            //     this.set('total.avg_amt_e',  checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0)))
+                this.set('total.net_weight_e',  checkNaN('net_weight_e'))
+                this.set('total.fob_amt_baht_e',  checkNaN('fob_amt_baht_e'))
+                this.set('total.fob_amt_e',  checkNaN('fob_amt_e'))
+                this.set('total.avg_amt_baht_e',  checkNaN('avg_amt_baht_e'))
+                this.set('total.avg_amt_e',  checkNaN('avg_amt_e'))
 
-            // },
-            // printReportHamonize() {
-            //     this.$$('#report').open()
-
-            // },
-            // printReport() {
-            //     this.search.view = this.data.view
-            //     this.search.export = this.data.export
-            //     // if (this.search.field2 === undefined && this.search.field3 === undefined) {
-            //     window.open('./api/report/search/hamonize?' + this.genUrl(this.search))
-            //     // //console.log(this.genUrl(this.search));
-            //     // }
-            // }
+            }
         });
     </script>
 </dom-module>

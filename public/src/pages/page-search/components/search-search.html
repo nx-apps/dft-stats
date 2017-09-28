@@ -13,6 +13,8 @@
 <link rel="import" href="./../../components/page-style.html">
 <link rel="import" href="./../../components/common-logic.html">
 
+<link rel="import" href="./search-report.html">
+
 <link rel="import" href="../../../../bower_components/nylon-tag/nylon-tag.html">
 
 <link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
@@ -112,6 +114,7 @@
             }
         </style>
         <div class="container">
+            <search-report id="report" data-search="{{dataSearch}}"></search-report>
             <div class="flex-horizontal-with-ratios">
                 <div class="flex3child"></div>
                 <div class="flexchild labelSearchDate">
@@ -198,111 +201,117 @@
                 </div>
                 <div class="flex-4"></div>
             </div>
+
         </div>
-
-        <paper-dialog id="itemGroup" class="size-position">
+        <div class="horizontal end-justified layout">
+            <!-- <div class="btn-search"> -->
+            <paper-button raised class="gl-btn-info gl-small" on-tap="getSearchValue">
+                <iron-icon icon="search"></iron-icon>
+                ค้นหา
+            </paper-button>
+            <!-- </div> -->
+            <paper-button raised class="gl-btn-info gl-small" on-tap="settingReport">
+                <iron-icon icon="assignment"></iron-icon>
+                ออกรายงาน
+            </paper-button>
+        </div>
+        <paper-dialog id="itemGroup" class="size-position" modal>
             <h2>รายชื่อรายการ</h2>
-            <!-- <paper-dialog-scrollable> -->
-            <div name="list">
-                <div class="horizontal center layout header-item" warp style="height: 20px;">
-                    <div class="header-div flex">
-                        <div style="padding: 10px 15px;">
-                            รูปแบบ
-                            <paper-radio-group selected="{{typeSelete}}">
-                                <paper-radio-button name="list">รายการ</paper-radio-button>
-                                <paper-radio-button name="group">กลุ่ม</paper-radio-button>
-                            </paper-radio-group>
+            <paper-dialog-scrollable>
+                <div name="list">
+                    <div class="horizontal center layout header-item" warp style="height: 20px;">
+                        <div class="header-div flex">
+                            <div style="padding: 10px 15px;">
+                                รูปแบบ
+                                <paper-radio-group selected="{{typeSelete}}">
+                                    <paper-radio-button name="list">รายการ</paper-radio-button>
+                                    <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                                </paper-radio-group>
+                            </div>
+                        </div>
+                        <div class="header-div flex">
                         </div>
                     </div>
-                    <div class="header-div flex">
-                    </div>
-                </div>
-                <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
-                    <div name="list">
-                        <div class="horizontal layout header-item" warp>
-                            <div class="header-div flex"></div>
-                            <template is="dom-repeat" items={{columns}} initial-count="20">
-                                <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                    <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
-                                </div>
-                            </template>
-                        </div>
-                        <div class="subdiv">
-                            <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
-                                <div hidden="{{main.hidden}}">
-                                    <div class="horizontal layout main-item">
-                                        <div class="flex">
-                                            <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
-                                        </div>
-                                        <template is="dom-repeat" items={{columns}}>
-                                            <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
-                                        </template>
+                    <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                        <div name="list">
+                            <div class="horizontal layout header-item" warp>
+                                <div class="header-div flex"></div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
                                     </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div name="group">
-                        <div class="horizontal layout header-item" warp>
-                            <div class=""></div>
-                            <div class="header-div flex"></div>
-                            <div class="header-div flex-3">ชื่อกลุ่ม</div>
-                            <template is="dom-repeat" items={{columns}} initial-count="20">
-                                <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                    <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
-                                </div>
-                            </template>
-                            <!-- <div class="header-div flex-3">
-                                <gl-form-input label="[[localizeContract.hm_code]]" always-float-label type="search" disabled="{{!dataSeleted.isYear}}" value="{{dataSeleted.hamonize_code}}"
-                                    on-value-changed="searchHamonizeCode"></gl-form-input>
-                            </div> -->
-                        </div>
-
-                        <div class="subdiv">
-                            <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
-                                <div class="horizontal layout center" hidden="{{item.hiddend}}" warp style="    height: 50px;
-                                line-height: 50px;">
-                                    <div class="">
-                                        <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
-                                    </div>
-                                    <div class="flex">
-                                        <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild" disabled="[[commonState.btnDisabled]]">
-                                    </div>
-                                    <div class="flex-3 text-row-header">[[item.group_name]]</div>
-                                    <div class="flex-3"></div>
-
-                                    <div class="flex-3">-</div>
-                                </div>
-                                <iron-collapse id="collapse-[[indexroot]]">
-                                    <template is="dom-repeat" items={{item.group_item}} as="subChild">
-                                        <div hidden="{{subChild.hiddend}}">
-                                            <div class="horizontal layout sub-item">
-                                                <div class=""></div>
-                                                <div class="row flex">
-                                                    <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}" on-tap="getSelect" disabled="[[commonState.btnDisabled]]">
-                                                </div>
-                                                <div class="row flex-2">[[item.name_th]]</div>
-                                                <template is="dom-repeat" items={{columns}}>
-                                                    <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
-                                                </template>
-                                                <!-- <div class="row flex-3">[[subChild.hamonize_code]]</div>
-                                                <div class="row flex-3">[[subChild.hamonize_th]]</div> -->
+                                </template>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
+                                    <div hidden="{{main.hidden}}">
+                                        <div class="horizontal layout main-item">
+                                            <div class="flex">
+                                                <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
                                             </div>
+                                            <template is="dom-repeat" items={{columns}}>
+                                                <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
+                                            </template>
                                         </div>
-                                    </template>
-                                </iron-collapse>
-                            </template>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
-                    </div>
-                </iron-pages>
-
-
-
-                <!-- </paper-dialog-scrollable>
+                        <div name="group">
+                            <div class="horizontal layout header-item" warp>
+                                <div class=""></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex-3">ชื่อกลุ่ม</div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
+                                    <div hidden="{{item.hidden}}">
+                                        <div class="horizontal layout center" warp style="height: 50px; line-height: 50px;">
+                                            <div class="">
+                                                <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
+                                            </div>
+                                            <div class="flex">
+                                                <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild">
+                                            </div>
+                                            <div class="flex-3 text-row-header">[[item.group_name]]</div>
+                                            <div class="flex-3"></div>
+                                            <div class="flex-3">-</div>
+                                        </div>
+                                        <iron-collapse id="collapse-[[indexroot]]">
+                                            <template is="dom-repeat" items={{item.group_item}} as="subChild" initial-count="20">
+                                                <div hidden="{{subChild.hidden}}">
+                                                    <div class="horizontal layout sub-item">
+                                                        <div class=""></div>
+                                                        <div class="row flex">
+                                                            <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}">
+                                                                [[checkList(subChild,subChild.*)]]
+                                                                <!-- {{subChild.check}} -->
+                                                        </div>
+                                                        <div class="row flex-2">[[item.name_th]]</div>
+                                                        <template is="dom-repeat" items={{columns}}>
+                                                            <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </iron-collapse>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </iron-pages>
+            </paper-dialog-scrollable>
             <div class="buttons">
                 <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
-            </div> -->
+            </div>
         </paper-dialog>
+        <!-- modal -->
+
     </template>
     <script>
         Polymer({
@@ -342,6 +351,15 @@
                     value: {
                         hamonizeList: [],
                         hamonizeGroupList: [],
+                        companyList: [],
+                        countryList: [],
+                    }
+                },
+                dataSeleted: {
+                    type: Object,
+                    value: {
+                        field: '',
+                        hamonizeList: [],
                         companyList: [],
                         countryList: [],
                     }
@@ -386,7 +404,12 @@
                 typeSelete: {
                     type: String,
                     value: 'list'
+                },
+                dataSearch: {
+                    type: Object,
+                    value: {}
                 }
+
             },
             observers: [
                 'checkPullData(data,data.*)'
@@ -494,6 +517,8 @@
             getSelete(e) {
                 let data = e.model.__data__
                 let value = data.item.value
+                this.set('dataSeleted.field', value)
+
                 // console.log(data.item.fields)
                 switch (value) {
                     case 'hamonize':
@@ -570,15 +595,23 @@
             searchItemGroup(e) {
                 let result = this._getValueInput(this.columns, 'input_group_')
                 this.dataUseGroup.map((item, index) => {
-                    console.log(item);
                     item.group_item.map((sub_item, sub_index) => {
-                        console.log(this.dataUseGroup[index].group_item[sub_index].hidden)
-                        // this.set('dataUseGroup.' + index + 'group_item.' + sub_index + '.hidden', )
+                        let notFound = this._checkPropIsMath(sub_item, result.data)
+                        sub_item.hidden = notFound
+                        this.set('dataUseGroup.' + index + '.group_item.' + sub_index + '.hidden', notFound)
+                        this.notifyPath('dataUseGroup.' + index + '.group_item.' + sub_index + '.hidden')
+                        return sub_item
                     })
+                    let allNotFound = item.group_item.every(elem => elem.hidden === true)
+                    item.hidden = allNotFound
+                    this.set('dataUseGroup.' + index + '.hidden', allNotFound)
+                    this.notifyPath('dataUseGroup.' + index)
+
                     return item
 
                 })
-                // console.log(result);
+                this.notifyPath('dataUseGroup')
+                // console.log(this.dataUseGroup);
             },
             toggle: function (e) {
                 let index = e.currentTarget.index
@@ -611,7 +644,97 @@
                     // console.log(this.genUrl(data))
                     // this.genUrl()
                 }
-            }
+            },
+            getCheckChild(e) {
+                let item = e.model.__data__.item
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                let result = this._getValueInput(this.columns, 'input_group_')
+                this.dataUseGroup[indexRoot].group_item.map((item, index) => {
+                    if (!this._checkPropIsMath(item, result.data) ) {
+                    this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
+                    }
+                })
+            },
+            checkList(data) {
+                let checkHave = this.dataUse.findIndex(item => item.value === data.value)
+                this.set('dataUse.' + [checkHave] + '.check', data.check)
+            },
+            checkAddItem() {
+                let newData = []
+                let newCheck = []
+                let newCheckGroup = []
+                let field = this.dataSeleted.field
+                const _filterChecked = (data) => {
+                    return data.filter((item) => {
+                        return item.check === true
+                    })
+                }
+                const _reduceDataArray = (dataGroup) => {
+                    return dataGroup.map(item => item.group_item).reduce((a, b) => a.concat(b), [])//data)
+                }
+                const _concatCheckDup = (data1, data2) => {
+                    let arr = []
+                    let arr2 = []
+                    data1.concat(data2).map((item) => {
+                        arr[item.value] = item
+                    })
+                    for (var key in arr) {
+                        arr2.push(arr[key])
+                    }
+                    return arr2
+                }
+
+                switch (field) {
+                    case 'hamonize':
+                        newCheck = _filterChecked(this.dataSelect.hamonizeList)
+                        newCheckGroup = _filterChecked(_reduceDataArray(this.dataSelect.hamonizeGroupList))
+                        newData = _concatCheckDup(newCheck, newCheckGroup)
+                        this.set('dataSeleted.hamonizeList', newData)
+                        break;
+                    case 'country':
+                        newCheck = _filterChecked(this.dataSelect.countryList)
+                        this.set('dataSeleted.countryList', newCheck)
+                        break;
+                    case 'company':
+                        newCheck = _filterChecked(this.dataSelect.companyList)
+                        this.set('dataSeleted.companyList', newCheck)
+                        break;
+                    default:
+                        break;
+                }
+            },
+            _getData() {
+                const getArr = (data) => {
+                    return data.map(item => item.value).join(',')
+                }
+                let dataSend = {
+                    hamonize: getArr(this.dataSeleted.hamonizeList),
+                    country: getArr(this.dataSeleted.countryList),
+                    company: getArr(this.dataSeleted.companyList),
+                }
+
+                let dataMath = {}
+                this.value.map((item, index) => {
+                    dataMath['field' + (index + 1)] = item.value
+                    dataMath['value' + (index + 1)] = dataSend[item.value]
+                })
+                dataMath.tranType = this.data.tranType || 'a'
+                dataMath.dateStart = this.data.dateStart || null
+                dataMath.dateEnd = this.data.dateEnd || null
+
+                return dataMath
+            },
+            getSearchValue() {
+                let dataSave = this._getData()
+                this.dispatchAction('GET_SEARCH_ALL', dataSave)
+            },
+            settingReport() {
+                let dataSave = this._getData()
+                // console.log(this.$$('#report'));
+                this.set('dataSearch', dataSave)
+                this.$$('#report').openDia()
+            },
         });
     </script>
 </dom-module>
