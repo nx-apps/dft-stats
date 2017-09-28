@@ -15,6 +15,7 @@
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="net_weight" class="java.lang.Double"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
 	<field name="fob_amt" class="java.lang.Double"/>
@@ -701,6 +702,7 @@
 	</pageFooter>
 	<summary>
 		<band height="82" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField>
 				<reportElement x="456" y="22" width="346" height="60" uuid="6cdf5704-1834-48d8-8185-c1b1a1b8f928"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">

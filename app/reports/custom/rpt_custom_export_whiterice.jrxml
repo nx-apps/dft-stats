@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_whiterice" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d695a328-3717-45e4-ae89-3991bc6e37d5">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1473"/>
+	<property name="ireport.x" value="694"/>
 	<property name="ireport.y" value="0"/>
+    <property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
 	<parameter name="ENDMONTH" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="weight" class="java.lang.Integer"/>
 	<field name="value_b" class="java.lang.Double"/>
@@ -1316,8 +1318,9 @@
 			</textField>
 		</band>
 	</detail>
-	<pageFooter>
+	<columnFooter>
 		<band height="10">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement x="794" y="0" width="8" height="10" uuid="98eadc49-6ff1-48c4-81c8-dd99bf3f011b"/>
 				<box leftPadding="0" rightPadding="0">
@@ -1347,9 +1350,10 @@
 				<textFieldExpression><![CDATA["หน้า "+$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageFooter>
+	</columnFooter>
 	<summary>
 		<band height="39">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<staticText>
 				<reportElement x="0" y="0" width="82" height="10" uuid="4051b8e0-1680-4bbe-bb38-82a9cdad87e4"/>
 				<box>

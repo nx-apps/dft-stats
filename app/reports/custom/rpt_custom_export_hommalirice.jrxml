@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_hommalirice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b4787b3-db21-4892-80af-83bf72463ef0">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="119"/>
+	<property name="ireport.x" value="46"/>
 	<property name="ireport.y" value="0"/>
+    <property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
 	<parameter name="ENDMONTH" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="zone_name" class="java.lang.String"/>
 	<field name="weight" class="java.lang.Integer"/>
@@ -563,6 +565,7 @@
 	</detail>
 	<pageFooter>
 		<band height="10">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField>
 				<reportElement x="517" y="0" width="30" height="10" uuid="67e85d0f-977b-4696-805c-e2feb3288ad2"/>
 				<box leftPadding="0" rightPadding="0">
@@ -595,6 +598,7 @@
 	</pageFooter>
 	<summary>
 		<band height="48" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="72768ac5-eced-4f25-ad58-e40048a5e8cb"/>
 				<box leftPadding="2" rightPadding="2">
