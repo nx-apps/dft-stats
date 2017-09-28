@@ -238,7 +238,7 @@
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="80" height="20" uuid="e1c57a98-6879-4ecf-b09f-6825f373c50b"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -252,7 +252,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="482" y="0" width="80" height="20" uuid="9ba7c4c9-4642-412f-96c2-582ea2283b6d"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -266,7 +266,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="722" y="0" width="80" height="20" uuid="a1c14ceb-cd95-43f5-9923-4f1ad9a1d11b"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -294,7 +294,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="642" y="0" width="80" height="20" uuid="e4415be6-846f-4045-b275-53acc179c773"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -308,7 +308,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="562" y="0" width="80" height="20" uuid="672e358c-2aba-4cff-8d9d-7bb40f05c424"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -388,7 +388,7 @@
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="482" y="0" width="80" height="20" uuid="7f5b0503-8d81-4c38-909d-182d19f1031f"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -412,7 +412,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="642" y="0" width="80" height="20" uuid="304d8ebd-e61f-4e86-9c58-93956c472bb1"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -426,7 +426,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="80" height="20" uuid="affe7491-18fb-4bbe-b7c8-df614f565c92"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -440,7 +440,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="562" y="0" width="80" height="20" uuid="8f0399f2-1136-47fd-98b6-6d5b59b2ac4b"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -454,7 +454,7 @@
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="722" y="0" width="80" height="20" uuid="fed13d61-d1d0-4749-94be-887ea7536eac"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
