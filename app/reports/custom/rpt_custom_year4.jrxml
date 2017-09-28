@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year4" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="60"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -108,22 +108,22 @@
 		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
 	<variable name="RATIO_0" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{0_weight}==null?"":($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{0_weight}==null?0:($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1x" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weightx}==null?"":($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{1_weightx}==null?0:($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weight}==null?"":($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{1_weight}==null?0:($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_2" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{2_weight}==null?"":($F{2_weight}/$F{2_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{2_weight}==null?0:($F{2_weight}/$F{2_weightw})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_3" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{3_weight}==null?"":($F{3_weight}/$F{3_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{3_weight}==null?0:($F{3_weight}/$F{3_weightw})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_4" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{4_weight}==null?"":($F{4_weight}/$F{4_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{4_weight}==null?0:($F{4_weight}/$F{4_weightw})*100)]]></variableExpression>
 	</variable>
 	<group name="GP_ZONE">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
