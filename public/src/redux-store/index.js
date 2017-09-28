@@ -13,6 +13,7 @@ import {licenseReducer,licenseAction} from './reducer/license'
 import {countryReducer,countryAction} from './reducer/country'
 import {pricehamonizeReducer,pricehamonizeAction} from './reducer/pricehamonize'
 import {searchReducer,searchAction} from './reducer/search'
+import {reportReducer,reportAction} from './reducer/report'
 
 
 import {certReducer,certAction} from './reducer/cert'
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
     cert:certReducer,
     pricehamonize:pricehamonizeReducer,
     search:searchReducer,
+    report:reportReducer,
 });
 const storeApp = createStore(
     rootReducer,
@@ -51,3 +53,4 @@ window.countryAction = countryAction(storeApp);
 window.certAction = certAction(storeApp);
 window.pricehamonizeAction = pricehamonizeAction(storeApp);
 window.searchAction = searchAction(storeApp);
+window.reportAction = reportAction(storeApp);
