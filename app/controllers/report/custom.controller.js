@@ -75,7 +75,7 @@ exports.year = function (req, res) {
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณการส่งออกข้าวไทยรายปี'
             param = rpt.keysToUpper(param);
-            res.ireport("custom/rpt_custom_year1.jasper", req.query.export || "pdf", data, param)
+            res.ireport("custom/rpt_custom_year" + req.query.backYear + ".jasper", req.query.export || "pdf", data, param)
 
         });
 }

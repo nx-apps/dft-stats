@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="104"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -16,77 +16,85 @@
 	<parameter name="0_WEIGHT" class="java.lang.String"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
+	<parameter name="YEAR_0" class="java.lang.String"/>
+	<parameter name="YEAR_1" class="java.lang.String"/>
+	<parameter name="YEAR_2" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="zone_name" class="java.lang.String"/>
-	<field name="2_weight" class="java.lang.String"/>
-	<field name="2_ratio" class="java.lang.String"/>
-	<field name="1_weight" class="java.lang.String"/>
-	<field name="1_ratio" class="java.lang.String"/>
-	<field name="1_weightx" class="java.lang.String"/>
-	<field name="1_ratiox" class="java.lang.String"/>
-	<field name="0_weight" class="java.lang.String"/>
-	<field name="0_ratio" class="java.lang.String"/>
-	<field name="delta" class="java.lang.String"/>
+	<field name="2_weight" class="java.lang.Integer"/>
+	<field name="2_weightw" class="java.lang.Integer"/>
+	<field name="1_weight" class="java.lang.Integer"/>
+	<field name="1_weightw" class="java.lang.Integer"/>
+	<field name="1_weightx" class="java.lang.Integer"/>
+	<field name="1_weightwx" class="java.lang.Integer"/>
+	<field name="0_weight" class="java.lang.Integer"/>
+	<field name="0_weightw" class="java.lang.Integer"/>
 	<variable name="SUM_2_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_2_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{2_ratio}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_ratio}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_WEIGHTX" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIOX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_ratiox}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
 	</variable>
 	<variable name="SUM_0_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_0_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{0_ratio}]]></variableExpression>
-	</variable>
-	<variable name="SUM_DELTA" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{delta}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_WEIGHT" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{2_ratio}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_WEIGHT" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_ratio}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_WEIGHTX" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIOX" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_ratiox}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_0_WEIGHT" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_0_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{0_ratio}]]></variableExpression>
+		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_DELTA" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{delta}]]></variableExpression>
+	<variable name="RATIO_0" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{0_weight}==null?"":($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
+	</variable>
+	<variable name="RATIO_1x" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{1_weightx}==null?"":($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
+	</variable>
+	<variable name="RATIO_1" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{1_weight}==null?"":($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
+	</variable>
+	<variable name="RATIO_2" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{2_weight}==null?"":($F{2_weight}/$F{2_weightw})*100)]]></variableExpression>
 	</variable>
 	<group name="GP_ZONE">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
 		<groupHeader>
 			<band height="15">
 				<textField>
-					<reportElement x="0" y="0" width="105" height="15" uuid="680c4ffc-026a-4d85-bb99-a0f5ac6c1c1d"/>
+					<reportElement x="0" y="0" width="555" height="15" backcolor="#999999" uuid="680c4ffc-026a-4d85-bb99-a0f5ac6c1c1d"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -94,7 +102,7 @@
 						<rightPen lineWidth="0.7"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{zone_name}]]></textFieldExpression>
 				</textField>
@@ -122,7 +130,7 @@
 					</textElement>
 					<text><![CDATA[รวม]]></text>
 				</staticText>
-				<textField pattern="#,##0">
+				<textField pattern="#,##0.00">
 					<reportElement x="155" y="0" width="50" height="15" uuid="6455a228-e3ab-4d04-b027-5a27595ca6df"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
@@ -135,7 +143,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_2_RATIO}==0?"":$V{SUM_2_RATIO})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="#,##0.00">
 					<reportElement x="255" y="0" width="50" height="15" uuid="1bedebec-c733-4be6-9550-c6f837efe8ff"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
@@ -148,7 +156,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_1_RATIO}==0?"":$V{SUM_1_RATIO})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="#,##0.00">
 					<reportElement x="505" y="0" width="50" height="15" uuid="f6036337-fac8-46a4-bd89-ece548a1fa3b"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
@@ -159,7 +167,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_DELTA}==0?"":$V{SUM_DELTA})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{SUM_0_RATIO}-$V{SUM_1_RATIOX}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
 					<reportElement x="305" y="0" width="50" height="15" uuid="f28ce098-b3a1-4ef6-b3c4-d4854453bcad"/>
@@ -200,7 +208,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_1_WEIGHT}==0?"":$V{SUM_1_WEIGHT})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="#,##0.00">
 					<reportElement x="355" y="0" width="50" height="15" uuid="5346bcf8-f67f-40a9-bd5b-c5673fdb74dc"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
@@ -226,7 +234,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_2_WEIGHT}==0?"":$V{SUM_2_WEIGHT})]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0">
+				<textField pattern="#,##0.00">
 					<reportElement x="455" y="0" width="50" height="15" uuid="0843eed3-c360-49bd-923c-e115ab3076b0"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
@@ -282,7 +290,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{2_WEIGHT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{YEAR_2}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="155" y="0" width="50" height="30" uuid="7dc428d3-f585-4203-8f77-96c9d3fe102e"/>
@@ -321,7 +329,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{1_WEIGHT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{YEAR_1}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="405" y="15" width="50" height="15" uuid="3c0ffd2f-ae19-4147-a5a4-d547e2bb222f"/>
@@ -334,7 +342,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{0_WEIGHT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{YEAR_0}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="455" y="15" width="50" height="15" uuid="a8222f7f-fc2c-4a93-8f7f-7df4dcecdf69"/>
@@ -399,7 +407,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{1_WEIGHTX}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{YEAR_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -418,7 +426,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{country_th}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="155" y="0" width="50" height="15" uuid="6aed5535-5430-4be1-8f24-3ee52ead1b0c"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -429,9 +437,9 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{2_ratio}==0?"":$F{2_ratio})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{RATIO_2}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="255" y="0" width="50" height="15" uuid="a33cfc84-255e-4a1d-b6df-42098e36ec36"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -442,7 +450,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_ratio}==0?"":$F{1_ratio})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{RATIO_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="205" y="0" width="50" height="15" uuid="35e73b63-07a1-489a-916f-4ed27a2d6258"/>
@@ -470,7 +478,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($F{2_weight}==0?"":$F{2_weight})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="355" y="0" width="50" height="15" uuid="41302e87-657a-47f3-b557-179330fccc17"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -481,9 +489,9 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_ratiox}==0?"":$F{1_ratiox})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{RATIO_1x}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="455" y="0" width="50" height="15" uuid="53274190-50b0-4f2b-b475-53f05360f254"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -494,7 +502,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{0_ratio}==0?"":$F{0_ratio})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{RATIO_0}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="405" y="0" width="50" height="15" uuid="83cce87d-abdb-4dd6-9c52-c1c852a71652"/>
@@ -522,7 +530,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($F{1_weightx}==0?"":$F{1_weightx})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="1bc33a27-29e9-472c-8a71-2c53a96eebb3"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -533,7 +541,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{delta}==0?"":$F{delta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{RATIO_0}-$V{RATIO_1x}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -599,7 +607,7 @@
 				</textElement>
 				<text><![CDATA[รวมทั้งหมด]]></text>
 			</staticText>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="155" y="0" width="50" height="15" uuid="c58a87c2-c204-4644-b0f9-80808ee982cf"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -625,7 +633,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHT}==0?"":$V{TOTAL_1_WEIGHT})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="455" y="0" width="50" height="15" uuid="4021a450-c405-4639-966c-60a9990b4997"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -651,7 +659,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($V{TOTAL_0_WEIGHT}==0?"":$V{TOTAL_0_WEIGHT})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="255" y="0" width="50" height="15" uuid="5e7205bd-c3cf-40fc-8ac4-14cdb73ce16b"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -677,7 +685,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHTX}==0?"":$V{TOTAL_1_WEIGHTX})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="355" y="0" width="50" height="15" uuid="ea0b6ac5-5310-4e32-92e9-b1ff2caa6472"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -690,7 +698,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[($V{TOTAL_1_RATIOX}==0?"":$V{TOTAL_1_RATIOX})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="42e9f9aa-e2e1-4a0b-bf67-6671ba04c4d8"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
@@ -701,7 +709,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_DELTA}==0?"":$V{TOTAL_DELTA})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{TOTAL_0_RATIO}-$V{TOTAL_1_RATIOX}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="105" y="0" width="50" height="15" uuid="9b91904d-8fc9-4cc4-9643-edc6304a53e2"/>
