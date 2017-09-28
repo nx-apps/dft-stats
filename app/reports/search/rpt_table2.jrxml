@@ -442,7 +442,7 @@
 				<textFieldExpression><![CDATA[$V{SUM_AVG_AMT_BAHT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="566" y="20" width="236" height="60" uuid="642cb296-c971-4144-bbb6-efa12b042506"/>
+				<reportElement x="482" y="20" width="320" height="60" uuid="642cb296-c971-4144-bbb6-efa12b042506"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
