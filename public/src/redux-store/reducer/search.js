@@ -87,15 +87,21 @@ export function searchAction(store) {
                 });
         },
         GET_SEARCH_ALL(data) {
+            this.fire('toast', { status: 'load', text: 'กำลังบันทึกข้อมูล...' })
             axios.post('/search', data)
                 .then((response) => {
-                    store.dispatch({ type: 'GET_SEARCH_ALL', payload: response.data })
+                    this.fire('toast', {
+                        status: 'success', text: 'ค้นหาสำเร็จ', callback() {
+                            store.dispatch({ type: 'GET_SEARCH_ALL', payload: response.data })
+                        }
+                    });
+
                 })
                 .catch(function (error) {
                     ////console.log(error);
                 });
         },
-        SET_SEARCH(data){
+        SET_SEARCH(data) {
             // console.log(data);
             store.dispatch({ type: 'SET_SEARCH', payload: data })
         }

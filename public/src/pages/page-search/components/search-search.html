@@ -598,12 +598,13 @@
             },
             searchItem(e) {
                 let result = this._getValueInput(this.columns, 'input_')
-                if (result.countPropertity > 0) {
-                    this.dataUse.map((item, index) => {
-                        // console.log(checkIsHave(this.dataUse, [index], result.data));
+                this.dataUse.map((item, index) => {
+                    if (result.countPropertity > 0) {
                         this.set('dataUse.' + index + '.hidden', this._checkPropIsMath(item, result.data))
-                    })
-                }
+                    } else {
+                        this.set('dataUse.' + index + '.hidden', false)
+                    }
+                })
             },
             searchItemGroup(e) {
                 let result = this._getValueInput(this.columns, 'input_group_')
@@ -621,7 +622,6 @@
                     this.notifyPath('dataUseGroup.' + index)
 
                     return item
-
                 })
                 this.notifyPath('dataUseGroup')
                 // console.log(this.dataUseGroup);
@@ -676,7 +676,7 @@
                 //         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
                 //     }
                 // })
-                // console.log(item.value);
+                // console.log(item.vsalue);
                 // console.log(item,indexRoot,checkHost,result);
             },
             getCheckChild(e) {
