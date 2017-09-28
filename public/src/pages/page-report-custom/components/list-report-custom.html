@@ -144,7 +144,7 @@
                     </div>
                     <div class="flex" style=" margin-right: 30px">
                         <!--  -->
-                        <gl-form-input label="จำนวนปีที่ต้องการดู:"  allowed-pattern="[1-4]" placeholder="จำนวนปีที่ต้องการดู" type="number" hidden="[[checkReportYear(param.report_id)]]"
+                        <gl-form-input label="จำนวนปีย้อนหลัง:"  allowed-pattern="[1-4]" placeholder="จำนวนปีย้อนหลัง" type="number" hidden="[[checkReportYear(param.report_id)]]"
                             value="{{data.backYear}}" min="1" max="4" maxlength="1"></gl-form-input>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                     type: Object,
                     value: {
                         year: '',
-                        month: '', type: 'PDF'
+                        month: '', export: 'PDF'
                     }
                 },
                 zoneList: {
@@ -241,7 +241,7 @@
                 let link = e.model.item.report_link
                 let type = e.currentTarget.id
                 let report_prama = e.model.item.report_prama
-                this.set('data.type', type)
+                this.set('data.export', type)
                 // this.set('data.link', link)
                 this.set('param.report_id', e.model.item.report_id)
                 this.set('param.report_prama', report_prama)
