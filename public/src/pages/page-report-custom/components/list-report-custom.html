@@ -11,6 +11,8 @@
 
 <link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
 
+<link rel="import" href="../../components/common-logic.html">
+
 <link rel="import" href="./../../components/page-style.html">
 
 <dom-module id="list-report-custom">
@@ -125,7 +127,7 @@
                         </div>
                     </div>
                     <div class="flex" style=" margin-right: 30px">{{getMonth(data.modelYear)}}
-                        <gl-combo-box id="priority" label="ปี" always-float-label item-label-path="label" item-value-path="value" items="{{yearList}}"
+                        <gl-combo-box class="required" required id="priority" label="ปี" always-float-label item-label-path="label" item-value-path="value" items="{{yearList}}"
                             value="{{data.modelYear}}">
                             <template>
                                 [[item.label]]
@@ -133,7 +135,7 @@
                         </gl-combo-box>
                     </div>
                     <div class="flex" style=" margin-right: 30px">
-                        <gl-combo-box id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value" items="{{monthList}}"
+                        <gl-combo-box class="required" required id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value" items="{{monthList}}"
                             value="{{data.modelMonth}}">
                             <template>
                                 [[item.label]]
@@ -141,9 +143,9 @@
                         </gl-combo-box>
                     </div>
                     <div class="flex" style=" margin-right: 30px">
-                            <!--  -->
-                        <gl-form-input label="จำนวนปีที่ต้องการดู:" placeholder="จำนวนปีที่ต้องการดู" type="number"  hidden="[[checkReportYear(param.report_id)]]"
-                            value="{{data.backYear}}" min="1" max="999"></gl-form-input>
+                        <!--  -->
+                        <gl-form-input label="จำนวนปีที่ต้องการดู:"  allowed-pattern="[1-4]" placeholder="จำนวนปีที่ต้องการดู" type="number" hidden="[[checkReportYear(param.report_id)]]"
+                            value="{{data.backYear}}" min="1" max="4" maxlength="1"></gl-form-input>
                     </div>
                 </div>
             </paper-dialog-scrollable>
@@ -161,7 +163,7 @@
         Polymer({
             is: 'list-report-custom',
             behaviors: [
-                ReduxBehavior, nylonBehavior ,MonthBehavior
+                ReduxBehavior, nylonBehavior, MonthBehavior ,commonLogic
             ],
             properties: {
                 data: {
@@ -260,8 +262,23 @@
                     return false
                 return true
             },
+            // checkValue(e) {
+            //     let value = Number(e.detail.value)
+            //     // console.log(value < 1);
+
+            //     if (value < 1 || value > 4) {
+            //         console.log(1111);
+            //         if (value !== ' ') {
+            //             // console.log(this.data.backYear);
+            //             this.set('data.backYear', 1)
+            //         }
+            //     }
+
+            // },
             printReport() {
-                const _filterChecked = (data) => {
+                // console.log(this.validateForm('.required'))
+                if(this.validateForm('.required')){
+                    const _filterChecked = (data) => {
                     return data.filter((item) => {
                         return item.check === true
                     })
@@ -269,7 +286,7 @@
                 let Check = _filterChecked(this.zoneList)
                 let newData = this.data
                 newData.zoneName = String(Check.map(item => item.value))
-                console.log(this.genUrl(newData));
+                // console.log(this.genUrl(newData));
                 // let openPost = (url, variables) => {
                 //     var form = document.createElement("form");
                 //     form.setAttribute("method", "post");
@@ -288,7 +305,7 @@
                 // openPost(url, newData)
                 switch (this.param.report_id) {
                     case 1:
-                        window.open('./api/report/custom/whiterice?' +this.genUrl(newData))
+                        window.open('./api/report/custom/whiterice?' + this.genUrl(newData))
                         break;
                     case 2:
                         window.open('./api/report/custom/allrice?' + this.genUrl(newData))
@@ -297,11 +314,13 @@
                         window.open('./api/report/custom/hommali?' + this.genUrl(newData))
                         break;
                     case 4:
-                        window.open('./api/report/custom/year?'+this.genUrl(newData))
+                        window.open('./api/report/custom/year?' + this.genUrl(newData))
                         break;
                     default:
                         break;
                 }
+                }
+                
 
             }
 
