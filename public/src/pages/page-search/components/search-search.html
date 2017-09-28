@@ -5,10 +5,13 @@
 <link rel="import" href="./../../../../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="./../../../../bower_components/paper-radio-group/paper-radio-group.html">
-<link rel="import" href="./../../components/page-style.html">
-<link rel="import" href="./../../components/common-logic.html">
 
 <link rel="import" href="../../../../bower_components/iron-collapse/iron-collapse.html">
+
+<link rel="import" href="../../../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../components/common-logic.html">
 
 <link rel="import" href="../../../../bower_components/nylon-tag/nylon-tag.html">
 
@@ -94,6 +97,10 @@
                 padding-left: 60px;
             }
 
+            .text-row-header {
+                text-align: left;
+            }
+
             paper-icon-button .hamonize {
                 margin-top: -50px;
             }
@@ -170,8 +177,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-body">
-
-                            <template is="dom-repeat" items={{value}}>
+                            <template is="dom-repeat" items={{value}} initial-count="20">
                                 <tr>
                                     <td>{{_Obindex(index)}}</td>
                                     <td>{{item.id}}</td>
@@ -198,28 +204,100 @@
             <h2>รายชื่อรายการ</h2>
             <!-- <paper-dialog-scrollable> -->
             <div name="list">
-                <div class="horizontal layout header-item" warp>
-                    <div class="header-div flex"></div>
-                    <template is="dom-repeat" items={{columns}}>
-                        <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                            <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                <div class="horizontal center layout header-item" warp style="height: 20px;">
+                    <div class="header-div flex">
+                        <div style="padding: 10px 15px;">
+                            รูปแบบ
+                            <paper-radio-group selected="{{typeSelete}}">
+                                <paper-radio-button name="list">รายการ</paper-radio-button>
+                                <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                            </paper-radio-group>
                         </div>
-                    </template>
-                </div>
-                <div class="subdiv">
-                    <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main">
-                        <div hidden="{{main.hidden}}">
-                            <div class="horizontal layout main-item">
-                                <div class="row flex">
-                                    <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
-                                </div>
-                                <template is="dom-repeat" items={{columns}}>
-                                    <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
-                                </template>
-                            </div>
-                    </template>
+                    </div>
+                    <div class="header-div flex">
                     </div>
                 </div>
+                <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                    <div name="list">
+                        <div class="horizontal layout header-item" warp>
+                            <div class="header-div flex"></div>
+                            <template is="dom-repeat" items={{columns}} initial-count="20">
+                                <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                    <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="subdiv">
+                            <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
+                                <div hidden="{{main.hidden}}">
+                                    <div class="horizontal layout main-item">
+                                        <div class="flex">
+                                            <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
+                                        </div>
+                                        <template is="dom-repeat" items={{columns}}>
+                                            <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div name="group">
+                        <div class="horizontal layout header-item" warp>
+                            <div class=""></div>
+                            <div class="header-div flex"></div>
+                            <div class="header-div flex-3">ชื่อกลุ่ม</div>
+                            <template is="dom-repeat" items={{columns}} initial-count="20">
+                                <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                    <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                </div>
+                            </template>
+                            <!-- <div class="header-div flex-3">
+                                <gl-form-input label="[[localizeContract.hm_code]]" always-float-label type="search" disabled="{{!dataSeleted.isYear}}" value="{{dataSeleted.hamonize_code}}"
+                                    on-value-changed="searchHamonizeCode"></gl-form-input>
+                            </div> -->
+                        </div>
+
+                        <div class="subdiv">
+                            <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
+                                <div class="horizontal layout center" hidden="{{item.hiddend}}" warp style="    height: 50px;
+                                line-height: 50px;">
+                                    <div class="">
+                                        <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
+                                    </div>
+                                    <div class="flex">
+                                        <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild" disabled="[[commonState.btnDisabled]]">
+                                    </div>
+                                    <div class="flex-3 text-row-header">[[item.group_name]]</div>
+                                    <div class="flex-3"></div>
+
+                                    <div class="flex-3">-</div>
+                                </div>
+                                <iron-collapse id="collapse-[[indexroot]]">
+                                    <template is="dom-repeat" items={{item.group_item}} as="subChild">
+                                        <div hidden="{{subChild.hiddend}}">
+                                            <div class="horizontal layout sub-item">
+                                                <div class=""></div>
+                                                <div class="row flex">
+                                                    <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}" on-tap="getSelect" disabled="[[commonState.btnDisabled]]">
+                                                </div>
+                                                <div class="row flex-2">[[item.name_th]]</div>
+                                                <template is="dom-repeat" items={{columns}}>
+                                                    <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
+                                                </template>
+                                                <!-- <div class="row flex-3">[[subChild.hamonize_code]]</div>
+                                                <div class="row flex-3">[[subChild.hamonize_th]]</div> -->
+                                            </div>
+                                        </div>
+                                    </template>
+                                </iron-collapse>
+                            </template>
+                        </div>
+                    </div>
+                </iron-pages>
+
+
+
                 <!-- </paper-dialog-scrollable>
             <div class="buttons">
                 <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
@@ -247,6 +325,10 @@
                     statePath: 'search.hamonizeList',
                     observer: '_cloneDataHamonize'
                 },
+                hamonizeGroupList: {
+                    statePath: 'search.hamonizeGroupList',
+                    observer: '_cloneDataHamonizeGroup'
+                },
                 companyList: {
                     statePath: 'search.companyList',
                     observer: '_cloneDataCompany'
@@ -259,11 +341,15 @@
                     type: Object,
                     value: {
                         hamonizeList: [],
+                        hamonizeGroupList: [],
                         companyList: [],
                         countryList: [],
                     }
                 },
                 dataUse: {
+                    type: Array
+                },
+                dataUseGroup: {
                     type: Array
                 },
                 myItems: {
@@ -297,12 +383,19 @@
                     value: {}
                 },
                 columns: Array,
+                typeSelete: {
+                    type: String,
+                    value: 'list'
+                }
             },
             observers: [
                 'checkPullData(data,data.*)'
             ],
             _cloneDataHamonize(hamonize) {
                 this._cloneData(hamonize, 'hamonizeList')
+            },
+            _cloneDataHamonizeGroup(hamonizeGroup) {
+                this._cloneDataGroup(hamonizeGroup, 'hamonizeGroupList')
             },
             _cloneDataCompany(company) {
                 this._cloneData(company, 'companyList')
@@ -315,6 +408,21 @@
                 newData.map(item => {
                     item.hidden = false
                     item.check = false
+                    return item
+                })
+                this.set(`dataSelect.${name}`, newData)
+            },
+            _cloneDataGroup(data, name) {
+                let newData = JSON.parse(JSON.stringify(data))
+                newData.map(item => {
+                    item.hidden = false
+                    item.check = false
+
+                    item.group_item.map((sub_item) => {
+                        sub_item.hidden = false
+                        sub_item.check = false
+                        return sub_item
+                    })
                     return item
                 })
                 this.set(`dataSelect.${name}`, newData)
@@ -390,33 +498,36 @@
                 switch (value) {
                     case 'hamonize':
                         this.set('dataUse', this.dataSelect.hamonizeList)
+                        this.set('dataUseGroup', this.dataSelect.hamonizeGroupList)
                         break;
                     case 'country':
                         this.set('dataUse', this.dataSelect.countryList)
+                        this.set('dataUseGroup', [])
                         break;
                     case 'company':
                         this.set('dataUse', this.dataSelect.companyList)
+                        this.set('dataUseGroup', [])
                         break;
                     default:
                         break;
                 }
-                // console.log(this.dataUse);
                 this.set('columns', data.item.fields)
-                // columns
-
                 this.$.itemGroup.open()
-                // console.log(value)
             },
             _showData(main, item) {
-                console.log(main, item);
                 return main[item]
             },
-            searchItem(e) {
-                let data = {},
+            _showDataGroup(main, item) {
+                // console.log(main, item);
+                return main[item]
+            },
+            _getValueInput(columns, inputName) {
+                let comBind = {},
+                    data = {},
                     countPropertity = 0
-                for (var index = 0; index < this.columns.length; index++) {
-                    var element = this.columns[index]
-                    let inputElement = 'input_' + element
+                for (var index = 0; index < columns.length; index++) {
+                    var element = columns[index]
+                    let inputElement = inputName + element
                     if (Polymer.dom(this.root).querySelector('#' + inputElement) !== undefined &&
                         Polymer.dom(this.root).querySelector('#' + inputElement) !== null &&
                         Polymer.dom(this.root).querySelector('#' + inputElement).value !== '') {
@@ -424,29 +535,62 @@
                         countPropertity++
                     }
                 }
-                if (countPropertity > 0) {
-                    const checkIsHave = (data, index, properties) => {
-                        // console.log(data,index,properties);
-                        let arrIsTrue = []
-                        for (var key in properties) {
-                            if (properties.hasOwnProperty(key)) {
-                                let prop = properties[key]
-                                let str1 = String(data[index][key]),
-                                    str2 = String(properties[key])
-                                // gเช็ดดว่าเป็นภาษาอังกฏษเปล่า
-                                if (/^[a-zA-Z]+$/.test(String(properties[key]))) {
-                                    str1 = str1.toLowerCase()
-                                    str2 = str2.toLowerCase()
-                                }
-                                arrIsTrue.push(str1.search(str2.toLowerCase()) > -1 ? false : true)
-                            }
+                return comBind = {
+                    data: data,
+                    countPropertity: countPropertity
+                }
+            },
+            _checkPropIsMath(data, properties) {
+                let arrIsTrue = []
+                for (var key in properties) {
+                    if (properties.hasOwnProperty(key)) {
+                        let prop = properties[key]
+                        let str1 = String(data[key]),
+                            str2 = String(prop)
+                        // gเช็ดดว่าเป็นภาษาอังกฏษเปล่า
+                        if (/^[a-zA-Z]+$/.test(String(prop))) {
+                            str1 = str1.toLowerCase()
+                            str2 = str2.toLowerCase()
                         }
-                        return arrIsTrue.every(elem => elem == true)
+                        // console.log(str1,str2);
+                        arrIsTrue.push(str1.search(str2.toLowerCase()) > -1 ? false : true)
                     }
+                }
+                return !arrIsTrue.every(elem => elem === false)
+            },
+            searchItem(e) {
+                let result = this._getValueInput(this.columns, 'input_')
+                if (result.countPropertity > 0) {
                     this.dataUse.map((item, index) => {
-                        this.set('dataUse.' + index + '.hidden', checkIsHave(this.dataUse, [index], data))
+                        // console.log(checkIsHave(this.dataUse, [index], result.data));
+                        this.set('dataUse.' + index + '.hidden', this._checkPropIsMath(item, result.data))
                     })
                 }
+            },
+            searchItemGroup(e) {
+                let result = this._getValueInput(this.columns, 'input_group_')
+                this.dataUseGroup.map((item, index) => {
+                    console.log(item);
+                    item.group_item.map((sub_item, sub_index) => {
+                        console.log(this.dataUseGroup[index].group_item[sub_index].hidden)
+                        // this.set('dataUseGroup.' + index + 'group_item.' + sub_index + '.hidden', )
+                    })
+                    return item
+
+                })
+                // console.log(result);
+            },
+            toggle: function (e) {
+                let index = e.currentTarget.index
+                if (e.currentTarget.icon === 'expand-more') {
+                    e.currentTarget.icon = 'chevron-right'
+                } else {
+                    e.currentTarget.icon = 'expand-more'
+                }
+                // console.log(e.currentTarget.icon);
+                // console.log(this.$$('#collapse-' + index))
+                // console.log(this.$$('#collapse-' + index).open);
+                this.$$('#collapse-' + index).toggle()
             },
             checkPullData(data, actionData) {
                 if (data.dateStart !== undefined && data.dateEnd !== undefined) {
@@ -461,13 +605,12 @@
                         data.SelectAll = true
                     }
                     this.dispatchAction('GET_SEARCH_HAMONIZE', this.genUrl(data))
-                    // this.dispatchAction('GET_SEARCH_HAMONIZE_GROUP', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_HAMONIZE_GROUP', this.genUrl(data))
                     this.dispatchAction('GET_SEARCH_COMPANY', this.genUrl(data))
                     this.dispatchAction('GET_SEARCH_COUNTRY', this.genUrl(data))
-                    console.log(this.genUrl(data))
+                    // console.log(this.genUrl(data))
                     // this.genUrl()
                 }
-
             }
         });
     </script>

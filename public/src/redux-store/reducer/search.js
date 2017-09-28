@@ -3,6 +3,7 @@ import { commonAction } from '../config'
 
 const initialState = {
     hamonizeList: [],
+    hamonizeGroupList: [],
     companyList: [],
     countryList: [],
     searchList: []
@@ -13,6 +14,8 @@ export function searchReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_SEARCH_HAMONIZE':
             return Object.assign({}, state, { hamonizeList: action.payload });
+        case 'GET_SEARCH_HAMONIZE_GROUP':
+            return Object.assign({}, state, { hamonizeGroupList: action.payload });
         case 'GET_SEARCH_COMPANY':
             return Object.assign({}, state, { companyList: action.payload });
         case 'GET_SEARCH_COUNTRY':
@@ -43,7 +46,7 @@ export function searchAction(store) {
         //   },
         GET_SEARCH_HAMONIZE(data) {
             // console.log(data);
-            axios.get('/hamonize?'+ data)
+            axios.get('/hamonize?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_HAMONIZE', payload: response.data })
                 })
@@ -51,8 +54,19 @@ export function searchAction(store) {
                     ////console.log(error);
                 });
         },
+        GET_SEARCH_HAMONIZE_GROUP(data) {
+            // console.log(data);
+            axios.get('/hamonize/group?' + data)
+                .then((response) => {
+                    store.dispatch({ type: 'GET_SEARCH_HAMONIZE_GROUP', payload: response.data })
+                })
+                .catch(function (error) {
+                    ////console.log(error);
+                });
+        },
+
         GET_SEARCH_COMPANY(data) {
-            axios.get('/company?'+ data)
+            axios.get('/company?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_COMPANY', payload: response.data })
                 })
@@ -61,7 +75,7 @@ export function searchAction(store) {
                 });
         },
         GET_SEARCH_COUNTRY(data) {
-            axios.get('/country?'+ data)
+            axios.get('/country?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_COUNTRY', payload: response.data })
                 })
