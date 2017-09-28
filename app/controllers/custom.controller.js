@@ -24,3 +24,10 @@ exports.month = function (req, res) {
             res.json(data)
         })
 }
+exports.typerice = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT typerice_name as value,typerice_name as label from custom_hscode group by typerice_name`, [],
+        function (err, data) {
+            res.send(data)
+        })
+}
