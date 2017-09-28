@@ -19,7 +19,7 @@ exports.whiterice = function (req, res) {
                 param.year = req.query.year;
                 param.current_date = new Date().toISOString().slice(0, 10);
                 param = rpt.keysToUpper(param);
-                res.json(param)
+                // res.json(d2)
                 res.ireport("custom/rpt_custom_export_whiterice.jasper", req.query.export || "pdf", d2, param)
                 //     approveDate: req.query.date,
                 //     FILE_TYPE: req.query.export,
