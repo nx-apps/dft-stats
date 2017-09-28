@@ -170,12 +170,13 @@
             </div>
             <div class="flex-horizontal-with-ratios">
                 <div class="flex-3"></div>
-                <div class="flex-5">
+                <div class="flex-6">
                     <table class="gl-table-default">
                         <thead class="table-head">
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ</th>
+                                <th>รายการที่เลือก</th>
                                 <th>ตั้งค่า</th>
                             </tr>
                         </thead>
@@ -184,6 +185,7 @@
                                 <tr>
                                     <td>{{_Obindex(index)}}</td>
                                     <td>{{item.id}}</td>
+                                    <td>{{painText(item,dataSeleted.*)}}</td>
                                     <td>
                                         <paper-button raised on-tap="getSelete">ตั้งค่า</paper-button>
                                     </td>
@@ -192,14 +194,14 @@
 
                             <template is="dom-if" if={{_ObIsHave(value,value.*)}}>
                                 <tr>
-                                    <td colspan="3" style="text-align: center;">ไม่มีข้อมูล</td>
+                                    <td colspan="4" style="text-align: center;">ไม่มีข้อมูล</td>
                                 </tr>
                             </template>
 
                         </tbody>
                     </table>
                 </div>
-                <div class="flex-4"></div>
+                <div class="flex-3"></div>
             </div>
 
         </div>
@@ -498,6 +500,17 @@
                 return data
             },
             // end tag
+            painText(value) {
+                let text = String(this.dataSeleted[value.value + 'List'].map(item => item.label)).slice(0, 30) || ''
+                let text2 = ''
+                // console.log(text);
+                if (text.length > 0) {
+                    text2 = text + '...'
+                } else {
+                    text2 = text
+                }
+                return text2
+            },
             _setDate(e) {
                 e.dateStart = '2017-09-01'
                 e.dateEnd = '2017-09-22'
@@ -651,8 +664,8 @@
                 let checkHost = e.currentTarget.checked
                 let result = this._getValueInput(this.columns, 'input_group_')
                 this.dataUseGroup[indexRoot].group_item.map((item, index) => {
-                    if (!this._checkPropIsMath(item, result.data) ) {
-                    this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
+                    if (!this._checkPropIsMath(item, result.data)) {
+                        this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
                     }
                 })
             },
@@ -727,6 +740,7 @@
             },
             getSearchValue() {
                 let dataSave = this._getData()
+                this.dispatchAction('SET_SEARCH',dataSave)
                 this.dispatchAction('GET_SEARCH_ALL', dataSave)
             },
             settingReport() {

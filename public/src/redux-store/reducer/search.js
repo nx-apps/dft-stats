@@ -6,7 +6,8 @@ const initialState = {
     hamonizeGroupList: [],
     companyList: [],
     countryList: [],
-    searchList: []
+    searchList: [],
+    settingSearch: {}
 }
 
 export function searchReducer(state = initialState, action) {
@@ -22,6 +23,8 @@ export function searchReducer(state = initialState, action) {
             return Object.assign({}, state, { countryList: action.payload });
         case 'GET_SEARCH_ALL':
             return Object.assign({}, state, { searchList: action.payload });
+        case 'SET_SEARCH':
+            return Object.assign({}, state, { settingSearch: action.payload });
         default:
             return state
     }
@@ -91,6 +94,10 @@ export function searchAction(store) {
                 .catch(function (error) {
                     ////console.log(error);
                 });
+        },
+        SET_SEARCH(data){
+            // console.log(data);
+            store.dispatch({ type: 'SET_SEARCH', payload: data })
         }
 
     }]
