@@ -82,8 +82,8 @@ exports.hommalirice = function (req, res) {
                 param.current_date = new Date().toISOString().slice(0, 10);
                 param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณมูลค่าการส่งออกข้าวหอมมะลิไทย'
                 param = rpt.keysToUpper(param);
-                // res.json(param)
-                res.ireport("custom/rpt_custom_export_hommalirice.jasper", req.query.export || "pdf", d2, param)
+                res.json(param)
+                // res.ireport("custom/rpt_custom_export_hommalirice.jasper", req.query.export || "pdf", d2, param)
                 //     approveDate: req.query.date,
                 //     FILE_TYPE: req.query.export,
                 //     OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ปริมาณและมูลค่าการส่งออกข้าวขาวของไทย'
