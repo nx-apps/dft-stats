@@ -69,13 +69,13 @@
 		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
 	<variable name="RATIO_0" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{0_weight}==0?"":($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{0_weight}==null?"":($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1x" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weightx}==0?"":($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{1_weightx}==null?"":($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weight}==0?"":($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{1_weight}==null?"":($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
 	</variable>
 	<group name="GP_ZONE">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
@@ -386,7 +386,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weight}==0?"":$F{1_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{1_weight}==null?"":$F{1_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="335" y="0" width="55" height="15" uuid="41302e87-657a-47f3-b557-179330fccc17"/>
@@ -425,7 +425,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{0_weight}==0?"":$F{0_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{0_weight}==null?"":$F{0_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="280" y="0" width="55" height="15" uuid="50466292-6818-4175-9e04-278cfd323554"/>
@@ -438,7 +438,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weightx}==0?"":$F{1_weightx})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{1_weightx}==null?"":$F{1_weightx})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="500" y="0" width="55" height="15" uuid="1bc33a27-29e9-472c-8a71-2c53a96eebb3"/>

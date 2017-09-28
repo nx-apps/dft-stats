@@ -1,11 +1,6 @@
 var rpt = require('../../global/report');
 exports.whiterice = function (req, res) {
 
-    // var monthArr = [];
-    // for (var i = Number(req.query.startMonth); i <= Number(req.query.endMonth); i++) {
-    //     var n = (i < 10 ? '0' + i : i);
-    //     monthArr.push(n)
-    // }
     req.jdbc.query("mssql", "exec sp_stats_rpt_custom_whiterice @month=?, @year=?, @zone=?", [req.query.modelMonth, req.query.modelYear, req.query.zoneName],
         function (err, data) {
             // res.send(data);
@@ -21,13 +16,7 @@ exports.whiterice = function (req, res) {
             param = rpt.keysToUpper(param);
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณและมูลค่าการส่งออกข้าวขาวของไทย'
-            // console.log(param.OUTPUT_NAME)
-            // res.json(param)
             res.ireport("custom/rpt_custom_export_whiterice.jasper", req.query.export || "pdf", data, param)
-            //     approveDate: req.query.date,
-            //     FILE_TYPE: req.query.export,
-            //     OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ปริมาณและมูลค่าการส่งออกข้าวขาวของไทย'
-            // });
         })
 }
 exports.exportrice = function (req, res) {
