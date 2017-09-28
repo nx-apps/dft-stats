@@ -1,21 +1,26 @@
+var rpt = require('../global/report');
 exports.zone = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT zone_name as zoneName from custom_country group by zone_name`, [],
+    j.query("mssql", `SELECT zone_name as value,zone_name as label from custom_country group by zone_name`, [],
         function (err, data) {
             res.send(data)
         })
 }
 exports.year = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT model_year as modelYear from custom group by model_year`, [],
+    j.query("mssql", `SELECT model_year as value,model_year as label from custom group by model_year`, [],
         function (err, data) {
             res.send(data)
         })
 }
 exports.month = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT model_month as modelMonth from custom where model_year = ? group by model_month`, [req.query.modelYear],
+    j.query("mssql", `SELECT model_month as value from custom where model_year = ? group by model_month`, [req.query.modelYear],
         function (err, data) {
-            res.send(data)
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                data[i].label = rpt.getMonthName(Number(data[i]['value']))
+            }
+            res.json(data)
         })
 }
