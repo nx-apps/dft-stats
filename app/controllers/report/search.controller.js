@@ -110,6 +110,7 @@ exports.threeinone = function (req, res) {
         val.value1 || '', val.value2 || '', val.value3 || ''],
         function (err, data) {
             data = JSON.parse(data);
+            res.json(data)
             var filename = 'rpt_' + val.view
                 + (val.field3 != '' && typeof val.field3 !== 'undefined' ? '3' : (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1'))
                 + (val.tranType == 'a' ? '_all' : '');
