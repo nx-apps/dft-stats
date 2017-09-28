@@ -309,8 +309,8 @@
                 this.set('total.net_weight_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0)))
                 this.set('total.fob_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0)))
                 this.set('total.fob_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0)))
-                this.set('total.avg_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0),dataList.length))
-                this.set('total.avg_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0),dataList.length))
+                this.set('total.avg_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0)/dataList.length))
+                this.set('total.avg_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0)/dataList.length))
 
 
             }
