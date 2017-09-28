@@ -46,13 +46,13 @@
 	<variable name="SUM_FOB_B_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_B_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Sum">
+	<variable name="SUM_AVG_B_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_baht}]]></variableExpression>
 	</variable>
 	<variable name="SUM_FOB_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Sum">
+	<variable name="SUM_AVG_G1" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD3" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt}]]></variableExpression>
 	</variable>
 	<variable name="SUM_NET_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Sum">
@@ -61,13 +61,13 @@
 	<variable name="SUM_FOB_B_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_baht}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_B_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Sum">
+	<variable name="SUM_AVG_B_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_baht}]]></variableExpression>
 	</variable>
 	<variable name="SUM_FOB_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Sum">
+	<variable name="SUM_AVG_G2" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD2" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt}]]></variableExpression>
 	</variable>
 	<variable name="SUM_NET_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
@@ -76,13 +76,13 @@
 	<variable name="SUM_FOB_B_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
 		<variableExpression><![CDATA[$V{SUM_FOB_B_G1}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_B_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
+	<variable name="SUM_AVG_B_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Average">
 		<variableExpression><![CDATA[$V{SUM_AVG_B_G1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_FOB_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
 		<variableExpression><![CDATA[$V{SUM_FOB_G1}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
+	<variable name="SUM_AVG_G3" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Average">
 		<variableExpression><![CDATA[$V{SUM_AVG_G1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_NET" class="java.lang.Double" calculation="Sum">

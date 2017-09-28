@@ -32,10 +32,10 @@
 	<variable name="SUM_FOB_AMT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT_BAHT" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT_BAHT" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_baht}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt}]]></variableExpression>
 	</variable>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
