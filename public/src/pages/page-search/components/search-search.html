@@ -249,7 +249,7 @@
                                     <div hidden="{{main.hidden}}">
                                         <div class="horizontal layout main-item">
                                             <div class="flex">
-                                                <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" disabled="[[commonState.btnDisabled]]">
+                                                <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" on-tap="getCheckGroup">
                                             </div>
                                             <template is="dom-repeat" items={{columns}}>
                                                 <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
@@ -658,6 +658,27 @@
                     // this.genUrl()
                 }
             },
+            getCheckGroup(e) {
+                let value = e.model.__data__.main.value
+                let checkHost = e.currentTarget.checked
+                // let result = this._getValueInput(this.columns, 'input_')
+                this.dataUseGroup.map((group, index1) => {
+                    group.group_item.map((item, index2) => {
+                        if (item.value === value) {
+                            this.set('dataUseGroup.' + index1 + '.group_item.' + index2 + '.check', checkHost)
+                        }
+                        return item
+                    })
+                    return group
+                })
+                // this.dataUseGroup[indexRoot].group_item.map((item, index) => {
+                //     if (!this._checkPropIsMath(item, result.data)) {
+                //         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
+                //     }
+                // })
+                // console.log(item.value);
+                // console.log(item,indexRoot,checkHost,result);
+            },
             getCheckChild(e) {
                 let item = e.model.__data__.item
                 let indexRoot = e.currentTarget.id
@@ -740,7 +761,7 @@
             },
             getSearchValue() {
                 let dataSave = this._getData()
-                this.dispatchAction('SET_SEARCH',dataSave)
+                this.dispatchAction('SET_SEARCH', dataSave)
                 this.dispatchAction('GET_SEARCH_ALL', dataSave)
             },
             settingReport() {
