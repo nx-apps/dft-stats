@@ -141,7 +141,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_2_RATIO}==0?"":$V{SUM_2_RATIO})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_2_RATIO}==null?0:$V{SUM_2_RATIO})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
 					<reportElement x="255" y="0" width="50" height="15" uuid="1bedebec-c733-4be6-9550-c6f837efe8ff"/>
@@ -154,7 +154,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_1_RATIO}==0?"":$V{SUM_1_RATIO})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_1_RATIO}==null?0:$V{SUM_1_RATIO})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
 					<reportElement x="505" y="0" width="50" height="15" uuid="f6036337-fac8-46a4-bd89-ece548a1fa3b"/>
@@ -180,7 +180,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_1_WEIGHTX}==0?"":$V{SUM_1_WEIGHTX})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_1_WEIGHTX}==null?0:$V{SUM_1_WEIGHTX})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
 					<reportElement x="405" y="0" width="50" height="15" uuid="73906395-9b95-4b27-8ef8-029174ffe8c2"/>
@@ -193,7 +193,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_0_WEIGHT}==0?"":$V{SUM_0_WEIGHT})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_0_WEIGHT}==null?0:$V{SUM_0_WEIGHT})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
 					<reportElement x="205" y="0" width="50" height="15" uuid="47c13f17-bcd7-46d4-b5b2-58791d947ceb"/>
@@ -206,7 +206,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_1_WEIGHT}==0?"":$V{SUM_1_WEIGHT})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_1_WEIGHT}==null?0:$V{SUM_1_WEIGHT})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
 					<reportElement x="355" y="0" width="50" height="15" uuid="5346bcf8-f67f-40a9-bd5b-c5673fdb74dc"/>
@@ -219,7 +219,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_1_RATIOX}==0?"":$V{SUM_1_RATIOX})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_1_RATIOX}==null?0:$V{SUM_1_RATIOX})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
 					<reportElement x="105" y="0" width="50" height="15" uuid="467c3b0e-8d8c-46e2-97be-b874689156d6"/>
@@ -232,7 +232,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_2_WEIGHT}==0?"":$V{SUM_2_WEIGHT})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_2_WEIGHT}==null?0:$V{SUM_2_WEIGHT})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
 					<reportElement x="455" y="0" width="50" height="15" uuid="0843eed3-c360-49bd-923c-e115ab3076b0"/>
@@ -245,7 +245,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_0_RATIO}==0?"":$V{SUM_0_RATIO})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($V{SUM_0_RATIO}==null?0:$V{SUM_0_RATIO})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -463,7 +463,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weight}==0?"":$F{1_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{1_weight}==null?0:$F{1_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="105" y="0" width="50" height="15" uuid="1ce2b91b-6ff4-44b0-865a-f08b0eeb5504"/>
@@ -476,7 +476,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{2_weight}==0?"":$F{2_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{2_weight}==null?0:$F{2_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="355" y="0" width="50" height="15" uuid="41302e87-657a-47f3-b557-179330fccc17"/>
@@ -515,7 +515,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{0_weight}==0?"":$F{0_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{0_weight}==null?0:$F{0_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="305" y="0" width="50" height="15" uuid="50466292-6818-4175-9e04-278cfd323554"/>
@@ -528,7 +528,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weightx}==0?"":$F{1_weightx})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{1_weightx}==null?0:$F{1_weightx})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="1bc33a27-29e9-472c-8a71-2c53a96eebb3"/>
@@ -618,7 +618,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_2_RATIO}==0?"":$V{TOTAL_2_RATIO})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_2_RATIO}==null?0:$V{TOTAL_2_RATIO})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="205" y="0" width="50" height="15" uuid="083bbb66-5851-4454-bab0-69116b9c713c"/>
@@ -631,7 +631,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHT}==0?"":$V{TOTAL_1_WEIGHT})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHT}==null?0:$V{TOTAL_1_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="455" y="0" width="50" height="15" uuid="4021a450-c405-4639-966c-60a9990b4997"/>
@@ -644,7 +644,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_0_RATIO}==0?"":$V{TOTAL_0_RATIO})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_0_RATIO}==null?0:$V{TOTAL_0_RATIO})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="405" y="0" width="50" height="15" uuid="7c8f0bf3-3a53-4a0a-a59f-6a18f8125cc1"/>
@@ -657,7 +657,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_0_WEIGHT}==0?"":$V{TOTAL_0_WEIGHT})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_0_WEIGHT}==null?0:$V{TOTAL_0_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="255" y="0" width="50" height="15" uuid="5e7205bd-c3cf-40fc-8ac4-14cdb73ce16b"/>
@@ -670,7 +670,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_1_RATIO}==0?"":$V{TOTAL_1_RATIO})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_1_RATIO}==null?0:$V{TOTAL_1_RATIO})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="305" y="0" width="50" height="15" uuid="0720e619-ba28-41b8-acff-a77a4a7f3201"/>
@@ -683,7 +683,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHTX}==0?"":$V{TOTAL_1_WEIGHTX})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_1_WEIGHTX}==null?0:$V{TOTAL_1_WEIGHTX})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="355" y="0" width="50" height="15" uuid="ea0b6ac5-5310-4e32-92e9-b1ff2caa6472"/>
@@ -696,7 +696,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_1_RATIOX}==0?"":$V{TOTAL_1_RATIOX})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_1_RATIOX}==null?0:$V{TOTAL_1_RATIOX})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="42e9f9aa-e2e1-4a0b-bf67-6671ba04c4d8"/>
@@ -722,7 +722,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_2_WEIGHT}==0?"":$V{TOTAL_2_WEIGHT})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_2_WEIGHT}==null?0:$V{TOTAL_2_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="355" y="17" width="200" height="20" uuid="a2dfe9b4-5e77-4fa6-94ca-3d65c06c8fd1"/>
