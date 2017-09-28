@@ -16,71 +16,71 @@
 	<parameter name="YEAR_3" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="zone_name" class="java.lang.String"/>
-	<field name="3_weight" class="java.lang.Integer"/>
-	<field name="3_weightw" class="java.lang.Integer"/>
-	<field name="2_weight" class="java.lang.Integer"/>
-	<field name="2_weightw" class="java.lang.Integer"/>
-	<field name="1_weight" class="java.lang.Integer"/>
-	<field name="1_weightw" class="java.lang.Integer"/>
-	<field name="1_weightx" class="java.lang.Integer"/>
-	<field name="1_weightwx" class="java.lang.Integer"/>
-	<field name="0_weight" class="java.lang.Integer"/>
-	<field name="0_weightw" class="java.lang.Integer"/>
-	<variable name="SUM_3_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<field name="3_weight" class="java.lang.Double"/>
+	<field name="3_weightw" class="java.lang.Double"/>
+	<field name="2_weight" class="java.lang.Double"/>
+	<field name="2_weightw" class="java.lang.Double"/>
+	<field name="1_weight" class="java.lang.Double"/>
+	<field name="1_weightw" class="java.lang.Double"/>
+	<field name="1_weightx" class="java.lang.Double"/>
+	<field name="1_weightwx" class="java.lang.Double"/>
+	<field name="0_weight" class="java.lang.Double"/>
+	<field name="0_weightw" class="java.lang.Double"/>
+	<variable name="SUM_3_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{3_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_3_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_3}]]></variableExpression>
 	</variable>
-	<variable name="SUM_2_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_2_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_2_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
 	</variable>
-	<variable name="SUM_1_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_1_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
-	<variable name="SUM_1_WEIGHTX" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_1_WEIGHTX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIOX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
 	</variable>
-	<variable name="SUM_0_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_0_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_0_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_3_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_3_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{3_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_3_RATIO" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_3}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_2_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_2_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_RATIO" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_1_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_1_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIO" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_1_WEIGHTX" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_1_WEIGHTX" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIOX" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_0_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_0_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_0_RATIO" class="java.lang.Double" calculation="Sum">

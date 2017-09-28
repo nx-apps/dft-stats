@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-    <property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
 	<parameter name="ENDMONTH" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String"/>
@@ -11,28 +11,28 @@
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="zone_name" class="java.lang.String"/>
-	<field name="weight" class="java.lang.Integer"/>
+	<field name="weight" class="java.lang.Double"/>
 	<field name="value_b" class="java.lang.Double"/>
 	<field name="value_D" class="java.lang.Double"/>
-	<field name="weight1" class="java.lang.Integer"/>
+	<field name="weight1" class="java.lang.Double"/>
 	<field name="value_b1" class="java.lang.Double"/>
 	<field name="value_D1" class="java.lang.Double"/>
-	<field name="weight2" class="java.lang.Integer"/>
+	<field name="weight2" class="java.lang.Double"/>
 	<field name="value_b2" class="java.lang.Double"/>
 	<field name="value_D2" class="java.lang.Double"/>
-	<field name="weight3" class="java.lang.Integer"/>
+	<field name="weight3" class="java.lang.Double"/>
 	<field name="value_b3" class="java.lang.Double"/>
 	<field name="value_D3" class="java.lang.Double"/>
-	<field name="weight4" class="java.lang.Integer"/>
+	<field name="weight4" class="java.lang.Double"/>
 	<field name="value_b4" class="java.lang.Double"/>
 	<field name="value_D4" class="java.lang.Double"/>
-	<field name="weight5" class="java.lang.Integer"/>
+	<field name="weight5" class="java.lang.Double"/>
 	<field name="value_b5" class="java.lang.Double"/>
 	<field name="value_D5" class="java.lang.Double"/>
-	<field name="sum_weight" class="java.lang.Integer"/>
+	<field name="sum_weight" class="java.lang.Double"/>
 	<field name="sum_value_b" class="java.lang.Double"/>
 	<field name="sum_value_D" class="java.lang.Double"/>
-	<variable name="SUM_WEIGHT" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -41,7 +41,7 @@
 	<variable name="SUM_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D}]]></variableExpression>
 	</variable>
-	<variable name="SUM_WEIGHT1" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT1" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B1" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -50,7 +50,7 @@
 	<variable name="SUM_VALUE_D1" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D1}]]></variableExpression>
 	</variable>
-	<variable name="SUM_WEIGHT2" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT2" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight2}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B2" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -59,7 +59,7 @@
 	<variable name="SUM_VALUE_D2" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D2}]]></variableExpression>
 	</variable>
-	<variable name="SUM_WEIGHT3" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT3" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight3}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B3" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -68,7 +68,7 @@
 	<variable name="SUM_VALUE_D3" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D3}]]></variableExpression>
 	</variable>
-	<variable name="SUM_WEIGHT4" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT4" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight4}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B4" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -77,7 +77,7 @@
 	<variable name="SUM_VALUE_D4" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D4}]]></variableExpression>
 	</variable>
-	<variable name="SUM_WEIGHT5" class="java.lang.Integer" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
+	<variable name="SUM_WEIGHT5" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight5}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_B5" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
@@ -95,7 +95,7 @@
 	<variable name="SUM_S_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{sum_value_D}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B" class="java.lang.Double" calculation="Sum">
@@ -104,7 +104,7 @@
 	<variable name="TOTAL_VALUE_D" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT1" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B1" class="java.lang.Double" calculation="Sum">
@@ -113,7 +113,7 @@
 	<variable name="TOTAL_VALUE_D1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D1}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT2" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT2" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight2}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B2" class="java.lang.Double" calculation="Sum">
@@ -122,7 +122,7 @@
 	<variable name="TOTAL_VALUE_D2" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D2}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT3" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT3" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight3}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B3" class="java.lang.Double" calculation="Sum">
@@ -131,7 +131,7 @@
 	<variable name="TOTAL_VALUE_D3" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D3}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT4" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT4" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight4}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B4" class="java.lang.Double" calculation="Sum">
@@ -140,7 +140,7 @@
 	<variable name="TOTAL_VALUE_D4" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D4}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_WEIGHT5" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_WEIGHT5" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight5}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_B5" class="java.lang.Double" calculation="Sum">
@@ -149,7 +149,7 @@
 	<variable name="TOTAL_VALUE_D5" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_D5}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_S_WEIGHT" class="java.lang.Integer" calculation="Sum">
+	<variable name="TOTAL_S_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{sum_weight}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_S_VALUE_B" class="java.lang.Double" calculation="Sum">
