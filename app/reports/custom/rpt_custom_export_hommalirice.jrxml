@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_hommalirice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b4787b3-db21-4892-80af-83bf72463ef0">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="48"/>
+	<property name="ireport.x" value="119"/>
 	<property name="ireport.y" value="0"/>
+	<import value="nylon.report.*"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
 	<parameter name="ENDMONTH" class="java.lang.String"/>
 	<parameter name="YEAR" class="java.lang.String"/>
@@ -560,8 +561,40 @@
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="10">
+			<textField>
+				<reportElement x="517" y="0" width="30" height="10" uuid="67e85d0f-977b-4696-805c-e2feb3288ad2"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="547" y="0" width="8" height="10" uuid="03bf89ca-5b4c-42d7-9927-0e6da6c02daa"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
-		<band height="55" splitType="Stretch">
+		<band height="48" splitType="Stretch">
 			<textField pattern="#,##0.00">
 				<reportElement x="505" y="0" width="50" height="15" uuid="72768ac5-eced-4f25-ad58-e40048a5e8cb"/>
 				<box leftPadding="2" rightPadding="2">
@@ -693,19 +726,6 @@
 				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D1}==0?"":$V{TOTAL_VALUE_D1})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="450" y="37" width="105" height="10" uuid="86d26477-a542-4af5-a933-4fdbdaf4725f"/>
-				<box leftPadding="2">
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="0" y="17" width="105" height="10" uuid="8c43a74e-37f0-4324-b588-0c351e75feb9"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.0"/>
@@ -718,32 +738,15 @@
 				</textElement>
 				<text><![CDATA[ที่มา : กรมศุลกากร]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="450" y="27" width="105" height="10" uuid="8216b24a-181c-4071-9b0a-e755424d0fd0"/>
-				<box leftPadding="2">
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+			<textField>
+				<reportElement x="433" y="17" width="122" height="30" uuid="f3ab0207-1df3-4ecf-9077-3c987bd6c539"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[กรมการค้าต่างประเทศ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="450" y="17" width="105" height="10" uuid="e895076d-b5f5-45fc-8b16-9a23c582e93d"/>
-				<box leftPadding="2">
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[กลุ่มบริหารข้อมูลและสถิติ]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["กลุ่มบริหารข้อมูลและสถิติ\n"+
+"กรมการค้าต่างประเทศ\n"+
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

@@ -401,7 +401,7 @@
 				<textFieldExpression><![CDATA[$V{SUM_FOB_BAHT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="566" y="20" width="236" height="60" uuid="c24b85d5-510b-405b-84b5-3cd91700b0bd"/>
+				<reportElement x="482" y="20" width="320" height="60" uuid="c24b85d5-510b-405b-84b5-3cd91700b0bd"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
