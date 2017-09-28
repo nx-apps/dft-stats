@@ -35,10 +35,10 @@
 	<variable name="SUM_FOB_AMT_I" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_i}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT_BAHT_I" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT_BAHT_I" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_baht_i}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT_I" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT_I" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_i}]]></variableExpression>
 	</variable>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
@@ -54,10 +54,10 @@
 	<variable name="SUM_FOB_AMT_E" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{fob_amt_e}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT_BAHT_E" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT_BAHT_E" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_baht_e}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_AMT_E" class="java.lang.Double" calculation="Sum">
+	<variable name="SUM_AVG_AMT_E" class="java.lang.Double" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_amt_e}]]></variableExpression>
 	</variable>
 	<background>
