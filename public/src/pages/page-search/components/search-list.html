@@ -34,7 +34,7 @@
                 <template is="dom-repeat" items={{columns}} as="column">
                     <vaadin-grid-column width="250px" flex-grow="0" resizable>
                         <template class="header">{{column.label}}
-                            <vaadin-gird-filter-common aria-label="field1" path="field1" value="[[_field1]]">
+                            <vaadin-gird-filter-common aria-label="field1" path="[[column.value]]" value="[[get(column.value, item)]]">
                             </vaadin-gird-filter-common>
                         </template>
                         <template>
@@ -279,32 +279,39 @@
                     // console.log(num)
                     return this.formatNumber(num)
                 })
-
-                const calNum = (prop) => {
-                    return checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current][prop], 0))
+                // console.log(dataList.length);
+                const calNum = (prop,mun =1) => {
+                    return checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current][prop], 0)/mun)
                 }
-                // checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight, 0))
+                // // console.log(isNaN(this.total.avg_amt_baht_i));
+
+                // this.set('total.net_weight_e', checkNaN('net_weight_e'))
+                // this.set('total.fob_amt_baht_e', checkNaN('fob_amt_baht_e'))
+                // this.set('total.fob_amt_e', checkNaN('fob_amt_e'))
+                // this.set('total.avg_amt_baht_e', checkNaN('avg_amt_baht_e'))
+                // this.set('total.avg_amt_e', checkNaN('avg_amt_e'))
+
                 this.set('total.net_weight', calNum('net_weight'))
                 this.set('total.fob_amt_baht', calNum('fob_amt_baht'))
                 this.set('total.fob_amt', calNum('fob_amt'))
-                this.set('total.avg_amt_baht', calNum('avg_amt_baht'))
-                this.set('total.avg_amt', calNum('avg_amt'))
+                this.set('total.avg_amt_baht', calNum('avg_amt_baht',dataList.length))
+                this.set('total.avg_amt', calNum('avg_amt',dataList.length))
+
                 // console.log(this.total.avg_amt_baht);
                 this.set('total.net_weight_i', calNum('net_weight_i'))
                 this.set('total.fob_amt_baht_i', calNum('fob_amt_baht_i'))
                 this.set('total.fob_amt_i', calNum('fob_amt_i'))
-                this.set('total.avg_amt_baht_i', calNum('avg_amt_baht_i'))
-                this.set('total.avg_amt_i', calNum('avg_amt_i'))
+                this.set('total.avg_amt_baht_i', calNum('avg_amt_baht_i',dataList.length))
+                this.set('total.avg_amt_i', calNum('avg_amt_i',dataList.length))
 
                 // console.log(isNaN(this.total.avg_amt_baht_i));
 
-                this.set('total.net_weight_e', checkNaN('net_weight_e'))
-                this.set('total.fob_amt_baht_e', checkNaN('fob_amt_baht_e'))
-                this.set('total.fob_amt_e', checkNaN('fob_amt_e'))
-                this.set('total.avg_amt_baht_e', checkNaN('avg_amt_baht_e'))
-                this.set('total.avg_amt_e', checkNaN('avg_amt_e'))
+                this.set('total.net_weight_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0)))
+                this.set('total.fob_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0)))
+                this.set('total.fob_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0)))
+                this.set('total.avg_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0),dataList.length))
+                this.set('total.avg_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0),dataList.length))
 
-                console.log(this.total);
 
             }
         });
