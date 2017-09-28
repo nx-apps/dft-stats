@@ -1,6 +1,6 @@
 exports.zone = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT zone_name as zone from custom_country group by zone_name`, [],
+    j.query("mssql", `SELECT zone_name as zoneName from custom_country group by zone_name`, [],
         function (err, data) {
             res.send(data)
         })

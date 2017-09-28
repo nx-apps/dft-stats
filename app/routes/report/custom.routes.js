@@ -4,5 +4,6 @@ module.exports = function (app) {
     app.get('/whiterice', controller.whiterice)
     app.get('/exportrice', controller.exportrice)
     app.get('/hommalirice', controller.hommalirice)
+    app.get('/year',controller.year)
     
 }
