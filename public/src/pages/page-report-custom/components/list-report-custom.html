@@ -170,7 +170,7 @@
                     type: Object,
                     value: {
                         year: '',
-                        month: '', type: 'PDF'
+                        month: '', export: 'PDF'
                     }
                 },
                 zoneList: {
@@ -241,7 +241,7 @@
                 let link = e.model.item.report_link
                 let type = e.currentTarget.id
                 let report_prama = e.model.item.report_prama
-                this.set('data.type', type)
+                this.set('data.export', type)
                 // this.set('data.link', link)
                 this.set('param.report_id', e.model.item.report_id)
                 this.set('param.report_prama', report_prama)
