@@ -49,7 +49,7 @@ export function searchAction(store) {
         //   },
         GET_SEARCH_HAMONIZE(data) {
             // console.log(data);
-            axios.get('/hamonize?' + data)
+            axios.get('/edi/hamonize?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_HAMONIZE', payload: response.data })
                 })
@@ -59,7 +59,7 @@ export function searchAction(store) {
         },
         GET_SEARCH_HAMONIZE_GROUP(data) {
             // console.log(data);
-            axios.get('/hamonize/group?' + data)
+            axios.get('/edi/hamonize/group?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_HAMONIZE_GROUP', payload: response.data })
                 })
@@ -69,7 +69,7 @@ export function searchAction(store) {
         },
 
         GET_SEARCH_COMPANY(data) {
-            axios.get('/company?' + data)
+            axios.get('/edi/company?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_COMPANY', payload: response.data })
                 })
@@ -78,7 +78,7 @@ export function searchAction(store) {
                 });
         },
         GET_SEARCH_COUNTRY(data) {
-            axios.get('/country?' + data)
+            axios.get('/edi/country?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_COUNTRY', payload: response.data })
                 })
@@ -88,7 +88,7 @@ export function searchAction(store) {
         },
         GET_SEARCH_ALL(data) {
             this.fire('toast', { status: 'load', text: 'กำลังบันทึกข้อมูล...' })
-            axios.post('/search', data)
+            axios.post('/edi/search', data)
                 .then((response) => {
                     this.fire('toast', {
                         status: 'success', text: 'ค้นหาสำเร็จ', callback() {

@@ -334,19 +334,19 @@
                     observer: '_setDate'
                 },
                 hamonizeList: {
-                    statePath: 'search.hamonizeList',
+                    statePath: 'searchCustoms.hamonizeList',
                     observer: '_cloneDataHamonize'
                 },
                 hamonizeGroupList: {
-                    statePath: 'search.hamonizeGroupList',
+                    statePath: 'searchCustoms.hamonizeGroupList',
                     observer: '_cloneDataHamonizeGroup'
                 },
                 companyList: {
-                    statePath: 'search.companyList',
+                    statePath: 'searchCustoms.companyList',
                     observer: '_cloneDataCompany'
                 },
                 countryList: {
-                    statePath: 'search.countryList',
+                    statePath: 'searchCustoms.countryList',
                     observer: '_cloneDataCountry'
                 },
                 dataSelect: {
@@ -390,13 +390,13 @@
                             hidden: false,
                             fields: ['value', 'label']
                         },
-                        {
-                            id: 'บริษัท',
-                            value: 'company',
-                            label: '',
-                            hidden: false,
-                            fields: ['value', 'label']
-                        }
+                        // {
+                        //     id: 'บริษัท',
+                        //     value: 'company',
+                        //     label: '',
+                        //     hidden: false,
+                        //     fields: ['value', 'label']
+                        // }
                     ]
                 },
                 data: {
@@ -651,10 +651,10 @@
                         data.tranType = 'a'
                         data.SelectAll = true
                     }
-                    this.dispatchAction('GET_SEARCH_HAMONIZE', this.genUrl(data))
-                    this.dispatchAction('GET_SEARCH_HAMONIZE_GROUP', this.genUrl(data))
-                    this.dispatchAction('GET_SEARCH_COMPANY', this.genUrl(data))
-                    this.dispatchAction('GET_SEARCH_COUNTRY', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(data))
+                    // this.dispatchAction('GET_SEARCH_CUSTOMS_COMPANY', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(data))
                     // console.log(this.genUrl(data))
                     // this.genUrl()
                 }
@@ -762,8 +762,8 @@
             },
             getSearchValue() {
                 let dataSave = this._getData()
-                this.dispatchAction('SET_SEARCH', dataSave)
-                this.dispatchAction('GET_SEARCH_ALL', dataSave)
+                this.dispatchAction('SET_SEARCH_CUSTOMS', dataSave)
+                this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', dataSave)
             },
             settingReport() {
                 let dataSave = this._getData()
