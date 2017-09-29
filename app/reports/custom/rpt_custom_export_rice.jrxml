@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_rice" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe2187aa-954a-4e94-85b0-69e77e6efad3">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="937"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
@@ -162,21 +162,8 @@
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
 		<groupHeader>
 			<band height="10">
-				<staticText>
-					<reportElement x="67" y="0" width="735" height="10" uuid="cb512d73-6eba-4059-b3d9-745fd89c5e48"/>
-					<box>
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="0" y="0" width="67" height="10" uuid="376733c3-5ea8-49f2-93ac-3152d5aac394"/>
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="10" backcolor="#CCCCCC" uuid="376733c3-5ea8-49f2-93ac-3152d5aac394"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -193,7 +180,7 @@
 		<groupFooter>
 			<band height="10">
 				<textField pattern="#,##0.00">
-					<reportElement x="417" y="0" width="35" height="10" uuid="26f9aa65-abaf-4a5a-80a2-435639fc2a59"/>
+					<reportElement mode="Transparent" x="417" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="26f9aa65-abaf-4a5a-80a2-435639fc2a59"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -206,7 +193,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B3}==0?"":$V{SUM_VALUE_B3})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="277" y="0" width="35" height="10" uuid="8c445a9f-2b81-448f-9fb1-724852500b3a"/>
+					<reportElement mode="Transparent" x="277" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8c445a9f-2b81-448f-9fb1-724852500b3a"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -219,7 +206,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT2}==0?"":$V{SUM_WEIGHT2})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="137" y="0" width="35" height="10" uuid="1f2823dc-69c8-49ce-86fe-efcfeac979a1"/>
+					<reportElement mode="Transparent" x="137" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="1f2823dc-69c8-49ce-86fe-efcfeac979a1"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -232,7 +219,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D}==0?"":$V{SUM_VALUE_D})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="347" y="0" width="35" height="10" uuid="8baa8a83-8c5e-4c3d-8273-abbd9320b000"/>
+					<reportElement mode="Transparent" x="347" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8baa8a83-8c5e-4c3d-8273-abbd9320b000"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -245,7 +232,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D2}==0?"":$V{SUM_VALUE_D2})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="452" y="0" width="35" height="10" uuid="96f16275-e70e-41ab-89b3-cb3cd542b43b"/>
+					<reportElement mode="Transparent" x="452" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="96f16275-e70e-41ab-89b3-cb3cd542b43b"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -258,7 +245,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D3}==0?"":$V{SUM_VALUE_D3})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="102" y="0" width="35" height="10" uuid="62859a61-ddd5-43d0-9472-d706b9dc460a"/>
+					<reportElement mode="Transparent" x="102" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="62859a61-ddd5-43d0-9472-d706b9dc460a"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -271,7 +258,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B}==0?"":$V{SUM_VALUE_B})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="312" y="0" width="35" height="10" uuid="1dbaa078-d154-4e71-9d9d-f73a3595fc42"/>
+					<reportElement mode="Transparent" x="312" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="1dbaa078-d154-4e71-9d9d-f73a3595fc42"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -284,7 +271,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B2}==0?"":$V{SUM_VALUE_B2})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="67" y="0" width="35" height="10" uuid="d448111d-1f53-4428-93bc-e9dd48613878"/>
+					<reportElement mode="Transparent" x="67" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d448111d-1f53-4428-93bc-e9dd48613878"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -297,7 +284,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT}==0?"":$V{SUM_WEIGHT})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="522" y="0" width="35" height="10" uuid="3c3613b0-aec4-4caa-8a26-480e29a03f2a"/>
+					<reportElement mode="Transparent" x="522" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="3c3613b0-aec4-4caa-8a26-480e29a03f2a"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -310,7 +297,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B4}==0?"":$V{SUM_VALUE_B4})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="382" y="0" width="35" height="10" uuid="ec6e23d2-24a3-4902-bd7a-156b45c84995"/>
+					<reportElement mode="Transparent" x="382" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="ec6e23d2-24a3-4902-bd7a-156b45c84995"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -323,7 +310,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT3}==0?"":$V{SUM_WEIGHT3})]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="0" width="67" height="10" uuid="302ca5b0-387d-4be9-ad91-d7457180cc46"/>
+					<reportElement mode="Transparent" x="0" y="0" width="67" height="10" backcolor="#CCCCCC" uuid="302ca5b0-387d-4be9-ad91-d7457180cc46"/>
 					<box>
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -336,7 +323,7 @@
 					<text><![CDATA[รวม]]></text>
 				</staticText>
 				<textField pattern="#,##0.00">
-					<reportElement x="207" y="0" width="35" height="10" uuid="4fd131ac-2e22-4be2-81ba-7338f39c8650"/>
+					<reportElement mode="Transparent" x="207" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="4fd131ac-2e22-4be2-81ba-7338f39c8650"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -349,7 +336,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B1}==0?"":$V{SUM_VALUE_B1})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="242" y="0" width="35" height="10" uuid="d48261a5-1827-4f6f-a363-7a58db289100"/>
+					<reportElement mode="Transparent" x="242" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d48261a5-1827-4f6f-a363-7a58db289100"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -362,7 +349,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D1}==0?"":$V{SUM_VALUE_D1})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="172" y="0" width="35" height="10" uuid="2047e53d-0d9e-40fc-ad3f-10c6a88fa7ab"/>
+					<reportElement mode="Transparent" x="172" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="2047e53d-0d9e-40fc-ad3f-10c6a88fa7ab"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -375,7 +362,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT1}==0?"":$V{SUM_WEIGHT1})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="557" y="0" width="35" height="10" uuid="d3e3ff9f-37b6-4183-9f03-cc6b9f00b358"/>
+					<reportElement mode="Transparent" x="557" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d3e3ff9f-37b6-4183-9f03-cc6b9f00b358"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -388,7 +375,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D4}==0?"":$V{SUM_VALUE_D4})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="487" y="0" width="35" height="10" uuid="b1821afa-6720-4c38-9f4d-1430cbc79988"/>
+					<reportElement mode="Transparent" x="487" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="b1821afa-6720-4c38-9f4d-1430cbc79988"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -401,7 +388,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT4}==0?"":$V{SUM_WEIGHT4})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="662" y="0" width="35" height="10" uuid="8418ddf3-6e81-482b-9283-8c728218f9b0"/>
+					<reportElement mode="Transparent" x="662" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8418ddf3-6e81-482b-9283-8c728218f9b0"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -414,7 +401,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_D5}==0?"":$V{SUM_VALUE_D5})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="592" y="0" width="35" height="10" uuid="b9ff94b1-23d2-4671-b3ee-78c87cc46c94"/>
+					<reportElement mode="Transparent" x="592" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="b9ff94b1-23d2-4671-b3ee-78c87cc46c94"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -427,7 +414,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_WEIGHT5}==0?"":$V{SUM_WEIGHT5})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="627" y="0" width="35" height="10" uuid="0e3c8e41-133b-49dd-8848-7d2b2ffee059"/>
+					<reportElement mode="Transparent" x="627" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="0e3c8e41-133b-49dd-8848-7d2b2ffee059"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -440,7 +427,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_VALUE_B5}==0?"":$V{SUM_VALUE_B5})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0">
-					<reportElement x="697" y="0" width="35" height="10" uuid="69a2c00f-9acd-4c03-aaf6-8b59e30bd307"/>
+					<reportElement mode="Transparent" x="697" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="69a2c00f-9acd-4c03-aaf6-8b59e30bd307"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -453,7 +440,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_S_WEIGHT}==0?"":$V{SUM_S_WEIGHT})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="767" y="0" width="35" height="10" uuid="fa991ee4-991b-4774-a496-0f004a3c98cd"/>
+					<reportElement mode="Transparent" x="767" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="fa991ee4-991b-4774-a496-0f004a3c98cd"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
@@ -466,7 +453,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_S_VALUE_D}==0?"":$V{SUM_S_VALUE_D})]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
-					<reportElement x="732" y="0" width="35" height="10" uuid="cc9069b5-8906-4764-92fc-773ea9d41cf0"/>
+					<reportElement mode="Transparent" x="732" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="cc9069b5-8906-4764-92fc-773ea9d41cf0"/>
 					<box leftPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
