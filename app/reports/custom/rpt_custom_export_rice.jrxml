@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_rice" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe2187aa-954a-4e94-85b0-69e77e6efad3">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="937"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="STARTMONTH" class="java.lang.String"/>
@@ -163,310 +163,293 @@
 		<groupHeader>
 			<band height="10">
 				<textField>
-					<reportElement mode="Opaque" x="0" y="0" width="802" height="10" backcolor="#CCCCCC" uuid="376733c3-5ea8-49f2-93ac-3152d5aac394"/>
-					<box leftPadding="2" rightPadding="2">
+					<reportElement mode="Opaque" x="0" y="0" width="67" height="10" backcolor="#CCFFCC" uuid="376733c3-5ea8-49f2-93ac-3152d5aac394"/>
+					<box leftPadding="5">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.7"/>
 						<bottomPen lineWidth="0.7"/>
 						<rightPen lineWidth="0.7"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+						<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{zone_name}]]></textFieldExpression>
 				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="417" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="26f9aa65-abaf-4a5a-80a2-435639fc2a59"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B3}==null?0:$V{SUM_VALUE_B3})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="277" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="8c445a9f-2b81-448f-9fb1-724852500b3a"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT2}==null?0:$V{SUM_WEIGHT2})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="137" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="1f2823dc-69c8-49ce-86fe-efcfeac979a1"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D}==null?0:$V{SUM_VALUE_D})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="347" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="8baa8a83-8c5e-4c3d-8273-abbd9320b000"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D2}==null?0:$V{SUM_VALUE_D2})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="452" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="96f16275-e70e-41ab-89b3-cb3cd542b43b"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D3}==null?0:$V{SUM_VALUE_D3})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="102" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="62859a61-ddd5-43d0-9472-d706b9dc460a"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B}==null?0:$V{SUM_VALUE_B})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="312" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="1dbaa078-d154-4e71-9d9d-f73a3595fc42"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B2}==null?0:$V{SUM_VALUE_B2})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="67" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="d448111d-1f53-4428-93bc-e9dd48613878"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT}==null?0:$V{SUM_WEIGHT})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="522" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="3c3613b0-aec4-4caa-8a26-480e29a03f2a"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B4}==null?0:$V{SUM_VALUE_B4})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="382" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="ec6e23d2-24a3-4902-bd7a-156b45c84995"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT3}==null?0:$V{SUM_WEIGHT3})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="207" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="4fd131ac-2e22-4be2-81ba-7338f39c8650"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B1}==null?0:$V{SUM_VALUE_B1})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="242" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="d48261a5-1827-4f6f-a363-7a58db289100"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D1}==null?0:$V{SUM_VALUE_D1})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="172" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="2047e53d-0d9e-40fc-ad3f-10c6a88fa7ab"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT1}==null?0:$V{SUM_WEIGHT1})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="557" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="d3e3ff9f-37b6-4183-9f03-cc6b9f00b358"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D4}==null?0:$V{SUM_VALUE_D4})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="487" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="b1821afa-6720-4c38-9f4d-1430cbc79988"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT4}==null?0:$V{SUM_WEIGHT4})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="662" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="8418ddf3-6e81-482b-9283-8c728218f9b0"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_D5}==null?0:$V{SUM_VALUE_D5})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="592" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="b9ff94b1-23d2-4671-b3ee-78c87cc46c94"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_WEIGHT5}==null?0:$V{SUM_WEIGHT5})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="627" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="0e3c8e41-133b-49dd-8848-7d2b2ffee059"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_VALUE_B5}==null?0:$V{SUM_VALUE_B5})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
+					<reportElement mode="Opaque" x="697" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="69a2c00f-9acd-4c03-aaf6-8b59e30bd307"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_S_WEIGHT}==null?0:$V{SUM_S_WEIGHT})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="767" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="fa991ee4-991b-4774-a496-0f004a3c98cd"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_S_VALUE_D}==null?0:$V{SUM_S_VALUE_D})]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0.00">
+					<reportElement mode="Opaque" x="732" y="0" width="35" height="10" backcolor="#CCFFCC" uuid="cc9069b5-8906-4764-92fc-773ea9d41cf0"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.7"/>
+						<leftPen lineWidth="0.7"/>
+						<bottomPen lineWidth="0.7"/>
+						<rightPen lineWidth="0.7"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{SUM_S_VALUE_B}==null?0:$V{SUM_S_VALUE_B})]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
-		<groupFooter>
-			<band height="10">
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="417" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="26f9aa65-abaf-4a5a-80a2-435639fc2a59"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B3}==0?"":$V{SUM_VALUE_B3})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="277" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8c445a9f-2b81-448f-9fb1-724852500b3a"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT2}==0?"":$V{SUM_WEIGHT2})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="137" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="1f2823dc-69c8-49ce-86fe-efcfeac979a1"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D}==0?"":$V{SUM_VALUE_D})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="347" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8baa8a83-8c5e-4c3d-8273-abbd9320b000"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D2}==0?"":$V{SUM_VALUE_D2})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="452" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="96f16275-e70e-41ab-89b3-cb3cd542b43b"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D3}==0?"":$V{SUM_VALUE_D3})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="102" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="62859a61-ddd5-43d0-9472-d706b9dc460a"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B}==0?"":$V{SUM_VALUE_B})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="312" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="1dbaa078-d154-4e71-9d9d-f73a3595fc42"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B2}==0?"":$V{SUM_VALUE_B2})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="67" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d448111d-1f53-4428-93bc-e9dd48613878"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT}==0?"":$V{SUM_WEIGHT})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="522" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="3c3613b0-aec4-4caa-8a26-480e29a03f2a"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B4}==0?"":$V{SUM_VALUE_B4})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="382" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="ec6e23d2-24a3-4902-bd7a-156b45c84995"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT3}==0?"":$V{SUM_WEIGHT3})]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement mode="Transparent" x="0" y="0" width="67" height="10" backcolor="#CCCCCC" uuid="302ca5b0-387d-4be9-ad91-d7457180cc46"/>
-					<box>
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[รวม]]></text>
-				</staticText>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="207" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="4fd131ac-2e22-4be2-81ba-7338f39c8650"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B1}==0?"":$V{SUM_VALUE_B1})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="242" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d48261a5-1827-4f6f-a363-7a58db289100"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D1}==0?"":$V{SUM_VALUE_D1})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="172" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="2047e53d-0d9e-40fc-ad3f-10c6a88fa7ab"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT1}==0?"":$V{SUM_WEIGHT1})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="557" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d3e3ff9f-37b6-4183-9f03-cc6b9f00b358"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D4}==0?"":$V{SUM_VALUE_D4})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="487" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="b1821afa-6720-4c38-9f4d-1430cbc79988"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT4}==0?"":$V{SUM_WEIGHT4})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="662" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8418ddf3-6e81-482b-9283-8c728218f9b0"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_D5}==0?"":$V{SUM_VALUE_D5})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="592" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="b9ff94b1-23d2-4671-b3ee-78c87cc46c94"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_WEIGHT5}==0?"":$V{SUM_WEIGHT5})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="627" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="0e3c8e41-133b-49dd-8848-7d2b2ffee059"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_VALUE_B5}==0?"":$V{SUM_VALUE_B5})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0">
-					<reportElement mode="Transparent" x="697" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="69a2c00f-9acd-4c03-aaf6-8b59e30bd307"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_S_WEIGHT}==0?"":$V{SUM_S_WEIGHT})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="767" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="fa991ee4-991b-4774-a496-0f004a3c98cd"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_S_VALUE_D}==0?"":$V{SUM_S_VALUE_D})]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00">
-					<reportElement mode="Transparent" x="732" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="cc9069b5-8906-4764-92fc-773ea9d41cf0"/>
-					<box leftPadding="2" rightPadding="2">
-						<topPen lineWidth="0.7"/>
-						<leftPen lineWidth="0.7"/>
-						<bottomPen lineWidth="0.7"/>
-						<rightPen lineWidth="0.7"/>
-					</box>
-					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-						<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_S_VALUE_B}==0?"":$V{SUM_S_VALUE_B})]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupFooter>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -485,7 +468,7 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="67" height="20" uuid="51cd7483-9279-464d-a6eb-c84dbbb51edc"/>
+				<reportElement mode="Opaque" x="0" y="0" width="67" height="20" backcolor="#CCCCFF" uuid="51cd7483-9279-464d-a6eb-c84dbbb51edc"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -493,12 +476,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ประเทศ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="67" y="0" width="105" height="10" uuid="d4c12246-869c-4131-a823-177c2e43a015"/>
+				<reportElement mode="Opaque" x="67" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="d4c12246-869c-4131-a823-177c2e43a015"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -506,12 +489,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวหอมมะลิไทย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="67" y="10" width="35" height="10" uuid="91a5cdcc-3e95-49a6-9c4f-cce771af2298"/>
+				<reportElement mode="Opaque" x="67" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="91a5cdcc-3e95-49a6-9c4f-cce771af2298"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -519,12 +502,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="102" y="10" width="35" height="10" uuid="17095dee-c6bd-4ad4-b40d-233d021aff20"/>
+				<reportElement mode="Opaque" x="102" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="17095dee-c6bd-4ad4-b40d-233d021aff20"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -532,12 +515,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="137" y="10" width="35" height="10" uuid="8cae2949-5f44-4e41-b2b9-b084e80cde61"/>
+				<reportElement mode="Opaque" x="137" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="8cae2949-5f44-4e41-b2b9-b084e80cde61"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -545,12 +528,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="242" y="10" width="35" height="10" uuid="0bbdc047-633c-46e7-975e-ca6eaddb5c84"/>
+				<reportElement mode="Opaque" x="242" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="0bbdc047-633c-46e7-975e-ca6eaddb5c84"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -558,12 +541,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="0" width="105" height="10" uuid="52c3cdf8-e9d9-424f-a8cf-70a983b99f2d"/>
+				<reportElement mode="Opaque" x="172" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="52c3cdf8-e9d9-424f-a8cf-70a983b99f2d"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -571,12 +554,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวหอมไทย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="10" width="35" height="10" uuid="d05622b8-238f-4e1c-bfbc-2cb93a7a75a9"/>
+				<reportElement mode="Opaque" x="172" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="d05622b8-238f-4e1c-bfbc-2cb93a7a75a9"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -584,12 +567,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="207" y="10" width="35" height="10" uuid="404028cb-f20a-45b7-93ed-1f9956f6e634"/>
+				<reportElement mode="Opaque" x="207" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="404028cb-f20a-45b7-93ed-1f9956f6e634"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -597,12 +580,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="347" y="10" width="35" height="10" uuid="0e7d6ef7-7f7a-4c0d-ac67-1d3525bb41da"/>
+				<reportElement mode="Opaque" x="347" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="0e7d6ef7-7f7a-4c0d-ac67-1d3525bb41da"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -610,12 +593,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="0" width="105" height="10" uuid="67670335-5e24-4b3e-9fa5-3bcefaa2a8de"/>
+				<reportElement mode="Opaque" x="277" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="67670335-5e24-4b3e-9fa5-3bcefaa2a8de"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -623,12 +606,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวขาว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="10" width="35" height="10" uuid="ebe8f663-53ee-4393-bf48-37eecd2dcee9"/>
+				<reportElement mode="Opaque" x="277" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="ebe8f663-53ee-4393-bf48-37eecd2dcee9"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -636,12 +619,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="312" y="10" width="35" height="10" uuid="ef7beaf1-30ae-449f-a51d-30e8a0d65f25"/>
+				<reportElement mode="Opaque" x="312" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="ef7beaf1-30ae-449f-a51d-30e8a0d65f25"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -649,12 +632,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="452" y="10" width="35" height="10" uuid="38643fcd-ccb9-4b41-970a-e232742f49ef"/>
+				<reportElement mode="Opaque" x="452" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="38643fcd-ccb9-4b41-970a-e232742f49ef"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -662,12 +645,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="382" y="0" width="105" height="10" uuid="9f4f2d6c-c7c8-4a8d-aeff-1f43f301d693"/>
+				<reportElement mode="Opaque" x="382" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="9f4f2d6c-c7c8-4a8d-aeff-1f43f301d693"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -675,12 +658,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวกล้อง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="382" y="10" width="35" height="10" uuid="0e44a782-af54-4a34-82cf-e9634ea92ebd"/>
+				<reportElement mode="Opaque" x="382" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="0e44a782-af54-4a34-82cf-e9634ea92ebd"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -688,12 +671,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="10" width="35" height="10" uuid="2d145325-b007-4a0b-ba9d-95b4c1b5cfb4"/>
+				<reportElement mode="Opaque" x="417" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="2d145325-b007-4a0b-ba9d-95b4c1b5cfb4"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -701,12 +684,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="557" y="10" width="35" height="10" uuid="5bff2f9f-ceed-4e59-82c2-e454dbb3f8ba"/>
+				<reportElement mode="Opaque" x="557" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="5bff2f9f-ceed-4e59-82c2-e454dbb3f8ba"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -714,12 +697,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="487" y="0" width="105" height="10" uuid="0435fbfe-20b1-4c85-8eac-0c4723aaa239"/>
+				<reportElement mode="Opaque" x="487" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="0435fbfe-20b1-4c85-8eac-0c4723aaa239"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -727,12 +710,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวเหนียว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="487" y="10" width="35" height="10" uuid="b1a3ab25-84ac-4437-a7cd-48aa48e95a1b"/>
+				<reportElement mode="Opaque" x="487" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="b1a3ab25-84ac-4437-a7cd-48aa48e95a1b"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -740,12 +723,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="522" y="10" width="35" height="10" uuid="80b53efc-db2b-4730-b34e-cc0a62f45616"/>
+				<reportElement mode="Opaque" x="522" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="80b53efc-db2b-4730-b34e-cc0a62f45616"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -753,12 +736,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="662" y="10" width="35" height="10" uuid="74c4d91a-a341-4e1d-920d-1461a0fc6da9"/>
+				<reportElement mode="Opaque" x="662" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="74c4d91a-a341-4e1d-920d-1461a0fc6da9"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -766,12 +749,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="592" y="0" width="105" height="10" uuid="d374ca13-cd4a-4958-ae1f-09fd8e40ed59"/>
+				<reportElement mode="Opaque" x="592" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="d374ca13-cd4a-4958-ae1f-09fd8e40ed59"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -779,12 +762,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ข้าวนึ่ง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="592" y="10" width="35" height="10" uuid="479470de-9899-4ba1-87af-144f05413229"/>
+				<reportElement mode="Opaque" x="592" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="479470de-9899-4ba1-87af-144f05413229"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -792,12 +775,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="627" y="10" width="35" height="10" uuid="d41bec69-6f67-4245-ad6d-cb7fd3555a0d"/>
+				<reportElement mode="Opaque" x="627" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="d41bec69-6f67-4245-ad6d-cb7fd3555a0d"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -805,12 +788,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="697" y="0" width="105" height="10" uuid="08901edc-6e26-4f59-870c-6f4e86a9af92"/>
+				<reportElement mode="Opaque" x="697" y="0" width="105" height="10" backcolor="#CCCCFF" uuid="08901edc-6e26-4f59-870c-6f4e86a9af92"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -818,12 +801,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[รวมข้าวทุกชนิด]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="732" y="10" width="35" height="10" uuid="eccf2335-ef15-43a0-963d-011fe8292fed"/>
+				<reportElement mode="Opaque" x="732" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="eccf2335-ef15-43a0-963d-011fe8292fed"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -831,12 +814,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้านบาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="697" y="10" width="35" height="10" uuid="01f69ee7-cf2e-4d7c-9613-e7f0d3deca95"/>
+				<reportElement mode="Opaque" x="697" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="01f69ee7-cf2e-4d7c-9613-e7f0d3deca95"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -844,12 +827,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ปริมาณ(ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="767" y="10" width="35" height="10" uuid="4b1e5d97-dfce-48bd-819f-57fdcfbac4da"/>
+				<reportElement mode="Opaque" x="767" y="10" width="35" height="10" backcolor="#CCCCFF" uuid="4b1e5d97-dfce-48bd-819f-57fdcfbac4da"/>
 				<box>
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -857,7 +840,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[มูลค่า(ล้าน US)]]></text>
 			</staticText>
@@ -866,7 +849,7 @@
 	<detail>
 		<band height="10" splitType="Stretch">
 			<textField pattern="#,##0.00">
-				<reportElement x="242" y="0" width="35" height="10" uuid="dbeb8081-1f90-4a68-bd76-4226ec96f0a8"/>
+				<reportElement mode="Opaque" x="242" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="dbeb8081-1f90-4a68-bd76-4226ec96f0a8"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -876,10 +859,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D1}==0?"":$F{value_D1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D1}==null?0:$F{value_D1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="417" y="0" width="35" height="10" uuid="ecf31ee3-9997-4a71-a964-20f7ede1065f"/>
+				<reportElement mode="Opaque" x="417" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="ecf31ee3-9997-4a71-a964-20f7ede1065f"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -889,11 +872,11 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b3}==0?"":$F{value_b3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b3}==null?0:$F{value_b3})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="67" height="10" uuid="84d66506-fbec-4b1e-86d4-bb463a8460c6"/>
-				<box leftPadding="2" rightPadding="2">
+				<reportElement mode="Opaque" x="0" y="0" width="67" height="10" backcolor="#FFFFCC" uuid="84d66506-fbec-4b1e-86d4-bb463a8460c6"/>
+				<box leftPadding="15" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
 					<bottomPen lineWidth="0.7"/>
@@ -905,7 +888,7 @@
 				<textFieldExpression><![CDATA[$F{country_th}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="522" y="0" width="35" height="10" uuid="32f27576-f2b6-46ec-9960-36b350b3b610"/>
+				<reportElement mode="Opaque" x="522" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="32f27576-f2b6-46ec-9960-36b350b3b610"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -915,10 +898,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b4}==0?"":$F{value_b4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b4}==null?0:$F{value_b4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="277" y="0" width="35" height="10" uuid="edaca61c-0503-43d4-906a-cabe87d151de"/>
+				<reportElement mode="Opaque" x="277" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="edaca61c-0503-43d4-906a-cabe87d151de"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -928,10 +911,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight2}==0?"":$F{weight2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight2}==null?0:$F{weight2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="592" y="0" width="35" height="10" uuid="d5d40b74-48e3-41bb-bd81-fc23069930cf"/>
+				<reportElement mode="Opaque" x="592" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="d5d40b74-48e3-41bb-bd81-fc23069930cf"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -941,10 +924,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight5}==0?"":$F{weight5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight5}==null?0:$F{weight5})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="452" y="0" width="35" height="10" uuid="2fea659e-eea1-4330-830f-e65d3c05b112"/>
+				<reportElement mode="Opaque" x="452" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="2fea659e-eea1-4330-830f-e65d3c05b112"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -954,10 +937,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D3}==0?"":$F{value_D3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D3}==null?0:$F{value_D3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="662" y="0" width="35" height="10" uuid="b958eb1b-283c-4f08-ae79-b81e70d2fc89"/>
+				<reportElement mode="Opaque" x="662" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="b958eb1b-283c-4f08-ae79-b81e70d2fc89"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -967,10 +950,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D5}==0?"":$F{value_D5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D5}==null?0:$F{value_D5})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="627" y="0" width="35" height="10" uuid="4ccadfa1-0948-4e43-ba1b-4e0970857f0e"/>
+				<reportElement mode="Opaque" x="627" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="4ccadfa1-0948-4e43-ba1b-4e0970857f0e"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -980,10 +963,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b5}==0?"":$F{value_b5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b5}==null?0:$F{value_b5})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="207" y="0" width="35" height="10" uuid="9dd932f6-2ece-42d0-baa2-7f710e9d0b05"/>
+				<reportElement mode="Opaque" x="207" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="9dd932f6-2ece-42d0-baa2-7f710e9d0b05"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -993,10 +976,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b1}==0?"":$F{value_b1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b1}==null?0:$F{value_b1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="487" y="0" width="35" height="10" uuid="46f471a4-3539-4d06-b41b-c250c094aabf"/>
+				<reportElement mode="Opaque" x="487" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="46f471a4-3539-4d06-b41b-c250c094aabf"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1006,10 +989,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight4}==0?"":$F{weight4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight4}==null?0:$F{weight4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="67" y="0" width="35" height="10" uuid="9488fc3a-79c7-4267-a6b9-13497fa30f74"/>
+				<reportElement mode="Opaque" x="67" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="9488fc3a-79c7-4267-a6b9-13497fa30f74"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1019,10 +1002,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight}==0?"":$F{weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight}==null?0:$F{weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="172" y="0" width="35" height="10" uuid="c616f6eb-b736-4e5f-8f96-ea1b59d6afaa"/>
+				<reportElement mode="Opaque" x="172" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="c616f6eb-b736-4e5f-8f96-ea1b59d6afaa"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1032,10 +1015,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight1}==0?"":$F{weight1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight1}==null?0:$F{weight1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="382" y="0" width="35" height="10" uuid="2ed3b255-0075-4af4-ad9c-862dc1cc05a6"/>
+				<reportElement mode="Opaque" x="382" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="2ed3b255-0075-4af4-ad9c-862dc1cc05a6"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1045,10 +1028,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{weight3}==0?"":$F{weight3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight3}==null?0:$F{weight3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="102" y="0" width="35" height="10" uuid="2895ee79-fd43-4d86-8ce8-adeb5ad9cf34"/>
+				<reportElement mode="Opaque" x="102" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="2895ee79-fd43-4d86-8ce8-adeb5ad9cf34"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1058,10 +1041,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b}==0?"":$F{value_b})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b}==null?0:$F{value_b})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="347" y="0" width="35" height="10" uuid="3082bd9e-987d-492a-bad6-c77537af2301"/>
+				<reportElement mode="Opaque" x="347" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="3082bd9e-987d-492a-bad6-c77537af2301"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1071,10 +1054,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D2}==0?"":$F{value_D2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D2}==null?0:$F{value_D2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="312" y="0" width="35" height="10" uuid="5c3cbf3a-4c09-4ea7-a1bf-71d6165a369d"/>
+				<reportElement mode="Opaque" x="312" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="5c3cbf3a-4c09-4ea7-a1bf-71d6165a369d"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1084,10 +1067,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_b2}==0?"":$F{value_b2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_b2}==null?0:$F{value_b2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="557" y="0" width="35" height="10" uuid="a7d334c7-25aa-421f-bd51-dcc17d3ed3c0"/>
+				<reportElement mode="Opaque" x="557" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="a7d334c7-25aa-421f-bd51-dcc17d3ed3c0"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1097,10 +1080,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D4}==0?"":$F{value_D4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D4}==null?0:$F{value_D4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="137" y="0" width="35" height="10" uuid="408cbd75-a6c5-4680-a46c-a69595c5c462"/>
+				<reportElement mode="Opaque" x="137" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="408cbd75-a6c5-4680-a46c-a69595c5c462"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1110,10 +1093,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D}==0?"":$F{value_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_D}==null?0:$F{value_D})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="697" y="0" width="35" height="10" uuid="c993338c-3514-4cc1-9327-1b3f5822d875"/>
+				<reportElement mode="Opaque" x="697" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="c993338c-3514-4cc1-9327-1b3f5822d875"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1123,10 +1106,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{sum_weight}==0?"":$F{sum_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{sum_weight}==null?0:$F{sum_weight})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="732" y="0" width="35" height="10" uuid="00d67b1a-afb3-4082-b3bf-db2ace177c45"/>
+				<reportElement mode="Opaque" x="732" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="00d67b1a-afb3-4082-b3bf-db2ace177c45"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1136,10 +1119,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{sum_value_b}==0?"":$F{sum_value_b})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{sum_value_b}==null?0:$F{sum_value_b})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="767" y="0" width="35" height="10" uuid="95acc6b9-0498-40c4-86f6-57c2eb084a5a"/>
+				<reportElement mode="Opaque" x="767" y="0" width="35" height="10" backcolor="#FFFFCC" uuid="95acc6b9-0498-40c4-86f6-57c2eb084a5a"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1149,7 +1132,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{sum_value_D}==0?"":$F{sum_value_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{sum_value_D}==null?0:$F{sum_value_D})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -1190,7 +1173,7 @@
 		<band height="38">
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField pattern="#,##0.00">
-				<reportElement x="627" y="0" width="35" height="10" uuid="2d05759b-d84d-450f-944a-37a5b352966f"/>
+				<reportElement mode="Opaque" x="627" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="2d05759b-d84d-450f-944a-37a5b352966f"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1198,12 +1181,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B5}==0?"":$V{TOTAL_VALUE_B5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B5}==null?0:$V{TOTAL_VALUE_B5})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="522" y="0" width="35" height="10" uuid="8636084c-6c2e-4a2e-908e-09492a91840e"/>
+				<reportElement mode="Opaque" x="522" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="8636084c-6c2e-4a2e-908e-09492a91840e"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1211,12 +1194,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B4}==0?"":$V{TOTAL_VALUE_B4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B4}==null?0:$V{TOTAL_VALUE_B4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="592" y="0" width="35" height="10" uuid="34bbcdbb-cfff-4660-aca4-d4c0eec14b24"/>
+				<reportElement mode="Opaque" x="592" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="34bbcdbb-cfff-4660-aca4-d4c0eec14b24"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1224,12 +1207,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT5}==0?"":$V{TOTAL_WEIGHT5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT5}==null?0:$V{TOTAL_WEIGHT5})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="277" y="0" width="35" height="10" uuid="d188baa1-c1de-40c7-bc20-f73fd1567ce3"/>
+				<reportElement mode="Opaque" x="277" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="d188baa1-c1de-40c7-bc20-f73fd1567ce3"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1237,12 +1220,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT2}==0?"":$V{TOTAL_WEIGHT2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT2}==null?0:$V{TOTAL_WEIGHT2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="382" y="0" width="35" height="10" uuid="09aeb8d2-b849-4329-82a7-24e2fcecb6fc"/>
+				<reportElement mode="Opaque" x="382" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="09aeb8d2-b849-4329-82a7-24e2fcecb6fc"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1250,12 +1233,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT3}==0?"":$V{TOTAL_WEIGHT3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT3}==null?0:$V{TOTAL_WEIGHT3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="347" y="0" width="35" height="10" uuid="f36d0809-5dee-40d1-8762-e37de3ad319d"/>
+				<reportElement mode="Opaque" x="347" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="f36d0809-5dee-40d1-8762-e37de3ad319d"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1263,12 +1246,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D2}==0?"":$V{TOTAL_VALUE_D2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D2}==null?0:$V{TOTAL_VALUE_D2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="102" y="0" width="35" height="10" uuid="628dbe79-8a2f-428a-800f-83eeaf9dd67c"/>
+				<reportElement mode="Opaque" x="102" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="628dbe79-8a2f-428a-800f-83eeaf9dd67c"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1276,12 +1259,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B}==0?"":$V{TOTAL_VALUE_B})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B}==null?0:$V{TOTAL_VALUE_B})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="172" y="0" width="35" height="10" uuid="7df62281-7f2b-4d35-bf93-7e0e5231e1ba"/>
+				<reportElement mode="Opaque" x="172" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="7df62281-7f2b-4d35-bf93-7e0e5231e1ba"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1289,12 +1272,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT1}==0?"":$V{TOTAL_WEIGHT1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT1}==null?0:$V{TOTAL_WEIGHT1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="67" y="0" width="35" height="10" uuid="82f4ec8c-1a05-4e39-9047-7d0c179b5a51"/>
+				<reportElement mode="Opaque" x="67" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="82f4ec8c-1a05-4e39-9047-7d0c179b5a51"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1302,12 +1285,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT}==0?"":$V{TOTAL_WEIGHT})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT}==null?0:$V{TOTAL_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="662" y="0" width="35" height="10" uuid="4f3fe12e-816e-4f23-a203-fbee8dea02ca"/>
+				<reportElement mode="Opaque" x="662" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="4f3fe12e-816e-4f23-a203-fbee8dea02ca"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1315,25 +1298,25 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D5}==0?"":$V{TOTAL_VALUE_D5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D5}==null?0:$V{TOTAL_VALUE_D5})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="67" height="10" uuid="9cd541db-a596-4ab3-b297-931ebf3daef8"/>
-				<box>
+				<reportElement mode="Opaque" x="0" y="0" width="67" height="10" backcolor="#CCCCCC" uuid="9cd541db-a596-4ab3-b297-931ebf3daef8"/>
+				<box leftPadding="5">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
 					<bottomPen lineWidth="0.7"/>
 					<rightPen lineWidth="0.7"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[รวมทั้งหมด]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="452" y="0" width="35" height="10" uuid="1a5370a3-02e2-4f13-b861-9db822d2bf51"/>
+				<reportElement mode="Opaque" x="452" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="1a5370a3-02e2-4f13-b861-9db822d2bf51"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1341,12 +1324,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D3}==0?"":$V{TOTAL_VALUE_D3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D3}==null?0:$V{TOTAL_VALUE_D3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="207" y="0" width="35" height="10" uuid="a44140da-c796-4881-b27e-e24fa0ab4f38"/>
+				<reportElement mode="Opaque" x="207" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="a44140da-c796-4881-b27e-e24fa0ab4f38"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1354,12 +1337,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B1}==0?"":$V{TOTAL_VALUE_B1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B1}==null?0:$V{TOTAL_VALUE_B1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="242" y="0" width="35" height="10" uuid="4b984cd0-ec4c-4f8b-8627-42ad7d9cb860"/>
+				<reportElement mode="Opaque" x="242" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="4b984cd0-ec4c-4f8b-8627-42ad7d9cb860"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1367,12 +1350,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D1}==0?"":$V{TOTAL_VALUE_D1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D1}==null?0:$V{TOTAL_VALUE_D1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="487" y="0" width="35" height="10" uuid="0efeb1ad-e3c5-4f5c-ae68-53fb69750539"/>
+				<reportElement mode="Opaque" x="487" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="0efeb1ad-e3c5-4f5c-ae68-53fb69750539"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1380,12 +1363,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT4}==0?"":$V{TOTAL_WEIGHT4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_WEIGHT4}==null?0:$V{TOTAL_WEIGHT4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="557" y="0" width="35" height="10" uuid="de267e03-27d9-4fea-8503-3e0261764ccd"/>
+				<reportElement mode="Opaque" x="557" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="de267e03-27d9-4fea-8503-3e0261764ccd"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1393,12 +1376,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D4}==0?"":$V{TOTAL_VALUE_D4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D4}==null?0:$V{TOTAL_VALUE_D4})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="137" y="0" width="35" height="10" uuid="35699cfb-06c1-4639-927a-c47d7a4436a3"/>
+				<reportElement mode="Opaque" x="137" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="35699cfb-06c1-4639-927a-c47d7a4436a3"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1406,12 +1389,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D}==0?"":$V{TOTAL_VALUE_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_D}==null?0:$V{TOTAL_VALUE_D})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="312" y="0" width="35" height="10" uuid="7306862a-69d2-4915-9c55-f1925fdd80f9"/>
+				<reportElement mode="Opaque" x="312" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="7306862a-69d2-4915-9c55-f1925fdd80f9"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1419,12 +1402,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B2}==0?"":$V{TOTAL_VALUE_B2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B2}==null?0:$V{TOTAL_VALUE_B2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="417" y="0" width="35" height="10" uuid="819e988d-8b0a-47fe-b3e3-809a4c7bd473"/>
+				<reportElement mode="Opaque" x="417" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="819e988d-8b0a-47fe-b3e3-809a4c7bd473"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1432,12 +1415,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B3}==0?"":$V{TOTAL_VALUE_B3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B3}==null?0:$V{TOTAL_VALUE_B3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="732" y="0" width="35" height="10" uuid="af9c122a-c000-4af8-9823-6ce0e320cb3e"/>
+				<reportElement mode="Opaque" x="732" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="af9c122a-c000-4af8-9823-6ce0e320cb3e"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1445,12 +1428,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_S_VALUE_B}==0?"":$V{TOTAL_S_VALUE_B})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_S_VALUE_B}==null?0:$V{TOTAL_S_VALUE_B})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="767" y="0" width="35" height="10" uuid="10b02248-ad75-4601-bd67-7320cbd3245b"/>
+				<reportElement mode="Opaque" x="767" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="10b02248-ad75-4601-bd67-7320cbd3245b"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1458,12 +1441,12 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_S_VALUE_D}==0?"":$V{TOTAL_S_VALUE_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_S_VALUE_D}==null?0:$V{TOTAL_S_VALUE_D})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="697" y="0" width="35" height="10" uuid="5b100e82-b620-4da6-8c97-3bb926eefb06"/>
+				<reportElement mode="Opaque" x="697" y="0" width="35" height="10" backcolor="#CCCCCC" uuid="5b100e82-b620-4da6-8c97-3bb926eefb06"/>
 				<box leftPadding="2" rightPadding="2">
 					<topPen lineWidth="0.7"/>
 					<leftPen lineWidth="0.7"/>
@@ -1471,9 +1454,9 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="6" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="6" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($V{TOTAL_S_WEIGHT}==0?"":$V{TOTAL_S_WEIGHT})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($V{TOTAL_S_WEIGHT}==null?0:$V{TOTAL_S_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="12" width="105" height="10" uuid="e92faef7-803a-48cd-bb80-58fc19bc9f44"/>
