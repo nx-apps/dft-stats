@@ -1,0 +1,319 @@
+<link rel="import" href="./../../components/format-number-behavior.html">
+<link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="./../../components/data-manage-behavior.html">
+<link rel="import" href="./../../components/common-logic.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<link rel="import" href="../../components/vaadin-gird-filter-common.html">
+
+<link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid-column-group.html">
+
+<link rel="import" href="./../../components/page-style.html">
+
+<!--vaadin-grid-column-group-->
+<dom-module id="search-list-customs">
+    <style include="page-style flex-style">
+        vaadin-grid {
+            height: 100vh;
+        }
+    </style>
+    <template>
+        <div class="container">
+            <vaadin-grid id="material" items="[[dataList]]">
+                <vaadin-grid-column width="50px" flex-grow="0" resizable>
+                    <template class="header">
+                        <div class="text-center">ลำดับ</div>
+                    </template>
+                    <template>
+                        <div class="text-center"> [[_Obindex(index)]]</div>
+                    </template>
+                </vaadin-grid-column>
+
+                <template is="dom-repeat" items={{columns}} as="column">
+                    <vaadin-grid-column width="250px" flex-grow="0" resizable>
+                        <template class="header">{{column.label}}
+                            <vaadin-gird-filter-common aria-label="field1" path="[[column.value]]" value="[[get(column.value, item)]]">
+                            </vaadin-gird-filter-common>
+                        </template>
+                        <template>
+                            <div>[[get(column.value, item)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right"></div>
+                        </template>
+                    </vaadin-grid-column>
+                </template>
+
+
+
+                <vaadin-grid-column-group width="750px" flex-grow="0" resizable hidden="[[search.importer]]">
+                    <template class="header">
+                        <div class="text-center">นำเข้า</div>
+                    </template>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">ปริมาณ (ตัน)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.net_weight_i)]][[formatNumber(item.net_weight)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.net_weight_i]][[total.net_weight]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_i)]][[formatNumber(item.fob_amt_baht)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.fob_amt_baht_i]][[total.fob_amt_baht]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_i)]][[formatNumber(item.avg_amt_baht)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.avg_amt_baht_i]][[total.avg_amt_baht]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_i)]][[formatNumber(item.fob_amt)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.fob_amt_i]][[total.fob_amt]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_i)]][[formatNumber(item.avg_amt)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.avg_amt_i]][[total.avg_amt]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
+
+                <vaadin-grid-column-group width="750px" flex-grow="0" resizable hidden="[[search.exporter]]">
+                    <template class="header">
+                        <div class="text-center">ส่งออก</div>
+                    </template>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">ปริมาณ (ตัน)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.net_weight_e)]][[formatNumber(item.net_weight)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.net_weight_e]][[total.net_weight]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_baht_e)]][[formatNumber(item.fob_amt_baht)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.fob_amt_baht_e]][[total.fob_amt_baht]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (บาท)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_baht_e)]][[formatNumber(item.avg_amt_baht)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.avg_amt_baht_e]][[total.avg_amt_baht]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">มูลค่า (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.fob_amt_e)]][[formatNumber(item.fob_amt)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.fob_amt_e]][[total.fob_amt]]</div>
+                        </template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="15%" flex-grow="0" resizable>
+                        <template class="header">
+                            <div class="text-right">เฉลี่ยต่อตัน (USD)</div>
+                        </template>
+                        <template>
+                            <div class="text-right">[[formatNumber(item.avg_amt_e)]][[formatNumber(item.avg_amt)]]</div>
+                        </template>
+                        <template class="footer">
+                            <div class="text-right">[[total.avg_amt_e]][[total.avg_amt]]</div>
+                        </template>
+                    </vaadin-grid-column>
+                </vaadin-grid-column-group>
+            </vaadin-grid>
+
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'search-list-customs',
+            behaviors: [
+                DataManageBehavior,
+                ReduxBehavior,
+                FormatNumberBehavior,
+                commonLogic,
+                MonthBehavior
+            ],
+            properties: {
+                dataList: {
+                    statePath: 'search.searchList',
+                    observer: 'totalcal'
+                },
+                settingSearch: {
+                    statePath: 'search.settingSearch',
+                    observer: 'setCol'
+                },
+                columns: {
+                    type: Array,
+                    value: []
+                },
+                total: {
+                    type: Object,
+                    value: {}
+                },
+                search: {
+                    type: Object,
+                    value: {
+                        importer: true,
+                        exporter: false
+                    }
+                }
+            },
+            // setText(text) {
+            //     if (text === 'country')
+            //         return 'ประเทศ'
+            //     return 'บริษัท'
+            // },
+            setCol(data) {
+                switch (data.tranType) {
+                    case 'i':
+                        this.set('search.importer', false)
+                        this.set('search.exporter', true)
+                        break;
+                    case 'e':
+                        this.set('search.importer', true)
+                        this.set('search.exporter', false)
+                        break;
+                    case 'a':
+                        this.set('search.importer', false)
+                        this.set('search.exporter', false)
+                        break;
+                    default:
+                        // this.set('search.importer', true)
+                        // this.set('search.exporter', true)
+                        break;
+                }
+                this.set('columns', [])
+                let newData = {}
+                const changeName = (data) => {
+                    switch (data) {
+                        case 'hamonize':
+                            return 'ข้าว'
+                            break;
+                        case 'company':
+                            return 'บริษัท'
+                            break;
+                        case 'country':
+                            return 'ประเทศ'
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                // console.log(data.hasOwnProperty('field1'));
+                if (data.hasOwnProperty('field1')) {
+                    newData = {
+                        label: changeName(data.field1),
+                        value: 'field1',
+                    }
+                    this.push('columns', newData)
+                }
+                if (data.hasOwnProperty('field2')) {
+                    newData = {
+                        label: changeName(data.field2),
+                        value: 'field2',
+                    }
+                    this.push('columns', newData)
+                }
+                if (data.hasOwnProperty('field3')) {
+                    newData = {
+                        label: changeName(data.field3),
+                        value: 'field3',
+                    }
+                    this.push('columns', newData)
+                }
+            },
+            totalcal(dataList) {
+                let checkNaN = ((num) => {
+                    if (isNaN(num)) return ''
+                    // console.log(num)
+                    return this.formatNumber(num)
+                })
+                // console.log(dataList.length);
+                const calNum = (prop,mun =1) => {
+                    return checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current][prop], 0)/mun)
+                }
+                // // console.log(isNaN(this.total.avg_amt_baht_i));
+
+                // this.set('total.net_weight_e', checkNaN('net_weight_e'))
+                // this.set('total.fob_amt_baht_e', checkNaN('fob_amt_baht_e'))
+                // this.set('total.fob_amt_e', checkNaN('fob_amt_e'))
+                // this.set('total.avg_amt_baht_e', checkNaN('avg_amt_baht_e'))
+                // this.set('total.avg_amt_e', checkNaN('avg_amt_e'))
+
+                this.set('total.net_weight', calNum('net_weight'))
+                this.set('total.fob_amt_baht', calNum('fob_amt_baht'))
+                this.set('total.fob_amt', calNum('fob_amt'))
+                this.set('total.avg_amt_baht', calNum('avg_amt_baht',dataList.length))
+                this.set('total.avg_amt', calNum('avg_amt',dataList.length))
+
+                // console.log(this.total.avg_amt_baht);
+                this.set('total.net_weight_i', calNum('net_weight_i'))
+                this.set('total.fob_amt_baht_i', calNum('fob_amt_baht_i'))
+                this.set('total.fob_amt_i', calNum('fob_amt_i'))
+                this.set('total.avg_amt_baht_i', calNum('avg_amt_baht_i',dataList.length))
+                this.set('total.avg_amt_i', calNum('avg_amt_i',dataList.length))
+
+                // console.log(isNaN(this.total.avg_amt_baht_i));
+
+                this.set('total.net_weight_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].net_weight_e, 0)))
+                this.set('total.fob_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_baht_e, 0)))
+                this.set('total.fob_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].fob_amt_e, 0)))
+                this.set('total.avg_amt_baht_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_baht_e, 0)/dataList.length))
+                this.set('total.avg_amt_e', checkNaN(Object.keys(dataList).reduce((previous, current) => previous + dataList[current].avg_amt_e, 0)/dataList.length))
+
+
+            }
+        });
+    </script>
+</dom-module>
