@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    var controller = require('../../controllers/report/daily.controller')
+    var controller = require('../../../controllers/report/edi/daily.controller')
 
     app.get('/company', controller.dailyCompany)
     app.get('/country', controller.dailyCountry)
