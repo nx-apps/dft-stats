@@ -38,14 +38,14 @@ exports.expt = function (req, res) {
             var main = data[0];
             main.sub = sub;
             // res.json(main);
-            res.ireport("search/export.jasper", req.query.export || "pdf", [main], {
+            res.ireport("edi/search/export.jasper", req.query.export || "pdf", [main], {
                 OUTPUT_NAME: main.reference_code2
             });
 
         })
 }
 exports.impt = function (req, res) {
-    // res.ireport("search/import.jasper", req.query.export || "pdf", [{}], {});
+    // res.ireport("edi/search/import.jasper", req.query.export || "pdf", [{}], {});
     var val = req.query;
     if (req.method == 'POST') val = req.body;
     req.jdbc.query('mssql', 'exec sp_stats_rpt_refcode @refCode=?',
@@ -63,14 +63,14 @@ exports.impt = function (req, res) {
             main.quantity2 = (multi ? 0 : data[1].quantity);
             main.unit_code2 = (multi ? '' : data[1].unit_code);
             // res.json(main)
-            res.ireport("search/import.jasper", req.query.export || "pdf", [main], {
+            res.ireport("edi/search/import.jasper", req.query.export || "pdf", [main], {
                 OUTPUT_NAME: main.reference_code2
             });
 
         })
 }
 exports.ec = function (req, res) {
-    // res.ireport("search/import.jasper", req.query.export || "pdf", [{}], {});
+    // res.ireport("edi/search/import.jasper", req.query.export || "pdf", [{}], {});
     var val = req.query;
     if (req.method == 'POST') val = req.body;
     req.jdbc.query('mssql', 'exec sp_stats_rpt_refcode @refCode=?',
@@ -78,7 +78,7 @@ exports.ec = function (req, res) {
         function (err, data) {
             data = JSON.parse(data);
             // res.json(main);
-            res.ireport("search/ec.jasper", req.query.export || "pdf", data, {
+            res.ireport("edi/search/ec.jasper", req.query.export || "pdf", data, {
                 OUTPUT_NAME: data[0].reference_code2
             });
         });
@@ -114,7 +114,7 @@ exports.threeinone = function (req, res) {
             var filename = 'rpt_' + val.view
                 + (val.field3 != '' && typeof val.field3 !== 'undefined' ? '3' : (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1'))
                 + (val.tranType == 'a' ? '_all' : '');
-            res.ireport("search/" + filename + ".jasper", req.query.export || "pdf", data, params);
+            res.ireport("edi/search/" + filename + ".jasper", req.query.export || "pdf", data, params);
         });
 
 }

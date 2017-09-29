@@ -10,7 +10,7 @@ exports.dailyCompany = function (req, res) {
             // params = rpt.keysToUpper(params);
             params.current_date = new Date().toISOString().slice(0, 10);
             // res.json(params)
-            res.ireport("daily/rpt_daily_company.jasper", req.query.export || "pdf", d2, {
+            res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", d2, {
                 approveDate: req.query.date,
                 FILE_TYPE: req.query.export,
                 OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
@@ -42,7 +42,7 @@ exports.dailyCountry = function (req, res) {
                 param = rpt.keysToUpper(param);
                 // res.send(param);
                 // res.json(param)
-                res.ireport("daily/rpt_daily_country.jasper", req.query.export || "pdf", d2, param);
+                res.ireport("edi/daily/rpt_daily_country.jasper", req.query.export || "pdf", d2, param);
             })
         })
 }
@@ -56,7 +56,7 @@ exports.dailyPricerice = function (req, res) {
             };
             // params = rpt.keysToUpper(params);
             params.current_date = new Date().toISOString().slice(0, 10);
-            res.ireport("daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", d2, {
+            res.ireport("edi/daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", d2, {
                 approveDate: req.query.date,
                 FILE_TYPE: req.query.export,
                 OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ราคาข้าวตามใบอนุญาต'
@@ -73,7 +73,7 @@ exports.dailyExportrice = function (req, res) {
             // res.send(data);
             // req.r.json(data)
             // .run().then(function (d2) {
-            res.ireport("daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data, {
+            res.ireport("edi/daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data, {
                 OUTPUT_NAME: req.query.currentDate.replace(/-/g, '') + '_สรุปสถานการณ์ส่งออกข้าว',
                 CURRENT_DATE: req.query.currentDate,
                 REF_DATA: refData
@@ -135,7 +135,7 @@ exports.dailyCost = function (req, res) {
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ข้อมูลส่งออกข้าว ต้นทุนและราคาข้าวชนิดต่างๆ';
             // res.json(param)
-            res.ireport("daily/rpt_daily_cost.jasper", req.query.export || "pdf", datas, param);
+            res.ireport("edi/daily/rpt_daily_cost.jasper", req.query.export || "pdf", datas, param);
         })
 }
 exports.dailyDit = function (req, res, next) {
@@ -341,7 +341,7 @@ exports.dailyDit = function (req, res, next) {
             params.current_date = new Date().toISOString().slice(0, 10);
             params.OUTPUT_NAME = params.current_date.replace(/-/g, '') + '_ราคาข้าวสาร_เอฟ_โอ_บี_กรุงเทพ';
             // res.json(data)
-            res.ireport("daily/rpt_daily_dit.jasper", req.query.export || "pdf", data, params);
+            res.ireport("edi/daily/rpt_daily_dit.jasper", req.query.export || "pdf", data, params);
         })
 }
 exports.dailyFob = function (req, res, next) {
@@ -459,7 +459,7 @@ exports.dailyFob = function (req, res, next) {
                     params.LAST_DATE = year + "-" + (month < 10 ? "0" : "") + month + "-" + lastDate.date;
                     params.OUTPUT_NAME = params.LAST_DATE.replace(/-/g, '') + '_ราคาข้าวสารส่งออก_FOB_กรุงเทพ';
                     // res.json(data)
-                    res.ireport("daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
+                    res.ireport("edi/daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
                 })
 
 
