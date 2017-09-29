@@ -585,7 +585,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})+" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})+(new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END})==new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})?"":" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END}))]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="5" width="802" height="25" uuid="f978edb2-2b98-48ce-b1a7-4ddaa69b68d3"/>

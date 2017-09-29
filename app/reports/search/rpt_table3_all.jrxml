@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_table3_all" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4e9cecd-e61c-40cb-a9bc-3fa7fe18803c">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="131"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="COLUMN_NAME1" class="java.lang.String"/>
@@ -95,7 +95,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})+" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})+(new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END})==new  nylon.utility.NumberFormat().toThaiDate($P{DATE_START})?"":" ถึง "+" วันที่ "+new  nylon.utility.NumberFormat().toThaiDate($P{DATE_END}))]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
