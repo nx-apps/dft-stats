@@ -1,0 +1,94 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../components/month-behavior.html">
+
+<link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
+
+<link rel="import" href="../../components/page-style.html">
+
+<dom-module id="search-report-customs">
+    <template>
+        <style include="page-style">
+             :host {
+                display: block;
+            }
+        </style>
+        <paper-dialog id="report" modal>
+            <div class="layout start-justified">
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-combo-box always-float-label label="รูปแบบเอกสาร" placeholder="รูปแบบเอกสาร" value="{{data.view}}" item-label-path="cate"
+                        item-value-path="id" items="{{report.categoryReport}}">
+                        <template>
+                            [[item.cate]]
+                        </template>
+                    </gl-combo-box>
+                </div>
+
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-combo-box always-float-label label="ประเภทเอกสาร" placeholder="ประเภทเอกสาร" value="{{data.export}}" item-label-path="report_type"
+                        item-value-path="report_type_id" items="{{report.reportFile}}">
+                        <template>
+                            [[item.report_type]]
+                        </template>
+                    </gl-combo-box>
+                </div>
+
+                <div class="flex horizontal end-justified layout buttons">
+                    <paper-button raised class="gl-btn-default" dialog-dismiss>ปิด</paper-button>
+                    <paper-button raised class="gl-btn-primary" on-tap="printReport" autofocus>ออกรายงาน</paper-button>
+                </div>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'search-report-customs',
+            behaviors: [
+                ReduxBehavior,
+                MonthBehavior
+            ],
+            properties: {
+                dataSearch: {
+                    type: Object,
+                    value: {}
+                },
+                value: {
+                    value: [],
+                    notify: true
+                },
+                data: {
+                    type: Object,
+                    value: {
+                        view: 'table',
+                        export: 'pdf'
+                    }
+                },
+                report: {
+                    type: Object,
+                    value: {
+                        categoryReport: [
+                            { cate: 'ตาราง', id: 'table' },
+                            { cate: 'Pivot', id: 'pivot' }
+                        ],
+                        reportFile: [
+                            { report_type: 'PDF', report_type_id: 'pdf' },
+                            { report_type: 'WORD', report_type_id: 'word' },
+                            { report_type: 'EXCEL', report_type_id: 'excel' }
+                        ]
+                    }
+                },
+            },
+            openDia() {
+                this.$$('#report').open()
+            },
+            printReport(){
+                let newDataReport = this.dataSearch
+                newDataReport.view = this.data.view
+                newDataReport.export = this.data.export
+                window.open('./api/report/search?' + this.genUrl(newDataReport))
+                // printReport
+            }
+        });
+    </script>
+</dom-module>

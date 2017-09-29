@@ -1,0 +1,38 @@
+<link rel="import" href="./components/search-list-customs.html">
+<link rel="import" href="./components/search-search-customs.html">
+
+<link rel="import" href="./../components/month-behavior.html">
+
+<link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
+
+<dom-module id="page-search-customs">
+    <template>
+        <style include="page-style flex-style"></style>
+        <div class="xcontainer">
+            <section class="container">
+                <div class="header">ข้อมูลการส่งออก / นำเข้า</div>
+            </section>
+            <section class="container">
+                <paper-material elevation="1">
+                    <search-search-customs ></search-search-customs>
+                    <search-list-customs ></search-list-customs>
+                </paper-material>
+
+            </section>
+
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'page-search-customs',
+            behaviors: [
+                ReduxBehavior, nylonBehavior, hamonizeAction, searchAction
+            ],
+            nylonPageActive() {
+                // this.dispatchAction('HAMONIZE_RICE_LIST');
+                this.dispatchAction('HAMONIZE_SET_DATE');
+                // this.dispatchAction('HAMONIZE_RICE_LIST_GROUP');
+            }
+        });
+    </script>
+</dom-module>

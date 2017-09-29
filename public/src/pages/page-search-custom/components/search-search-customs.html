@@ -1,0 +1,776 @@
+<link rel="import" href="./../../components/month-behavior.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="./../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="./../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="./../../../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./../../../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<link rel="import" href="../../../../bower_components/iron-collapse/iron-collapse.html">
+
+<link rel="import" href="../../../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="./../../components/common-logic.html">
+
+<link rel="import" href="./search-report-customs.html">
+
+<link rel="import" href="../../../../bower_components/nylon-tag/nylon-tag.html">
+
+<link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
+
+<link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="search-search-customs">
+    <template>
+        <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
+             :host {
+                display: block;
+            }
+
+            tag-module {
+                cursor: pointer;
+            }
+
+            .item {
+                float: left;
+                margin: 5px;
+            }
+
+            .comBobox {
+                clear: both;
+            }
+
+            div.main {
+                /*background-color: red;*/
+                height: 300px;
+                overflow-y: scroll;
+                /*min-width: 300px;*/
+                border: solid darkblue 1px;
+            }
+
+            span.namesub {
+                display: inline-block;
+                /*background-color: blue;*/
+                width: 70%;
+            }
+
+            span.year {
+                display: inline-block;
+                width: 20%;
+                /*background-color: red;*/
+                /*display: inline;*/
+                /*float: right;*/
+            }
+
+            .collapse-content {
+                padding: 15px;
+                width: 500px;
+                border: 1px solid #dedede;
+            }
+
+            .header-item {
+                border: 1px solid #ddd;
+                background-color: #F1F1F1;
+                padding: 15px;
+            }
+
+            .subdiv {
+                border-bottom: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                border-left: 1px solid #ddd;
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+            .main-item,
+            .sub-item {
+                padding: 15px 0px;
+                /*border: 1px solid #ddd;*/
+                border-bottom: 1px solid #ddd;
+            }
+
+            .main-item:hover,
+            .sub-item:hover {
+                background-color: #F1F1F1;
+            }
+
+            .sub-item {
+                padding-left: 60px;
+            }
+
+            .text-row-header {
+                text-align: left;
+            }
+
+            paper-icon-button .hamonize {
+                margin-top: -50px;
+            }
+
+            paper-dialog.size-position {
+                width: 800px;
+                height: 550px;
+                overflow: auto;
+            }
+        </style>
+        <div class="container">
+            <search-report-customss id="report" data-search="{{dataSearch}}"></search-report-customss>
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex3child"></div>
+                <div class="flexchild labelSearchDate">
+                    เริ่มวันที่ :
+                </div>
+                <div class="flex2child">
+                    <!-- {{date}} -->
+                    <gl-form-input type="date" value="{{data.dateStart}}"></gl-form-input>
+                </div>
+                <div class="flexchild"></div>
+                <div class="flexchild labelSearchDate">
+                    ถึงวันที่ :
+                </div>
+                <div class="flex2child">
+                    <gl-form-input type="date" value="{{data.dateEnd}}"></gl-form-input>
+                </div>
+                <div class="flex3child"></div>
+                <div class="flexchild"></div>
+            </div>
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex2child"></div>
+                <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                    แสดงคอลัมน์ :
+                </div>
+                <div class="flex2child">
+                    <div class="horizontal layout">
+                        <div>
+                            <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
+                        </div>&nbsp;&nbsp;
+                        <div>
+                            <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                    ลำดับที่ :
+                </div>
+                <div class="flex3child">
+                    <template is="dom-repeat" items="[[value]]">
+                        <div class="item">
+                            <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
+                        </div>
+                    </template>
+                    <div class="comBobox">
+                        <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                            <template>
+                                [[item.id]]
+                            </template>
+                        </gl-combo-box>
+                    </div>
+                </div>
+                <div class="flex3child"></div>
+            </div>
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex-3"></div>
+                <div class="flex-6">
+                    <table class="gl-table-default">
+                        <thead class="table-head">
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ</th>
+                                <th>รายการที่เลือก</th>
+                                <th>ตั้งค่า</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            <template is="dom-repeat" items={{value}} initial-count="20">
+                                <tr>
+                                    <td>{{_Obindex(index)}}</td>
+                                    <td>{{item.id}}</td>
+                                    <td>{{painText(item,dataSeleted.*)}}</td>
+                                    <td>
+                                        <paper-button raised on-tap="getSelete">ตั้งค่า</paper-button>
+                                    </td>
+                                </tr>
+                            </template>
+
+                            <template is="dom-if" if={{_ObIsHave(value,value.*)}}>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">ไม่มีข้อมูล</td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-3"></div>
+            </div>
+
+        </div>
+        <div class="horizontal end-justified layout">
+            <!-- <div class="btn-search"> -->
+            <paper-button raised class="gl-btn-info gl-small" on-tap="getSearchValue">
+                <iron-icon icon="search"></iron-icon>
+                ค้นหา
+            </paper-button>
+            <!-- </div> -->
+            <paper-button raised class="gl-btn-info gl-small" on-tap="settingReport">
+                <iron-icon icon="assignment"></iron-icon>
+                ออกรายงาน
+            </paper-button>
+        </div>
+        <paper-dialog id="itemGroup" class="size-position" modal>
+            <h2>รายชื่อรายการ</h2>
+            <paper-dialog-scrollable>
+                <div class="layout start-justified">
+                    <div class="horizontal center layout header-item" warp style="height: 20px;">
+                        <div class="header-div flex">
+                            <div style="padding: 10px 15px;">
+                                รูปแบบ
+                                <paper-radio-group selected="{{typeSelete}}">
+                                    <paper-radio-button name="list">รายการ</paper-radio-button>
+                                    <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                                </paper-radio-group>
+                            </div>
+                        </div>
+                        <div class="header-div flex">
+                        </div>
+                    </div>
+                    <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                        <div name="list">
+                            <div class="horizontal layout header-item" warp>
+                                <div class="header-div flex"></div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
+                                    <div hidden="{{main.hidden}}">
+                                        <div class="horizontal layout main-item">
+                                            <div class="flex">
+                                                <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" on-tap="getCheckGroup">
+                                            </div>
+                                            <template is="dom-repeat" items={{columns}}>
+                                                <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div name="group">
+                            <div class="horizontal layout header-item" warp>
+                                <div class=""></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex-3">ชื่อกลุ่ม</div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
+                                    <div hidden="{{item.hidden}}">
+                                        <div class="horizontal layout center" warp style="height: 50px; line-height: 50px;">
+                                            <div class="">
+                                                <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
+                                            </div>
+                                            <div class="flex">
+                                                <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild">
+                                            </div>
+                                            <div class="flex-3 text-row-header">[[item.group_name]]</div>
+                                            <div class="flex-3"></div>
+                                            <div class="flex-3">-</div>
+                                        </div>
+                                        <iron-collapse id="collapse-[[indexroot]]">
+                                            <template is="dom-repeat" items={{item.group_item}} as="subChild" initial-count="20">
+                                                <div hidden="{{subChild.hidden}}">
+                                                    <div class="horizontal layout sub-item">
+                                                        <div class=""></div>
+                                                        <div class="row flex">
+                                                            <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}">
+                                                                [[checkList(subChild,subChild.*)]]
+                                                                <!-- {{subChild.check}} -->
+                                                        </div>
+                                                        <div class="row flex-2">[[item.name_th]]</div>
+                                                        <template is="dom-repeat" items={{columns}}>
+                                                            <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </iron-collapse>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </iron-pages>
+                </div>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
+            </div>
+        </paper-dialog>
+        <!-- modal -->
+
+    </template>
+    <script>
+        Polymer({
+            is: 'search-search-customs',
+            behaviors: [
+                ReduxBehavior,
+                MonthBehavior,
+                commonLogic
+            ],
+            properties: {
+                value: {
+                    value: [],
+                    notify: true
+                },
+                date: {
+                    statePath: 'hamonize.date',
+                    observer: '_setDate'
+                },
+                hamonizeList: {
+                    statePath: 'search.hamonizeList',
+                    observer: '_cloneDataHamonize'
+                },
+                hamonizeGroupList: {
+                    statePath: 'search.hamonizeGroupList',
+                    observer: '_cloneDataHamonizeGroup'
+                },
+                companyList: {
+                    statePath: 'search.companyList',
+                    observer: '_cloneDataCompany'
+                },
+                countryList: {
+                    statePath: 'search.countryList',
+                    observer: '_cloneDataCountry'
+                },
+                dataSelect: {
+                    type: Object,
+                    value: {
+                        hamonizeList: [],
+                        hamonizeGroupList: [],
+                        companyList: [],
+                        countryList: [],
+                    }
+                },
+                dataSeleted: {
+                    type: Object,
+                    value: {
+                        field: '',
+                        hamonizeList: [],
+                        companyList: [],
+                        countryList: [],
+                    }
+                },
+                dataUse: {
+                    type: Array
+                },
+                dataUseGroup: {
+                    type: Array
+                },
+                myItems: {
+                    type: Array,
+                    value: [
+                        {
+                            id: 'ชนิดข้าว',
+                            value: 'hamonize',
+                            label: '',
+                            hidden: false,
+                            fields: ['value', 'label']
+                        },
+                        {
+                            id: 'ประเทศ',
+                            value: 'country',
+                            label: '',
+                            hidden: false,
+                            fields: ['value', 'label']
+                        },
+                        {
+                            id: 'บริษัท',
+                            value: 'company',
+                            label: '',
+                            hidden: false,
+                            fields: ['value', 'label']
+                        }
+                    ]
+                },
+                data: {
+                    type: Object,
+                    value: {}
+                },
+                columns: Array,
+                typeSelete: {
+                    type: String,
+                    value: 'list'
+                },
+                dataSearch: {
+                    type: Object,
+                    value: {}
+                }
+
+            },
+            observers: [
+                'checkPullData(data,data.*)'
+            ],
+            _cloneDataHamonize(hamonize) {
+                this._cloneData(hamonize, 'hamonizeList')
+            },
+            _cloneDataHamonizeGroup(hamonizeGroup) {
+                this._cloneDataGroup(hamonizeGroup, 'hamonizeGroupList')
+            },
+            _cloneDataCompany(company) {
+                this._cloneData(company, 'companyList')
+            },
+            _cloneDataCountry(country) {
+                this._cloneData(country, 'countryList')
+            },
+            _cloneData(data, name) {
+                let newData = JSON.parse(JSON.stringify(data))
+                newData.map(item => {
+                    item.hidden = false
+                    item.check = false
+                    return item
+                })
+                this.set(`dataSelect.${name}`, newData)
+            },
+            _cloneDataGroup(data, name) {
+                let newData = JSON.parse(JSON.stringify(data))
+                newData.map(item => {
+                    item.hidden = false
+                    item.check = false
+
+                    item.group_item.map((sub_item) => {
+                        sub_item.hidden = false
+                        sub_item.check = false
+                        return sub_item
+                    })
+                    return item
+                })
+                this.set(`dataSelect.${name}`, newData)
+            },
+            //tag
+            selectTag: function (e) {
+                let value = e.detail.value
+                // //console.log(value);
+                if (value !== null) {
+
+                    let result = this.myItems.indexOf(value)
+                    let num = this.value.length + 1
+                    this.set('myItems.' + result + '.hidden', true)
+                    this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
+                    // //console.log(this.myItems[result]);
+                    this.push('value', value)
+                    e.detail.value = ''
+                }
+
+            },
+            setColor: function (value) {
+                if (typeof value == 'undefined') {
+                    return '#7B7D7D';
+                }
+                else {
+                    return value;
+                }
+            },
+            deleteTag: function (e) {
+                // //console.log(e.currentTarget.item);
+                var index = this.value.indexOf(e.currentTarget.item);
+                var indexMyItem = this.myItems.indexOf(e.currentTarget.item);
+                this.splice('value', index, 1);
+
+                // บวกเลขเข้าไป
+
+                this.value.map((item, num) => {
+                    this.set('myItems.' + indexMyItem + '.hidden', false)
+                    this.set('myItems.' + indexMyItem + '.label', (num + 1) + '.' + item.id + '   X')
+                    this.set('value.' + num + '.label', (num + 1) + '.' + item.id + '   X')
+                })
+                if (this.value.length === 0) {
+                    this.myItems.map((item, index) => {
+                        this.set('myItems.' + index + '.hidden', false)
+                    })
+                }
+            },
+            getSeleted(filter) {
+                let data = this.myItems.filter((item) => item.hidden === false)
+                return data
+            },
+            // end tag
+            painText(value) {
+                let text = String(this.dataSeleted[value.value + 'List'].map(item => item.label)).slice(0, 30) || ''
+                let text2 = ''
+                // console.log(text);
+                if (text.length > 0) {
+                    text2 = text + '...'
+                } else {
+                    text2 = text
+                }
+                return text2
+            },
+            _setDate(e) {
+                // e.dateStart = '2017-09-01'
+                // e.dateEnd = '2017-09-22'
+                this.set('data.dateStart', e.dateStart)
+                this.set('data.dateEnd', e.dateEnd);
+                this.set('data.exporter', true)
+                this.set('data.importer', false)
+            },
+            checkIsValue(value) {
+                if (value === 'value') {
+                    return 'header-div flex-2'
+                } else {
+                    return 'header-div flex-3'
+                }
+                // console.log(value);
+            },
+            getSelete(e) {
+                let data = e.model.__data__
+                let value = data.item.value
+                this.set('dataSeleted.field', value)
+
+                // console.log(data.item.fields)
+                switch (value) {
+                    case 'hamonize':
+                        this.set('dataUse', this.dataSelect.hamonizeList)
+                        this.set('dataUseGroup', this.dataSelect.hamonizeGroupList)
+                        break;
+                    case 'country':
+                        this.set('dataUse', this.dataSelect.countryList)
+                        this.set('dataUseGroup', [])
+                        break;
+                    case 'company':
+                        this.set('dataUse', this.dataSelect.companyList)
+                        this.set('dataUseGroup', [])
+                        break;
+                    default:
+                        break;
+                }
+                this.set('columns', data.item.fields)
+                this.$.itemGroup.open()
+            },
+            _showData(main, item) {
+                return main[item]
+            },
+            _showDataGroup(main, item) {
+                // console.log(main, item);
+                return main[item]
+            },
+            _getValueInput(columns, inputName) {
+                let comBind = {},
+                    data = {},
+                    countPropertity = 0
+                for (var index = 0; index < columns.length; index++) {
+                    var element = columns[index]
+                    let inputElement = inputName + element
+                    if (Polymer.dom(this.root).querySelector('#' + inputElement) !== undefined &&
+                        Polymer.dom(this.root).querySelector('#' + inputElement) !== null &&
+                        Polymer.dom(this.root).querySelector('#' + inputElement).value !== '') {
+                        data[element] = Polymer.dom(this.root).querySelector('#' + inputElement).value
+                        countPropertity++
+                    }
+                }
+                return comBind = {
+                    data: data,
+                    countPropertity: countPropertity
+                }
+            },
+            _checkPropIsMath(data, properties) {
+                let arrIsTrue = []
+                for (var key in properties) {
+                    if (properties.hasOwnProperty(key)) {
+                        let prop = properties[key]
+                        let str1 = String(data[key]),
+                            str2 = String(prop)
+                        // gเช็ดดว่าเป็นภาษาอังกฏษเปล่า
+                        if (/^[a-zA-Z]+$/.test(String(prop))) {
+                            str1 = str1.toLowerCase()
+                            str2 = str2.toLowerCase()
+                        }
+                        // console.log(str1,str2);
+                        arrIsTrue.push(str1.search(str2.toLowerCase()) > -1 ? false : true)
+                    }
+                }
+                return !arrIsTrue.every(elem => elem === false)
+            },
+            searchItem(e) {
+                let result = this._getValueInput(this.columns, 'input_')
+                this.dataUse.map((item, index) => {
+                    if (result.countPropertity > 0) {
+                        this.set('dataUse.' + index + '.hidden', this._checkPropIsMath(item, result.data))
+                    } else {
+                        this.set('dataUse.' + index + '.hidden', false)
+                    }
+                })
+            },
+            searchItemGroup(e) {
+                let result = this._getValueInput(this.columns, 'input_group_')
+                this.dataUseGroup.map((item, index) => {
+                    item.group_item.map((sub_item, sub_index) => {
+                        let notFound = this._checkPropIsMath(sub_item, result.data)
+                        sub_item.hidden = notFound
+                        this.set('dataUseGroup.' + index + '.group_item.' + sub_index + '.hidden', notFound)
+                        this.notifyPath('dataUseGroup.' + index + '.group_item.' + sub_index + '.hidden')
+                        return sub_item
+                    })
+                    let allNotFound = item.group_item.every(elem => elem.hidden === true)
+                    item.hidden = allNotFound
+                    this.set('dataUseGroup.' + index + '.hidden', allNotFound)
+                    this.notifyPath('dataUseGroup.' + index)
+
+                    return item
+                })
+                this.notifyPath('dataUseGroup')
+                // console.log(this.dataUseGroup);
+            },
+            toggle: function (e) {
+                let index = e.currentTarget.index
+                if (e.currentTarget.icon === 'expand-more') {
+                    e.currentTarget.icon = 'chevron-right'
+                } else {
+                    e.currentTarget.icon = 'expand-more'
+                }
+                // console.log(e.currentTarget.icon);
+                // console.log(this.$$('#collapse-' + index))
+                // console.log(this.$$('#collapse-' + index).open);
+                this.$$('#collapse-' + index).toggle()
+            },
+            checkPullData(data, actionData) {
+                if (data.dateStart !== undefined && data.dateEnd !== undefined) {
+                    if ((data.exporter === false) && (data.importer === true)) {
+                        data.tranType = 'i'
+                        data.SelectAll = false
+                    } else if ((data.exporter === true) && (data.importer === false)) {
+                        data.tranType = 'e'
+                        data.SelectAll = false
+                    } else {
+                        data.tranType = 'a'
+                        data.SelectAll = true
+                    }
+                    this.dispatchAction('GET_SEARCH_HAMONIZE', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_HAMONIZE_GROUP', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_COMPANY', this.genUrl(data))
+                    this.dispatchAction('GET_SEARCH_COUNTRY', this.genUrl(data))
+                    // console.log(this.genUrl(data))
+                    // this.genUrl()
+                }
+            },
+            getCheckGroup(e) {
+                let value = e.model.__data__.main.value
+                let checkHost = e.currentTarget.checked
+                // let result = this._getValueInput(this.columns, 'input_')
+                this.dataUseGroup.map((group, index1) => {
+                    group.group_item.map((item, index2) => {
+                        if (item.value === value) {
+                            this.set('dataUseGroup.' + index1 + '.group_item.' + index2 + '.check', checkHost)
+                        }
+                        return item
+                    })
+                    return group
+                })
+                // this.dataUseGroup[indexRoot].group_item.map((item, index) => {
+                //     if (!this._checkPropIsMath(item, result.data)) {
+                //         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
+                //     }
+                // })
+                // console.log(item.vsalue);
+                // console.log(item,indexRoot,checkHost,result);
+            },
+            getCheckChild(e) {
+                let item = e.model.__data__.item
+                let indexRoot = e.currentTarget.id
+                let checkHost = e.currentTarget.checked
+                let result = this._getValueInput(this.columns, 'input_group_')
+                this.dataUseGroup[indexRoot].group_item.map((item, index) => {
+                    if (!this._checkPropIsMath(item, result.data)) {
+                        this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
+                    }
+                })
+            },
+            checkList(data) {
+                let checkHave = this.dataUse.findIndex(item => item.value === data.value)
+                this.set('dataUse.' + [checkHave] + '.check', data.check)
+            },
+            checkAddItem() {
+                let newData = []
+                let newCheck = []
+                let newCheckGroup = []
+                let field = this.dataSeleted.field
+                const _filterChecked = (data) => {
+                    return data.filter((item) => {
+                        return item.check === true
+                    })
+                }
+                const _reduceDataArray = (dataGroup) => {
+                    return dataGroup.map(item => item.group_item).reduce((a, b) => a.concat(b), [])//data)
+                }
+                const _concatCheckDup = (data1, data2) => {
+                    let arr = []
+                    let arr2 = []
+                    data1.concat(data2).map((item) => {
+                        arr[item.value] = item
+                    })
+                    for (var key in arr) {
+                        arr2.push(arr[key])
+                    }
+                    return arr2
+                }
+
+                switch (field) {
+                    case 'hamonize':
+                        newCheck = _filterChecked(this.dataSelect.hamonizeList)
+                        newCheckGroup = _filterChecked(_reduceDataArray(this.dataSelect.hamonizeGroupList))
+                        newData = _concatCheckDup(newCheck, newCheckGroup)
+                        this.set('dataSeleted.hamonizeList', newData)
+                        break;
+                    case 'country':
+                        newCheck = _filterChecked(this.dataSelect.countryList)
+                        this.set('dataSeleted.countryList', newCheck)
+                        break;
+                    case 'company':
+                        newCheck = _filterChecked(this.dataSelect.companyList)
+                        this.set('dataSeleted.companyList', newCheck)
+                        break;
+                    default:
+                        break;
+                }
+            },
+            _getData() {
+                const getArr = (data) => {
+                    return data.map(item => item.value).join(',')
+                }
+                let dataSend = {
+                    hamonize: getArr(this.dataSeleted.hamonizeList),
+                    country: getArr(this.dataSeleted.countryList),
+                    company: getArr(this.dataSeleted.companyList),
+                }
+
+                let dataMath = {}
+                this.value.map((item, index) => {
+                    dataMath['field' + (index + 1)] = item.value
+                    dataMath['value' + (index + 1)] = dataSend[item.value]
+                })
+                dataMath.tranType = this.data.tranType || 'a'
+                dataMath.dateStart = this.data.dateStart || null
+                dataMath.dateEnd = this.data.dateEnd || null
+
+                return dataMath
+            },
+            getSearchValue() {
+                let dataSave = this._getData()
+                this.dispatchAction('SET_SEARCH', dataSave)
+                this.dispatchAction('GET_SEARCH_ALL', dataSave)
+            },
+            settingReport() {
+                let dataSave = this._getData()
+                // console.log(this.$$('#report'));
+                this.set('dataSearch', dataSave)
+                this.$$('#report').openDia()
+            },
+        });
+    </script>
+</dom-module>
