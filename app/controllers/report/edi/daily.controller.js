@@ -1,4 +1,4 @@
-var rpt = require('../../global/report');
+var rpt = require('../../../global/report');
 exports.dailyCompany = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_company @approveDate=?", [req.query.date], function (err, data) {
