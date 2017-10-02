@@ -88,9 +88,10 @@ exports.getSearch = function (req, res) {
     @modelMonth=?,
     @field1=?,
     @field2=?,
-    @hsCode=?`,
+    @hsCode=?,
+    @countryCode=?`,
         [val.tranType || 'E', val.modelYear, val.modelMonth || '00',
-        val.field1 || 'hamonize', val.field2 || '', val.hsCode || '1006'],
+        val.field1 || 'hamonize', val.field2 || '', val.hsCode || '1006', val.countryCode || ''],
         function (err, data) {
             res.send(data);
         });
