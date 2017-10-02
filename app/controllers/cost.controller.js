@@ -28,10 +28,11 @@ exports.update = function (req, res) {
                 cost_end: oldData(0)('cost_end')
             }
         }).do(function (d) {
-            var endDateNew = r.time(d('cost_date').year(),
-                d('cost_date').month(),
-                d('cost_date').day().sub(1),
-                '+07');
+            var endDateNew = d('cost_date').sub(86400);
+            // r.time(d('cost_date').year(),
+            //     d('cost_date').month(),
+            //     d('cost_date').day().sub(1),
+            //     '+07');
             return r.table('cost').insert(d)
                 .do(r.table('cost').get(oldData(0)('id')).update({ cost_end: endDateNew }))
         })
