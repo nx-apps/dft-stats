@@ -95,7 +95,7 @@ exports.threeinone = function (req, res) {
         TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : (val.tranType == 'i' ? 'นำเข้า' : 'นำเข้า-ส่งออก')),
         FILE_TYPE: req.query.export
     };
-    req.jdbc.query("mssql", `exec sp_stats_search_3in1 
+    req.jdbc.query("mssql", `exec sp_stats_search_edi 
                 @tranType=?,
                 @dateStart=?,
                 @dateEnd=?,

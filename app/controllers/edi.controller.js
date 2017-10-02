@@ -55,7 +55,7 @@ exports.getSearch = function (req, res) {
     let dateEnd = dd.dateEnd || today
 
     var j = req.jdbc;
-    j.query("mssql", `exec sp_stats_search_3in1 
+    j.query("mssql", `exec sp_stats_search_edi 
     @tranType=?,
     @dateStart=?,
     @dateEnd=?,
