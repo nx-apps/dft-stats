@@ -47,7 +47,7 @@ exports.month = function (req, res) {
             res.json(data)
         })
 }
-exports.typericeGroup = function (req, res) {
+exports.typerice = function (req, res) {
     var j = req.jdbc;
     j.query("mssql", `SELECT typerice_name,hscode as value,hm.hamonize_th as label
     from custom_hscode ch
@@ -68,7 +68,7 @@ exports.typericeGroup = function (req, res) {
             res.json(arr)
         })
 }
-exports.typerice = function (req, res) {
+exports.hamonize = function (req, res) {
     var j = req.jdbc;
     j.query("mssql", `SELECT hscode as value,hm.hamonize_th as label
     from custom_hscode ch
