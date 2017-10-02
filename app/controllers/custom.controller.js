@@ -80,16 +80,16 @@ exports.hamonize = function (req, res) {
         })
 }
 exports.getSearch = function (req, res) {
+
     var val = (req.method == "GET" ? req.query : req.body);
-    var j = req.jdbc;
-    j.query("mssql", `exec sp_stats_search_custom
+    req.jdbc.query("mssql", `exec sp_stats_search_custom
     @tranType=?,
     @modelYear=?,
     @modelMonth=?,
     @field1=?,
     @field2=?,
     @hsCode=?`,
-        [val.tranType || 'E', val.modelYear, val.modelMonth = '00',
+        [val.tranType || 'E', val.modelYear, val.modelMonth || '00',
         val.field1 || 'hamonize', val.field2 || '', val.hsCode || '1006'],
         function (err, data) {
             res.send(data);
