@@ -341,9 +341,13 @@
                     statePath: 'searchCustoms.hamonizeGroupList',
                     observer: '_cloneDataHamonizeGroup'
                 },
-                companyList: {
-                    statePath: 'searchCustoms.companyList',
-                    observer: '_cloneDataCompany'
+                // companyList: {
+                //     statePath: 'searchCustoms.companyList',
+                //     observer: '_cloneDataCompany'
+                // },
+                zoneGroupList: {
+                    statePath: 'searchCustoms.zoneGroupList',
+                    observer: '_cloneDataZoneGroup'
                 },
                 countryList: {
                     statePath: 'searchCustoms.countryList',
@@ -354,7 +358,8 @@
                     value: {
                         hamonizeList: [],
                         hamonizeGroupList: [],
-                        companyList: [],
+                        zoneGroupList: [],
+                        // companyList: [],
                         countryList: [],
                     }
                 },
@@ -363,7 +368,7 @@
                     value: {
                         field: '',
                         hamonizeList: [],
-                        companyList: [],
+                        // companyList: [],
                         countryList: [],
                     }
                 },
@@ -423,9 +428,12 @@
             _cloneDataHamonizeGroup(hamonizeGroup) {
                 this._cloneDataGroup(hamonizeGroup, 'hamonizeGroupList')
             },
-            _cloneDataCompany(company) {
-                this._cloneData(company, 'companyList')
+            _cloneDataZoneGroup(zoneGroup) {
+                this._cloneDataGroup(zoneGroup, 'zoneGroupList')
             },
+            // _cloneDataCompany(company) {
+            //     this._cloneData(company, 'companyList')
+            // },
             _cloneDataCountry(country) {
                 this._cloneData(country, 'countryList')
             },
@@ -541,7 +549,7 @@
                         break;
                     case 'country':
                         this.set('dataUse', this.dataSelect.countryList)
-                        this.set('dataUseGroup', [])
+                        this.set('dataUseGroup', this.dataSelect.zoneGroupList)
                         break;
                     case 'company':
                         this.set('dataUse', this.dataSelect.companyList)
@@ -653,6 +661,8 @@
                     }
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(data))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(data))
+                    
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(data))
                     // this.dispatchAction('GET_SEARCH_CUSTOMS_COMPANY', this.genUrl(data))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(data))
                     // console.log(this.genUrl(data))
@@ -729,6 +739,8 @@
                         break;
                     case 'country':
                         newCheck = _filterChecked(this.dataSelect.countryList)
+                        newCheckGroup = _filterChecked(_reduceDataArray(this.dataSelect.zoneGroupList))
+                        newData = _concatCheckDup(newCheck, newCheckGroup)
                         this.set('dataSeleted.countryList', newCheck)
                         break;
                     case 'company':
@@ -746,7 +758,7 @@
                 let dataSend = {
                     hamonize: getArr(this.dataSeleted.hamonizeList),
                     country: getArr(this.dataSeleted.countryList),
-                    company: getArr(this.dataSeleted.companyList),
+                    // company: getArr(this.dataSeleted.companyList),
                 }
 
                 let dataMath = {}

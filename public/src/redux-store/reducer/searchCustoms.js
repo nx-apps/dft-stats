@@ -4,7 +4,7 @@ import { commonAction } from '../config'
 const initialState = {
     hamonizeList: [],
     hamonizeGroupList: [],
-    companyList: [],
+    zoneGroupList: [],
     countryList: [],
     searchList: [],
     settingSearch: {}
@@ -17,8 +17,8 @@ export function searchCustomsReducer(state = initialState, action) {
             return Object.assign({}, state, { hamonizeList: action.payload });
         case 'GET_SEARCH_CUSTOMS_HAMONIZE_GROUP':
             return Object.assign({}, state, { hamonizeGroupList: action.payload });
-        case 'GET_SEARCH_CUSTOMS_COMPANY':
-            return Object.assign({}, state, { companyList: action.payload });
+        case 'GET_SEARCH_CUSTOMS_ZONE':
+            return Object.assign({}, state, { zoneGroupList: action.payload });
         case 'GET_SEARCH_CUSTOMS_COUNTRY':
             return Object.assign({}, state, { countryList: action.payload });
         case 'GET_SEARCH_CUSTOMS_ALL':
@@ -35,9 +35,9 @@ export function searchCustomsAction(store) {
     return [commonAction(), {
         GET_SEARCH_CUSTOMS_HAMONIZE(data) {
             // console.log(data);
-            axios.get('/customs/hamonize?' + data)
+            axios.get('/custom/hamonize?' + data)
                 .then((response) => {
-                    store.dispatch({ type: 'GET_SEARCH_CUSTOMS_CUSTOMS_HAMONIZE', payload: response.data })
+                    store.dispatch({ type: 'GET_SEARCH_CUSTOMS_HAMONIZE', payload: response.data })
                 })
                 .catch(function (error) {
                     ////console.log(error);
@@ -45,7 +45,7 @@ export function searchCustomsAction(store) {
         },
         GET_SEARCH_CUSTOMS_HAMONIZE_GROUP(data) {
             // console.log(data);
-            axios.get('/customs/hamonize/group?' + data)
+            axios.get('/custom/typerice?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', payload: response.data })
                 })
@@ -54,17 +54,17 @@ export function searchCustomsAction(store) {
                 });
         },
 
-        GET_SEARCH_CUSTOMS_COMPANY(data) {
-            axios.get('/customs/company?' + data)
+        GET_SEARCH_CUSTOMS_ZONE(data) {
+            axios.get('/custom/zone?' + data)
                 .then((response) => {
-                    store.dispatch({ type: 'GET_SEARCH_CUSTOMS_COMPANY', payload: response.data })
+                    store.dispatch({ type: 'GET_SEARCH_CUSTOMS_ZONE', payload: response.data })
                 })
                 .catch(function (error) {
                     ////console.log(error);
                 });
         },
         GET_SEARCH_CUSTOMS_COUNTRY(data) {
-            axios.get('/customs/country?' + data)
+            axios.get('/custom/country?' + data)
                 .then((response) => {
                     store.dispatch({ type: 'GET_SEARCH_CUSTOMS_COUNTRY', payload: response.data })
                 })
