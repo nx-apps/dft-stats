@@ -26,10 +26,11 @@
         Polymer({
             is: 'page-search-customs',
             behaviors: [
-                ReduxBehavior, nylonBehavior, hamonizeAction,searchCustomsAction
+                ReduxBehavior, nylonBehavior, hamonizeAction,searchCustomsAction,reportAction
             ],
             nylonPageActive() {
                 // this.dispatchAction('HAMONIZE_RICE_LIST');
+                this.dispatchAction('GET_YEAR')
                 this.dispatchAction('HAMONIZE_SET_DATE');
                 // this.dispatchAction('HAMONIZE_RICE_LIST_GROUP');
             }
