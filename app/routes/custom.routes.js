@@ -6,4 +6,5 @@ module.exports = function (app) {
     app.get('/month', controller.month);
     app.get('/typerice', controller.typerice);
     app.get('/hamonize', controller.hamonize);
+    app.route('/search').get(controller.getSearch).post(controller.getSearch);
 }
