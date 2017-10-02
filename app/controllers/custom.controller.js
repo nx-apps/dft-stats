@@ -1,7 +1,30 @@
 var rpt = require('../global/report');
 exports.zone = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT zone_name as value,zone_name as label from custom_country group by zone_name`, [],
+    j.query("mssql", `SELECT zone_name,country_th as label,country_code as value,zone_order
+    from custom_country
+    group by zone_name,country_th,country_code,zone_order
+    order by zone_order,country_th`, [],
+        function (err, data) {
+            data = JSON.parse(data);
+            var arr = [];
+            var temp = '';
+            for (var i = 0; i < data.length; i++) {
+                if (temp != data[i].zone_name) {
+                    arr.push({ group_name: data[i].zone_name, group_item: [] })
+                    temp = data[i].zone_name
+                }
+                arr.filter((f) => f.group_name == data[i].zone_name)[0].group_item.push(data[i])
+            }
+            res.json(arr)
+        })
+}
+exports.country = function (req, res) {
+    var j = req.jdbc;
+    j.query("mssql", `SELECT country_th as label,country_code as value
+    from custom_country
+    group by country_th,country_code
+    order by country_th`, [],
         function (err, data) {
             res.send(data)
         })
