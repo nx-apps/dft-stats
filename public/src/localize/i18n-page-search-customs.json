@@ -1,0 +1,14 @@
+{
+    "th": {
+        "Meg": "TH",
+        "test": "ทดสอบ",
+        "change": "เปลี่ยน",
+        "importexport": "ข้อมูลการส่งออก / นำเข้า"
+    },
+    "en": {
+        "Meg": "ENG",
+        "test": "test",
+        "change": "change",
+        "importexport": "Import / Export"
+    }
+}

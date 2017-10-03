@@ -6,6 +6,10 @@
 
 <link rel="import" href="../../components/format-number-behavior.html">
 
+<link rel="import" href="../../../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+
 <dom-module id="search-customs">
     <template>
         <style include="page-style">
@@ -13,6 +17,20 @@
                 display: block;
             }
         </style>
+        <div class="horizontal start-justified layout">
+            <paper-button raised class="gl-btn-info gl-small" on-tap="backPage">
+                <iron-icon icon="search"></iron-icon>
+                ย้อนกลับ
+            </paper-button>
+        </div>
+        <template is="dom-repeat" items="{{searchHistory}}">
+            <span hidden="{{checkIndex(index)}}" on-tap="backUrl">
+                <iron-icon icon="menu" ></iron-icon>
+            </span>
+            <span on-tap="backUrl">{{item.label}} -></span>
+
+        </template>
+
         <table class="gl-table-default">
             <thead class="table-head">
                 <tr>
@@ -20,8 +38,9 @@
                     <template is="dom-repeat" items={{header}}>
                         <th>[[item]]</th>
                     </template>
-                    <th>มูลค่า (บาท)</th>
-                    <th>มูลค่า (ดอลลาร์สหรัฐ)</th>
+
+                    <th>มูลค่า (ล้านดอลลาร์สหรัฐ)</th>
+                    <th>มูลค่า (ล้านบาท)</th>
                     <th>น้ำหนัก (ล้านตัน)</th>
                 </tr>
             </thead>
@@ -64,6 +83,10 @@
                     statePath: 'searchCustoms.settingSearch',
                     observer: 'setCol'
                 },
+                searchHistory: {
+                    type: Array,
+                    value: []
+                }
             },
             setHeader(data) {
                 let arr = [],
@@ -84,18 +107,80 @@
                 return main[item]
                 // console.log(main,item);
             },
+            checkIndex(index) {
+                console.log(index === 0)
+                return index !== 0
+                // return index === 0
+            },
             _getSearch(e) {
-                let data = this.settingSearch
+                let data = JSON.parse(JSON.stringify(this.settingSearch))
                 let item = e.model.__data__
+                let newArray = JSON.parse(JSON.stringify(this.searchHistory))
+
+                const checkField = (data) => {
+                    let count = 0
+                    for (var key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            var element = data[key]
+                            if ((/^field/).test(key)) {
+                                count++
+                            }
+                        }
+                    }
+                    return count
+                }
+                // console.log(itsem);
                 if (item.main.hsCode !== null) {
                     data.hsCode = item.main.hsCode
+                    data.countryCode = item.main.countryCode
+                    let fieldHsName = checkField(item.main)
+                    let field2 = 'field' + (fieldHsName - 1)
+                    let field1 = 'field' + (fieldHsName - 2)
+                    // console.log(item.main[field2]);
+                    // console.log(data);
+                    // console.log(item.main[field]);
+                    if (data.field1 === "hamonize" && data.field2 === "country") {
+                        data.label = + item.main.hsCode + ' - ' + item.main[field2]
+                    } else if (data.field1 === "hamonize" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+                        data.label = + item.main.hsCode
+                    } else if (data.field1 === "country" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+                        data.label = item.main['field' + 0]
+                    } else {
+                        data.label = item.main['field' + 0] + item.main.hsCode
+                    }
+
+                    newArray.push(data)
+                    this.set('searchHistory', newArray)
                     this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
-                    // console.log(this.settingSearch);
+                    this.notifyPath('searchHistory')
                 }
             },
             setCol(data) {
-                console.log(data);
+                this.set('searchHistory', [])
+                this.push('searchHistory', JSON.parse(JSON.stringify(data)))
+                // console.log(this.searchHistory);
+                // console.log(data);
+            },
+            backPage() {
+                if (this.searchHistory.length > 0) {
+                    this.pop('searchHistory')
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[this.searchHistory.length - 1])
+                    // console.log(this.searchHistory);
+                }
+            },
+            backUrl(e) {
+                let data = e.model.index
+                let newArray = JSON.parse(JSON.stringify(this.searchHistory))
+                let newArray2 = []
+                // console.log(newArray);
+                for (var i = 0; i < data + 1; i++) {
+                    // console.log(newArray[i]);
+                    newArray2.push(newArray[i])
+                }
+                this.set('searchHistory', newArray2)
+                this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[data])
             }
+
         });
     </script>
 </dom-module>

@@ -73,7 +73,7 @@ export function searchCustomsAction(store) {
         //         });
         // },
         GET_SEARCH_CUSTOMS_ALL(data) {
-            console.log(data);
+            // console.log(data);
             this.fire('toast', { status: 'load', text: 'กำลังบันทึกข้อมูล...' })
             axios.post('/custom/search?', data)
                 .then((response) => {

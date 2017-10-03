@@ -14,7 +14,7 @@
             </section>
             <section class="container">
                 <paper-material elevation="1">
-                    <search-search-customs ></search-search-customs>
+                    <search-search-customs></search-search-customs>
                     <!-- <search-list-customs ></search-list-customs> -->
                     <search-customs></search-customs>
                 </paper-material>
@@ -27,8 +27,11 @@
         Polymer({
             is: 'page-search-customs',
             behaviors: [
-                ReduxBehavior, nylonBehavior, hamonizeAction,searchCustomsAction,reportAction
+                nylonLocalizeBehavior, ReduxBehavior, nylonBehavior, hamonizeAction, searchCustomsAction, reportAction
             ],
+            attached: function () {
+                this.nylonLocalizeImport('/i18n-page-search-customs.json');
+            },
             nylonPageActive() {
                 // this.dispatchAction('HAMONIZE_RICE_LIST');
                 this.dispatchAction('GET_YEAR')
