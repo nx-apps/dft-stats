@@ -90,8 +90,14 @@ exports.getSearch = function (req, res) {
     @field2=?,
     @hsCode=?,
     @countryCode=?`,
-        [val.tranType || 'E', val.modelYear, val.modelMonth || '00',
-        val.field1 || 'hamonize', val.field2 || '', val.hsCode || '1006', val.countryCode || ''],
+        [
+            (typeof val.tranType === 'undefined' ? 'E' : val.tranType.toUpperCase()),
+            val.modelYear, val.modelMonth || '00',
+            val.field1 || 'hamonize',
+            val.field2 || '',
+            val.hsCode || '1006',
+            val.countryCode || ''
+        ],
         function (err, datas) {
             datas = JSON.parse(datas);
             const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
