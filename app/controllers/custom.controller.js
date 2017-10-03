@@ -124,7 +124,7 @@ exports.getSearch = function (req, res) {
                     }
                     if (val.field1 != 'country') {
                         data['field' + c] = datas[i].field1;
-                        if (i == 0) arr['header']['field' + c] = val.field1;
+                        if (i == 0) arr['header']['field' + c] = val.field1 || 'hamonize';
                         c++;
                     }
                     if (typeof val.field2 !== 'undefined') {
@@ -147,6 +147,7 @@ exports.getSearch = function (req, res) {
                 data['countryCode'] = datas[i].countryCode;
                 arr['datas'].push(data);
             }
+
             res.json(arr);
         });
 }
