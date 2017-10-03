@@ -116,23 +116,30 @@
         <div class="container">
             <search-report-customss id="report" data-search="{{dataSearch}}"></search-report-customss>
             <div class="flex-horizontal-with-ratios">
-                <div class="flex3child"></div>
-                <div class="flexchild labelSearchDate">
-                    เริ่มวันที่ :
+                <div class="flex2child"></div>
+                <div class="flex2child " style="text-align: right; padding-right: 10px;">
+                    ปี :
                 </div>
-                <div class="flex2child">
-                    <!-- {{date}} -->
-                    <gl-form-input type="date" value="{{data.dateStart}}"></gl-form-input>
+                <div class="flex" style=" margin-right: 30px">
+                    <gl-combo-box class="required" required id="priority" label="ปี" no-label-float item-label-path="label" item-value-path="value"
+                        items="{{yearList}}" value="{{data.modelYear}}">
+                        <template>
+                            [[item.label]]
+                        </template>
+                    </gl-combo-box>
                 </div>
-                <div class="flexchild"></div>
-                <div class="flexchild labelSearchDate">
-                    ถึงวันที่ :
+                <div class="flex2child" style="text-align: right; padding-right: 10px;">
+                    เดือน :
                 </div>
-                <div class="flex2child">
-                    <gl-form-input type="date" value="{{data.dateEnd}}"></gl-form-input>
+                <div class="flex-2" style=" margin-right: 30px">
+                    <gl-combo-box class="required" required id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
+                        items="{{monthList}}" value="{{data.modelMonth}}">
+                        <template>
+                            [[item.label]]
+                        </template>
+                    </gl-combo-box>
                 </div>
-                <div class="flex3child"></div>
-                <div class="flexchild"></div>
+                <div class="flex2child"></div>
             </div>
             <div class="flex-horizontal-with-ratios">
                 <div class="flex2child"></div>
@@ -168,7 +175,7 @@
                 </div>
                 <div class="flex3child"></div>
             </div>
-            <div class="flex-horizontal-with-ratios">
+            <!-- <div class="flex-horizontal-with-ratios">
                 <div class="flex-3"></div>
                 <div class="flex-6">
                     <table class="gl-table-default">
@@ -202,22 +209,20 @@
                     </table>
                 </div>
                 <div class="flex-3"></div>
-            </div>
+            </div> -->
 
         </div>
         <div class="horizontal end-justified layout">
-            <!-- <div class="btn-search"> -->
             <paper-button raised class="gl-btn-info gl-small" on-tap="getSearchValue">
                 <iron-icon icon="search"></iron-icon>
                 ค้นหา
             </paper-button>
-            <!-- </div> -->
             <paper-button raised class="gl-btn-info gl-small" on-tap="settingReport">
                 <iron-icon icon="assignment"></iron-icon>
                 ออกรายงาน
             </paper-button>
         </div>
-        <paper-dialog id="itemGroup" class="size-position" modal>
+        <!-- <paper-dialog id="itemGroup" class="size-position" modal>
             <h2>รายชื่อรายการ</h2>
             <paper-dialog-scrollable>
                 <div class="layout start-justified">
@@ -292,7 +297,6 @@
                                                         <div class="row flex">
                                                             <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}">
                                                                 [[checkList(subChild,subChild.*)]]
-                                                                <!-- {{subChild.check}} -->
                                                         </div>
                                                         <div class="row flex-2">[[item.name_th]]</div>
                                                         <template is="dom-repeat" items={{columns}}>
@@ -312,7 +316,7 @@
             <div class="buttons">
                 <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
             </div>
-        </paper-dialog>
+        </paper-dialog> -->
         <!-- modal -->
 
     </template>
@@ -416,12 +420,27 @@
                 dataSearch: {
                     type: Object,
                     value: {}
-                }
+                },
+                yearList: {
+                    statePath: 'report.yearList',
+                    observer: 'setYear'
+                },
+                monthList: {
+                    statePath: 'report.monthList',
+                },
 
             },
             observers: [
                 'checkPullData(data,data.*)'
             ],
+            setYear(listYear) {
+                // console.log(listYear.length > 0 );
+                if (listYear.length > 0) {
+                    // console.log(listYear[listYear.length-1]);
+                    this.set('data.modelYear', listYear[listYear.length - 1].value)
+                }
+                // console.log(listYear);
+            },
             _cloneDataHamonize(hamonize) {
                 this._cloneData(hamonize, 'hamonizeList')
             },
@@ -659,12 +678,16 @@
                         data.tranType = 'a'
                         data.SelectAll = true
                     }
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(data))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(data))
-                    
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(data))
-                    // this.dispatchAction('GET_SEARCH_CUSTOMS_COMPANY', this.genUrl(data))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(data))
+                    // console.log(this.genUrl(data));
+                    // console.log(data);
+                    this.dispatchAction('SET_SEARCH_CUSTOMS', data)
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.genUrl(data))
+                    // this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(data))
+                    // this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(data))
+
+                    // this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(data))
+                    // // this.dispatchAction('GET_SEARCH_CUSTOMS_COMPANY', this.genUrl(data))
+                    // this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(data))
                     // console.log(this.genUrl(data))
                     // this.genUrl()
                 }
@@ -769,6 +792,8 @@
                 dataMath.tranType = this.data.tranType || 'a'
                 dataMath.dateStart = this.data.dateStart || null
                 dataMath.dateEnd = this.data.dateEnd || null
+                dataMath.modelYear = this.data.modelYear
+                dataMath.modelMonth = this.data.modelMonth
 
                 return dataMath
             },

@@ -68,14 +68,14 @@
             <div class="flex-2 ">
                 อัตราแลกเปลี่ยน :
             </div>
-            <div class="flex">
-                <gl-form-input allowed-pattern="[0-9||,||.]" format-number="on" readonly no-label-float value="[[data.rate_bank]]">
+            <div class="flex-2">
+                <gl-form-input allowed-pattern="[0-9||,||.]"style="width:100px;" format-number="on" readonly no-label-float value="[[data.rate_bank]]">
                     <paper-icon-button style="width:35px; height:35px" suffix icon="create" on-tap="editConfirm"></paper-icon-button>
                 </gl-form-input>
                 <!--<paper-icon-button id="edit" class="crud" icon="settings" raised on-tap="editConfirm"></paper-icon-button>
                 <paper-tooltip for="edit" offset="0">ตั้งค่า</paper-tooltip>-->
             </div>
-            <div class="flex-2"></div>
+            <div class="flex-1"></div>
         </div>
         <paper-dialog id="printDia" class="printd" style=" " class="size-position" modal>
             <h2>รายการ</h2>
