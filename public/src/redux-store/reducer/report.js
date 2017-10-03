@@ -43,7 +43,7 @@ export function reportAction(store) {
                     store.dispatch({ type: 'GET_YEAR', payload: response.data })
                 })
                 .catch(function (error) {
-                    ////console.log(error);
+                    console.log(error);
                 });
         },
         GET_MONTH_IN_YEAR(year) {

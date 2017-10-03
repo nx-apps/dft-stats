@@ -4,6 +4,8 @@
 
 <link rel="import" href="../../components/common-logic.html">
 
+<link rel="import" href="../../components/format-number-behavior.html">
+
 <dom-module id="search-customs">
     <template>
         <style include="page-style">
@@ -15,25 +17,26 @@
             <thead class="table-head">
                 <tr>
                     <th>1</th>
+                    <template is="dom-repeat" items={{header}}>
+                        <th>[[item]]</th>
+                    </template>
+                    <th>มูลค่า (บาท)</th>
+                    <th>มูลค่า (ดอลลาร์สหรัฐ)</th>
+                    <th>น้ำหนัก (ล้านตัน)</th>
                 </tr>
             </thead>
-            <tfoot class="table-foot">
-                <tr>
-                    <td></td>
-                </tr>
-            </tfoot>
             <tbody class="table-body">
 
-                <template is="dom-repeat" items={{searchCustomsList.datas}} initial-count="20">
+                <template is="dom-repeat" items={{searchCustomsList.datas}} initial-count="20" as=main>
                     <tr on-tap="_getSearch">
                         <td>[[index]]</td>
-                        <td>[[item.hsCode]]</td>
 
-                        <td>[[item.field1]]</td>
-                        <td>[[item.field2]]</td>
-                        <td>[[item.value_d]]</td>
-                        <td>[[item.weight]]</td>
-                        <td>[[item.value_b]]</td>
+                        <template is="dom-repeat" items={{field}}>
+                            <td>[[getProp(main,item)]]</td>
+                        </template>
+                        <td>[[formatNumber(main.value_d)]]</td>
+                        <td>[[formatNumber(main.value_b)]]</td>
+                        <td>[[main.weight]]</td>
                     </tr>
                 </template>
 
@@ -47,7 +50,8 @@
             behaviors: [
                 ReduxBehavior,
                 MonthBehavior,
-                commonLogic
+                commonLogic,
+                FormatNumberBehavior
             ],
             properties: {
                 searchCustomsList: {
@@ -55,22 +59,36 @@
                     observer: 'setHeader'
                 },
                 header: [],
+                field: [],
                 settingSearch: {
                     statePath: 'searchCustoms.settingSearch',
                     observer: 'setCol'
                 },
             },
-            setHeader(data){
-                console.log(data);
+            setHeader(data) {
+                let arr = [],
+                    field = []
+                for (var key in data.header) {
+                    if (data.header.hasOwnProperty(key)) {
+                        var element = data.header[key]
+                        field.push(key)
+                        arr.push(element)
+                        // console.log(element);
+                    }
+                }
+                this.set('header', arr)
+                this.set('field', field)
+                // console.log(this.field);
+            },
+            getProp(main, item) {
+                return main[item]
+                // console.log(main,item);
             },
             _getSearch(e) {
                 let data = this.settingSearch
                 let item = e.model.__data__
-                // console.log(item);
-                if (item.item.hsCode !== null) {
-                    console.log(e.model.__data__);
-                    data.hsCode = item.item.hsCode
-                    console.log(data);
+                if (item.main.hsCode !== null) {
+                    data.hsCode = item.main.hsCode
                     this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
                     // console.log(this.settingSearch);
                 }
