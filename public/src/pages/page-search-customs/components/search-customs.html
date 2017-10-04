@@ -16,51 +16,96 @@
              :host {
                 display: block;
             }
+            /* .breadcrumbs {
+                border: 1px solid red;
+                padding: 20px 2px;
+            } */
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            #breadcrumbs-one {
+                margin: 10px 0px;
+                /* border: 1px solid; */
+                background-color: ghostwhite;
+                padding: 15px 4px;
+            }
+
+            .icon,
+            .breadcrumbs {
+                cursor: pointer;
+            }
+
+            .icon:hover,
+            .breadcrumbs:hover {
+                color: #b7b7b7;
+            }
+
+            .breadcrumbs::after {
+                content: '  / '
+            }
         </style>
         <div class="horizontal start-justified layout">
-            <paper-button raised class="gl-btn-info gl-small" on-tap="backPage">
-                <iron-icon icon="search"></iron-icon>
+            <paper-button raised class="gl-btn-info gl-small" on-tap="backPage" disabled="[[checkArray(searchHistory,searchHistory.*)]]">
+                <iron-icon icon="settings-backup-restore"></iron-icon>
                 ย้อนกลับ
             </paper-button>
         </div>
-        <template is="dom-repeat" items="{{searchHistory}}">
-            <span hidden="{{checkIndex(index)}}" on-tap="backUrl">
-                <iron-icon icon="menu" ></iron-icon>
-            </span>
-            <span on-tap="backUrl">{{item.label}} -></span>
-
-        </template>
-
+        <div id="breadcrumbs-one">
+            <template is="dom-repeat" items="{{searchHistory}}">
+                <span class="icon" hidden="{{checkIndex(index)}}" on-tap="backUrl">
+                    <iron-icon icon="menu"></iron-icon>
+                </span>
+                <span> <a class="breadcrumbs" on-tap="backUrl">{{item.label}}</a></span>
+            </template>
+        </div>
         <table class="gl-table-default">
             <thead class="table-head">
                 <tr>
-                    <th>1</th>
+                    <th>ลำดับ</th>
                     <template is="dom-repeat" items={{header}}>
                         <th>[[item]]</th>
                     </template>
-
                     <th>มูลค่า (ล้านดอลลาร์สหรัฐ)</th>
                     <th>มูลค่า (ล้านบาท)</th>
                     <th>น้ำหนัก (ล้านตัน)</th>
                 </tr>
             </thead>
             <tbody class="table-body">
-
                 <template is="dom-repeat" items={{searchCustomsList.datas}} initial-count="20" as=main>
                     <tr on-tap="_getSearch">
-                        <td>[[index]]</td>
+                        <td>[[autoIndex(index)]]</td>
 
                         <template is="dom-repeat" items={{field}}>
                             <td>[[getProp(main,item)]]</td>
                         </template>
-                        <td>[[formatNumber(main.value_d)]]</td>
-                        <td>[[formatNumber(main.value_b)]]</td>
+                        <td>[[main.value_d]]</td>
+                        <td>[[main.value_b]]</td>
                         <td>[[main.weight]]</td>
                     </tr>
                 </template>
-
-
             </tbody>
+            <tfoot class="table-foot">
+                <tr>
+
+                    <template is="dom-repeat" items="{{_isShow(searchCustomsList.datas)}}">
+                        <!-- {{item}} and {{index}} can be used in this binding scope -->
+
+
+
+                        <td></td>
+                        <template is="dom-repeat" items={{field}}>
+                            <td></td>
+                        </template>
+                        <td>ไม่มีข้อมูล</td>
+                        <td></td>
+                        <td></td>
+                    </template>
+                </tr>
+            </tfoot>
         </table>
     </template>
     <script>
@@ -107,10 +152,22 @@
                 return main[item]
                 // console.log(main,item);
             },
+            autoIndex(index) {
+                return index + 1
+            },
             checkIndex(index) {
                 // console.log(index === 0)
                 return index !== 0
                 // return index === 0
+            },
+            checkArray(searchHistory){
+                return searchHistory.length < 2
+            },
+            _isShow: function (data, dataLoop) {
+                // console.log(data);
+                if (data !== undefined)
+                    return data.length < 1
+                return false
             },
             _getSearch(e) {
                 let data = JSON.parse(JSON.stringify(this.settingSearch))
@@ -136,21 +193,22 @@
                     let fieldHsName = checkField(item.main)
                     let field2 = 'field' + (fieldHsName - 1)
                     let field1 = 'field' + (fieldHsName - 2)
-                    // console.log(item.main[field2]);
-                    // console.log(data);
-                    // console.log(item.main[field]);
-                    if (data.field1 === "hamonize" && data.field2 === "country") {
-                        data.label = + item.main.hsCode + ' - ' + item.main[field2]
-                    } else if (data.field1 === "hamonize" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
-                        data.label = + item.main.hsCode
-                    } else if (data.field1 === "country" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
-                        data.label = item.main['field' + 0]
-                    } else {
-                        data.label = item.main['field' + 0] + item.main.hsCode
+                    //g= เช็คว่าค่าซ้ำกับล่าสุดไหม ถ้าซ้ำไม่เพิ่มเข้าไป
+                    if (!(newArray[newArray.length - 1].hsCode === item.main.hsCode)) {
+                        if (data.field1 === "hamonize" && data.field2 === "country") {
+                            data.label = + item.main.hsCode + ' - ' + item.main[field2]
+                        } else if (data.field1 === "hamonize" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+                            data.label = + item.main.hsCode
+                        } else if (data.field1 === "country" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+                            data.label = item.main['field' + 0]
+                        } else {
+                            data.label = item.main['field' + 0] + item.main.hsCode
+                        }
+
+                        newArray.push(data)
+                        this.set('searchHistory', newArray)
                     }
 
-                    newArray.push(data)
-                    this.set('searchHistory', newArray)
                     this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
                     this.notifyPath('searchHistory')
                 }

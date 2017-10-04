@@ -87,7 +87,7 @@ export function searchAction(store) {
                 });
         },
         GET_SEARCH_ALL(data) {
-            this.fire('toast', { status: 'load', text: 'กำลังบันทึกข้อมูล...' })
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.post('/edi/search', data)
                 .then((response) => {
                     this.fire('toast', {

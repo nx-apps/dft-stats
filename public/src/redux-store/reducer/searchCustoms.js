@@ -74,7 +74,7 @@ export function searchCustomsAction(store) {
         // },
         GET_SEARCH_CUSTOMS_ALL(data) {
             // console.log(data);
-            this.fire('toast', { status: 'load', text: 'กำลังบันทึกข้อมูล...' })
+            this.fire('toast', { status: 'load', text: 'กำลังค้นหาข้อมูล...' })
             axios.post('/custom/search?', data)
                 .then((response) => {
                     this.fire('toast', {
