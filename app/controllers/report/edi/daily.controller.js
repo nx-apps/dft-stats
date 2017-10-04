@@ -236,7 +236,7 @@ exports.dailyDit = function (req, res, next) {
             return r.branch(m('keys').eq([]),
                 {},
                 m('keys').map(function (m2) {
-                    return [r.expr(m2), m('prices').avg(m2)]
+                    return [r.expr(m2), m('prices').avg(m2).round()]
                 }).coerceTo('object')
             )
         })
