@@ -121,7 +121,7 @@
                             </div>
                             <template is="dom-repeat" items={{zoneList}}>
                                 <div class="zoneName">
-                                    <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
+                                    <paper-checkbox checked="{{item.check}}"> {{item.group_name}}</paper-checkbox>
                                 </div>
                             </template>
                         </div>
@@ -178,9 +178,11 @@
                 },
                 yearList: {
                     statePath: 'report.yearList',
+                    observer: 'setYear'
                 },
                 monthList: {
                     statePath: 'report.monthList',
+                    observer: 'setMonth'
                 },
                 report: {
                     type: Array,
@@ -215,6 +217,17 @@
                     type: Object,
                     value: {}
                 },
+            },
+            setYear(year){
+                if(year.length > 1){
+                    this.set('data.modelYear',year[year.length-1].value)
+                }
+            },
+            setMonth(month){
+                if(month.length > 1){
+                    // console.log(1)
+                    this.set('data.modelMonth',month[month.length-1].value)
+                }
             },
             checkIsTree(index) {
                 return (index % 3 === 0 ? true : false)
