@@ -159,20 +159,18 @@ exports.getSearch = function (req, res) {
                     if (val.field1 == 'country') countryName = datas[0].field1;
                     if (val.field2 == 'country') countryName = datas[0].field2;
                 }
+                var params = Object.assign(arr.header, {
+                    TRAN_TYPE: (val.tranType == 'i' ? 'นำเข้า' : 'ส่งออก'),
+                    MONTH: rpt.getMonthName(Number(req.query.modelMonth)),
+                    YEAR: req.query.modelYear,
+                    COUNTRY_NAME: countryName,
+                    FILE_TYPE: req.query.export
+                });
+                params = rpt.keysToUpper(params);
+                res.ireport("custom/search/rpt_" + req.query.view + countHeader + ".jasper", req.query.export || "pdf", arr.datas, params);
+            } else {
+                res.ireport("custom/search/rpt_table1.jasper", req.query.export || "pdf", [], {});
             }
-            var params = Object.assign(arr.header, {
-                TRAN_TYPE: (val.tranType == 'i' ? 'นำเข้า' : 'ส่งออก'),
-                MONTH: rpt.getMonthName(Number(req.query.modelMonth)),
-                YEAR: req.query.modelYear,
-                COUNTRY_NAME: countryName,
-                FILE_TYPE: req.query.export
-            });
-            params = rpt.keysToUpper(params);
-            // res.json(params)
-            // res.json(datas);
-            // var filename = 'rpt_' + val.view
-            //     + (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1');
-            res.ireport("custom/search/rpt_" + req.query.view + countHeader + ".jasper", req.query.export || "pdf", arr.datas, params);
         });
 
 }
