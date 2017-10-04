@@ -879,11 +879,11 @@
                 })
                 // dataMath.dateStart = this.data.dateStart || null
                 // dataMath.dateEnd = this.data.dateEnd || null
-                dataMath.hsCode = this.data.hsCode
-                dataMath.modelYear = this.data.modelYear
-                dataMath.modelMonth = this.data.modelMonth
-                dataMath.countryCode = this.data.countryCode
-                dataMath.tranType = this.data.tranType
+                dataMath.hsCode = this.data.hsCode  || ''
+                dataMath.modelYear = this.data.modelYear  || ''
+                dataMath.modelMonth = this.data.modelMonth  || ''
+                dataMath.countryCode = this.data.countryCode  || ''
+                dataMath.tranType = this.data.tranType  || 'e'
                 return dataMath
             },
             getSearchValue() {
