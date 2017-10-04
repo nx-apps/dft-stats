@@ -5,5 +5,7 @@ module.exports = function (app) {
     app.get('/allrice', controller.exportrice)
     app.get('/hommali', controller.hommalirice)
     app.get('/year',controller.year)
+    app.get('/search', controller.getSearch)
+
     
 }
