@@ -5,12 +5,14 @@ exports.zone = function (req, res) {
     if (Object.keys(req.query).length > 0) {
         let c = 0;
         for (var obj in req.query) {
-            if (c > 0)
-                where += ' and ';
-            else
-                where += ' where ';
-            where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
-            c++;
+            if (req.query[obj] != '') {
+                if (c > 0)
+                    where += ' and ';
+                else
+                    where += ' where ';
+                where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+                c++;
+            }
         }
     }
     j.query("mssql", `SELECT zone_name,country_th as label,country_code as value,zone_order
@@ -39,12 +41,14 @@ exports.country = function (req, res) {
     if (Object.keys(req.query).length > 0) {
         let c = 0;
         for (var obj in req.query) {
-            if (c > 0)
-                where += ' and ';
-            else
-                where += ' where ';
-            where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
-            c++;
+            if (req.query[obj] != '') {
+                if (c > 0)
+                    where += ' and ';
+                else
+                    where += ' where ';
+                where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+                c++;
+            }
         }
     }
     j.query("mssql", `SELECT country_th as label,country2 as value
