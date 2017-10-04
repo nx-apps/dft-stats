@@ -1,6 +1,8 @@
 <link rel="import" href="./components/search-customs.html">
 <link rel="import" href="./components/search-search-customs.html">
 
+<!-- <link rel="import" href="../../nylon-behavior.html"> -->
+
 <link rel="import" href="./../components/month-behavior.html">
 
 <link rel="import" href="./../../../bower_components/paper-material/paper-material.html">
@@ -10,7 +12,7 @@
         <style include="page-style flex-style"></style>
         <div class="xcontainer">
             <section class="container">
-                <div class="header">ข้อมูลการส่งออก / นำเข้า</div>
+                <div class="header"> {{localize('importexport')}} </div>
             </section>
             <section class="container">
                 <paper-material elevation="1">
@@ -29,7 +31,7 @@
             behaviors: [
                 nylonLocalizeBehavior, ReduxBehavior, nylonBehavior, hamonizeAction, searchCustomsAction, reportAction
             ],
-            attached: function () {
+            created:function(){
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
             },
             nylonPageActive() {

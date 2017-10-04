@@ -3,12 +3,40 @@
         "Meg": "TH",
         "test": "ทดสอบ",
         "change": "เปลี่ยน",
-        "importexport": "ข้อมูลการส่งออก / นำเข้า"
+        "importexport": "ข้อมูลการส่งออก / นำเข้า",
+        "btn_back": "ย้อนกลับ",
+        "order": "ลำดับ",
+        "value": "มูลค่า",
+        "weight":"น้ำหนัก",
+        "million_usd": "ล้านดอลลาร์สหรัฐ",
+        "million_thb": "ล้านบาท",
+        "million_ton": "ตัน",
+        "hmcode4": "รหัสข้าว 4 หลัก",
+        "hmcode6": "รหัสข้าว 6 หลัก",
+        "hmcode8": "รหัสข้าว  8 หลัก",
+        "hmcode11": "รหัสข้าว 11 หลัก",
+        "hamonize": "ชื่อข้าว",
+        "country": "ประเทศ",
+        "no_data": "ไม่มีข้อมูล"
     },
     "en": {
         "Meg": "ENG",
         "test": "test",
         "change": "change",
-        "importexport": "Import / Export"
+        "importexport": "Import / Export",
+        "btn_back": "BACK",
+        "order": "No",
+        "value": "Valur",
+        "weight":"Weight",
+        "million_usd": "ล้านดอลลาร์สหรัฐ",
+        "million_thb": "ล้านบาท",
+        "million_ton": "ล้านตัน",
+        "hmcode4": "hmcode4",
+        "hmcode6": "hmcode6",
+        "hmcode8": "hmcode8",
+        "hmcode11": "hmcode11",
+        "hamonize": "hamonize",
+        "country": "country",
+        "no_data": "ไม่มีข้อมูล"
     }
 }

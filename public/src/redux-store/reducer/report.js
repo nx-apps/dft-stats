@@ -3,8 +3,9 @@ import { commonAction } from '../config'
 
 const initialState = {
     zoneList: [],
-    yearList:[],
-    monthList:[]
+    yearList: [],
+    monthList: [],
+    countryList: []
 }
 
 export function reportReducer(state = initialState, action) {
@@ -16,6 +17,8 @@ export function reportReducer(state = initialState, action) {
             return Object.assign({}, state, { yearList: action.payload });
         case 'GET_MONTH_IN_YEAR':
             return Object.assign({}, state, { monthList: action.payload });
+        case 'GET_COUNTRY_IN_YEAR':
+            return Object.assign({}, state, { countryList: action.payload })
         default:
             return state
     }
@@ -47,7 +50,7 @@ export function reportAction(store) {
                 });
         },
         GET_MONTH_IN_YEAR(year) {
-            axios.get('/custom/month?modelYear='+year)
+            axios.get('/custom/month?modelYear=' + year)
                 .then((response) => {
                     response.data.map(item => {
                         item.check = false
@@ -58,6 +61,16 @@ export function reportAction(store) {
                 .catch(function (error) {
                     ////console.log(error);
                 });
+        },
+        GET_COUNTRY_IN_YEAR(date) {
+            console.log(date);
+            // axios.get('/custom/month?modelYear=' + year)
+            //     .then((response) => {
+            //         store.dispatch({ type: 'GET_COUNTRY_IN_YEAR', payload: response.data })
+            //     })
+            //     .catch(function (error) {
+            //         ////console.log(error);
+            //     });
         },
     }]
 };
