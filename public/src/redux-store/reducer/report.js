@@ -5,7 +5,8 @@ const initialState = {
     zoneList: [],
     yearList: [],
     monthList: [],
-    countryList: []
+    countryList: [],
+    data: {}
 }
 
 export function reportReducer(state = initialState, action) {
@@ -18,7 +19,9 @@ export function reportReducer(state = initialState, action) {
         case 'GET_MONTH_IN_YEAR':
             return Object.assign({}, state, { monthList: action.payload });
         case 'GET_COUNTRY_IN_YEAR':
-            return Object.assign({}, state, { countryList: action.payload })
+            return Object.assign({}, state, { countryList: action.payload });
+        case 'SET_DATA':
+            return Object.assign({}, state, { data: action.payload })
         default:
             return state
     }
@@ -64,7 +67,7 @@ export function reportAction(store) {
         },
         GET_COUNTRY_IN_YEAR(date) {
             // console.log(date);
-            axios.get('/custom/country?'+date)
+            axios.get('/custom/country?' + date)
                 .then((response) => {
                     store.dispatch({ type: 'GET_COUNTRY_IN_YEAR', payload: response.data })
                 })
@@ -72,5 +75,8 @@ export function reportAction(store) {
                     ////console.log(error);
                 });
         },
+        SET_DATA(data){
+            store.dispatch({ type: 'SET_DATA', payload: data })
+        }
     }]
 };

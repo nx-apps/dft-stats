@@ -247,11 +247,13 @@
                         } else {
                             data.label = item.main['field' + 0] + item.main.hsCode
                         }
+                        // console.log(data);
+                        this.dispatchAction('SET_SEARCH_CUSTOMS', data)
 
                         newArray.push(data)
                         this.set('searchHistory', newArray)
                     }
-
+                    
                     this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
                     this.notifyPath('searchHistory')
                 }

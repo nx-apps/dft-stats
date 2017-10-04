@@ -153,7 +153,8 @@
                         </div>
                     </template>
                     <div class="comBobox">
-                        <gl-combo-box id="priority" value="{{data.tag}}" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                        <gl-combo-box id="priority" value="{{data.tag}}" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}"
+                            on-selected-item-changed="selectTag">
                             <template>
                                 [[item.id]]
                             </template>
@@ -439,8 +440,9 @@
                     ]
                 },
                 data: {
-                    type: Object,
-                    value: {}
+                    statePath: 'searchCustoms.settingSearch'
+                    // type: Object,
+                    // value: {}
                 },
                 // columns: Array,
                 // typeSelete: {
@@ -470,10 +472,10 @@
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
             },
-            getCountry(year, month) {
+            getCountry(year = '', month = '') {
                 let data = {
-                    modelYear: year || '',
-                    modelMonth: month || ''
+                    modelYear: year,
+                    modelMonth: month
                 }
                 this.dispatchAction('GET_COUNTRY_IN_YEAR', this.genUrl(data))
             },
@@ -492,7 +494,9 @@
                 if (country.length > 0) {
                     if (!country.find(item => item.value === 'country'))
                         this.set('data.countryCode', '')
-                    this.getCountry(this.data.modelYear, this.data.modelMonth)
+                    if (this.data !== undefined) {
+                        this.getCountry(this.data.modelYear, this.data.modelMonth)
+                    }
                     // console.log( country.find(item => item.value === 'country') === undefined  );
                     return !country.find(item => item.value === 'country')
                 } else {
@@ -555,13 +559,13 @@
                     this.push('value', value)
                     // console.log(1);
                     // e.detail.value = ''
-                    this.set('data.tag','')
+                    this.set('data.tag', '')
                     this.$.priority.value = ''
                     // console.log(this.$.priority.value);
                     // console.log(this.$.priority);
                     // console.log(1111);
                 } else {
-                    this.set('data.tag','') 
+                    this.set('data.tag', '')
                 }
 
             },
@@ -879,11 +883,11 @@
                 })
                 // dataMath.dateStart = this.data.dateStart || null
                 // dataMath.dateEnd = this.data.dateEnd || null
-                dataMath.hsCode = this.data.hsCode  || ''
-                dataMath.modelYear = this.data.modelYear  || ''
-                dataMath.modelMonth = this.data.modelMonth  || ''
-                dataMath.countryCode = this.data.countryCode  || ''
-                dataMath.tranType = this.data.tranType  || 'e'
+                dataMath.hsCode = this.data.hsCode || ''
+                dataMath.modelYear = this.data.modelYear || ''
+                dataMath.modelMonth = this.data.modelMonth || ''
+                dataMath.countryCode = this.data.countryCode || ''
+                dataMath.tranType = this.data.tranType || 'e'
                 return dataMath
             },
             getSearchValue() {
