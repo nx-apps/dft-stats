@@ -136,7 +136,7 @@
                     {{localize('month')}} :
                 </div>
                 <div class="flex-2" style=" margin-right: 30px ">
-                    <gl-combo-box class="required" required id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
+                    <gl-combo-box  id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
                         items="{{monthList}}" value="{{data.modelMonth}}">
                         <template>
                             [[item.label]]
