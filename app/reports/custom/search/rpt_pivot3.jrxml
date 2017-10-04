@@ -284,7 +284,7 @@
     :"ประเทศ"+$P{COUNTRY_NAME}
 
 )
-+" เดือน "+$P{MONTH}+" ปี "+$P{YEAR}]]></textFieldExpression>
++($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

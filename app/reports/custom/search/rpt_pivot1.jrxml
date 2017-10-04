@@ -67,7 +67,7 @@
     :"ประเทศ"+$P{COUNTRY_NAME}
 
 )
-+" เดือน "+$P{MONTH}+" ปี "+$P{YEAR}]]></textFieldExpression>
++($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="5" width="802" height="25" uuid="f154b89f-992d-40bb-a5aa-2413eecc747f"/>
