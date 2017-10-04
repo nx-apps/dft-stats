@@ -17,3 +17,6 @@ exports.getMonthName = function (index) {
 exports.getMonthNameRethink = function (index) {
     return r.expr(arrMonth)(index);
 }
+exports.camel2UnderScore = (str) => {
+    return str.replace(/\.?([A-Z]+)/g, function (x, y) { return "_" + y.toLowerCase() }).replace(/^_/, "")
+}
