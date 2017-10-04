@@ -128,50 +128,53 @@ exports.getSearch = function (req, res) {
         ],
         function (err, datas) {
             datas = JSON.parse(datas);
-            if (datas.length == 0) res.json({ datas: [], header: {} });
-            const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
-            const config = {
-                lenMin: (haveCode ? 0 : datas[0].hsCode.length),
-                lenMax: (haveCode ? 0 : datas[datas.length - 1].hsCode.length)
-            };
-            let arr = { datas: [], header: {} };
-            for (let i = 0; i < datas.length; i++) {
-                let data = {};
-                if (config.lenMin > 0) {
-                    let c = 0;
-                    if (val.field1 == 'country') {
-                        data['field' + c] = datas[i].field1;
-                        if (i == 0) arr['header']['field' + c] = 'country';
-                        c++;
+            if (datas.length == 0) {
+                res.json({ datas: [], header: {} });
+            } else {
+                const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
+                const config = {
+                    lenMin: (haveCode ? 0 : datas[0].hsCode.length),
+                    lenMax: (haveCode ? 0 : datas[datas.length - 1].hsCode.length)
+                };
+                let arr = { datas: [], header: {} };
+                for (let i = 0; i < datas.length; i++) {
+                    let data = {};
+                    if (config.lenMin > 0) {
+                        let c = 0;
+                        if (val.field1 == 'country') {
+                            data['field' + c] = datas[i].field1;
+                            if (i == 0) arr['header']['field' + c] = 'country';
+                            c++;
+                        }
+                        for (let l = config.lenMin; l <= config.lenMax; l += 2) {
+                            if (l == 10) l++;
+                            if (l == datas[i].hsCode.length) data['field' + c] = datas[i].hsCode;
+                            else data['field' + c] = '';
+                            if (i == 0) arr['header']['field' + c] = 'hmcode' + l;
+                            c++;
+                        }
+                        if (val.field1 != 'country') {
+                            data['field' + c] = datas[i].field1;
+                            if (i == 0) arr['header']['field' + c] = val.field1 || 'hamonize';
+                            c++;
+                        }
+                        if (typeof val.field2 !== 'undefined') {
+                            data['field' + c] = datas[i].field2;
+                            if (i == 0) arr['header']['field' + c] = val.field2;
+                            c++;
+                        }
+                    } else {
+                        data['field0'] = datas[i].field1;
+                        if (i == 0) arr['header']['field0'] = 'country';
                     }
-                    for (let l = config.lenMin; l <= config.lenMax; l += 2) {
-                        if (l == 10) l++;
-                        if (l == datas[i].hsCode.length) data['field' + c] = datas[i].hsCode;
-                        else data['field' + c] = '';
-                        if (i == 0) arr['header']['field' + c] = 'hmcode' + l;
-                        c++;
-                    }
-                    if (val.field1 != 'country') {
-                        data['field' + c] = datas[i].field1;
-                        if (i == 0) arr['header']['field' + c] = val.field1 || 'hamonize';
-                        c++;
-                    }
-                    if (typeof val.field2 !== 'undefined') {
-                        data['field' + c] = datas[i].field2;
-                        if (i == 0) arr['header']['field' + c] = val.field2;
-                        c++;
-                    }
-                } else {
-                    data['field0'] = datas[i].field1;
-                    if (i == 0) arr['header']['field0'] = 'country';
+                    data['weight'] = datas[i].weight;
+                    data['value_b'] = datas[i].value_b;
+                    data['value_d'] = datas[i].value_d;
+                    data['hsCode'] = datas[i].hsCode;
+                    data['countryCode'] = datas[i].countryCode;
+                    arr['datas'].push(data);
                 }
-                data['weight'] = datas[i].weight;
-                data['value_b'] = datas[i].value_b;
-                data['value_d'] = datas[i].value_d;
-                data['hsCode'] = datas[i].hsCode;
-                data['countryCode'] = datas[i].countryCode;
-                arr['datas'].push(data);
+                res.json(arr);
             }
-            res.json(arr);
         });
 }
