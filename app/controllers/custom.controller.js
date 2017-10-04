@@ -129,7 +129,7 @@ exports.getSearch = function (req, res) {
         function (err, datas) {
             datas = JSON.parse(datas);
             if (datas.length == 0) {
-                res.json({ datas: [], header: {} });
+                res.json({ datas: datas, header: {} });
             } else {
                 const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
                 const config = {
