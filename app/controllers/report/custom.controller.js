@@ -93,7 +93,7 @@ exports.getSearch = function (req, res) {
         val.field1 || 'hamonize', val.field2 || '', val.hsCode || '1006', val.countryCode || ''],
         function (err, datas) {
             datas = JSON.parse(datas);
-            let arr = { datas: datas, header: {} };
+            let arr = { datas: [], header: {} };
             if (datas.length > 0) {
                 const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
                 const isPivot = (req.query.view == 'pivot' ? true : false);
