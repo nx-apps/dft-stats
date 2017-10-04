@@ -171,7 +171,7 @@ exports.getSearch = function (req, res) {
             });
             params = rpt.keysToUpper(params);
             // res.json(params)
-            // res.json(arr['header']);
+            // res.json(datas);
             // var filename = 'rpt_' + val.view
             //     + (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1');
             res.ireport("custom/search/rpt_" + req.query.view + countHeader + ".jasper", req.query.export || "pdf", arr.datas, params);
