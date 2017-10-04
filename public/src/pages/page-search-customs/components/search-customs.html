@@ -54,6 +54,11 @@
             .number {
                 text-align: right;
             }
+
+            .border-color {
+                text-align: right;
+                border-left: 1px solid #ddd;
+            }
         </style>
         <div class="horizontal start-justified layout">
             <paper-button raised class="gl-btn-info gl-small" on-tap="backPage" disabled="[[checkArray(searchHistory,searchHistory.*)]]">
@@ -77,16 +82,16 @@
                     <template is="dom-repeat" items={{header}}>
                         <th></th>
                     </template>
-                    <th style="text-align: center;" colspan="3">{{localize('value')}}</th>
+                    <th style="text-align: center;border-left: 1px solid #ddd;" colspan="3">{{localize('value')}}</th>
                 </tr>
                 <tr>
                     <th>{{localize('order')}}</th>
                     <template is="dom-repeat" items={{header}}>
                         <th>[[localize(item)]]</th>
                     </template>
-                    <th style="text-align: right;">{{localize('million_thb')}}</th>
-                    <th style="text-align: right;">{{localize('million_usd')}}</th>
-                    <th style="text-align: right;">{{localize('million_ton')}}</th>
+                    <th class="border-color">{{localize('million_thb')}}</th>
+                    <th class="border-color">{{localize('million_usd')}}</th>
+                    <th class="border-color">{{localize('million_ton')}}</th>
                 </tr>
             </thead>
             <tbody class="table-body">
@@ -97,9 +102,9 @@
                         <template is="dom-repeat" items={{field}}>
                             <td>[[getProp(main,item)]]</td>
                         </template>
-                        <td style="text-align: right;">[[formatNumber(main.value_b)]]</td>
-                        <td style="text-align: right;">[[formatNumber(main.value_d)]]</td>
-                        <td style="text-align: right;">[[formatNumber(main.weight)]]</td>
+                        <td class="border-color">[[formatNumber(main.value_b)]]</td>
+                        <td class="border-color">[[formatNumber(main.value_d)]]</td>
+                        <td class="border-color">[[formatNumber(main.weight)]]</td>
                     </tr>
                 </template>
             </tbody>

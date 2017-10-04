@@ -63,14 +63,14 @@ export function reportAction(store) {
                 });
         },
         GET_COUNTRY_IN_YEAR(date) {
-            console.log(date);
-            // axios.get('/custom/month?modelYear=' + year)
-            //     .then((response) => {
-            //         store.dispatch({ type: 'GET_COUNTRY_IN_YEAR', payload: response.data })
-            //     })
-            //     .catch(function (error) {
-            //         ////console.log(error);
-            //     });
+            // console.log(date);
+            axios.get('/custom/country?' + date)
+                .then((response) => {
+                    store.dispatch({ type: 'GET_COUNTRY_IN_YEAR', payload: response.data })
+                })
+                .catch(function (error) {
+                    ////console.log(error);
+                });
         },
     }]
 };

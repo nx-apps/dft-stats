@@ -17,6 +17,11 @@
 <link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
 <link rel="import" href="./../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
+<link rel="import" href="../../../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<link rel="import" href="../../../../bower_components/paper-radio-button/paper-radio-button.html">
+
+
 <dom-module id="search-search-customs">
     <template>
         <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
@@ -112,9 +117,11 @@
         <div class="container">
             <search-report-customs id="report" data-search="{{dataSearch}}"></search-report-customs>
             <div class="flex-horizontal-with-ratios">
-                <div class="flex2child"></div>
-                <div class="flex1child " style="text-align: right; padding-right: 10px; line-height: 40px;">
-                    ปี :
+                <div class="flex"></div>
+                <div class="flex ">
+                    <div style="text-align: right; padding-right: 10px; line-height: 40px;">
+                        {{localize('year')}} :
+                    </div>
                 </div>
                 <div class="flex" style=" margin-right: 30px">
                     <gl-combo-box class="required" required id="priority" label="ปี" no-label-float item-label-path="label" item-value-path="value"
@@ -124,8 +131,8 @@
                         </template>
                     </gl-combo-box>
                 </div>
-                <div class="flex1child" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    เดือน :
+                <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
+                    {{localize('month')}} :
                 </div>
                 <div class="flex-2" style=" margin-right: 30px ">
                     <gl-combo-box class="required" required id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
@@ -135,10 +142,10 @@
                         </template>
                     </gl-combo-box>
                 </div>
-                <div class="flex1child" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    ลำดับที่ :
+                <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
+                    {{localize('order_show')}} :
                 </div>
-                <div class="flex3child">
+                <div class="flex-3">
                     <template is="dom-repeat" items="[[value]]">
                         <div class="item">
                             <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
@@ -152,15 +159,26 @@
                         </gl-combo-box>
                     </div>
                 </div>
-                <div class="flex2child"></div>
+                <div class="flex"></div>
             </div>
             <div class="flex-horizontal-with-ratios">
-                <div class="flex2child"></div>
-                <div class="flex2child " style="text-align: right; padding-right: 10px; line-height: 40px;">
-                    รหัสข้าว :
+                <div class="flex"></div>
+                <div class="flex">
+                    <label id="label1">ประเภทการดู:</label>
                 </div>
-                <div class="flex2child">
+                <div class="flex">
+                    <paper-radio-group selected="{{data.tranType}}" aria-labelledby="label1">
+                        <paper-radio-button name="e">ส่งออก</paper-radio-button>
+                        <paper-radio-button name="i">นำเข้า</paper-radio-button>
+                    </paper-radio-group>
+                </div>
+                <div class="flex " style="text-align: right; padding-right: 10px; line-height: 40px;">
+                    {{localize('hsCode')}} :
+                </div>
+                <div class="flex-2" style=" margin-right: 30px ">
                     <paper-input placeholder="1006" no-label-float value="{{data.hsCode}}"></paper-input>
+
+
                     <!-- <div class="horizontal layout">
                         <div>
                             <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
@@ -170,19 +188,20 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="flex2child" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    ประเทศ :
+                <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
+                    {{localize('country')}} :
                 </div>
-                <div class="flex3child">
+                <div class="flex-3">
                     <div class="comBobox">
-                        <gl-combo-box no-label-float item-label-path="id" item-value-path="id" items="{{countryList}}" value="{{data.countryCode}}">
+                        <gl-combo-box no-label-float item-label-path="label" item-value-path="value" items="{{countryList}}" value="{{data.countryCode}}"
+                            disabled="{{checkHasCountry(value,value.*)}}">
                             <template>
-                                [[item.id]]
+                                [[item.label]]
                             </template>
                         </gl-combo-box>
                     </div>
                 </div>
-                <div class="flex3child"></div>
+                <div class="flex"></div>
             </div>
             <!-- <div class="flex-horizontal-with-ratios">
                 <div class="flex-3"></div>
@@ -224,11 +243,11 @@
         <div class="horizontal end-justified layout">
             <paper-button raised class="gl-btn-info gl-small" on-tap="getSearchValue">
                 <iron-icon icon="search"></iron-icon>
-                ค้นหา
+                {{localize('btn_search')}}
             </paper-button>
             <paper-button raised class="gl-btn-info gl-small" on-tap="settingReport">
                 <iron-icon icon="assignment"></iron-icon>
-                ออกรายงาน
+                {{localize('btn_report')}}
             </paper-button>
         </div>
         <!-- <paper-dialog id="itemGroup" class="size-position" modal>
@@ -333,6 +352,7 @@
         Polymer({
             is: 'search-search-customs',
             behaviors: [
+                nylonLocalizeBehavior,
                 ReduxBehavior,
                 MonthBehavior,
                 commonLogic
@@ -444,8 +464,10 @@
             },
             observers: [
                 // 'checkPullData(data,data.*)'
-                'getCountryCode(data.modelYear,data.modelMonth)'
             ],
+            created: function () {
+                this.nylonLocalizeImport('/i18n-page-search-customs.json');
+            },
             setYear(listYear) {
                 // console.log(listYear.length > 0 );
                 if (listYear.length > 0) {
@@ -457,14 +479,23 @@
                 }
                 // console.log(listYear);
             },
-            getCountryCode(year, month) {
-                console.log(year, month);
-
-                let data = {
-                    year,
-                    month
+            checkHasCountry(country) {
+                if (country.length > 0) {
+                    if (country.find(item => item.value === 'country') === undefined ? true : false) {
+                            let data = {
+                                year : this.data.modelYear,
+                                month : this.data.modelMonth
+                            }
+                        this.dispatchAction('GET_COUNTRY_IN_YEAR', data)
+                    }
+                    // console.log( country.find(item => item.value === 'country') === undefined  );
+                    return (country.find(item => item.value === 'country') === undefined ? true : false)
+                } else {
+                    return true
                 }
-                this.dispatchAction('GET_COUNTRY_IN_YEAR',data)
+                // console.log(( country.filter(item => item.value === 'country').length === 1 ? true : false));
+
+                // console.log(this.value);
             },
             // _cloneDataHamonize(hamonize) {
             //     this._cloneData(hamonize, 'hamonizeList')
@@ -516,6 +547,7 @@
                     this.set('myItems.' + result + '.label', num + '.' + value.id + '   X')
                     // //console.log(this.myItems[result]);
                     this.push('value', value)
+                    // console.log(1);
                     e.detail.value = ''
                 }
 
@@ -568,8 +600,9 @@
                 // e.dateEnd = '2017-09-22'
                 // this.set('data.dateStart', e.dateStart)
                 // this.set('data.dateEnd', e.dateEnd);
-                this.set('data.exporter', true)
-                this.set('data.importer', false)
+                // this.set('data.exporter', true)
+                // this.set('data.importer', false)
+                this.set('data.tranType', 'e')
                 this.$.priority.value = this.myItems[0].id
                 // console.log(this.$.priority.value);
 
@@ -707,14 +740,15 @@
                 // }
                 // console.log(this.genUrl(data));
                 // console.log(data);
-                let date = {}
-                date.modelYear = data.modelYear
-                date.modelMonth = data.modelMonth || ''
-                date.hsCode = data.hsCode || ''
-                this.value.map((item, index) => {
-                    date['field' + (index + 1)] = item.value
-                })
-                console.log(data.modelYear);
+                let date = this._getData()
+                // date.modelYear = data.modelYear
+                // date.modelMonth = data.modelMonth || ''
+                // date.hsCode = data.hsCode || ''
+                // date.tranType = data.tranType || 'e'
+                // this.value.map((item, index) => {
+                //     date['field' + (index + 1)] = item.value
+                // })
+                // console.log(data.modelYear);
                 // this.debounce('searchInput', () => {
                 if (data.modelYear !== undefined && data.modelYear !== '') {
                     this.dispatchAction('SET_SEARCH_CUSTOMS', date)
@@ -830,29 +864,20 @@
                     dataMath['field' + (index + 1)] = item.value
                     // dataMath['value' + (index + 1)] = dataSend[item.value]
                 })
-                dataMath.tranType = this.data.tranType || 'a'
                 // dataMath.dateStart = this.data.dateStart || null
                 // dataMath.dateEnd = this.data.dateEnd || null
                 dataMath.hsCode = this.data.hsCode
                 dataMath.modelYear = this.data.modelYear
                 dataMath.modelMonth = this.data.modelMonth
                 dataMath.countryCode = this.data.countryCode
-
+                dataMath.tranType = this.data.tranType
                 return dataMath
             },
             getSearchValue() {
                 let dataSave = this._getData()
 
-                let date = {}
-                date.hsCode = dataSave.hsCode || ''
-                date.modelYear = dataSave.modelYear
-                date.countryCode = dataSave.countryCode || ''
-                date.modelMonth = dataSave.modelMonth || ''
-                this.value.map((item, index) => {
-                    date['field' + (index + 1)] = item.value
-                })
-                this.dispatchAction('SET_SEARCH_CUSTOMS', date)
-                this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', date)
+                this.dispatchAction('SET_SEARCH_CUSTOMS', dataSave)
+                this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', dataSave)
             },
             settingReport() {
                 let dataSave = this._getData()
