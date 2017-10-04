@@ -298,7 +298,7 @@
                 }
                 let Check = _filterChecked(this.zoneList)
                 let newData = this.data
-                newData.zoneName = String(Check.map(item => item.value))
+                newData.zoneName = String(Check.map(item => item.group_name))
                 // console.log(this.genUrl(newData));
                 // let openPost = (url, variables) => {
                 //     var form = document.createElement("form");
