@@ -80,14 +80,14 @@
                 },
             },
             openDia() {
-                console.log(this.$$('#report'));
+                // console.log(this.$$('#report'));
                 this.$$('#report').open()
             },
             printReport(){
                 let newDataReport = this.dataSearch
                 newDataReport.view = this.data.view
                 newDataReport.export = this.data.export
-                window.open('./api/report/search?' + this.genUrl(newDataReport))
+                window.open('./api/report/custom/search?' + this.genUrl(newDataReport))
                 // printReport
             }
         });
