@@ -1,8 +1,22 @@
 var rpt = require('../global/report');
 exports.zone = function (req, res) {
     var j = req.jdbc;
+    let where = '';
+    if (Object.keys(req.query).length > 0) {
+        let c = 0;
+        for (var obj in req.query) {
+            if (c > 0)
+                where += ' and ';
+            else
+                where += ' where ';
+            where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+            c++;
+        }
+    }
     j.query("mssql", `SELECT zone_name,country_th as label,country_code as value,zone_order
-    from custom_country
+    from custom 
+    left join custom_country cc on custom.country2 = cc.country_code
+    ${where}
     group by zone_name,country_th,country_code,zone_order
     order by zone_order,country_th`, [],
         function (err, data) {
@@ -21,9 +35,23 @@ exports.zone = function (req, res) {
 }
 exports.country = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT country_th as label,country_code as value
-    from custom_country
-    group by country_th,country_code
+    let where = '';
+    if (Object.keys(req.query).length > 0) {
+        let c = 0;
+        for (var obj in req.query) {
+            if (c > 0)
+                where += ' and ';
+            else
+                where += ' where ';
+            where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+            c++;
+        }
+    }
+    j.query("mssql", `SELECT country_th as label,country2 as value
+    from custom 
+    left join custom_country cc on custom.country2 = cc.country_code
+    ${where}
+    group by country_th,country2
     order by country_th`, [],
         function (err, data) {
             res.send(data)
@@ -100,6 +128,7 @@ exports.getSearch = function (req, res) {
         ],
         function (err, datas) {
             datas = JSON.parse(datas);
+            if (datas.length == 0) res.json({ datas: [], header: {} });
             const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
             const config = {
                 lenMin: (haveCode ? 0 : datas[0].hsCode.length),
@@ -135,10 +164,6 @@ exports.getSearch = function (req, res) {
                 } else {
                     data['field0'] = datas[i].field1;
                     if (i == 0) arr['header']['field0'] = 'country';
-                    // if (typeof val.field2 !== 'undefined') {
-                    //     data['field1'] = datas[i].field2;
-                    //     // if (i == 0) arr['header']['field1'] = 'country';
-                    // }
                 }
                 data['weight'] = datas[i].weight;
                 data['value_b'] = datas[i].value_b;
@@ -147,7 +172,6 @@ exports.getSearch = function (req, res) {
                 data['countryCode'] = datas[i].countryCode;
                 arr['datas'].push(data);
             }
-
             res.json(arr);
         });
 }
