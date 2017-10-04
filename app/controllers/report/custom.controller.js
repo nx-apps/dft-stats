@@ -94,6 +94,7 @@ exports.getSearch = function (req, res) {
         function (err, datas) {
             datas = JSON.parse(datas);
             const haveCode = datas[0].hsCode === null || isNaN(datas[0].hsCode);
+            const isPivot = (req.query.view == 'pivot' ? true : false);
             const config = {
                 lenMin: (haveCode ? 0 : datas[0].hsCode.length),
                 lenMax: (haveCode ? 0 : datas[datas.length - 1].hsCode.length)
@@ -105,32 +106,41 @@ exports.getSearch = function (req, res) {
                     let c = 0;
                     if (val.field1 == 'country') {
                         data['field' + c] = datas[i].field1;
-                        if (i == 0) arr['header']['field' + c] = 'country';
+                        if (i == 0) arr['header']['field' + c] = 'ประเทศ';
                         c++;
                     }
                     for (let l = config.lenMin; l <= config.lenMax; l += 2) {
                         if (l == 10) l++;
                         if (l == datas[i].hsCode.length) {
-                            data['field' + c] = datas[i].hsCode + ' ' + (val.field1 == 'hamonize' ? datas[i].field1 : datas[i].field2);
+                            data['field' + c] = datas[i].hsCode + (isPivot ? ' ' + (val.field1 == 'hamonize' ? datas[i].field1 : datas[i].field2) : '');
                         } else {
                             const thisLength = datas[i].hsCode.length;
                             const parentCode = datas[i].hsCode.substring(0, thisLength - (thisLength == 11 ? 3 : 2));
                             const parentData = arr['datas'].filter((f) => f.hsCode == parentCode);
                             data['field' + c] = (parentData.length > 0 ? parentData[0]['field' + c] : '');
                         }
-                        if (i == 0) arr['header']['field' + c] = (l == config.lenMax ? 'hamonize' : 'hmcode' + l);
+                        if (i == 0) arr['header']['field' + c] = (isPivot?'ชนิดข้าว':'HSCODE'+l);//(l == config.lenMax ? 'ชนิดข้าว' : 'hmcode' + l);
                         c++;
+                    }
+                    if (val.field1 == 'hamonize' || val.field2 == 'hamonize') {
+                        if (!isPivot) {
+                            data['field' + c] = (val.field1 == 'hamonize' ? datas[i].field1 : datas[i].field2);
+                            if (i == 0) arr['header']['field' + c] = 'ชนิดข้าว';
+                            c++;
+                        }
                     }
                     if (val.field2 == 'country') {
                         data['field' + c] = datas[i].field2;
-                        if (i == 0) arr['header']['field' + c] = 'country';
+                        if (i == 0) arr['header']['field' + c] = 'ประเทศ';
                         c++;
                     }
                 } else {
                     data['field0'] = datas[i].field1;
-                    if (i == 0) arr['header']['field0'] = 'country';
+                    if (i == 0) arr['header']['field0'] = 'ประเทศ';
                 }
                 data['weight'] = datas[i].weight;
+                data['avg_b']=datas[i].avg_b;
+                data['avg_d']=datas[i].avg_d;
                 data['value_b'] = datas[i].value_b;
                 data['value_d'] = datas[i].value_d;
                 data['hsCode'] = datas[i].hsCode;
@@ -138,35 +148,33 @@ exports.getSearch = function (req, res) {
                 arr['datas'].push(data);
             }
             let countHeader = Number(Object.keys(arr['header']).length);
-            arr.datas = arr['datas'].filter((f) => {
-                return f.field0 != "" && f.field1 != "" && f.field2 != "" && f.field3 != "" && f.field4 != ""
-            })
-            // let countryName = '';
-            // if (typeof val.countryCode !== 'undefined') {
-            //     if (val.field1 == 'country') countryName = datas[0].field1;
-            //     if (val.field2 == 'country') countryName = datas[0].field2;
-            // }
+            if (isPivot) {
+                arr.datas = arr['datas'].filter((f) => {
+                    return f.field0 != "" && f.field1 != "" && f.field2 != "" && f.field3 != "" && f.field4 != ""
+                })
+            }
+            let countryName = '';
+            if (typeof val.countryCode !== 'undefined') {
+                if (val.field1 == 'country') countryName = datas[0].field1;
+                if (val.field2 == 'country') countryName = datas[0].field2;
+            }
             // // res.json(countryName)
             // let countHeader = Number(Object.keys(arr['header']).length);
             // countHeader = (config.lenMin > 0 ? countHeader - 1 : countHeader);
             // // res.json(countHeader);
-            // var params = Object.assign(arr.header, {
-            //     TRAN_TYPE: (val.tranType == 'e' ? 'ส่งออก' : (val.tranType == 'i' ? 'นำเข้า' : 'นำเข้า-ส่งออก')),
-            //     MONTH: rpt.getMonthName(Number(req.query.modelMonth)),
-            //     YEAR: req.query.modelYear,
-            //     country_Name: countryName
-            //     // countryName: req.query.countryName
-            //     //     COLUMN_NAME1: (val.field1 == 'country' ? 'ประเทศ' : 'ชนิดข้าว'),
-            //     //     COLUMN_NAME2: (val.field2 == 'hamonize' ? 'ชนิดข้าว' : 'ประเทศ'),
-            //     //     TRAN_TYPE: val.tranType == 'i' ? 'นำเข้า' : 'ส่งออก',
-            //     //     FILE_TYPE: req.query.export
-            // });
-            // params = rpt.keysToUpper(params);
+            var params = Object.assign(arr.header, {
+                TRAN_TYPE: (val.tranType == 'i' ? 'นำเข้า' : 'ส่งออก'),
+                MONTH: rpt.getMonthName(Number(req.query.modelMonth)),
+                YEAR: req.query.modelYear,
+                COUNTRY_NAME: countryName,
+                FILE_TYPE: req.query.export
+            });
+            params = rpt.keysToUpper(params);
             // res.json(params)
-            res.json(arr);
+            // res.json(arr['header']);
             // var filename = 'rpt_' + val.view
             //     + (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1');
-            // res.ireport("custom/search/rpt_table" + countHeader + ".jasper", req.query.export || "pdf", arr.datas, params);
+            res.ireport("custom/search/rpt_" + req.query.view + countHeader + ".jasper", req.query.export || "pdf", arr.datas, params);
         });
 
 }
