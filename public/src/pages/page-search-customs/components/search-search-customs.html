@@ -22,6 +22,7 @@
 <link rel="import" href="../../../../bower_components/paper-radio-button/paper-radio-button.html">
 
 
+
 <dom-module id="search-search-customs">
     <template>
         <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
@@ -152,7 +153,7 @@
                         </div>
                     </template>
                     <div class="comBobox">
-                        <gl-combo-box id="priority" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
+                        <gl-combo-box id="priority" value="{{data.tag}}" no-label-float item-label-path="id" item-value-path="id" items="{{getSeleted(myItems.*)}}" on-selected-item-changed="selectTag">
                             <template>
                                 [[item.id]]
                             </template>
@@ -193,7 +194,7 @@
                 </div>
                 <div class="flex-3">
                     <div class="comBobox">
-                        <gl-combo-box no-label-float item-label-path="label" item-value-path="value" items="{{countryList}}" value="{{data.countryCode}}"
+                        <gl-combo-box id="countryCode" no-label-float item-label-path="label" item-value-path="value" items="{{countryList}}" value="{{data.countryCode}}"
                             disabled="{{checkHasCountry(value,value.*)}}">
                             <template>
                                 [[item.label]]
@@ -464,9 +465,17 @@
             },
             observers: [
                 // 'checkPullData(data,data.*)'
+                'getCountry(data.modelYear,data.modelMonth)'
             ],
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
+            },
+            getCountry(year, month) {
+                let data = {
+                    modelYear: year || '',
+                    modelMonth: month || ''
+                }
+                this.dispatchAction('GET_COUNTRY_IN_YEAR', this.genUrl(data))
             },
             setYear(listYear) {
                 // console.log(listYear.length > 0 );
@@ -481,16 +490,13 @@
             },
             checkHasCountry(country) {
                 if (country.length > 0) {
-                    if (country.find(item => item.value === 'country') === undefined ? true : false) {
-                            let data = {
-                                year : this.data.modelYear,
-                                month : this.data.modelMonth
-                            }
-                        this.dispatchAction('GET_COUNTRY_IN_YEAR', data)
-                    }
+                    if (!country.find(item => item.value === 'country'))
+                        this.set('data.countryCode', '')
+                    this.getCountry(this.data.modelYear, this.data.modelMonth)
                     // console.log( country.find(item => item.value === 'country') === undefined  );
-                    return (country.find(item => item.value === 'country') === undefined ? true : false)
+                    return !country.find(item => item.value === 'country')
                 } else {
+                    this.set('data.countryCode', '')
                     return true
                 }
                 // console.log(( country.filter(item => item.value === 'country').length === 1 ? true : false));
@@ -548,7 +554,14 @@
                     // //console.log(this.myItems[result]);
                     this.push('value', value)
                     // console.log(1);
-                    e.detail.value = ''
+                    // e.detail.value = ''
+                    this.set('data.tag','')
+                    this.$.priority.value = ''
+                    console.log(this.$.priority.value);
+                    console.log(this.$.priority);
+                    console.log(1111);
+                } else {
+                    this.set('data.tag','') 
                 }
 
             },
