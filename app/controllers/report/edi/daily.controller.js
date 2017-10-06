@@ -90,6 +90,15 @@ exports.dailyCost = function (req, res) {
             })
             .orderBy('rice_id')
             .coerceTo('array')
+            .merge(function (m) {
+                return {
+                    lastestFob: r.db('stats').table('price').getAll([3, m('rice_id')], { index: 'getFobByRiceId' })
+                        .filter(function (f) {
+                            return f('price_date').lt(m('price_date'))
+                                .and(f('price_fob').gt(0))
+                        }).coerceTo('array').pluck('price_date', 'price_fob', 'rice_id')
+                }
+            })
     })
         .merge(function (m) {
             return {
@@ -100,16 +109,20 @@ exports.dailyCost = function (req, res) {
                     );
                     var divPrice = r.branch(m('cost').eq(null), 1, m('cost')('rate_bank'));
                     return {
+                        price_fob: r.branch(m2('price_fob').eq(0),
+                            r.branch(m2('lastestFob').count().eq(0), 0, m2('lastestFob').max('price_date')('price_fob')),
+                            m2('price_fob')),
                         price_dit: r.branch(m2('price_dit').eq(0), 0, r.round(m2('price_dit').add(costPrice).div(divPrice))),
                         price_thai: r.branch(m2('price_thai').eq(0), 0, r.round(m2('price_thai').add(costPrice).div(divPrice)))
                     }
                 })
+                    .without('lastestFob')
             }
         })
         .run()
         .then(function (data) {
             var param = rpt.keysToUpper(data['cost']);
-            // res.json(data['price'])
+            // res.json(data)
             var datas = data['price'];
             datas.push({
                 typerice: 'อื่นๆ',
@@ -182,8 +195,8 @@ exports.dailyDit = function (req, res, next) {
             return {
                 date: "",
                 prices: r.table('price')
-                    // .between(m2('date_start'), m2('date_end').add(86400), { index: 'price_date' })
-                    .between(m('date_start'), m('date_end').add(86400), { index: 'price_date' })
+                    // .between(m('date_start'), m('date_end').add(86400), { index: 'price_date' })
+                    .between(m('date_start'), m('date_end'), { index: 'price_date', rightBound: 'closed' })
                     .coerceTo('array').pluck('price_date', 'price_dit', 'rice_id')
                     .merge(function (m3) {
                         return {
