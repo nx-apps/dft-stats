@@ -18,7 +18,7 @@
     <template>
         <paper-material elevation="1" class="container">
             <vaadin-grid id="material" items="[[dataList]]" multi-sort>
-                <div on-tap="printReportCent" style="cursor: pointer;" data="[[item]]">
+                <!-- <div on-tap="printReportCent" style="cursor: pointer;" data="[[item]]"> -->
                     <vaadin-grid-column width="10%" flex-grow="0">
                         <template class="header">
                             <div class="text-center">
@@ -128,7 +128,7 @@
                         </template>
                         <template class="footer"></template>
                     </vaadin-grid-column>
-                </div>
+                <!-- </div> -->
             </vaadin-grid>
         </paper-material>
     </template>
