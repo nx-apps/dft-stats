@@ -437,7 +437,7 @@
 					<font fontName="TH SarabunPSK" size="14" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ที่มา : ข้อมูลจาก"+$P{REF_DATA}+"\n"+
-"กลุ่มบริการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว\n"+
+"กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
 "วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
 			</textField>

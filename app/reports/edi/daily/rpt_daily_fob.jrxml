@@ -1126,7 +1126,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="8" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["กลุ่มบริหารการค้าข้าวตามนโยบายและสถิติการค้าข้าว กองบริการค้าข้าว"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

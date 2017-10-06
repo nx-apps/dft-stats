@@ -81,7 +81,7 @@
 				<text><![CDATA[สูงสุด]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="395" y="0" width="80" height="20" uuid="f45a84d0-38df-4871-8d68-1fd73e27c81f"/>
+				<reportElement x="315" y="0" width="80" height="20" uuid="f45a84d0-38df-4871-8d68-1fd73e27c81f"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -95,7 +95,7 @@
 				<text><![CDATA[ราคาเฉลี่ย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="315" y="0" width="80" height="20" uuid="7228bac7-978e-4def-9126-588659265235"/>
+				<reportElement x="395" y="0" width="80" height="20" uuid="7228bac7-978e-4def-9126-588659265235"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -141,7 +141,7 @@
 				<textFieldExpression><![CDATA[$F{hamonize_th}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20" uuid="77f19732-bee1-4d56-a2ed-91a108c14063"/>
+				<reportElement stretchType="RelativeToBandHeight" x="315" y="0" width="80" height="20" uuid="77f19732-bee1-4d56-a2ed-91a108c14063"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -169,7 +169,7 @@
 				<textFieldExpression><![CDATA[$F{price_max}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="315" y="0" width="80" height="20" uuid="afe8dfb4-a404-4755-abf0-8dc66e0e600e"/>
+				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20" uuid="afe8dfb4-a404-4755-abf0-8dc66e0e600e"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -225,7 +225,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ที่มา : กลุ่มบริหารการค้าข้าวตามนโยบายในประเทศและสถิติการค้าข้าว\n"+
+				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
 "วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>

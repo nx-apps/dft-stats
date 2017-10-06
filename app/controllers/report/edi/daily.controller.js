@@ -2,20 +2,18 @@ var rpt = require('../../../global/report');
 exports.dailyCompany = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_company @approveDate=?", [req.query.date], function (err, data) {
-        // res.send(data);
-        req.r.json(data).run().then(function (d2) {
-            var params = {
-                date: req.query.date
-            };
-            // params = rpt.keysToUpper(params);
-            params.current_date = new Date().toISOString().slice(0, 10);
-            // res.json(params)
-            res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", d2, {
-                approveDate: req.query.date,
-                FILE_TYPE: req.query.export,
-                OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
-            });
-        })
+        data = JSON.parse(data)
+        var params = {
+            date: req.query.date
+        };
+        // params = rpt.keysToUpper(params);
+        params.current_date = new Date().toISOString().slice(0, 10);
+        // res.json(params)
+        res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", data, {
+            approveDate: req.query.date,
+            FILE_TYPE: req.query.export,
+            OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
+        });
     })
 }
 exports.dailyCountry = function (req, res) {
@@ -36,32 +34,29 @@ exports.dailyCountry = function (req, res) {
     };
     j.query("mssql", "exec sp_stats_rpt_daily_country @startDate=?, @endDate=?", [s, e],
         function (err, data) {
-            req.r.json(data).run().then(function (d2) {
-                param.current_date = new Date().toISOString().slice(0, 10);
-                param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ประเทศ ผู้นำเข้าข้าวรายใหญ่ของประเทศไทยตามแจ้งขายข้าว';
-                param = rpt.keysToUpper(param);
-                // res.send(param);
-                // res.json(param)
-                res.ireport("edi/daily/rpt_daily_country.jasper", req.query.export || "pdf", d2, param);
-            })
+            data = JSON.parse(data)
+            param.current_date = new Date().toISOString().slice(0, 10);
+            param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ประเทศ ผู้นำเข้าข้าวรายใหญ่ของประเทศไทยตามแจ้งขายข้าว';
+            param = rpt.keysToUpper(param);
+            // res.send(param);
+            // res.json(param)
+            res.ireport("edi/daily/rpt_daily_country.jasper", req.query.export || "pdf", data, param);
         })
 }
 exports.dailyPricerice = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
-        // res.send(data);
-        req.r.json(data).run().then(function (d2) {
-            var params = {
-                date: req.query.date
-            };
-            // params = rpt.keysToUpper(params);
-            params.current_date = new Date().toISOString().slice(0, 10);
-            res.ireport("edi/daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", d2, {
-                approveDate: req.query.date,
-                FILE_TYPE: req.query.export,
-                OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ราคาข้าวตามใบอนุญาต'
-            });
-        })
+        data = JSON.parse(data)
+        var params = {
+            date: req.query.date
+        };
+        // params = rpt.keysToUpper(params);
+        params.current_date = new Date().toISOString().slice(0, 10);
+        res.ireport("edi/daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", data, {
+            approveDate: req.query.date,
+            FILE_TYPE: req.query.export,
+            OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ราคาข้าวตามใบอนุญาต'
+        });
     })
 }
 exports.dailyExportrice = function (req, res) {
