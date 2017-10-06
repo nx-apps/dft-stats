@@ -1344,7 +1344,7 @@ A1
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement verticalAlignment="Bottom" markup="none">
+				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว"]]></textFieldExpression>
