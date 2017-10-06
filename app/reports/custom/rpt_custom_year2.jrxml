@@ -705,7 +705,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["กรมการค้าต่างประเทศ\n"+
+				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว\n"+
 "วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
