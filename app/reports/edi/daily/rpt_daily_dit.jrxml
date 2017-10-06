@@ -99,7 +99,7 @@
 		<groupHeader>
 			<band height="15">
 				<textField>
-					<reportElement x="0" y="0" width="82" height="15" uuid="bec41e1c-928a-4d24-a38d-c86f5b887ee3"/>
+					<reportElement x="0" y="0" width="99" height="15" uuid="bec41e1c-928a-4d24-a38d-c86f5b887ee3"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.5"/>
@@ -144,7 +144,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="117" y="0" width="35" height="15" uuid="789f1185-b112-4162-b291-7af7a76a0ea1"/>
+					<reportElement x="134" y="0" width="35" height="15" uuid="789f1185-b112-4162-b291-7af7a76a0ea1"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<bottomPen lineWidth="0.0"/>
@@ -201,7 +201,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="202" y="0" width="30" height="15" uuid="f18f7317-4dad-4989-8774-2a696f9d27c9"/>
+					<reportElement x="232" y="0" width="30" height="15" uuid="f18f7317-4dad-4989-8774-2a696f9d27c9"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<bottomPen lineWidth="0.0"/>
@@ -236,7 +236,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="82" y="0" width="35" height="15" uuid="b583ad86-1ec2-45d4-8341-7922f248f489"/>
+					<reportElement x="99" y="0" width="35" height="15" uuid="b583ad86-1ec2-45d4-8341-7922f248f489"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<bottomPen lineWidth="0.0"/>
@@ -258,7 +258,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="232" y="0" width="30" height="15" uuid="d7fe2e98-df7a-4799-a5b2-5237b10a5044"/>
+					<reportElement x="262" y="0" width="30" height="15" uuid="d7fe2e98-df7a-4799-a5b2-5237b10a5044"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<bottomPen lineWidth="0.0"/>
@@ -269,7 +269,7 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="152" y="0" width="50" height="15" uuid="27eac522-eba3-494c-b31e-95f45468cd60"/>
+					<reportElement x="169" y="0" width="63" height="15" uuid="27eac522-eba3-494c-b31e-95f45468cd60"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.5"/>
@@ -336,24 +336,13 @@
 					</textElement>
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="262" y="0" width="30" height="15" uuid="3cbd2685-28f1-4a39-9849-42d4b2c3de34"/>
-					<box>
-						<topPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
-						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[""]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
 			<band height="15">
 				<textField>
-					<reportElement x="0" y="0" width="82" height="15" uuid="4f469169-77cb-46f6-92b9-f697a4825063"/>
-					<box leftPadding="3" rightPadding="3">
+					<reportElement x="0" y="0" width="99" height="15" uuid="4f469169-77cb-46f6-92b9-f697a4825063"/>
+					<box leftPadding="0" rightPadding="5">
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
 						<bottomPen lineWidth="0.5"/>
@@ -399,7 +388,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_RICE15}== 0||$V{SUM_RICE15}==null?'-':$V{SUM_RICE15}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
-					<reportElement x="117" y="0" width="35" height="15" uuid="c8a68b87-f4f1-413b-8f8f-693c37d074bf"/>
+					<reportElement x="134" y="0" width="35" height="15" uuid="c8a68b87-f4f1-413b-8f8f-693c37d074bf"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<bottomPen lineWidth="0.5"/>
@@ -456,7 +445,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_RICE22}== 0||$V{SUM_RICE22}==null?'-':$V{SUM_RICE22}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
-					<reportElement x="202" y="0" width="30" height="15" uuid="e35a0088-3f60-4d35-8cef-ee9b892ae683"/>
+					<reportElement x="232" y="0" width="30" height="15" uuid="e35a0088-3f60-4d35-8cef-ee9b892ae683"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<bottomPen lineWidth="0.5"/>
@@ -491,7 +480,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_RICE21}== 0||$V{SUM_RICE21}==null?'-':$V{SUM_RICE21}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
-					<reportElement x="82" y="0" width="35" height="15" uuid="a35ef0ae-c0e4-476f-969f-f5d13f95be5d"/>
+					<reportElement x="99" y="0" width="35" height="15" uuid="a35ef0ae-c0e4-476f-969f-f5d13f95be5d"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<bottomPen lineWidth="0.5"/>
@@ -513,7 +502,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_RICE7}== 0||$V{SUM_RICE7}==null?'-':$V{SUM_RICE7}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
-					<reportElement x="232" y="0" width="30" height="15" uuid="4eade6e6-15d6-4e20-8096-fe289fefd15a"/>
+					<reportElement x="262" y="0" width="30" height="15" uuid="4eade6e6-15d6-4e20-8096-fe289fefd15a"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<bottomPen lineWidth="0.5"/>
@@ -524,7 +513,7 @@
 					<textFieldExpression><![CDATA[($V{SUM_RICE5}== 0||$V{SUM_RICE5}==null?'-':$V{SUM_RICE5}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0">
-					<reportElement x="152" y="0" width="50" height="15" uuid="6a7e0b8f-adbd-449b-a387-aa44f98bdcbd"/>
+					<reportElement x="169" y="0" width="63" height="15" uuid="6a7e0b8f-adbd-449b-a387-aa44f98bdcbd"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -591,17 +580,6 @@
 					</textElement>
 					<textFieldExpression><![CDATA[($V{SUM_RICE12}== 0||$V{SUM_RICE12}==null?'-':$V{SUM_RICE12}/$V{COUNT_RICE})]]></textFieldExpression>
 				</textField>
-				<textField pattern="###0">
-					<reportElement x="262" y="0" width="30" height="15" uuid="e043f066-e894-46d4-aef3-74d5d34bf8e4"/>
-					<box>
-						<topPen lineWidth="0.5"/>
-						<bottomPen lineWidth="0.5"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
-						<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($V{SUM_RICE6}== 0||$V{SUM_RICE6}==null?'-':$V{SUM_RICE6}/$V{COUNT_RICE})]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -622,7 +600,7 @@
 	<columnHeader>
 		<band height="45" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="15" width="82" height="30" uuid="50b6f980-507f-4add-b203-7ebc18040bae"/>
+				<reportElement x="0" y="15" width="99" height="30" uuid="50b6f980-507f-4add-b203-7ebc18040bae"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -635,7 +613,7 @@
 				<text><![CDATA[เดือน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="82" y="15" width="70" height="15" uuid="49edc8f0-e8aa-4fd6-a19d-514145079e5d"/>
+				<reportElement x="99" y="15" width="70" height="15" uuid="49edc8f0-e8aa-4fd6-a19d-514145079e5d"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -645,7 +623,7 @@
 				<text><![CDATA[ข้าวหอม 100%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="82" y="30" width="35" height="15" uuid="d8a20fa1-b99a-4841-8e0f-165cce0fecd2"/>
+				<reportElement x="99" y="30" width="35" height="15" uuid="d8a20fa1-b99a-4841-8e0f-165cce0fecd2"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -655,7 +633,7 @@
 				<text><![CDATA[A]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="117" y="30" width="35" height="15" uuid="4fbb8d23-99e3-4ed1-ba93-865c545e81ab"/>
+				<reportElement x="134" y="30" width="35" height="15" uuid="4fbb8d23-99e3-4ed1-ba93-865c545e81ab"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -665,7 +643,7 @@
 				<text><![CDATA[B]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="152" y="15" width="50" height="30" uuid="1ce16fd2-b669-4230-bbf2-240ef015d389"/>
+				<reportElement x="169" y="15" width="63" height="30" uuid="1ce16fd2-b669-4230-bbf2-240ef015d389"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -679,7 +657,7 @@
 ปทุมฯ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="202" y="15" width="300" height="15" uuid="387c88b9-9576-49d0-a732-3689d04aaa25"/>
+				<reportElement x="232" y="15" width="270" height="15" uuid="387c88b9-9576-49d0-a732-3689d04aaa25"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -689,7 +667,7 @@
 				<text><![CDATA[ข้าวขาว]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="202" y="30" width="30" height="15" uuid="b7bc9596-a6e4-4739-91b7-e110ab3668a2"/>
+				<reportElement x="232" y="30" width="30" height="15" uuid="b7bc9596-a6e4-4739-91b7-e110ab3668a2"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -699,7 +677,7 @@
 				<text><![CDATA[100% B]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="232" y="30" width="30" height="15" uuid="4bb715e3-d003-4cb9-83cf-729d678a0b36"/>
+				<reportElement x="262" y="30" width="30" height="15" uuid="4bb715e3-d003-4cb9-83cf-729d678a0b36"/>
 				<box>
 					<bottomPen lineWidth="0.5"/>
 				</box>
@@ -707,16 +685,6 @@
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[100% C]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="262" y="30" width="30" height="15" uuid="057def7e-7511-4a08-a069-980b6e66d253"/>
-				<box>
-					<bottomPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
-					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[5% เลิศ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="292" y="30" width="30" height="15" uuid="da884a08-eaf6-4c58-bc74-1f3158853bab"/>
@@ -912,8 +880,8 @@ A1
 		<band height="15" splitType="Stretch">
 			<printWhenExpression><![CDATA[$F{month}!="เฉลี่ยรายเดือน"]]></printWhenExpression>
 			<textField>
-				<reportElement x="0" y="0" width="49" height="15" uuid="3b1c4757-cc08-4156-bb06-c8a5593134b3"/>
-				<box leftPadding="3" rightPadding="3">
+				<reportElement x="0" y="0" width="55" height="15" uuid="3b1c4757-cc08-4156-bb06-c8a5593134b3"/>
+				<box leftPadding="5" rightPadding="3">
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
@@ -923,7 +891,7 @@ A1
 				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="82" y="0" width="35" height="15" uuid="5f04399e-f02b-4997-a4f8-b9359f6be14e"/>
+				<reportElement x="99" y="0" width="35" height="15" uuid="5f04399e-f02b-4997-a4f8-b9359f6be14e"/>
 				<box>
 					<leftPen lineWidth="0.5"/>
 				</box>
@@ -933,7 +901,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_1}== null||$F{rice_1}== 0?'-':$F{rice_1})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="0" width="35" height="15" uuid="ffcf68ca-c7f9-46b0-ae24-e7b6fe0ba9c7"/>
+				<reportElement x="134" y="0" width="35" height="15" uuid="ffcf68ca-c7f9-46b0-ae24-e7b6fe0ba9c7"/>
 				<box>
 					<rightPen lineWidth="0.0"/>
 				</box>
@@ -943,7 +911,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_2}== null||$F{rice_2}== 0?'-':$F{rice_2})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="152" y="0" width="50" height="15" uuid="e1abf59e-37a6-4a88-8123-1e12d65f76e7"/>
+				<reportElement x="169" y="0" width="63" height="15" uuid="e1abf59e-37a6-4a88-8123-1e12d65f76e7"/>
 				<box>
 					<leftPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
@@ -954,25 +922,18 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_3}== null||$F{rice_3}== 0?'-':$F{rice_3})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="202" y="0" width="30" height="15" uuid="c674ddcc-c766-4601-9b6a-c83566924069"/>
+				<reportElement x="232" y="0" width="30" height="15" uuid="c674ddcc-c766-4601-9b6a-c83566924069"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{rice_4}== null||$F{rice_4}== 0?'-':$F{rice_4})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="232" y="0" width="30" height="15" uuid="85e7e8f9-9985-41cb-9cd1-7e4e84239430"/>
+				<reportElement x="262" y="0" width="30" height="15" uuid="85e7e8f9-9985-41cb-9cd1-7e4e84239430"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{rice_5}== null||$F{rice_5}== 0?'-':$F{rice_5})]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="262" y="0" width="30" height="15" uuid="697cf037-9c10-4801-b408-8c6796b3b093"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
-					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{rice_6}== null||$F{rice_6}== 0?'-':$F{rice_6})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="292" y="0" width="30" height="15" uuid="c948a425-248a-4d77-a075-b746c8c41b28"/>
@@ -1097,8 +1058,8 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_21}==  null||$F{rice_21}==0?'-':$F{rice_21})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="49" y="0" width="33" height="15" uuid="4e221cc8-5736-4020-964a-76c1c169f203"/>
-				<box leftPadding="3" rightPadding="3">
+				<reportElement x="55" y="0" width="44" height="15" uuid="4e221cc8-5736-4020-964a-76c1c169f203"/>
+				<box leftPadding="0" rightPadding="5">
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
@@ -1110,11 +1071,8 @@ A1
 		<band height="15">
 			<printWhenExpression><![CDATA[$F{month}=="เฉลี่ยรายเดือน"]]></printWhenExpression>
 			<textField>
-				<reportElement x="0" y="0" width="82" height="15" uuid="b3bf2205-6006-4231-b458-07d0404ed708"/>
-				<box rightPadding="2">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
+				<reportElement x="0" y="0" width="99" height="15" uuid="b3bf2205-6006-4231-b458-07d0404ed708"/>
+				<box leftPadding="0" rightPadding="5">
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
@@ -1144,7 +1102,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_20}==  null||$F{rice_20}==0?'-':$F{rice_20})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="202" y="0" width="30" height="15" uuid="809b75d7-b963-48c2-b4ef-20ce93041ede"/>
+				<reportElement x="232" y="0" width="30" height="15" uuid="809b75d7-b963-48c2-b4ef-20ce93041ede"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -1197,16 +1155,6 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_7}==  null||$F{rice_7}==0?'-':$F{rice_7})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="262" y="0" width="30" height="15" uuid="451fe5fa-3ec4-4a55-8733-fcb1e3553ec8"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
-					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{rice_6}==  null||$F{rice_6}==0?'-':$F{rice_6})]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="752" y="0" width="50" height="15" uuid="9aab9a50-381d-410c-9df3-80589479ce9e"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1219,7 +1167,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_21}==  null||$F{rice_21}==0?'-':$F{rice_21})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="152" y="0" width="50" height="15" uuid="3abcb5d6-3239-48bb-b070-7b80014c1ac1"/>
+				<reportElement x="169" y="0" width="63" height="15" uuid="3abcb5d6-3239-48bb-b070-7b80014c1ac1"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1241,7 +1189,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_14}==  null||$F{rice_14}==0?'-':$F{rice_14})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="82" y="0" width="35" height="15" uuid="b9892861-514c-448b-b334-815dc83b89de"/>
+				<reportElement x="99" y="0" width="35" height="15" uuid="b9892861-514c-448b-b334-815dc83b89de"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1313,7 +1261,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_11}==  null||$F{rice_11}==0?'-':$F{rice_11})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="232" y="0" width="30" height="15" uuid="1d88abc3-0615-41c9-bf27-0b00f7072990"/>
+				<reportElement x="262" y="0" width="30" height="15" uuid="1d88abc3-0615-41c9-bf27-0b00f7072990"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -1323,7 +1271,7 @@ A1
 				<textFieldExpression><![CDATA[($F{rice_5}==  null||$F{rice_5}==0?'-':$F{rice_5})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="117" y="0" width="35" height="15" uuid="d3c744a5-b7b2-4e8b-924e-43a97ed6fe25"/>
+				<reportElement x="134" y="0" width="35" height="15" uuid="d3c744a5-b7b2-4e8b-924e-43a97ed6fe25"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.0"/>
