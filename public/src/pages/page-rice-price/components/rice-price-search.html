@@ -10,6 +10,10 @@
 <link rel="import" href="./../../../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="./../../../../bower_components/paper-item/paper-item.html">
 
+<link rel="import" href="../../components/nylon-date-picker/nylon-date-picker.html">
+
+<!-- <link rel="import" href="../../components/nylon-date-picker/nylon-date-picker-light.html"> -->
+
 
 <dom-module id="rice-price-search">
     <template>
@@ -51,6 +55,8 @@
                 เริ่มวันที่ :
             </div>
             <div class="flex-2"> [[searchPriceHamonize(date.dateStart)]]
+                <!-- <nylon-date-picker id="date" no-label-float selected="{{date.dateStart}}" show-bc on-keyup="_enter"></nylon-date-picker> -->
+                <!-- <nylon-date-picker-light id="date" label="วันที่" selected="" show-bc></nylon-date-picker-light> -->
                 <gl-form-input type="date" no-label-float value="{{date.dateStart}}"></gl-form-input>
             </div>
             <div class="flex-4">
@@ -69,7 +75,7 @@
                 อัตราแลกเปลี่ยน :
             </div>
             <div class="flex-2">
-                <gl-form-input allowed-pattern="[0-9||,||.]"style="width:100px;" format-number="on" readonly no-label-float value="[[data.rate_bank]]">
+                <gl-form-input allowed-pattern="[0-9||,||.]" style="width:100px;" format-number="on" readonly no-label-float value="[[data.rate_bank]]">
                     <paper-icon-button style="width:35px; height:35px" suffix icon="create" on-tap="editConfirm"></paper-icon-button>
                 </gl-form-input>
                 <!--<paper-icon-button id="edit" class="crud" icon="settings" raised on-tap="editConfirm"></paper-icon-button>
@@ -302,10 +308,20 @@
                 this.set('data.wr_d', wr_d)
                 // console.log(data);
             },
+            _enter(e) {
+                if (e.code === 'Enter') {
+                    this.searchPriceHamonize(this.date);
+                }
+            },
             searchPriceHamonize(date) {
 
                 if (date !== undefined && date !== '' && this.date.dateStart !== ''
                     && this.date.dateStart !== undefined) {
+                    let dateStart = this.date
+                    // console.log('----------------');
+                    // console.log(dateStart);
+                    // console.log('----------------');
+                    // console.log(new Date(dateStart).toISOString().split('T')[1]);
                     // this.dispatchAction('PRICEHAMONIZE_SEARCH', this.date)
                     this.dispatchAction('PRICEHAMONIZE_COST_SEARCH', this.date)
                 }
@@ -341,7 +357,7 @@
             },
             _printReport() {
                 // console.log(1111);
-                window.open('./api/report/daily/cost?date=' + this.date.dateStart + '&export=' + this.printReport.export)
+                window.open('./api/report/edi/daily/cost?date=' + this.date.dateStart + '&export=' + this.printReport.export)
                 // console.log();
             }
         });
