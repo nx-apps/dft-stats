@@ -182,59 +182,47 @@ exports.dailyDit = function (req, res, next) {
                 }).coerceTo('array').pluck('cost_date', 'cost_end', 'rate_bank', 'wr_b', 'wfr_b')
             }
         })
-        // r.expr({
-        //     data: data,
-        //     cost: r.table('cost').filter(function (f) {
-        //         return f('cost_date').inTimezone('+07').date().le(data[data.length - 1].date_end)
-        //             .and(f('cost_end').inTimezone('+07').date().ge(data[0].date_start))
-        //     }).coerceTo('array').pluck('cost_date', 'cost_end', 'rate_bank', 'wr_b', 'wfr_b')
-        // })
         .merge(function (m) {
-            // return {
-            //     data: m('data').merge(function (m2) {
             return {
                 date: "",
                 prices: r.table('price')
                     // .between(m('date_start'), m('date_end').add(86400), { index: 'price_date' })
                     .between(m('date_start'), m('date_end'), { index: 'price_date', rightBound: 'closed' })
                     .coerceTo('array').pluck('price_date', 'price_dit', 'rice_id')
-                    .merge(function (m3) {
+                    .merge(function (m2) {
                         return {
                             cost: m('cost').filter(function (f) {
-                                return f('cost_date').inTimezone('+07').date().le(m3('price_date'))
-                                    .and(f('cost_end').inTimezone('+07').date().ge(m3('price_date')))
+                                return f('cost_date').inTimezone('+07').date().le(m2('price_date'))
+                                    .and(f('cost_end').inTimezone('+07').date().ge(m2('price_date')))
                             }).coerceTo('array').without('cost_date', 'cost_end')
                         }
                     })
-                    .merge(function (m3) {
-                        return r.branch(m3('cost').eq([]),
+                    .merge(function (m2) {
+                        return r.branch(m2('cost').eq([]),
                             { cost: 0, rate: 1 },
                             {
-                                cost: r.branch(m3('rice_id').eq(1).or(m3('rice_id').eq(2)),
-                                    m3('cost')(0)('wfr_b'),
-                                    m3('cost')(0)('wr_b')
+                                cost: r.branch(m2('rice_id').eq(1).or(m2('rice_id').eq(2)),
+                                    m2('cost')(0)('wfr_b'),
+                                    m2('cost')(0)('wr_b')
                                 ),
-                                rate: m3('cost')(0)('rate_bank')
+                                rate: m2('cost')(0)('rate_bank')
                             }
                         )
                     })
-                    .merge(function (m3) {
+                    .merge(function (m2) {
                         return {
-                            price_dit: r.branch(m3('price_dit').eq(0), 0, r.round(m3('price_dit').add(m3('cost')).div(m3('rate'))))
+                            price_dit: r.branch(m2('price_dit').eq(0), 0, r.round(m2('price_dit').add(m2('cost')).div(m2('rate'))))
                         }
                     })
                     .group('price_date').ungroup()
-                    .map(function (m3) {
-                        return m3('reduction').map(function (m4) {
-                            return [r.expr('rice_').add(m4('rice_id').coerceTo('string')), m4('price_dit')]
+                    .map(function (m2) {
+                        return m2('reduction').map(function (m3) {
+                            return [r.expr('rice_').add(m3('rice_id').coerceTo('string')), m3('price_dit')]
                         }).coerceTo('object')
-                            .merge({ date: m3('group').day(), month: 0, year: m3('group').year(), type: 'date' })
+                            .merge({ date: m2('group').day(), month: 0, year: m2('group').year(), type: 'date' })
                     })
-                //     }
-                // })
             }
         }).without('cost')
-        // .getField('data')
         .merge(function (m) {
             return {
                 keys: r.branch(m('prices').ne([]), m('prices')(0).without('date', 'month', 'type', 'year').keys(), [])
@@ -322,5 +310,84 @@ exports.dailyFob = function (req, res, next) {
             });
         }
     }
-    res.json(data)
+    r.expr(data)
+        .merge(function (m) {
+            return {
+                date: "",
+                prices: r.table('price')
+                    // .between(m('date_start'), m('date_end').add(86400), { index: 'price_date' })
+                    .between([3, m('date_start')], [3, m('date_end')], { index: 'dayPriceDate', rightBound: 'closed' })
+                    .coerceTo('array').pluck('price_date', 'price_fob', 'rice_id')
+                    .group('price_date').ungroup()
+                    .map(function (m2) {
+                        return m2('reduction').map(function (m3) {
+                            return [r.expr('rice_').add(m3('rice_id').coerceTo('string')), m3('price_fob')]
+                        }).coerceTo('object')
+                            .merge({ date: m2('group').day(), month: 0, year: m2('group').year(), type: 'date' })
+                    })
+                    .filter(function (f) {
+                        return f('rice_1').ne(0)
+                    })
+            }
+        })
+        .merge(function (m) {
+            return {
+                keys: r.branch(m('prices').ne([]), m('prices')(0).without('date', 'month', 'type', 'year').keys(), [])
+            }
+        })
+        .merge(function (m) {
+            return r.branch(m('keys').eq([]),
+                {},
+                m('keys').map(function (m2) {
+                    return [r.expr(m2), m('prices').avg(m2).round()]
+                }).coerceTo('object')
+            )
+        })
+        .map(function (m) {
+            return r.branch(m('type').eq('date'), m, m.without('prices'))
+        })
+        .without('keys')
+        .do(function (d) {
+            return r.expr([d]).append(
+                d.filter({ type: 'date' })(0).getField('prices').orderBy('date')
+            )
+        })
+        .reduce(function (left, right) {
+            return left.add(right)
+        })
+        .without('prices')
+        .do(function (d) {
+            return d.append(
+                d.filter({ type: 'date' })(0)
+                    .merge({
+                        year: year,
+                        month: 'เฉลี่ย (เดือน)',
+                        date: '',
+                        type: 'month'
+                    })
+            )
+        })
+        .map(function (m) {
+            return r.branch(
+                m('type').eq('date').and(m('date').eq('')),
+                m.pluck('date', 'date_end', 'date_start', 'month', 'type', 'year'),
+                m
+            )
+        })
+        .merge(function (m) {
+            return {
+                month: r.branch(m('month').typeOf().eq('NUMBER'), rpt.getMonthNameRethink(m('month')), m('month')),
+                year: m('year').add(543)
+            }
+        })
+        .run()
+        .then(function (data) {
+            // res.json(params.date.substr(0,8)+data[data.length-2]['date'])
+            const yymm = params.date.substring(0, 8);
+            params = rpt.keysToUpper(params);
+            params.LAST_DATE = yymm + data[data.length - 2]['date'].toString();
+            params.OUTPUT_NAME = params.LAST_DATE.replace(/-/g, '') + '_ราคาข้าวสาร_FOB_กรุงเทพ';
+            // res.json(params)
+            res.ireport("edi/daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
+        })
 }
