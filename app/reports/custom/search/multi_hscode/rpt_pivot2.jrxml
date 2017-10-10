@@ -7,7 +7,7 @@
 	<parameter name="COLUMN_NAME1" class="java.lang.String"/>
 	<parameter name="COLUMN_NAME2" class="java.lang.String"/>
 	<parameter name="TRAN_TYPE" class="java.lang.String"/>
-	<parameter name="CURRENT_DATE" class="java.lang.String">
+	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
 	<parameter name="YEAR" class="java.lang.String">
@@ -29,27 +29,27 @@
 	<field name="field2" class="java.lang.String"/>
 	<field name="avg_b" class="java.lang.Double"/>
 	<field name="avg_d" class="java.lang.Double"/>
-	<variable name="SUM_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
+	<variable name="SUM_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD0" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
 	</variable>
-	<variable name="SUM_VALUE_B" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
+	<variable name="SUM_VALUE_B" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD0" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_b}]]></variableExpression>
 	</variable>
-	<variable name="SUM_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Sum">
+	<variable name="SUM_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD0" calculation="Sum">
 		<variableExpression><![CDATA[$F{value_d}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_VALUE_B" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Average">
+	<variable name="SUM_AVG_VALUE_B" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD0" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_b}]]></variableExpression>
 	</variable>
-	<variable name="SUM_AVG_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD1" calculation="Average">
+	<variable name="SUM_AVG_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_FIELD0" calculation="Average">
 		<variableExpression><![CDATA[$F{avg_d}]]></variableExpression>
 	</variable>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
 	</variable>
-	<group name="GP_FIELD1">
-		<groupExpression><![CDATA[$F{field1}]]></groupExpression>
+	<group name="GP_FIELD0">
+		<groupExpression><![CDATA[$F{field0}]]></groupExpression>
 		<groupHeader>
 			<band height="20">
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
@@ -64,9 +64,9 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{field1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{field0}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD1" pattern="#,##0.00">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD0" pattern="#,##0.00">
 					<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="80" height="20" uuid="2db495af-028a-40d9-9cf0-4eb76d040c4d"/>
 					<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 						<pen lineWidth="1.0"/>
@@ -80,7 +80,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_WEIGHT}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD1" pattern="#,##0.00">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD0" pattern="#,##0.00">
 					<reportElement stretchType="RelativeToBandHeight" x="642" y="0" width="80" height="20" uuid="10f773f4-5de7-4a88-b7e0-bdf2aee231d4"/>
 					<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 						<pen lineWidth="1.0"/>
@@ -94,7 +94,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_VALUE_D}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD1" pattern="#,##0.00">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD0" pattern="#,##0.00">
 					<reportElement stretchType="RelativeToBandHeight" x="562" y="0" width="80" height="20" uuid="a687f9f1-2feb-4815-b644-47f108649e47"/>
 					<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 						<pen lineWidth="1.0"/>
@@ -108,7 +108,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_AVG_VALUE_B}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD1" pattern="#,##0.00">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD0" pattern="#,##0.00">
 					<reportElement stretchType="RelativeToBandHeight" x="482" y="0" width="80" height="20" uuid="ae97f4a1-7364-4cdd-b6ad-ed3790a35829"/>
 					<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 						<pen lineWidth="1.0"/>
@@ -122,7 +122,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{SUM_VALUE_B}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD1" pattern="#,##0.00">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="GP_FIELD0" pattern="#,##0.00">
 					<reportElement stretchType="RelativeToBandHeight" x="722" y="0" width="80" height="20" uuid="8a7566f0-75d3-40b9-a674-fe8b4eb3bbae"/>
 					<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 						<pen lineWidth="1.0"/>
@@ -170,7 +170,12 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{COUNTRY_NAME}== ""
+    ? ""
+    :"ประเทศ"+$P{COUNTRY_NAME}
+
+)
++($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -186,11 +191,11 @@
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{FIELD1}!=$P{FIELD2}
-    ?$P{FIELD1}+"/"+$P{FIELD2}
-    :$P{FIELD1}
+				<textFieldExpression><![CDATA[($P{FIELD0}!=$P{FIELD1}
+    ?$P{FIELD0}+"/"+$P{FIELD1}
+    :$P{FIELD0}
 )]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -377,7 +382,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{field1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -424,7 +429,7 @@
 				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
-"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

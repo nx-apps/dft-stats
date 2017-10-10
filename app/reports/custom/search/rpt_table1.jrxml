@@ -9,7 +9,7 @@
 	<parameter name="DATE_START" class="java.lang.String"/>
 	<parameter name="DATE_END" class="java.lang.String"/>
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
-	<parameter name="MONTH_DATE" class="java.lang.String">
+	<parameter name="CURRENT_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
 	<parameter name="YEAR" class="java.lang.String">
@@ -62,12 +62,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="16" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{COUNTRY_NAME}== ""
-    ? ""
-    :"ประเทศ"+$P{COUNTRY_NAME}
-
-)
-+($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{MONTH}==null?"":" เดือน "+$P{MONTH}+" ")+"ปี "+$P{YEAR}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="3" width="555" height="25" uuid="f154b89f-992d-40bb-a5aa-2413eecc747f"/>
@@ -99,7 +94,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{FIELD0}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{FIELD1} == "country" ? "country" : "hamonize")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="236" y="0" width="160" height="20" uuid="695d935e-b580-43c4-bb22-e7549a96bbea"/>
@@ -285,7 +280,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{field0}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{field1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -333,7 +328,7 @@
 				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
-"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
