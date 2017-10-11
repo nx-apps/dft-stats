@@ -135,32 +135,43 @@
                         {{localize('year')}} :
                     </div>
                 </div>
-                <div class="flex" style=" margin-right: 30px">
-                    <gl-combo-box class="required" required id="priority" label="ปี" no-label-float item-label-path="label" item-value-path="value"
-                        items="{{yearList}}" value="{{data.modelYear}}">
-                        <template>
-                            [[item.label]]
-                        </template>
-                    </gl-combo-box>
+                <div class="flex">
+                    <div style=" margin-right: 30px">
+                        <gl-combo-box class="required" required id="priority" label="ปี" no-label-float item-label-path="label" item-value-path="value"
+                            items="{{yearList}}" value="{{data.modelYear}}">
+                            <template>
+                                [[item.label]]
+                            </template>
+                        </gl-combo-box>
+                    </div>
                 </div>
-                <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    {{localize('month')}} :
+                <div class="flex">
+                    <div style="text-align: right; padding-right: 10px;     line-height: 40px;">
+                        <paper-button raised on-tap='setMonth' class="gl-small">{{localize('month')}}</paper-button> :
+                    </div>
                 </div>
-                <div class="flex-2" style=" margin-right: 30px ">
-
-                    <paper-button raised on-tap='setMonth'>ตั้งค่า</paper-button>
-
-                    <!-- <gl-combo-box  id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
-                        items="{{monthList}}" value="{{data.modelMonth}}">
-                        <template>
-                            [[item.label]]
-                        </template>
-                    </gl-combo-box> -->
+                <div class="flex-2">
+                    <div >
+                        <paper-input value="[[getNameMonth(monthList,monthList.*)]]" readonly></paper-input>
+                    </div>
+                </div>
+                <div class="flex-2"></div>
+            </div>
+            <div class="flex-horizontal-with-ratios">
+                <div class="flex"></div>
+                <div class="flex">
+                    <label id="label1">ประเภทการดู:</label>
+                </div>
+                <div class="flex">
+                    <paper-radio-group selected="{{data.tranType}}" aria-labelledby="label1">
+                        <paper-radio-button name="e">ส่งออก</paper-radio-button>
+                        <paper-radio-button name="i">นำเข้า</paper-radio-button>
+                    </paper-radio-group>
                 </div>
                 <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
                     {{localize('order_show')}} :
                 </div>
-                <div class="flex-3">
+                <div class="flex-2">
                     <template is="dom-repeat" items="[[value]]">
                         <div class="item">
                             <nylon-tag on-tap="deleteTag" item="[[item]]" label="[[item.label]]" color="[[setColor(item.color)]]"></nylon-tag>
@@ -175,49 +186,7 @@
                         </gl-combo-box>
                     </div>
                 </div>
-                <div class="flex"></div>
-            </div>
-            <div class="flex-horizontal-with-ratios">
-                <div class="flex"></div>
-                <div class="flex">
-                    <label id="label1">ประเภทการดู:</label>
-                </div>
-                <div class="flex">
-                    <paper-radio-group selected="{{data.tranType}}" aria-labelledby="label1">
-                        <paper-radio-button name="e">ส่งออก</paper-radio-button>
-                        <paper-radio-button name="i">นำเข้า</paper-radio-button>
-                    </paper-radio-group>
-                </div>
-                <div class="flex " style="text-align: right; padding-right: 10px; line-height: 40px;">
-                    <!-- {{localize('hsCode')}} : -->
-                </div>
-                <div class="flex-2" style=" margin-right: 30px ">
-                    <!-- <paper-input placeholder="1006" no-label-float value="{{data.hsCode}}"></paper-input> -->
-
-
-                    <!-- <div class="horizontal layout">
-                        <div>
-                            <paper-checkbox checked="{{data.exporter}}">ส่งออก</paper-checkbox>
-                        </div>&nbsp;&nbsp;
-                        <div>
-                            <paper-checkbox checked="{{data.importer}}">นำเข้า</paper-checkbox>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    <!-- {{localize('country')}} : -->
-                </div>
-                <div class="flex-3">
-                    <!-- <div class="comBobox">
-                        <gl-combo-box id="countryCode" no-label-float item-label-path="label" item-value-path="value" items="{{countryList}}" value="{{data.countryCode}}"
-                            disabled="{{checkHasCountry(value,value.*)}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>
-                    </div> -->
-                </div>
-                <div class="flex"></div>
+                <div class="flex-2"></div>
             </div>
 
 
@@ -272,7 +241,7 @@
             <paper-dialog-scrollable>
                 <iron-pages selected="{{typePageMonth}}" attr-for-selected="name">
                     <div name="month">
-                            <h2>รายการเดือน</h2>
+                        <h2>รายการเดือน</h2>
                         <div class="zoneName" style="padding-bottom: 15px">
                             <paper-checkbox on-tap="seletedAll"> เลือกทุกเดือน</paper-checkbox>
                         </div>
@@ -401,6 +370,7 @@
             properties: {
                 value: {
                     value: [],
+                    observer: 'setset',
                     notify: true
                 },
                 date: {
@@ -512,11 +482,14 @@
                 'checkPullData(data,data.*)',
                 'getCountry(data.modelYear,data.modelMonth)'
             ],
-            listeners : {
+            listeners: {
                 'getNewData': 'checkAddMonth'
             },
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
+            },
+            setset(data) {
+                console.log(data);
             },
             // seletedAll(e) {
             //     let check = e.currentTarget.checked
@@ -661,6 +634,16 @@
                     text2 = text + '...'
                 } else {
                     text2 = text
+                }
+                return text2
+            },
+            getNameMonth(data) {
+                let month = data.filter(item => item.check === true).map(item => item.label).join(',').slice(0, 170) || ''
+                let text2 = ''
+                if (month.length > 0) {
+                    text2 = month + '...'
+                } else {
+                    text2 = month
                 }
                 return text2
             },
@@ -950,7 +933,7 @@
             },
             _getData() {
                 try {
-                    const isUnd = (prop) =>{
+                    const isUnd = (prop) => {
                         if (prop === undefined || prop === [] || prop === '')
                             return true
                         return false
