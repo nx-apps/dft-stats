@@ -473,9 +473,9 @@
                     ]
                 },
                 data: {
-                    statePath: 'searchCustoms.settingSearch'
-                    // type: Object,
-                    // value: {}
+                    // statePath: 'searchCustoms.settingSearch'
+                    type: Object,
+                    value: {}
                 },
                 columns: Array,
                 typeSelete: {
@@ -933,10 +933,19 @@
             },
             _getData() {
                 try {
+                    const isUnd = (prop) =>{
+                        if (prop === undefined || prop === [] || prop === '')
+                            return true
+                        return false
+                    }
                     const getArr = (data) => {
+                        if (isUnd(data))
+                            return ''
                         return data.map(item => item.value).join(',')
                     }
                     const _filterChecked = (data) => {
+                        if (isUnd(data))
+                            return ''
                         return data.filter((item) => {
                             if (item.check === true) {
                                 return item
@@ -944,6 +953,8 @@
                         })
                     }
                     const getValue = (data, prop = 'value') => {
+                        if (isUnd(data))
+                            return ''
                         return data.map(item => {
                             return item[prop]
                         })
