@@ -55,9 +55,9 @@
                 เริ่มวันที่ :
             </div>
             <div class="flex-2"> [[searchPriceHamonize(date.dateStart)]]
-                <!-- <nylon-date-picker id="date" no-label-float selected="{{date.dateStart}}" show-bc on-keyup="_enter"></nylon-date-picker> -->
+                <nylon-date-picker id="date" no-label-float selected="{{date.dateStart}}" show-bc on-keyup="_enter"></nylon-date-picker>
                 <!-- <nylon-date-picker-light id="date" label="วันที่" selected="" show-bc></nylon-date-picker-light> -->
-                <gl-form-input type="date" no-label-float value="{{date.dateStart}}"></gl-form-input>
+                <!-- <gl-form-input type="date" no-label-float value="{{date.dateStart}}"></gl-form-input> -->
             </div>
             <div class="flex-4">
                 <div class="btn-search">
@@ -314,17 +314,22 @@
                 }
             },
             searchPriceHamonize(date) {
+                this.debounce('searchInput', () => {
+                    if (date !== undefined && date !== '' && this.date.dateStart !== ''
+                        && this.date.dateStart !== undefined) {
+                        let dateStart = this.date
+                        if (dateStart.split('-')[0].length === 4) {
+                            console.log('----------------');
+                            console.log(dateStart);
+                            console.log('----------------');
+                        }
 
-                if (date !== undefined && date !== '' && this.date.dateStart !== ''
-                    && this.date.dateStart !== undefined) {
-                    let dateStart = this.date
-                    // console.log('----------------');
-                    // console.log(dateStart);
-                    // console.log('----------------');
-                    // console.log(new Date(dateStart).toISOString().split('T')[1]);
-                    // this.dispatchAction('PRICEHAMONIZE_SEARCH', this.date)
-                    this.dispatchAction('PRICEHAMONIZE_COST_SEARCH', this.date)
-                }
+                        // console.log(new Date(dateStart).toISOString().split('T')[1]);
+                        // this.dispatchAction('PRICEHAMONIZE_SEARCH', this.date)
+                        // this.dispatchAction('PRICEHAMONIZE_COST_SEARCH', this.date)
+                    }
+                }, 1000)
+
                 // console.log(this.data.dateStart);
             },
             editConfirm() {

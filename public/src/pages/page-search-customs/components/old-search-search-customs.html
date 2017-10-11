@@ -114,12 +114,6 @@
                 height: 550px;
                 overflow: auto;
             }
-
-            .zoneName {
-                margin-left: 20px;
-                padding-top: 5px;
-                display: block;
-            }
         </style>
         <div class="container">
             <search-report-customs id="report" data-search="{{dataSearch}}"></search-report-customs>
@@ -142,15 +136,12 @@
                     {{localize('month')}} :
                 </div>
                 <div class="flex-2" style=" margin-right: 30px ">
-
-                    <paper-button raised on-tap='setMonth'>ตั้งค่า</paper-button>
-
-                    <!-- <gl-combo-box  id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
+                    <gl-combo-box  id="priority" label="เดือน" no-label-float item-label-path="label" item-value-path="value"
                         items="{{monthList}}" value="{{data.modelMonth}}">
                         <template>
                             [[item.label]]
                         </template>
-                    </gl-combo-box> -->
+                    </gl-combo-box>
                 </div>
                 <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
                     {{localize('order_show')}} :
@@ -184,10 +175,10 @@
                     </paper-radio-group>
                 </div>
                 <div class="flex " style="text-align: right; padding-right: 10px; line-height: 40px;">
-                    <!-- {{localize('hsCode')}} : -->
+                    {{localize('hsCode')}} :
                 </div>
                 <div class="flex-2" style=" margin-right: 30px ">
-                    <!-- <paper-input placeholder="1006" no-label-float value="{{data.hsCode}}"></paper-input> -->
+                    <paper-input placeholder="1006" no-label-float value="{{data.hsCode}}"></paper-input>
 
 
                     <!-- <div class="horizontal layout">
@@ -200,21 +191,21 @@
                     </div> -->
                 </div>
                 <div class="flex" style="text-align: right; padding-right: 10px;     line-height: 40px;">
-                    <!-- {{localize('country')}} : -->
+                    {{localize('country')}} :
                 </div>
                 <div class="flex-3">
-                    <!-- <div class="comBobox">
+                    <div class="comBobox">
                         <gl-combo-box id="countryCode" no-label-float item-label-path="label" item-value-path="value" items="{{countryList}}" value="{{data.countryCode}}"
                             disabled="{{checkHasCountry(value,value.*)}}">
                             <template>
                                 [[item.label]]
                             </template>
                         </gl-combo-box>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="flex"></div>
             </div>
-
+wwwwwwwwwwwwww
 
             <div class="flex-horizontal-with-ratios">
                 <div class="flex-3"></div>
@@ -264,121 +255,99 @@
             </paper-button>
         </div>
         <paper-dialog id="itemGroup" class="size-position" modal>
+            <h2>รายชื่อรายการ</h2>
             <paper-dialog-scrollable>
-                <iron-pages selected="{{typePageMonth}}" attr-for-selected="name">
-                    <div name="month">
-                        <div class="zoneName" style="padding-bottom: 15px">
-                            <paper-checkbox on-tap="seletedAll"> เลือกทุกเดือน</paper-checkbox>
-                        </div>
-                        <template is="dom-repeat" items={{monthList}}>
-                            <div class="zoneName">
-                                <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
+                <div class="layout start-justified">
+                    <div class="horizontal center layout header-item" warp style="height: 20px;">
+                        <div class="header-div flex">
+                            <div style="padding: 10px 15px;">
+                                รูปแบบ
+                                <paper-radio-group selected="{{typeSelete}}">
+                                    <paper-radio-button name="list">รายการ</paper-radio-button>
+                                    <paper-radio-button name="group">กลุ่ม</paper-radio-button>
+                                </paper-radio-group>
                             </div>
-                        </template>
-
-                        <div class="buttons">
-                            <paper-button dialog-confirm autofocus raised on-tap="checkAddMonth">ปิด</paper-button>
+                        </div>
+                        <div class="header-div flex">
                         </div>
                     </div>
-                    <div name="search">
-                        <h2>รายชื่อรายการ</h2>
-                        <!-- <paper-dialog-scrollable> -->
-                        <div class="layout start-justified">
-                            <div class="horizontal center layout header-item" warp style="height: 20px;">
-                                <div class="header-div flex">
-                                    <div style="padding: 10px 15px;">
-                                        รูปแบบ
-                                        <paper-radio-group selected="{{typeSelete}}">
-                                            <paper-radio-button name="list">รายการ</paper-radio-button>
-                                            <paper-radio-button name="group">กลุ่ม</paper-radio-button>
-                                        </paper-radio-group>
+                    <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
+                        <div name="list">
+                            <div class="horizontal layout header-item" warp>
+                                <div class="header-div flex"></div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
                                     </div>
-                                </div>
-                                <div class="header-div flex">
-                                </div>
+                                </template>
                             </div>
-                            <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
-                                <div name="list">
-                                    <div class="horizontal layout header-item" warp>
-                                        <div class="header-div flex"></div>
-                                        <template is="dom-repeat" items={{columns}} initial-count="20">
-                                            <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                                <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
+                                    <div hidden="{{main.hidden}}">
+                                        <div class="horizontal layout main-item">
+                                            <div class="flex">
+                                                <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" on-tap="getCheckGroup">
                                             </div>
-                                        </template>
+                                            <template is="dom-repeat" items={{columns}}>
+                                                <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
+                                            </template>
+                                        </div>
                                     </div>
-                                    <div class="subdiv">
-                                        <template is="dom-repeat" items={{dataUse}} index-as="indexroot" as="main" initial-count="20">
-                                            <div hidden="{{main.hidden}}">
-                                                <div class="horizontal layout main-item">
-                                                    <div class="flex">
-                                                        <paper-checkbox style="padding-left:25px;" id="{{indexroot}}" checked="{{main.check}}" on-tap="getCheckGroup">
-                                                    </div>
-                                                    <template is="dom-repeat" items={{columns}}>
-                                                        <div class$="{{checkIsValue(item)}}">[[_showData(main,item)]]</div>
-                                                    </template>
-                                                </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div name="group">
+                            <div class="horizontal layout header-item" warp>
+                                <div class=""></div>
+                                <div class="header-div flex"></div>
+                                <div class="header-div flex-3">ชื่อกลุ่ม</div>
+                                <template is="dom-repeat" items={{columns}} initial-count="20">
+                                    <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
+                                        <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="subdiv">
+                                <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
+                                    <div hidden="{{item.hidden}}">
+                                        <div class="horizontal layout center" warp style="height: 50px; line-height: 50px;">
+                                            <div class="">
+                                                <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
                                             </div>
-                                        </template>
-                                    </div>
-                                </div>
-                                <div name="group">
-                                    <div class="horizontal layout header-item" warp>
-                                        <div class=""></div>
-                                        <div class="header-div flex"></div>
-                                        <div class="header-div flex-3">ชื่อกลุ่ม</div>
-                                        <template is="dom-repeat" items={{columns}} initial-count="20">
-                                            <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                                <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                            <div class="flex">
+                                                <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild">
                                             </div>
-                                        </template>
-                                    </div>
-                                    <div class="subdiv">
-                                        <template is="dom-repeat" items={{dataUseGroup}} index-as="indexroot" initial-count="20">
-                                            <div hidden="{{item.hidden}}">
-                                                <div class="horizontal layout center" warp style="height: 50px; line-height: 50px;">
-                                                    <div class="">
-                                                        <paper-icon-button style="margin-top: -50px;" icon="chevron-right" index="[[indexroot]]" on-tap="toggle"></paper-icon-button>
-                                                    </div>
-                                                    <div class="flex">
-                                                        <paper-checkbox checked="{{item.check}}" id="{{indexroot}}" on-tap="getCheckChild">
-                                                    </div>
-                                                    <div class="flex-3 text-row-header">[[item.group_name]]</div>
-                                                    <div class="flex-3"></div>
-                                                    <div class="flex-3">-</div>
-                                                </div>
-                                                <iron-collapse id="collapse-[[indexroot]]">
-                                                    <template is="dom-repeat" items={{item.group_item}} as="subChild" initial-count="20">
-                                                        <div hidden="{{subChild.hidden}}">
-                                                            <div class="horizontal layout sub-item">
-                                                                <div class=""></div>
-                                                                <div class="row flex">
-                                                                    <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}">
-                                                                        [[checkList(subChild,subChild.*)]]
-                                                                </div>
-                                                                <div class="row flex-2">[[item.name_th]]</div>
-                                                                <template is="dom-repeat" items={{columns}}>
-                                                                    <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
-                                                                </template>
-                                                            </div>
+                                            <div class="flex-3 text-row-header">[[item.group_name]]</div>
+                                            <div class="flex-3"></div>
+                                            <div class="flex-3">-</div>
+                                        </div>
+                                        <iron-collapse id="collapse-[[indexroot]]">
+                                            <template is="dom-repeat" items={{item.group_item}} as="subChild" initial-count="20">
+                                                <div hidden="{{subChild.hidden}}">
+                                                    <div class="horizontal layout sub-item">
+                                                        <div class=""></div>
+                                                        <div class="row flex">
+                                                            <paper-checkbox id="{{indexroot}}" checked="{{subChild.check}}">
+                                                                [[checkList(subChild,subChild.*)]]
                                                         </div>
-                                                    </template>
-                                                </iron-collapse>
-                                            </div>
-                                        </template>
+                                                        <div class="row flex-2">[[item.name_th]]</div>
+                                                        <template is="dom-repeat" items={{columns}}>
+                                                            <div class$="{{checkIsValue(item)}}">[[_showDataGroup(subChild,item)]]</div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </iron-collapse>
                                     </div>
-                                </div>
-                            </iron-pages>
+                                </template>
+                            </div>
                         </div>
-                        <!-- </paper-dialog-scrollable> -->
-                        <div class="buttons">
-                            <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
-                        </div>
-                    </div>
-                </iron-pages>
-
+                    </iron-pages>
+                </div>
             </paper-dialog-scrollable>
-
+            <div class="buttons">
+                <paper-button dialog-confirm autofocus raised on-tap="checkAddItem">ปิด</paper-button>
+            </div>
         </paper-dialog>
         <!-- modal -->
 
@@ -409,14 +378,14 @@
                     statePath: 'searchCustoms.hamonizeGroupList',
                     observer: '_cloneDataHamonizeGroup'
                 },
-                // companyList: {
-                //     statePath: 'searchCustoms.companyList',
-                //     observer: '_cloneDataCompany'
-                // },
-                // zoneGroupList: {
-                //     statePath: 'searchCustoms.zoneGroupList',
-                //     observer: '_cloneDataZoneGroup'
-                // },
+                companyList: {
+                    statePath: 'searchCustoms.companyList',
+                    observer: '_cloneDataCompany'
+                },
+                zoneGroupList: {
+                    statePath: 'searchCustoms.zoneGroupList',
+                    observer: '_cloneDataZoneGroup'
+                },
                 countryList: {
                     statePath: 'searchCustoms.countryList',
                     observer: '_cloneDataCountry'
@@ -482,10 +451,6 @@
                     type: String,
                     value: 'list'
                 },
-                typePageMonth: {
-                    type: String,
-                    value: 'month'
-                },
                 dataSearch: {
                     type: Object,
                     value: {}
@@ -497,23 +462,17 @@
                 monthList: {
                     statePath: 'report.monthList',
                 },
-                // countryList: {
-                //     statePath: 'report.countryList',
-                // },
+                countryList: {
+                    statePath: 'report.countryList',
+                },
 
             },
             observers: [
-                'checkPullData(data,data.*)',
+                // 'checkPullData(data,data.*)'
                 'getCountry(data.modelYear,data.modelMonth)'
             ],
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
-            },
-            seletedAll(e) {
-                let check = e.currentTarget.checked
-                this.monthList.map((item, index) => {
-                    this.set('monthList.' + [index] + '.check', check)
-                })
             },
             getCountry(year = '', month = '') {
                 let data = {
@@ -676,7 +635,6 @@
                 // console.log(value);
             },
             getSelete(e) {
-                this.set('typePageMonth', 'search')
                 let data = e.model.__data__
                 let value = data.item.value
                 this.set('dataSeleted.field', value)
@@ -802,8 +760,6 @@
                 // console.log(this.genUrl(data));
                 // console.log(data);
                 let date = this._getData()
-
-                // console.log(date);
                 // date.modelYear = data.modelYear
                 // date.modelMonth = data.modelMonth || ''
                 // date.hsCode = data.hsCode || ''
@@ -814,16 +770,13 @@
                 // console.log(data.modelYear);
                 // this.debounce('searchInput', () => {
                 if (data.modelYear !== undefined && data.modelYear !== '') {
-                    delete date.hsCode
-                    delete date.countryCode
-                    // console.log(this.genUrl(date));
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
+                    this.dispatchAction('SET_SEARCH_CUSTOMS', date)
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', date)
+                    // console.log(1);
                 }
                 // }, 500)
 
-                // this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(data))
+                // this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(data))
                 // this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(data))
 
                 // this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(data))
@@ -868,22 +821,6 @@
             checkList(data) {
                 let checkHave = this.dataUse.findIndex(item => item.value === data.value)
                 this.set('dataUse.' + [checkHave] + '.check', data.check)
-            },
-            setMonth() {
-                // console.log(1111);
-                this.$.itemGroup.open()
-                this.set('typePageMonth', 'month')
-            },
-            checkAddMonth() {
-                let date = this._getData()
-
-                if (date.modelYear !== undefined && date.modelYear !== '') {
-                    delete date.hsCode
-                    delete date.countryCode
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
-                }
             },
             checkAddItem() {
                 let newData = []
@@ -932,60 +869,32 @@
                 }
             },
             _getData() {
-                try {
-                    const getArr = (data) => {
-                        return data.map(item => item.value).join(',')
-                    }
-                    const _filterChecked = (data) => {
-                        return data.filter((item) => {
-                            if (item.check === true) {
-                                return item
-                            }
-                        })
-                    }
-                    const getValue = (data, prop = 'value') => {
-                        return data.map(item => {
-                            return item[prop]
-                        })
-                    }
-                    let dataSend = {
-                        hamonize: getArr(this.dataSeleted.hamonizeList),
-                        country: getArr(this.dataSeleted.countryList),
-                        // company: getArr(this.dataSeleted.companyList),
-                        modelMonth: getArr(_filterChecked(this.monthList), 'value')
-                    }
-                    // console.log(getArr(this.dataSeleted.hamonizeList));
-                    let dataMath = {}
-                    // this.value.map((item, index) => {
-                    //     dataMath['field' + (index + 1)] = item.value
-                    //     // dataMath['value' + (index + 1)] = dataSend[item.value]
-                    // })
-                    // let month = {}
-                    // this.data.modelMonth.map(item) =>{
-                    //     month.push
-                    // }
-                    // dataMath.dateStart = this.data.dateStart || null
-                    // dataMath.dateEnd = this.data.dateEnd || null
-                    dataMath.hsCode = dataSend.hamonize || ''
-                    dataMath.modelYear = this.data.modelYear || ''
-                    dataMath.modelMonth = dataSend.modelMonth || ''
-                    dataMath.countryCode = dataSend.country || ''
-                    dataMath.tranType = this.data.tranType || 'e'
-                    return dataMath
-                } catch (e) {
-                    console.log(e);
-                }
+                // const getArr = (data) => {
+                //     return data.map(item => item.value).join(',')
+                // }
+                // let dataSend = {
+                //     hamonize: getArr(this.dataSeleted.hamonizeList),
+                //     country: getArr(this.dataSeleted.countryList),
+                //     // company: getArr(this.dataSeleted.companyList),
+                // }
 
+                let dataMath = {}
+                this.value.map((item, index) => {
+                    dataMath['field' + (index + 1)] = item.value
+                    // dataMath['value' + (index + 1)] = dataSend[item.value]
+                })
+                // dataMath.dateStart = this.data.dateStart || null
+                // dataMath.dateEnd = this.data.dateEnd || null
+                dataMath.hsCode = this.data.hsCode || ''
+                dataMath.modelYear = this.data.modelYear || ''
+                dataMath.modelMonth = this.data.modelMonth || ''
+                dataMath.countryCode = this.data.countryCode || ''
+                dataMath.tranType = this.data.tranType || 'e'
+                return dataMath
             },
             getSearchValue() {
                 let dataSave = this._getData()
-                // console.log(dataSave);
-                // console.log(111212);
-                this.value.map((item, index) => {
-                    dataSave['field' + (index + 1)] = item.value
-                    // dataMath['value' + (index + 1)] = dataSend[item.value]
-                })
-                // console.log(dataSave);
+
                 this.dispatchAction('SET_SEARCH_CUSTOMS', dataSave)
                 this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', dataSave)
             },

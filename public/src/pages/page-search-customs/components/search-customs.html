@@ -29,27 +29,27 @@
                 list-style: none;
             }
 
-            #breadcrumbs-one {
+            /* #breadcrumbs-one {
                 margin: 10px 0px;
-                /* border: 1px solid; */
+                border: 1px solid;
                 background-color: ghostwhite;
                 padding: 15px 4px;
-            }
+            } */
 
             .icon,
             .breadcrumbs,
             td {
-                cursor: pointer;
+                /* cursor: pointer; */
             }
 
-            .icon:hover,
+            /* .icon:hover,
             .breadcrumbs:hover {
                 color: #b7b7b7;
-            }
+            } */
 
-            .breadcrumbs::after {
+            /* .breadcrumbs::after {
                 content: '  / '
-            }
+            } */
 
             .number {
                 text-align: right;
@@ -89,28 +89,30 @@
                     <template is="dom-repeat" items={{header}}>
                         <th>[[localize(item)]]</th>
                     </template>
+                    <th class="border-color">{{localize('million_ton')}}</th>
                     <th class="border-color">{{localize('million_thb')}}</th>
                     <th class="border-color">{{localize('million_usd')}}</th>
-                    <th class="border-color">{{localize('million_ton')}}</th>
+                    
                 </tr>
             </thead>
             <tbody class="table-body">
-                <template is="dom-repeat" items={{searchCustomsList.datas}} initial-count="20" as=main>
+                <template is="dom-repeat" items={{searchCustomsList}} initial-count="20" as=main>
                     <tr on-tap="_getSearch">
                         <td>[[autoIndex(index)]]</td>
 
                         <template is="dom-repeat" items={{field}}>
                             <td>[[getProp(main,item)]]</td>
                         </template>
+                        <td class="border-color">[[formatNumber(main.weight)]]</td>
                         <td class="border-color">[[formatNumber(main.value_b)]]</td>
                         <td class="border-color">[[formatNumber(main.value_d)]]</td>
-                        <td class="border-color">[[formatNumber(main.weight)]]</td>
+                        
                     </tr>
                 </template>
             </tbody>
             <tfoot class="table-foot">
                 <tr>
-                    <template is="dom-if" if="{{_isShow(searchCustomsList.datas)}}">
+                    <template is="dom-if" if="{{_isShow(searchCustomsList)}}">
                         <td></td>
                         <template is="dom-repeat" items={{field}}>
                             <td></td>
@@ -136,7 +138,7 @@
             properties: {
                 searchCustomsList: {
                     statePath: 'searchCustoms.searchCustomsList',
-                    observer: 'setHeader'
+                    // observer: 'setHeader'
                 },
                 header: [],
                 field: [],
@@ -156,22 +158,23 @@
             changeName(localize, item) {
                 return this.localize(item)
             },
-            setHeader(data) {
-                let arr = [],
-                    field = []
-                for (var key in data.header) {
-                    if (data.header.hasOwnProperty(key)) {
-                        var element = data.header[key]
-                        field.push(key)
-                        arr.push(element)
-                        // console.log(element);
-                    }
-                }
-                this.set('header', arr)
-                this.set('field', field)
-                // console.log(this.field);
-            },
+            // setHeader(data) {
+            //     let arr = [],
+            //         field = []
+            //     for (var key in data.header) {
+            //         if (data.header.hasOwnProperty(key)) {
+            //             var element = data.header[key]
+            //             field.push(key)
+            //             arr.push(element)
+            //             // console.log(element);
+            //         }
+            //     }
+            //     this.set('header', arr)
+            //     this.set('field', field)
+            //     // console.log(this.field);
+            // },
             getProp(main, item) {
+                console.log(main, item);
                 return main[item]
                 // console.log(main,item);
             },
@@ -212,77 +215,98 @@
                     return data.length < 1
                 return true
             },
-            _getSearch(e) {
-                let data = JSON.parse(JSON.stringify(this.settingSearch))
-                let item = e.model.__data__
-                let newArray = JSON.parse(JSON.stringify(this.searchHistory))
+            // _getSearch(e) {
+            //     let data = JSON.parse(JSON.stringify(this.settingSearch))
+            //     let item = e.model.__data__
+            //     let newArray = JSON.parse(JSON.stringify(this.searchHistory))
 
-                const checkField = (data) => {
-                    let count = 0
-                    for (var key in data) {
-                        if (data.hasOwnProperty(key)) {
-                            var element = data[key]
-                            if ((/^field/).test(key)) {
-                                count++
-                            }
-                        }
-                    }
-                    return count
-                }
-                // console.log(itsem);
-                if (item.main.hsCode !== null) {
-                    data.hsCode = item.main.hsCode
-                    data.countryCode = item.main.countryCode
-                    let fieldHsName = checkField(item.main)
-                    let field2 = 'field' + (fieldHsName - 1)
-                    let field1 = 'field' + (fieldHsName - 2)
-                    //g= เช็คว่าค่าซ้ำกับล่าสุดไหม ถ้าซ้ำไม่เพิ่มเข้าไป
-                    if (!(newArray[newArray.length - 1].hsCode === item.main.hsCode)) {
-                        if (data.field1 === "hamonize" && data.field2 === "country") {
-                            data.label = + item.main.hsCode + ' - ' + item.main[field2]
-                        } else if (data.field1 === "hamonize" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
-                            data.label = + item.main.hsCode
-                        } else if (data.field1 === "country" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
-                            data.label = item.main['field' + 0]
-                        } else {
-                            data.label = item.main['field' + 0] + item.main.hsCode
-                        }
-                        // console.log(data);
-                        this.dispatchAction('SET_SEARCH_CUSTOMS', data)
+            //     const checkField = (data) => {
+            //         let count = 0
+            //         for (var key in data) {
+            //             if (data.hasOwnProperty(key)) {
+            //                 var element = data[key]
+            //                 if ((/^field/).test(key)) {
+            //                     count++
+            //                 }
+            //             }
+            //         }
+            //         return count
+            //     }
+            //     // console.log(itsem);
+            //     if (item.main.hsCode !== null) {
+            //         data.hsCode = item.main.hsCode
+            //         data.countryCode = item.main.countryCode
+            //         let fieldHsName = checkField(item.main)
+            //         let field2 = 'field' + (fieldHsName - 1)
+            //         let field1 = 'field' + (fieldHsName - 2)
+            //         //g= เช็คว่าค่าซ้ำกับล่าสุดไหม ถ้าซ้ำไม่เพิ่มเข้าไป
+            //         if (!(newArray[newArray.length - 1].hsCode === item.main.hsCode)) {
+            //             if (data.field1 === "hamonize" && data.field2 === "country") {
+            //                 data.label = + item.main.hsCode + ' - ' + item.main[field2]
+            //             } else if (data.field1 === "hamonize" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+            //                 data.label = + item.main.hsCode
+            //             } else if (data.field1 === "country" && (data.field2 === "" || !data.hasOwnProperty('field2'))) {
+            //                 data.label = item.main['field' + 0]
+            //             } else {
+            //                 data.label = item.main['field' + 0] + item.main.hsCode
+            //             }
+            //             // console.log(data);
+            //             this.dispatchAction('SET_SEARCH_CUSTOMS', data)
 
-                        newArray.push(data)
-                        this.set('searchHistory', newArray)
-                    }
-                    
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
-                    this.notifyPath('searchHistory')
-                }
-            },
+            //             newArray.push(data)
+            //             this.set('searchHistory', newArray)
+            //         }
+
+            //         this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', data)
+            //         this.notifyPath('searchHistory')
+            //     }
+            // },
             setCol(data) {
-                this.set('searchHistory', [])
-                this.push('searchHistory', JSON.parse(JSON.stringify(data)))
+                try {
+                    let url = []
+                    let field =[]
+                    if (data.field1 !== undefined) {
+                        url.push(data.field1)
+                        field.push('field1')
+                    }
+                    if (data.field2 !== undefined) {
+                        url.push(data.field2)
+                        field.push('field2')
+                    }
+                    this.set('header',url)
+                    this.set('field',field)
+                    // console.log(url)
+                    // console.log(data.hasOwnProperty(field1));
+                    // console.log(data.hasOwnProperty(field2));
+                } catch (e) {
+
+                }
+
+
+                // this.set('searchHistory', [])
+                // this.push('searchHistory', JSON.parse(JSON.stringify(data)))
                 // console.log(this.searchHistory);
                 // console.log(data);
             },
-            backPage() {
-                if (this.searchHistory.length > 0) {
-                    this.pop('searchHistory')
-                    this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[this.searchHistory.length - 1])
-                    // console.log(this.searchHistory);
-                }
-            },
-            backUrl(e) {
-                let data = e.model.index
-                let newArray = JSON.parse(JSON.stringify(this.searchHistory))
-                let newArray2 = []
-                // console.log(newArray);
-                for (var i = 0; i < data + 1; i++) {
-                    // console.log(newArray[i]);
-                    newArray2.push(newArray[i])
-                }
-                this.set('searchHistory', newArray2)
-                this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[data])
-            }
+            // backPage() {
+            //     if (this.searchHistory.length > 0) {
+            //         this.pop('searchHistory')
+            //         this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[this.searchHistory.length - 1])
+            //         // console.log(this.searchHistory);
+            //     }
+            // },
+            // backUrl(e) {
+            //     let data = e.model.index
+            //     let newArray = JSON.parse(JSON.stringify(this.searchHistory))
+            //     let newArray2 = []
+            //     // console.log(newArray);
+            //     for (var i = 0; i < data + 1; i++) {
+            //         // console.log(newArray[i]);
+            //         newArray2.push(newArray[i])
+            //     }
+            //     this.set('searchHistory', newArray2)
+            //     this.dispatchAction('GET_SEARCH_CUSTOMS_ALL', this.searchHistory[data])
+            // }
 
         });
     </script>
