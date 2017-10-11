@@ -110,8 +110,8 @@
             }
 
             paper-dialog.size-position {
-                width: 800px;
-                height: 550px;
+                /* width: 800px;
+                height: 550px; */
                 overflow: auto;
             }
 
@@ -267,6 +267,7 @@
             <paper-dialog-scrollable>
                 <iron-pages selected="{{typePageMonth}}" attr-for-selected="name">
                     <div name="month">
+                            <h2>รายการเดือน</h2>
                         <div class="zoneName" style="padding-bottom: 15px">
                             <paper-checkbox on-tap="seletedAll"> เลือกทุกเดือน</paper-checkbox>
                         </div>
@@ -816,7 +817,8 @@
                 if (data.modelYear !== undefined && data.modelYear !== '') {
                     delete date.hsCode
                     delete date.countryCode
-                    // console.log(this.genUrl(date));
+                    this.dispatchAction('GET_MONTH_IN_YEAR', date.modelYear)
+                    // console.log();
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
