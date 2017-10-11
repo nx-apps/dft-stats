@@ -22,6 +22,8 @@
 <link rel="import" href="../../../../bower_components/paper-radio-button/paper-radio-button.html">
 
 
+<link rel="import" href="./search-month-customs.html">
+
 
 <dom-module id="search-search-customs">
     <template>
@@ -110,8 +112,10 @@
             }
 
             paper-dialog.size-position {
-                /* width: 800px;
-                height: 550px; */
+                width: 800px;
+                height: 550px;
+                /* width: 700px;
+                height: 400px; */
                 overflow: auto;
             }
 
@@ -123,6 +127,7 @@
         </style>
         <div class="container">
             <search-report-customs id="report" data-search="{{dataSearch}}"></search-report-customs>
+            <search-month-customs id="monthlist" data={{data}} monthlist="{{monthList}}"></search-month-customs>
             <div class="flex-horizontal-with-ratios">
                 <div class="flex"></div>
                 <div class="flex ">
@@ -507,15 +512,18 @@
                 'checkPullData(data,data.*)',
                 'getCountry(data.modelYear,data.modelMonth)'
             ],
+            listeners : {
+                'getNewData': 'checkAddMonth'
+            },
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
             },
-            seletedAll(e) {
-                let check = e.currentTarget.checked
-                this.monthList.map((item, index) => {
-                    this.set('monthList.' + [index] + '.check', check)
-                })
-            },
+            // seletedAll(e) {
+            //     let check = e.currentTarget.checked
+            //     this.monthList.map((item, index) => {
+            //         this.set('monthList.' + [index] + '.check', check)
+            //     })
+            // },
             getCountry(year = '', month = '') {
                 let data = {
                     modelYear: year,
@@ -873,12 +881,19 @@
             },
             setMonth() {
                 // console.log(1111);
-                this.$.itemGroup.open()
+                // console.log(this.$.monthlist);
+                this.$.monthlist.openDiag()
+                // this.$.itemGroup.style
+                // this.$.itemGroup.style = {
+                //     width : '200px',
+                //     height : '600px'
+                // }
+                // console.log(this.$.itemGroup.style);
                 this.set('typePageMonth', 'month')
             },
             checkAddMonth() {
                 let date = this._getData()
-
+                // log
                 if (date.modelYear !== undefined && date.modelYear !== '') {
                     delete date.hsCode
                     delete date.countryCode
@@ -1004,6 +1019,10 @@
             },
             settingReport() {
                 let dataSave = this._getData()
+                this.value.map((item, index) => {
+                    dataSave['field' + (index + 1)] = item.value
+                    // dataMath['value' + (index + 1)] = dataSend[item.value]
+                })
                 // console.log(this.$$('#report'));
                 this.set('dataSearch', dataSave)
                 this.$$('#report').openDia()

@@ -1,0 +1,73 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../components/month-behavior.html">
+
+<link rel="import" href="../../../../bower_components/gl-form/gl-combo-box.html">
+
+<link rel="import" href="../../components/page-style.html">
+
+<dom-module id="search-month-customs">
+    <template>
+        <style include="page-style">
+             :host {
+                display: block;
+            }
+            paper-dialog#report {
+                width: 300px;
+                height: 350px;
+                overflow: auto;
+            }
+        </style>
+        <paper-dialog id="report" modal>
+            <div class="layout start-justified">
+                <h2>รายการเดือน</h2>
+                <div class="zoneName" style="padding-bottom: 15px">
+                    <paper-checkbox on-tap="seletedAll"> เลือกทุกเดือน</paper-checkbox>
+                </div>
+                <template is="dom-repeat" items={{monthlist}}>
+                    <div class="zoneName">
+                        <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
+                    </div>
+                </template>
+
+                <div class="buttons">
+                    <paper-button dialog-confirm autofocus raised on-tap="checkAddMonth">ปิด</paper-button>
+                </div>
+            </div>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+            is: 'search-month-customs',
+            behaviors: [
+                ReduxBehavior,
+                MonthBehavior
+            ],
+            properties: {
+                data: {
+                    type: Object,
+                    value: {}
+                },
+                monthlist: {
+                    value: [],
+                    notify: true
+                },
+            },
+            openDiag() {
+                // console.log(this.$$('#report'));
+                this.$$('#report').open()
+                // console.log(1121212);
+            },
+            seletedAll(e) {
+                let check = e.currentTarget.checked
+                this.monthlist.map((item, index) => {
+                    this.set('monthlist.' + [index] + '.check', check)
+                })
+            },
+            checkAddMonth() {
+                this.fire('getNewData')
+            },
+        });
+    </script>
+</dom-module>

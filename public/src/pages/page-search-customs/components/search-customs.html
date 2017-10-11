@@ -60,13 +60,13 @@
                 border-left: 1px solid #ddd;
             }
         </style>
-        <div class="horizontal start-justified layout">
+        <!-- <div class="horizontal start-justified layout">
             <paper-button raised class="gl-btn-info gl-small" on-tap="backPage" disabled="[[checkArray(searchHistory,searchHistory.*)]]">
                 <iron-icon icon="settings-backup-restore"></iron-icon>
                 {{localize('btn_back')}}
             </paper-button>
 
-        </div>
+        </div> -->
         <div id="breadcrumbs-one">
             <template is="dom-repeat" items="{{searchHistory}}">
                 <span class="icon" hidden="{{checkIndex(index)}}" on-tap="backUrl">
