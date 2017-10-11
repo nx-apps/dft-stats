@@ -10,11 +10,12 @@ exports.zone = function (req, res) {
                     where += ' and ';
                 else
                     where += ' where ';
-                where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+                where += rpt.camel2UnderScore(obj) + (req.query[obj].split(',').length > 1 ? " in (" + req.query[obj].split(',').map(m => "'" + m + "'") + ")" : " = '" + req.query[obj] + "'")
                 c++;
             }
         }
     }
+    // res.send(where);
     j.query("mssql", `SELECT zone_name,country_th as label,country_code as value,zone_order
     from custom 
     left join custom_country cc on custom.country2 = cc.country_code
@@ -46,7 +47,7 @@ exports.country = function (req, res) {
                     where += ' and ';
                 else
                     where += ' where ';
-                where += rpt.camel2UnderScore(obj) + " = '" + req.query[obj] + "'"
+                where += rpt.camel2UnderScore(obj) + (req.query[obj].split(',').length > 1 ? " in (" + req.query[obj].split(',').map(m => "'" + m + "'") + ")" : " = '" + req.query[obj] + "'")
                 c++;
             }
         }
@@ -81,11 +82,32 @@ exports.month = function (req, res) {
 }
 exports.typerice = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT typerice_name,hscode as value,hm.hamonize_th as label
+    let where = '';
+    if (Object.keys(req.query).length > 0) {
+        let c = 0;
+        for (var obj in req.query) {
+            if (req.query[obj] != '') {
+                if (c > 0)
+                    where += ' and ';
+                else
+                    where += ' where ';
+                where += rpt.camel2UnderScore(obj) + (req.query[obj].split(',').length > 1 ? " in (" + req.query[obj].split(',').map(m => "'" + m + "'") + ")" : " = '" + req.query[obj] + "'")
+                c++;
+            }
+        }
+    }
+    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${req.query.modelYear} and hm.hamonize_year_end>=${req.query.modelYear}` : '')
+    j.query("mssql", `SELECT typerice_name,hs.HsCode as value,hm.hamonize_th as label
     from custom_hscode ch
-    join hamonize hm on hm.hamonize_code=ch.hscode and hm.hamonize_year=2017
-    group by typerice_name,hscode,hm.hamonize_th
-    order by typerice_name,hscode`, [],
+	join (
+		select hscode
+        from custom
+        ${where}
+		group by hscode
+	)hs on ch.hscode=hs.HsCode
+    join hamonize hm on hm.hamonize_code=ch.hscode ${whereYear}
+    group by typerice_name,hs.HsCode,hm.hamonize_th
+    order by typerice_name,hs.HsCode`, [],
         function (err, data) {
             data = JSON.parse(data);
             var arr = [];
@@ -102,11 +124,32 @@ exports.typerice = function (req, res) {
 }
 exports.hamonize = function (req, res) {
     var j = req.jdbc;
-    j.query("mssql", `SELECT hscode as value,hm.hamonize_th as label
-    from custom_hscode ch
-    join hamonize hm on hm.hamonize_code=ch.hscode and hm.hamonize_year=2017
-    group by hscode,hm.hamonize_th
-    order by hscode`, [],
+    let where = '';
+    if (Object.keys(req.query).length > 0) {
+        let c = 0;
+        for (var obj in req.query) {
+            if (req.query[obj] != '') {
+                if (c > 0)
+                    where += ' and ';
+                else
+                    where += ' where ';
+                where += rpt.camel2UnderScore(obj) + (req.query[obj].split(',').length > 1 ? " in (" + req.query[obj].split(',').map(m => "'" + m + "'") + ")" : " = '" + req.query[obj] + "'")
+                c++;
+            }
+        }
+    }
+    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${req.query.modelYear} and hm.hamonize_year_end>=${req.query.modelYear}` : '')
+
+    j.query("mssql", `select hm.hamonize_code as value,hm.hamonize_th as label
+	from hamonize hm 
+	join (
+		select hscode 
+        from custom 
+        ${where}
+		group by hscode
+	)ch on  ch.hscode like hm.hamonize_code+'%' ${whereYear}
+	group by hm.hamonize_code,hm.hamonize_th
+    order by hm.hamonize_code`, [],
         function (err, data) {
             res.send(data)
         })
