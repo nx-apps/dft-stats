@@ -370,7 +370,6 @@
             properties: {
                 value: {
                     value: [],
-                    observer: 'setset',
                     notify: true
                 },
                 date: {
@@ -487,9 +486,6 @@
             },
             created: function () {
                 this.nylonLocalizeImport('/i18n-page-search-customs.json');
-            },
-            setset(data) {
-                console.log(data);
             },
             // seletedAll(e) {
             //     let check = e.currentTarget.checked
