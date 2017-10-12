@@ -634,7 +634,8 @@
                 return text2
             },
             getNameMonth(data) {
-                let month = data.filter(item => item.check === true).map(item => item.label).join(',').slice(0, 170) || ''
+                // console.log(data.filter(item => item.check === true));
+                let month = data.filter(item => item.check === true).map(item => item.value).join(',').slice(0, 170) || ''
                 let text2 = ''
                 if (month.length > 0) {
                     text2 = month + '...'
