@@ -388,10 +388,10 @@
                 //     statePath: 'searchCustoms.companyList',
                 //     observer: '_cloneDataCompany'
                 // },
-                // zoneGroupList: {
-                //     statePath: 'searchCustoms.zoneGroupList',
-                //     observer: '_cloneDataZoneGroup'
-                // },
+                zoneGroupList: {
+                    statePath: 'searchCustoms.zoneGroupList',
+                    observer: '_cloneDataZoneGroup'
+                },
                 countryList: {
                     statePath: 'searchCustoms.countryList',
                     observer: '_cloneDataCountry'
@@ -810,6 +810,7 @@
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(date))
                 }
                 // }, 500)
 
@@ -849,6 +850,7 @@
                 let indexRoot = e.currentTarget.id
                 let checkHost = e.currentTarget.checked
                 let result = this._getValueInput(this.columns, 'input_group_')
+                // console.log(result);
                 this.dataUseGroup[indexRoot].group_item.map((item, index) => {
                     if (!this._checkPropIsMath(item, result.data)) {
                         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
@@ -880,6 +882,7 @@
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(date))
                 }
             },
             checkAddItem() {
