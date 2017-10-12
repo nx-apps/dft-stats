@@ -198,7 +198,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{FIELD1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{FIELD1} == 'country' ? 'ประเทศ' : 'ชนิดข้าว')]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="202" y="0" width="200" height="40" uuid="3842cc3e-b195-42ee-ab30-745aa0d73c46"/>
@@ -211,7 +211,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{FIELD2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{FIELD2} == 'country' ? 'ประเทศ' : 'ชนิดข้าว')]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

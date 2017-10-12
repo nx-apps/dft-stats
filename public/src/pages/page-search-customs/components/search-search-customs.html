@@ -388,10 +388,10 @@
                 //     statePath: 'searchCustoms.companyList',
                 //     observer: '_cloneDataCompany'
                 // },
-                // zoneGroupList: {
-                //     statePath: 'searchCustoms.zoneGroupList',
-                //     observer: '_cloneDataZoneGroup'
-                // },
+                zoneGroupList: {
+                    statePath: 'searchCustoms.zoneGroupList',
+                    observer: '_cloneDataZoneGroup'
+                },
                 countryList: {
                     statePath: 'searchCustoms.countryList',
                     observer: '_cloneDataCountry'
@@ -634,14 +634,15 @@
                 return text2
             },
             getNameMonth(data) {
-                let month = data.filter(item => item.check === true).map(item => item.label).join(',').slice(0, 170) || ''
-                let text2 = ''
-                if (month.length > 0) {
-                    text2 = month + '...'
-                } else {
-                    text2 = month
-                }
-                return text2
+                // console.log(data.filter(item => item.check === true));
+                let month = data.filter(item => item.check === true).map(item => item.value).join(',').slice(0, 170) || ''
+                // let teyxt2 = ''
+                // if (month.length > 0) {
+                //     text2 = month + '...'
+                // } else {
+                //     text2 = month
+                // }
+                return month
             },
             _setDate(e) {
                 // e.dateStart = '2017-09-01'
@@ -809,6 +810,7 @@
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(date))
                 }
                 // }, 500)
 
@@ -848,6 +850,7 @@
                 let indexRoot = e.currentTarget.id
                 let checkHost = e.currentTarget.checked
                 let result = this._getValueInput(this.columns, 'input_group_')
+                // console.log(result);
                 this.dataUseGroup[indexRoot].group_item.map((item, index) => {
                     if (!this._checkPropIsMath(item, result.data)) {
                         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
@@ -879,6 +882,7 @@
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_HAMONIZE_GROUP', this.genUrl(date))
                     this.dispatchAction('GET_SEARCH_CUSTOMS_COUNTRY', this.genUrl(date))
+                    this.dispatchAction('GET_SEARCH_CUSTOMS_ZONE', this.genUrl(date))
                 }
             },
             checkAddItem() {
