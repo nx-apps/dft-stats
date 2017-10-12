@@ -21,7 +21,7 @@ exports.zone = function (req, res) {
     left join custom_country cc on custom.country2 = cc.country_code
     ${where}
     group by zone_name,country_th,country_code,zone_order
-    order by zone_order,country_th`, [],
+    order by zone_order,country_code`, [],
         function (err, data) {
             data = JSON.parse(data);
             var arr = [];
@@ -57,7 +57,7 @@ exports.country = function (req, res) {
     left join custom_country cc on custom.country2 = cc.country_code
     ${where}
     group by country_th,country2
-    order by country_th`, [],
+    order by country2`, [],
         function (err, data) {
             res.send(data)
         })
