@@ -78,18 +78,19 @@
         <table class="gl-table-default">
             <thead class="table-head">
                 <tr>
-                    <th></th>
+                    <th style="text-align: center;border-left: 1px solid #ddd;" rowspan="2">{{localize('order')}}</th>
                     <template is="dom-repeat" items={{header}}>
-                        <th></th>
+                        <th style="text-align: center;border-left: 1px solid #ddd;" rowspan="2">[[localize(item)]]</th>
                     </template>
-                    <th style="text-align: center;border-left: 1px solid #ddd;" colspan="3">{{localize('value')}}</th>
+                    <th style="text-align: center;border-left: 1px solid #ddd;" rowspan="2">{{localize('volume')}}{{localize('million_ton')}}</th>
+                    <th style="text-align: center;border-left: 1px solid #ddd;" colspan="2">{{localize('value')}}</th>
                 </tr>
                 <tr>
-                    <th>{{localize('order')}}</th>
-                    <template is="dom-repeat" items={{header}}>
+                    <!-- <th>{{localize('order')}}</th> -->
+                    <!-- <template is="dom-repeat" items={{header}}>
                         <th>[[localize(item)]]</th>
-                    </template>
-                    <th class="border-color">{{localize('million_ton')}}</th>
+                    </template> -->
+                    <!-- <th class="border-color">{{localize('million_ton')}}</th> -->
                     <th class="border-color">{{localize('million_thb')}}</th>
                     <th class="border-color">{{localize('million_usd')}}</th>
                     
@@ -98,10 +99,10 @@
             <tbody class="table-body">
                 <template is="dom-repeat" items={{searchCustomsList}} initial-count="20" as=main>
                     <tr >
-                        <td>[[autoIndex(index)]]</td>
+                        <td style="border-left: 1px solid #ddd;">[[autoIndex(index)]]</td>
 
                         <template is="dom-repeat" items={{field}}>
-                            <td>[[getProp(main,item)]]</td>
+                            <td style="border-left: 1px solid #ddd;">[[getProp(main,item)]]</td>
                         </template>
                         <td class="border-color">[[formatNumber(main.weight)]]</td>
                         <td class="border-color">[[formatNumber(main.value_b)]]</td>

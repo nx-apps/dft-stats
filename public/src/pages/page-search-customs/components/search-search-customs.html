@@ -636,13 +636,13 @@
             getNameMonth(data) {
                 // console.log(data.filter(item => item.check === true));
                 let month = data.filter(item => item.check === true).map(item => item.value).join(',').slice(0, 170) || ''
-                let text2 = ''
-                if (month.length > 0) {
-                    text2 = month + '...'
-                } else {
-                    text2 = month
-                }
-                return text2
+                // let teyxt2 = ''
+                // if (month.length > 0) {
+                //     text2 = month + '...'
+                // } else {
+                //     text2 = month
+                // }
+                return month
             },
             _setDate(e) {
                 // e.dateStart = '2017-09-01'
