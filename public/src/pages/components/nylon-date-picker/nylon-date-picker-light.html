@@ -241,7 +241,7 @@
                 },
                 months: {
                     type: Array,
-                    value: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    value: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
                 },
             },
             observers: [
@@ -266,7 +266,6 @@
                     this.set('monthBe', new Date().getMonth() + 1)
             },
             setZeroBefore(day) {
-                // console.log('setZeroBefore');
                 if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
                     // console.log(1);
                     return '0' + day
@@ -275,20 +274,39 @@
                     return day
                 }
             },
+            checkDay(dayBe) {
+                if (dayBe === '' || Number(dayBe) === 0) {
+                    dayBe = 1
+                }
+                return this.setZeroBefore(dayBe)
+
+            },
+            checkMonth(monthBe) {
+                if (monthBe === '' || Number(monthBe) === 0)
+                    monthBe = new Date().getMonth() + 1
+                // console.log(this.monthBe);
+                return this.setZeroBefore(monthBe)
+            },
             checkDateBe(dayBe, monthBe, yearBe) {
                 // console.log('checkDateBe');
-                if (dayBe !== undefined && dayBe <= 31 && dayBe !== ''
-                    && monthBe !== undefined && Number(monthBe) <= 12 && monthBe !== ''
-                    && yearBe !== undefined && yearBe !== ''
-                    && !isNaN(dayBe) && !isNaN(monthBe) && !isNaN(yearBe)) {
-                    // console.log(dayBe, monthBe, yearBe);
-                    if (this.showBc) {
-                        this.set('selectedBe', dayBe + '/' + monthBe + '/' + yearBe)
-                    } else {
-                        this.set('selected', yearBe + '-' + monthBe + '-' + dayBe)
-                        // this.selected = (`${yearBe}-${monthBe}-${dayBey}`)
+                
+                this.debounce('searchInput', () => {
+                    if (dayBe !== undefined && dayBe <= 31 && dayBe !== ''
+                        && monthBe !== undefined && Number(monthBe) <= 12 && monthBe !== ''
+                        && yearBe !== undefined && yearBe !== ''
+                        && !isNaN(dayBe) && !isNaN(monthBe) && !isNaN(yearBe)) {
+
+                        dayBe = this.checkDay(dayBe)
+                        monthBe = this.checkMonth(monthBe)
+                        // console.log(dayBe, monthBe, yearBe);
+                        if (this.showBc) {
+                            this.set('selectedBe', dayBe + '/' + monthBe + '/' + yearBe)
+                        } else {
+                            this.set('selected', yearBe + '-' + monthBe + '-' + dayBe)
+                            // this.selected = (`${yearBe}-${monthBe}-${dayBey}`)
+                        }
                     }
-                }
+                }, 500)
             },
             // // end checkDate
             init() {
@@ -465,8 +483,8 @@
                 // this.selected = rawDate
                 // let date = this.selected
                 let date = rawDate
-                console.log(date.split('-')[1])
-                console.log(this.setZeroBefore(date.split('-')[1]));
+                // console.log(date.split('-')[1])
+                // console.log(this.setZeroBefore(date.split('-')[1]));
                 this.set('dayBe', date.split('-')[2])
                 this.set('monthBe', date.split('-')[1])
                 if (this.showBc) {
@@ -578,7 +596,7 @@
             },
 
             _selectedBeChanged(selectedBe) {
-                console.log('_selectedBeChanged');
+                // console.log('_selectedBeChanged');
                 selectedBe = this._checkDateBc(selectedBe)
                 var select = selectedBe.split('/')
                 // var select = selectedBe.split('/')

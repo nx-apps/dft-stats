@@ -28,7 +28,6 @@
                 padding: 0;
                 list-style: none;
             }
-
             /* #breadcrumbs-one {
                 margin: 10px 0px;
                 border: 1px solid;
@@ -41,12 +40,10 @@
             td {
                 /* cursor: pointer; */
             }
-
             /* .icon:hover,
             .breadcrumbs:hover {
                 color: #b7b7b7;
             } */
-
             /* .breadcrumbs::after {
                 content: '  / '
             } */
@@ -93,12 +90,12 @@
                     <!-- <th class="border-color">{{localize('million_ton')}}</th> -->
                     <th class="border-color">{{localize('million_thb')}}</th>
                     <th class="border-color">{{localize('million_usd')}}</th>
-                    
+
                 </tr>
             </thead>
             <tbody class="table-body">
                 <template is="dom-repeat" items={{searchCustomsList}} initial-count="20" as=main>
-                    <tr >
+                    <tr>
                         <td style="border-left: 1px solid #ddd;">[[autoIndex(index)]]</td>
 
                         <template is="dom-repeat" items={{field}}>
@@ -107,13 +104,13 @@
                         <td class="border-color">[[formatNumber(main.weight)]]</td>
                         <td class="border-color">[[formatNumber(main.value_b)]]</td>
                         <td class="border-color">[[formatNumber(main.value_d)]]</td>
-                        
+
                     </tr>
                 </template>
             </tbody>
-            <tfoot class="table-foot">
-                <tr>
-                    <template is="dom-if" if="{{_isShow(searchCustomsList)}}">
+            <template is="dom-if" if="{{_isShow(searchCustomsList)}}">
+                <tbody class="table-body">
+                    <tr>
                         <td></td>
                         <template is="dom-repeat" items={{field}}>
                             <td></td>
@@ -121,6 +118,19 @@
                         <td></td>
                         <td>{{localize('no_data')}}</td>
                         <td></td>
+                    </tr>
+                </tbody>
+            </template>
+            <tfoot class="table-foot">
+                <tr>
+                    <template is="dom-if" if="{{!_isShow(searchCustomsList)}}">
+                        <td>รวม</td>
+                        <template is="dom-repeat" items={{field}}>
+                            <td></td>
+                        </template>
+                        <td class="border-color">{{sumData.weight}}</td>
+                        <td class="border-color">{{sumData.value_b}}</td>
+                        <td class="border-color">{{sumData.value_d}}</td>
                     </template>
                 </tr>
             </tfoot>
@@ -139,13 +149,21 @@
             properties: {
                 searchCustomsList: {
                     statePath: 'searchCustoms.searchCustomsList',
-                    // observer: 'setHeader'
+                    observer: 'sumValue'
                 },
                 header: [],
                 field: [],
                 settingSearch: {
                     statePath: 'searchCustoms.settingSearch',
                     observer: 'setCol'
+                },
+                sumData: {
+                    type: Object,
+                    value: {
+                        weight: 0,
+                        value_b: 0,
+                        value_d: 0
+                    }
                 },
                 searchHistory: {
                     type: Array,
@@ -158,6 +176,23 @@
             },
             changeName(localize, item) {
                 return this.localize(item)
+            },
+            sumValue(data) {
+                let checkNaN = ((num) => {
+                    if (isNaN(num)) return ''
+                    // console.log(num)
+                    return this.formatNumber(num)
+                })
+                const calNum = (prop, mun = 1) => {
+                    return checkNaN(Object.keys(data).reduce((previous, current) => previous + data[current][prop], 0) / mun)
+                }
+                // console.log(data);
+                this.set('sumData.value_b',calNum('value_b'))
+                this.set('sumData.weight',calNum('weight'))
+                this.set('sumData.value_d',calNum('value_d'))
+                // console.log(calNum('value_b'));
+                // console.log(calNum('weight'));
+                // console.log(calNum('value_d'));
             },
             // setHeader(data) {
             //     let arr = [],
@@ -265,7 +300,7 @@
             setCol(data) {
                 try {
                     let url = []
-                    let field =[]
+                    let field = []
                     if (data.field1 !== undefined) {
                         url.push(data.field1)
                         field.push('field1')
@@ -274,8 +309,8 @@
                         url.push(data.field2)
                         field.push('field2')
                     }
-                    this.set('header',url)
-                    this.set('field',field)
+                    this.set('header', url)
+                    this.set('field', field)
                     // console.log(url)
                     // console.log(data.hasOwnProperty(field1));
                     // console.log(data.hasOwnProperty(field2));

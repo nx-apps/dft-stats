@@ -1,7 +1,10 @@
 <link rel="import" href="./../../../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="./../../../../bower_components/gl-form/gl-form-input.html">
-
+<link rel="import" href="../../../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="./../../components/page-style.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../components/nylon-date-picker/nylon-date-picker.html">
 
 <dom-module id="list-report">
     <template>
@@ -11,7 +14,9 @@
                 width: 100%;
                 height: auto;
             }
-
+            paper-dialog#report{
+                width: 300px;
+            }
             .img {
                 width: 24px;
                 height: 24px;
@@ -91,7 +96,8 @@
         <paper-dialog id="report">
             <div class="layout start-justified">
                 <div class="flex" style=" margin-right: 30px">
-                    <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.date}}"></gl-form-input>
+                        <nylon-date-picker label="วันที่ที่ต้องการดู:" always-float-label selected="{{data.date}}" show-bc></nylon-date-picker>
+                    <!-- <gl-form-input label="วันที่ที่ต้องการดู:" placeholder="วันที่ที่ต้องการดู" type="date" value="{{data.date}}"></gl-form-input> -->
                 </div>
                 <div class="flex" style=" margin-right: 30px">
                     <gl-form-input label="จำนวนเดือน:" placeholder="จำนวนเดือน" type="number" hidden="[[checkReport(param.report_id)]]" value="{{data.amountTime}}"></gl-form-input>

@@ -84,36 +84,32 @@
       span.comma {
         line-height: 30px;
       }
-      /* .inputDate {
-        display: inline;
-      } */
+      .inputDate {
+        text-align: center;
+      }
     </style>
     <paper-input-container no-label-float={{noLabelFloat}} always-float-label="{{alwaysFloatLabel}}" auto-validate attr-for-value="value"
       disabled$="{{disabled}}" hidden="{{hidden}}">
       <label class="label">{{label}}</label>
       <div class="container">
-        <input is="iron-input" bind-value="{{dayBe}}" class="inputDate" maxlength="2" allowed-pattern="[0-9]" aria-label="First 2 digits of date "
-          on-focusout="checkDay">
+        <input is="iron-input" bind-value="{{dayBe}}" class="inputDate" style="text-align: center;" maxlength="2" allowed-pattern="[0-9]" aria-label="First 2 digits of date "
+          on-focusout="checkDay" on-focus="_setSeleteValue">
         <span class="comma">/</span>
-        <input is="iron-input" bind-value="{{monthBe}}" class="inputDate" maxlength="2" allowed-pattern="[0-9]" aria-label="Middle 2 digits of month "
-          on-focusout="checkMonth">
+        <input is="iron-input" bind-value="{{monthBe}}" class="inputDate" style="text-align: center;" maxlength="2" allowed-pattern="[0-9]" aria-label="Middle 2 digits of month "
+          on-focusout="checkMonth" on-focus="_setSeleteValue">
         <span class="comma">/</span>
-        <input is="iron-input" bind-value="{{yearBe}}" class="inputDate" maxlength="4" allowed-pattern="[0-9]" aria-label="Last 4 digits of year"
-          on-focusout="checkYear">
+        <input is="iron-input" bind-value="{{yearBe}}" class="inputDate" style="text-align: center;" maxlength="4" allowed-pattern="[0-9]" aria-label="Last 4 digits of year"
+          on-focusout="checkYear" on-focus="_setSeleteValue">
       </div>
-
       <paper-input-error>Date invalid!</paper-input-error>
       <paper-icon-button suffix icon="nylon-data-icon:calendar" on-tap="openCalendar"></paper-icon-button>
     </paper-input-container>
 
 
+    <!-- [[selected]] /// [[showBc]]//
+    <br> [[selectedBe]]// -->
 
-
-
-    [[selected]] /// [[showBc]]//
-    <br> [[selectedBe]]//
-
-    <iron-dropdown id="dropdown" horizontal-align="right" vertical-align="top" close-animation-config="[[closeAnimationConfig]]"
+    <iron-dropdown id="dropdown" horizontal-align="left" vertical-align="top" close-animation-config="[[closeAnimationConfig]]"
       open-animation-config="[[openAnimationConfig]]">
       <div class="dropdown-content">
         <nylon-date-picker-light day-be="{{dayBe}}" month-be="{{monthBe}}" year-be="{{yearBe}}" selected="{{selected}}" selected-be="{{selectedBe}}"
@@ -168,6 +164,10 @@
           type: Boolean,
           value: false
         },
+        alwaysFloatLabel: {
+          type: Boolean,
+          value: false
+        },
         hidden: {
           type: Boolean,
           value: false
@@ -215,6 +215,14 @@
             }];
           }
         }
+      },
+      _setSeleteValue: function (e) {
+
+        let value = e.target
+        // value.value= ''
+        // console.log(value.updateValueAndPreserveCaret());
+        // console.log(value.select());
+        value.select()
       },
       setZeroBefore(day) {
         if (Number(day) > 0 && 10 > Number(day) && day[0] !== '0') {
