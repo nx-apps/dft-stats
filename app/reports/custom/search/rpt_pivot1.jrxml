@@ -94,7 +94,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{FIELD1} == "country" ? "country" : "hamonize")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{FIELD1} == "country" ? "ประเทศ" : "ชนิดข้าว")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="235" y="0" width="160" height="20" uuid="695d935e-b580-43c4-bb22-e7549a96bbea"/>

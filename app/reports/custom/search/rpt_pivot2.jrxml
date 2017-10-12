@@ -188,9 +188,11 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{FIELD1}!=$P{FIELD2}
-    ?$P{FIELD1}+"/"+$P{FIELD2}
-    :$P{FIELD1}
+				<textFieldExpression><![CDATA[
+(($P{FIELD1} == "country" ? "ประเทศ" : "ชนิดข้าว") != ($P{FIELD2} == "country" ? "ประเทศ" : "ชนิดข้าว") ?
+    ($P{FIELD1} == "country" ? "ประเทศ" : "ชนิดข้าว") +"/"+
+    ($P{FIELD2} == "country" ? "ประเทศ" : "ชนิดข้าว"):
+    ($P{FIELD1} == "country" ? "ประเทศ" : "ชนิดข้าว")
 )]]></textFieldExpression>
 			</textField>
 			<staticText>
