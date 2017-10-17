@@ -147,8 +147,9 @@
 
                 span,
                 .n {
-                    cursor: pointer
+                    cursor: pointer;
                 }
+                
             </style>
         </custom-style>
         <!-- <div slot="dropdown-content" class="box"> -->
@@ -156,8 +157,9 @@
             <div class="calendar">
                 <div class="months">
                     <div class="month" data-date="2011.1">
-                        <div class="header"><span class="n" on-click="previousYear">&#60&#60</span>&nbsp;&nbsp;<span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;<span on-click="nextYear" class="n">&#62&#62</span></div>
+                        <div class="header">
+                            <span class="n year" on-click="previousYear" >&#60&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n" on-click="previousMonth">&#60</span>&nbsp;&nbsp;&nbsp;&nbsp;[[monthAndYear]]&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="n" on-click="nextMonth">&#62</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span on-click="nextYear" class="n">&#62&#62</span></div>
                         <div class="body">
 
                             <div class="day_names">
