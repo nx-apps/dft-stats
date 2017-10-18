@@ -127,24 +127,45 @@
                         </div>
                     </div>
                     <div class="flex" style=" margin-right: 30px">{{getMonth(data.modelYear)}}
-                        <gl-combo-box class="required" required id="priority" label="ปี" always-float-label item-label-path="label" item-value-path="value" items="{{yearList}}"
-                            value="{{data.modelYear}}">
+                        <gl-combo-box class="required" required id="priority" label="ปี" always-float-label item-label-path="label" item-value-path="value"
+                            items="{{yearList}}" value="{{data.modelYear}}">
                             <template>
                                 [[item.label]]
                             </template>
                         </gl-combo-box>
                     </div>
-                    <div class="flex" style=" margin-right: 30px">
-                        <gl-combo-box class="required" required id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value" items="{{monthList}}"
-                            value="{{data.modelMonth}}">
-                            <template>
-                                [[item.label]]
-                            </template>
-                        </gl-combo-box>
-                    </div>
+
+                    <template is="dom-if" if={{!isRepor4}}>
+                        <div class="horizontal start-justified layout">
+                            <div>เดือนที่ต้องการดู</div>
+                        </div>
+                        <div class="flex">
+                            <div>
+                                <div class="zoneName" style="padding-bottom: 15px">
+                                    <paper-checkbox on-tap="seletedAllMonth"> เลือกทุกเดือน</paper-checkbox>
+                                </div>
+                                <template is="dom-repeat" items={{monthList}}>
+                                    <div class="zoneName">
+                                        <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template is="dom-if" if={{isRepor4}}>
+                        <div class="flex" style=" margin-right: 30px">
+                            <gl-combo-box class="required" required id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value"
+                                items="{{monthList}}" value="{{data.modelMonth}}">
+                                <template>
+                                    [[item.label]]
+                                </template>
+                            </gl-combo-box>
+                        </div>
+                    </template>
                     <div class="flex" style=" margin-right: 30px">
                         <!--  -->
-                        <gl-form-input label="จำนวนปีย้อนหลัง:"  allowed-pattern="[1-4]" placeholder="จำนวนปีย้อนหลัง" type="number" hidden="[[checkReportYear(param.report_id)]]"
+                        <gl-form-input label="จำนวนปีย้อนหลัง:" allowed-pattern="[1-4]" placeholder="จำนวนปีย้อนหลัง" type="number" hidden="[[checkReportYear(param.report_id)]]"
                             value="{{data.backYear}}" min="1" max="4" maxlength="1"></gl-form-input>
                     </div>
                 </div>
@@ -163,7 +184,7 @@
         Polymer({
             is: 'list-report-custom',
             behaviors: [
-                ReduxBehavior, nylonBehavior, MonthBehavior ,commonLogic
+                ReduxBehavior, nylonBehavior, MonthBehavior, commonLogic
             ],
             properties: {
                 data: {
@@ -218,15 +239,15 @@
                     value: {}
                 },
             },
-            setYear(year){
-                if(year.length > 1){
-                    this.set('data.modelYear',year[year.length-1].value)
+            setYear(year) {
+                if (year.length > 1) {
+                    this.set('data.modelYear', year[year.length - 1].value)
                 }
             },
-            setMonth(month){
-                if(month.length > 1){
+            setMonth(month) {
+                if (month.length > 1) {
                     // console.log(1)
-                    this.set('data.modelMonth',month[month.length-1].value)
+                    this.set('data.modelMonth', month[month.length - 1].value)
                 }
             },
             checkIsTree(index) {
@@ -244,6 +265,12 @@
                     this.set('zoneList.' + [index] + '.check', check)
                 })
             },
+            seletedAllMonth(e) {
+                let check = e.currentTarget.checked
+                this.monthList.map((item, index) => {
+                    this.set('monthList.' + [index] + '.check', check)
+                })
+            },
             ready() {
                 // //console.log(this.data);
                 // this.set('data.date', new Date().toISOString().split('T')[0])
@@ -257,6 +284,12 @@
                 this.set('data.export', type)
                 // this.set('data.link', link)
                 this.set('param.report_id', e.model.item.report_id)
+                let report = true
+                if (e.model.item.report_id !== 4)
+                    report = false
+
+                this.set('isRepor4', report)
+
                 this.set('param.report_prama', report_prama)
 
                 this.$$('#report').open()
@@ -290,50 +323,39 @@
             // },
             printReport() {
                 // console.log(this.validateForm('.required'))
-                if(this.validateForm('.required')){
+                if (this.validateForm('.required')) {
                     const _filterChecked = (data) => {
-                    return data.filter((item) => {
-                        return item.check === true
-                    })
+                        return data.filter((item) => {
+                            return item.check === true
+                        })
+                    }
+                    let Check = _filterChecked(this.zoneList)
+                    let CheckMonth = _filterChecked(this.monthList)
+                    let newData = this.data
+                    newData.zoneName = String(Check.map(item => item.group_name))
+                    if (this.param.report_id !== 4)
+                        newData.modelMonth = String(CheckMonth.map(item => item.value))
+
+
+                    // console.log(newData);
+                    switch (this.param.report_id) {
+                        case 1:
+                            window.open('./api/report/custom/whiterice?' + this.genUrl(newData))
+                            break;
+                        case 2:
+                            window.open('./api/report/custom/allrice?' + this.genUrl(newData))
+                            break;
+                        case 3:
+                            window.open('./api/report/custom/hommali?' + this.genUrl(newData))
+                            break;
+                        case 4:
+                            window.open('./api/report/custom/year?' + this.genUrl(newData))
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                let Check = _filterChecked(this.zoneList)
-                let newData = this.data
-                newData.zoneName = String(Check.map(item => item.group_name))
-                // console.log(this.genUrl(newData));
-                // let openPost = (url, variables) => {
-                //     var form = document.createElement("form");
-                //     form.setAttribute("method", "post");
-                //     form.setAttribute("action", url);
-                //     form.setAttribute("target", "_blank");
-                //     for (variable in variables) {
-                //         var hiddenField = document.createElement("input");
-                //         hiddenField.setAttribute("name", variable);
-                //         hiddenField.setAttribute("value", variables[variable]);
-                //         form.appendChild(hiddenField);
-                //     }
-                //     document.body.appendChild(form);
-                //     form.submit();
-                // }
-                // let url = '/api/report/daily/company'
-                // openPost(url, newData)
-                switch (this.param.report_id) {
-                    case 1:
-                        window.open('./api/report/custom/whiterice?' + this.genUrl(newData))
-                        break;
-                    case 2:
-                        window.open('./api/report/custom/allrice?' + this.genUrl(newData))
-                        break;
-                    case 3:
-                        window.open('./api/report/custom/hommali?' + this.genUrl(newData))
-                        break;
-                    case 4:
-                        window.open('./api/report/custom/year?' + this.genUrl(newData))
-                        break;
-                    default:
-                        break;
-                }
-                }
-                
+
 
             }
 
