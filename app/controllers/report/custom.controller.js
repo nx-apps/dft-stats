@@ -19,7 +19,7 @@ exports.whiterice = function (req, res) {
 }
 exports.exportrice = function (req, res) {
 
-    req.jdbc.query("mssql", "exec sp_stats_rpt_custom_rice @month=?, @year=?, @zone=?", [req.query.modelMonth, req.query.modelYear, req.query.zoneName],
+    req.jdbc.query("mssql", "exec sp_stats_rpt_custom_allrice @month=?, @year=?, @zone=?", [req.query.modelMonth, req.query.modelYear, req.query.zoneName],
         function (err, data) {
             data = JSON.parse(data);
             var param = {
