@@ -35,12 +35,13 @@ exports.exportrice = function (req, res) {
     req.jdbc.query("mssql", "exec sp_stats_rpt_custom_allrice @month=?, @year=?, @zone=?", [req.query.modelMonth, req.query.modelYear, req.query.zoneName],
         function (err, data) {
             data = JSON.parse(data);
+            const arrMonth = req.query.modelMonth.split(",").sort();
             var param = {
                 date: req.query.date,
                 FILE_TYPE: req.query.export,
             };
-            param.startMonth = rpt.getMonthName(1);
-            param.endMonth = rpt.getMonthName(Number(req.query.modelMonth));
+            param.startMonth = rpt.getMonthName(Number(arrMonth[0])),
+            param.endMonth = rpt.getMonthName(Number(arrMonth[arrMonth.length - 1])),
             param.year = req.query.modelYear;
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณและมูลค่าการส่งออกข้าวของไทย'
@@ -53,12 +54,13 @@ exports.hommalirice = function (req, res) {
         function (err, data) {
             // res.send(data);
             data = JSON.parse(data);
+            const arrMonth = req.query.modelMonth.split(",").sort();
             var param = {
                 date: req.query.date,
                 FILE_TYPE: req.query.export,
             };
-            param.startMonth = rpt.getMonthName(1);
-            param.endMonth = rpt.getMonthName(Number(req.query.modelMonth));
+            param.startMonth = rpt.getMonthName(Number(arrMonth[0])),
+            param.endMonth = rpt.getMonthName(Number(arrMonth[arrMonth.length - 1])),
             param.year = req.query.modelYear;
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณมูลค่าการส่งออกข้าวหอมมะลิไทย'
