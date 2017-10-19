@@ -96,7 +96,7 @@ exports.typerice = function (req, res) {
             }
         }
     }
-    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${req.query.modelYear} and hm.hamonize_year_end>=${req.query.modelYear}` : '')
+    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${Number(req.query.modelYear)-543} and hm.hamonize_year_end>=${Number(req.query.modelYear)-543}` : '')
     j.query("mssql", `SELECT typerice_name,hs.HsCode as value,hm.hamonize_th as label
     from custom_hscode ch
 	join (
@@ -138,7 +138,7 @@ exports.hamonize = function (req, res) {
             }
         }
     }
-    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${req.query.modelYear} and hm.hamonize_year_end>=${req.query.modelYear}` : '')
+    const whereYear = (req.query.hasOwnProperty('modelYear') ? ` and hm.hamonize_year<=${Number(req.query.modelYear)-543} and hm.hamonize_year_end>=${Number(req.query.modelYear)-543}` : '')
 
     j.query("mssql", `select hm.hamonize_code as value,hm.hamonize_th as label
 	from hamonize hm 
