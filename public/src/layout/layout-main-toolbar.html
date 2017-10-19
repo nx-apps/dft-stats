@@ -5,37 +5,44 @@
 <!--
 <link rel="import" href="../../../app/controllers/report2.controller">-->
 
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
 <link rel="import" href="../action/nylonLocalizeBehavior.html">
 
 
 <dom-module id="layout-main-toolbar">
 	<template>
-        <style is="custom-style">
+		<style is="custom-style">
 			app-toolbar {
 				background-color: #FF753F;
 				color: white;
 				font-family: 'CSChatThaiUI', sans-serif;
-       			-webkit-font-smoothing: antialiased;
+				-webkit-font-smoothing: antialiased;
 				--app-toolbar-font-size: 20px;
 				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 			}
-			.background{
+
+			.background {
 				padding: 10px;
 				background-color: white;
 			}
-			iron-image{
+
+			iron-image {
 				margin-right: 20px;
 				margin-left: 20px;
 			}
-			.sectionContent{
+
+			.sectionContent {
 				margin-left: 9%;
 				margin-top: 20px;
 				font-size: 16px;
 				padding-bottom: 5px;
 			}
-			paper-button{
+
+			paper-button {
 				font-size: 16px;
 			}
+
 			.icon {
 				display: inline-block;
 				width: 1em;
@@ -52,70 +59,76 @@
 				mask: url(#mymask);
 				-webkit-mask-box-image: url(/images/icon/static/32.png);
 			}
+
+			.icon-heade {
+				width: 32px;
+				height: 32px;
+			}
 		</style>
 		<app-toolbar>
-				<paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
-				<div style="background-color:#FFFFFF;margin-left: 20px;margin-top:3px;margin-right: 20px;" class="mymask"></div>
-				<svg height="0" width="0">
-					<mask id="mymask">
-						<image id="img" xlink:href="/images/icon/default/app-icon-32.png" x="0" y="0" height="50px" width="50px" />
-					</mask>
-				</svg>
-				<div main-title>ระบบสืบค้นข้อมูลและรายงานสถิติการนำเข้าและส่งออกข้าว</div>
-				[[user.name]]
-				<div style="cursor: pointer" on-tap="logout" hidden="{{hidden}}">
-					<paper-icon-button icon="exit-to-app"></paper-icon-button>Logout
-				</div>
-				<div style="cursor: pointer" on-tap="logout" hidden="{{!hidden}}">
-					<paper-icon-button icon="power-settings-new"></paper-icon-button>
-					Log-in
-				</div>
+			<paper-icon-button icon="menu" on-tap="toggleDrawer"></paper-icon-button>
+			<iron-image class="icon-heade" sizing="contain" src="/images/manifest/1508387671880.jpg"></iron-image>
+			<!-- <div style="background-color:#FFFFFF;margin-left: 20px;margin-top:3px;margin-right: 20px;" class="mymask"></div> -->
+			<svg height="0" width="0">
+				<mask id="mymask">
+					<image id="img" xlink:href="/images/manifest/72.ico" x="0" y="0" height="50px" width="50px" />
+				</mask>
+			</svg>
+			<div main-title>ระบบบริหารจัดการการระบายข้าวและการส่งออกข้าว</div>
+			[[user.name]]
+			<div style="cursor: pointer" on-tap="logout" hidden="{{hidden}}">
+				<paper-icon-button icon="exit-to-app"></paper-icon-button>Logout
+			</div>
+			<div style="cursor: pointer" on-tap="logout" hidden="{{hidden}}">
+				<paper-icon-button icon="power-settings-new"></paper-icon-button>
+				Log-in
+			</div>
 		</app-toolbar>
 	</template>
 	<script>
-        Polymer({
-            is: 'layout-main-toolbar',
-			behaviors: [nylonLocalizeBehavior,ReduxBehavior],
-			properties:{
-				user:{
-					 statePath:'auth.user',
-					 observer:'check'
+		Polymer({
+			is: 'layout-main-toolbar',
+			behaviors: [nylonLocalizeBehavior, ReduxBehavior],
+			properties: {
+				user: {
+					statePath: 'auth.user',
+					observer: 'check'
 				}
 			},
-			check:function(){
-				if(this.user.id){
-					this.hidden = false;	
+			check: function () {
+				if (this.user.id) {
+					this.hidden = false;
 				}
 				else {
 					// this.fire('nylon-change-page',{path:'/login'})
 					this.hidden = true;
 				}
 			},
-			attached:function(){
+			attached: function () {
 				// console.log(this.nylonLocalizeImport);
-				 this.nylonLocalizeImport('/i18n-page1.json');
+				this.nylonLocalizeImport('/i18n-page1.json');
 			},
-            toggleDrawer:function(){
-                this.fire('toggle-drawer');
-            },
-			changeLanguage:function(){
-              if(this.language=='th'){
-                this.nylonLocalizeChange('en');
-              }else{
-                this.nylonLocalizeChange('th');
-              } 
-            },
-			logout:function(){
+			toggleDrawer: function () {
+				this.fire('toggle-drawer');
+			},
+			changeLanguage: function () {
+				if (this.language == 'th') {
+					this.nylonLocalizeChange('en');
+				} else {
+					this.nylonLocalizeChange('th');
+				}
+			},
+			logout: function () {
 				this.hidden = true;
 				localStorage.removeItem('token');
-				if(this.user.role=="none"){
-					this.fire('nylon-change-page',{path:'/login'})
-				}else{
+				if (this.user.role == "none") {
+					this.fire('nylon-change-page', { path: '/login' })
+				} else {
 					window.location = "/login"
 				}
 				//this.fire('nylon-change-page',{path:'/login'})
 				//  this.AUTH_LOGOUT();
 			}
-        });
-    </script>
+		});
+	</script>
 </dom-module>

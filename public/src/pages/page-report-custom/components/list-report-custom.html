@@ -136,20 +136,13 @@
                     </div>
 
                     <template is="dom-if" if={{!isRepor4}}>
-                        <div class="horizontal start-justified layout">
-                            <div>เดือนที่ต้องการดู</div>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <div class="zoneName" style="padding-bottom: 15px">
-                                    <paper-checkbox on-tap="seletedAllMonth"> เลือกทุกเดือน</paper-checkbox>
-                                </div>
-                                <template is="dom-repeat" items={{monthList}}>
-                                    <div class="zoneName">
-                                        <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
-                                    </div>
+                        <div class="flex" style=" margin-right: 30px">
+                            <gl-combo-box class="required" required id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value"
+                                items="{{monthList}}" value="{{data.modelMonth}}">
+                                <template>
+                                    [[item.label]]
                                 </template>
-                            </div>
+                            </gl-combo-box>
                         </div>
                     </template>
 
