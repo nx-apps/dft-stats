@@ -136,27 +136,28 @@
                     </div>
 
                     <template is="dom-if" if={{!isRepor4}}>
-                        <div class="horizontal start-justified layout">
-                            <div>เดือนที่ต้องการดู</div>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <div class="zoneName" style="padding-bottom: 15px">
-                                    <paper-checkbox on-tap="seletedAllMonth"> เลือกทุกเดือน</paper-checkbox>
-                                </div>
-                                <template is="dom-repeat" items={{monthList}}>
-                                    <div class="zoneName">
-                                        <paper-checkbox checked="{{item.check}}"> {{item.label}}</paper-checkbox>
-                                    </div>
+                        <div class="flex" style=" margin-right: 30px">
+                            <gl-combo-box class="required" required id="priority" label="เดือนเริ่มต้นการดู" always-float-label item-label-path="label" item-value-path="value"
+                                items="{{monthList}}" value="{{data.modelMonthStart}}">
+                                <template>
+                                    [[item.label]]
                                 </template>
-                            </div>
+                            </gl-combo-box>
+                        </div>
+                        <div class="flex" style=" margin-right: 30px">
+                            <gl-combo-box class="required" required id="priority" label="เดือนสุดท้ายที่ดู" always-float-label item-label-path="label" item-value-path="value"
+                                items="{{monthList}}" value="{{data.modelMonthEnd}}">
+                                <template>
+                                    [[item.label]]
+                                </template>
+                            </gl-combo-box>
                         </div>
                     </template>
 
                     <template is="dom-if" if={{isRepor4}}>
                         <div class="flex" style=" margin-right: 30px">
                             <gl-combo-box class="required" required id="priority" label="เดือน" always-float-label item-label-path="label" item-value-path="value"
-                                items="{{monthList}}" value="{{data.modelMonth}}">
+                                items="{{monthList}}" value="{{data.modelMonthOne}}">
                                 <template>
                                     [[item.label]]
                                 </template>
@@ -247,7 +248,11 @@
             setMonth(month) {
                 if (month.length > 1) {
                     // console.log(1)
-                    this.set('data.modelMonth', month[month.length - 1].value)
+                    this.set('data.modelMonthOne', month[month.length - 1].value)
+                    this.set('data.modelMonthStart', month[0].value)
+                    this.set('data.modelMonthEnd', month[month.length - 1].value)
+                    
+
                 }
             },
             checkIsTree(index) {
@@ -330,13 +335,13 @@
                         })
                     }
                     let Check = _filterChecked(this.zoneList)
-                    let CheckMonth = _filterChecked(this.monthList)
                     let newData = this.data
                     newData.zoneName = String(Check.map(item => item.group_name))
-                    if (this.param.report_id !== 4)
-                        newData.modelMonth = String(CheckMonth.map(item => item.value))
-
-
+                    if (this.param.report_id !== 4){
+                        newData.modelMonth =  this.data.modelMonthStart +',' +this.data.modelMonthEnd
+                    } else {
+                        newData.modelMonth =  this.data.modelMonthOne
+                    }
                     // console.log(newData);
                     switch (this.param.report_id) {
                         case 1:
