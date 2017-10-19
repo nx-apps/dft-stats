@@ -14,13 +14,13 @@
 	<field name="zone_name" class="java.lang.String"/>
 	<field name="weight" class="java.lang.Double"/>
 	<field name="value_b" class="java.lang.Double"/>
-	<field name="value_D" class="java.lang.Double"/>
+	<field name="value_d" class="java.lang.Double"/>
 	<field name="weight1" class="java.lang.Double"/>
 	<field name="value_b1" class="java.lang.Double"/>
-	<field name="value_D1" class="java.lang.Double"/>
+	<field name="value_d1" class="java.lang.Double"/>
 	<field name="sum_weight" class="java.lang.Double"/>
 	<field name="sum_value_b" class="java.lang.Double"/>
-	<field name="sum_value_D" class="java.lang.Double"/>
+	<field name="sum_value_d" class="java.lang.Double"/>
 	<variable name="SUM_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
 	</variable>
@@ -28,7 +28,7 @@
 		<variableExpression><![CDATA[$F{value_b}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
-		<variableExpression><![CDATA[$F{value_D}]]></variableExpression>
+		<variableExpression><![CDATA[$F{value_d}]]></variableExpression>
 	</variable>
 	<variable name="SUM_WEIGHT1" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight1}]]></variableExpression>
@@ -37,7 +37,7 @@
 		<variableExpression><![CDATA[$F{value_b1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_VALUE_D1" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
-		<variableExpression><![CDATA[$F{value_D1}]]></variableExpression>
+		<variableExpression><![CDATA[$F{value_d1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_S_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
 		<variableExpression><![CDATA[$F{sum_weight}]]></variableExpression>
@@ -46,7 +46,7 @@
 		<variableExpression><![CDATA[$F{sum_value_b}]]></variableExpression>
 	</variable>
 	<variable name="SUM_S_VALUE_D" class="java.lang.Double" resetType="Group" resetGroup="GP_GROUP" calculation="Sum">
-		<variableExpression><![CDATA[$F{sum_value_D}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum_value_d}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
@@ -55,7 +55,7 @@
 		<variableExpression><![CDATA[$F{value_b}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_D" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{value_D}]]></variableExpression>
+		<variableExpression><![CDATA[$F{value_d}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_WEIGHT1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{weight1}]]></variableExpression>
@@ -64,7 +64,7 @@
 		<variableExpression><![CDATA[$F{value_b1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_VALUE_D1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{value_D1}]]></variableExpression>
+		<variableExpression><![CDATA[$F{value_d1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_S_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{sum_weight}]]></variableExpression>
@@ -73,7 +73,7 @@
 		<variableExpression><![CDATA[$F{sum_value_b}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_S_VALUE_D" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{sum_value_D}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum_value_d}]]></variableExpression>
 	</variable>
 	<group name="GP_GROUP">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
@@ -425,7 +425,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{sum_value_D}==null?0:$F{sum_value_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{sum_value_d}==null?0:$F{sum_value_d})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Opaque" x="305" y="0" width="50" height="15" backcolor="#FFFFCC" uuid="2f31ff6e-235a-4c4b-8af5-77abff3514b5"/>
@@ -503,7 +503,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D}==null?0:$F{value_D})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_d}==null?0:$F{value_d})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement mode="Opaque" x="255" y="0" width="50" height="15" backcolor="#FFFFCC" uuid="61ad65e0-e3a7-4151-800c-e5a2706ecbba"/>
@@ -529,7 +529,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{value_D1}==null?0:$F{value_D1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{value_d1}==null?0:$F{value_d1})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
