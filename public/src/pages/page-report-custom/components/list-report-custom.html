@@ -44,6 +44,10 @@
                 padding-top: 5px;
                 display: block;
             }
+
+            paper-dialog {
+                width: 550px;
+            }
         </style>
 
         <paper-material elevation="1">
@@ -107,6 +111,7 @@
 
 
         </paper-material>
+
         <paper-dialog id="report" modal>
             <h2>รายงาน</h2>
             <paper-dialog-scrollable>
@@ -136,21 +141,27 @@
                     </div>
 
                     <template is="dom-if" if={{!isRepor4}}>
-                        <div class="flex" style=" margin-right: 30px">
-                            <gl-combo-box class="required" required id="priority" label="เดือนเริ่มต้นการดู" always-float-label item-label-path="label" item-value-path="value"
-                                items="{{monthList}}" value="{{data.modelMonthStart}}">
-                                <template>
-                                    [[item.label]]
-                                </template>
-                            </gl-combo-box>
-                        </div>
-                        <div class="flex" style=" margin-right: 30px">
-                            <gl-combo-box class="required" required id="priority" label="เดือนสุดท้ายที่ดู" always-float-label item-label-path="label" item-value-path="value"
-                                items="{{monthList}}" value="{{data.modelMonthEnd}}">
-                                <template>
-                                    [[item.label]]
-                                </template>
-                            </gl-combo-box>
+                        <div class="layout start-justified">
+                            <div class="horizontal center start-justified layout">
+                                <div>เดือน</div>
+                                <div class="flex" style=" margin-right: 30px">
+                                    <gl-combo-box no-label-float item-label-path="label" item-value-path="value" items="{{monthList}}"
+                                        value="{{data.modelMonthStart}}">
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </gl-combo-box>
+                                </div>
+                                <div>ถึง</div>
+                                <div class="flex" style=" margin-right: 30px">
+                                    <gl-combo-box  no-label-float item-label-path="label" item-value-path="value" items="{{monthList}}"
+                                        value="{{data.modelMonthEnd}}">
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </gl-combo-box>
+                                </div>
+                            </div>
                         </div>
                     </template>
 
@@ -251,7 +262,7 @@
                     this.set('data.modelMonthOne', month[month.length - 1].value)
                     this.set('data.modelMonthStart', month[0].value)
                     this.set('data.modelMonthEnd', month[month.length - 1].value)
-                    
+
 
                 }
             },
@@ -337,10 +348,10 @@
                     let Check = _filterChecked(this.zoneList)
                     let newData = this.data
                     newData.zoneName = String(Check.map(item => item.group_name))
-                    if (this.param.report_id !== 4){
-                        newData.modelMonth =  this.data.modelMonthStart +',' +this.data.modelMonthEnd
+                    if (this.param.report_id !== 4) {
+                        newData.modelMonth = this.data.modelMonthStart + ',' + this.data.modelMonthEnd
                     } else {
-                        newData.modelMonth =  this.data.modelMonthOne
+                        newData.modelMonth = this.data.modelMonthOne
                     }
                     // console.log(newData);
                     switch (this.param.report_id) {
