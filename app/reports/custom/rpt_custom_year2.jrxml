@@ -32,50 +32,26 @@
 	<variable name="SUM_2_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
-	<variable name="SUM_2_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
-	</variable>
 	<variable name="SUM_1_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
-	</variable>
-	<variable name="SUM_1_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_WEIGHTX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
-	<variable name="SUM_1_RATIOX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
-	</variable>
 	<variable name="SUM_0_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
-	</variable>
-	<variable name="SUM_0_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_2_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_2}]]></variableExpression>
-	</variable>
 	<variable name="TOTAL_1_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
-	</variable>
-	<variable name="TOTAL_1_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_WEIGHTX" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
 	</variable>
-	<variable name="TOTAL_1_RATIOX" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_1x}]]></variableExpression>
-	</variable>
 	<variable name="TOTAL_0_WEIGHT" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
-	</variable>
-	<variable name="TOTAL_0_RATIO" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$V{RATIO_0}]]></variableExpression>
 	</variable>
 	<variable name="RATIO_0" class="java.lang.Double">
 		<variableExpression><![CDATA[($F{0_weight}==null?0:($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
@@ -88,6 +64,30 @@
 	</variable>
 	<variable name="RATIO_2" class="java.lang.Double">
 		<variableExpression><![CDATA[($F{2_weight}==null?0:($F{2_weight}/$F{2_weightw})*100)]]></variableExpression>
+	</variable>
+	<variable name="SUM_2_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
+		<variableExpression><![CDATA[($V{SUM_2_WEIGHT}/$F{2_weightw})*100]]></variableExpression>
+	</variable>
+	<variable name="SUM_1_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
+		<variableExpression><![CDATA[($V{SUM_1_WEIGHT}/$F{1_weightw})*100]]></variableExpression>
+	</variable>
+	<variable name="SUM_1_RATIOX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
+		<variableExpression><![CDATA[($V{SUM_1_WEIGHTX}/$F{1_weightwx})*100]]></variableExpression>
+	</variable>
+	<variable name="SUM_0_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
+		<variableExpression><![CDATA[($V{SUM_0_WEIGHT}/$F{0_weightw})*100]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_2_RATIO" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{TOTAL_2_WEIGHT}/$F{2_weightw})*100]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_1_RATIO" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHT}/$F{1_weightw})*100]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_1_RATIOX" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHTX}/$F{1_weightwx})*100]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_0_RATIO" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{TOTAL_0_WEIGHT}/$F{0_weightw})*100]]></variableExpression>
 	</variable>
 	<group name="GP_ZONE">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
@@ -558,7 +558,7 @@
 		<band height="70" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<staticText>
-				<reportElement x="0" y="17" width="105" height="10" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c"/>
+				<reportElement x="0" y="17" width="105" height="15" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -703,7 +703,7 @@
 			<textField>
 				<reportElement x="355" y="17" width="200" height="53" uuid="a2dfe9b4-5e77-4fa6-94ca-3d65c06c8fd1"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
