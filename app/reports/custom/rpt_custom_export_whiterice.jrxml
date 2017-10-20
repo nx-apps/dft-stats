@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_export_whiterice" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d695a328-3717-45e4-ae89-3991bc6e37d5">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="932"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -970,7 +970,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight4}==null?0:$F{weight4})]]></textFieldExpression>
 			</textField>
@@ -983,7 +983,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d4}==null?0:$F{value_d4})]]></textFieldExpression>
 			</textField>
@@ -996,7 +996,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d6}==null?0:$F{value_d6})]]></textFieldExpression>
 			</textField>
@@ -1009,7 +1009,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{country_th}]]></textFieldExpression>
 			</textField>
@@ -1022,7 +1022,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight3}==null?0:$F{weight3})]]></textFieldExpression>
 			</textField>
@@ -1035,7 +1035,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d}==null?0:$F{value_d})]]></textFieldExpression>
 			</textField>
@@ -1048,7 +1048,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight1}==null?0:$F{weight1})]]></textFieldExpression>
 			</textField>
@@ -1061,7 +1061,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b6}==null?0:$F{value_b6})]]></textFieldExpression>
 			</textField>
@@ -1074,7 +1074,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight2}==null?0:$F{weight2})]]></textFieldExpression>
 			</textField>
@@ -1087,7 +1087,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b}==null?0:$F{value_b})]]></textFieldExpression>
 			</textField>
@@ -1100,7 +1100,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight6}==null?0:$F{weight6})]]></textFieldExpression>
 			</textField>
@@ -1113,7 +1113,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sum_value_b}==null?0:$F{sum_value_b})]]></textFieldExpression>
 			</textField>
@@ -1126,7 +1126,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d3}==null?0:$F{value_d3})]]></textFieldExpression>
 			</textField>
@@ -1139,7 +1139,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b1}==null?0:$F{value_b1})]]></textFieldExpression>
 			</textField>
@@ -1152,7 +1152,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b5}==null?0:$F{value_b5})]]></textFieldExpression>
 			</textField>
@@ -1165,7 +1165,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight5}==null?0:$F{weight5})]]></textFieldExpression>
 			</textField>
@@ -1178,7 +1178,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{weight}==null?0:$F{weight})]]></textFieldExpression>
 			</textField>
@@ -1191,7 +1191,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b2}==null?0:$F{value_b2})]]></textFieldExpression>
 			</textField>
@@ -1204,7 +1204,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d2}==null?0:$F{value_d2})]]></textFieldExpression>
 			</textField>
@@ -1217,7 +1217,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b3}==null?0:$F{value_b3})]]></textFieldExpression>
 			</textField>
@@ -1230,7 +1230,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sum_weight}==null?0:$F{sum_weight})]]></textFieldExpression>
 			</textField>
@@ -1243,7 +1243,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_b4}==null?0:$F{value_b4})]]></textFieldExpression>
 			</textField>
@@ -1256,7 +1256,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d1}==null?0:$F{value_d1})]]></textFieldExpression>
 			</textField>
@@ -1269,7 +1269,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{sum_value_d}==null?0:$F{sum_value_d})]]></textFieldExpression>
 			</textField>
@@ -1282,7 +1282,7 @@
 					<rightPen lineWidth="0.7"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="8" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{value_d5}==null?0:$F{value_d5})]]></textFieldExpression>
 			</textField>

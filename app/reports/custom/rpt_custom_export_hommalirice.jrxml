@@ -715,7 +715,7 @@
 			<textField>
 				<reportElement x="433" y="17" width="122" height="50" uuid="f3ab0207-1df3-4ecf-9077-3c987bd6c539"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
