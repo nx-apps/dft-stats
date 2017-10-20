@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year4" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="50"/>
+	<property name="ireport.x" value="484"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -749,7 +749,7 @@
 		<band height="70" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<staticText>
-				<reportElement x="0" y="17" width="105" height="10" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c"/>
+				<reportElement x="0" y="17" width="105" height="15" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -946,7 +946,7 @@
 			<textField>
 				<reportElement x="602" y="17" width="200" height="53" uuid="a2dfe9b4-5e77-4fa6-94ca-3d65c06c8fd1"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
