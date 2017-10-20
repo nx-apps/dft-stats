@@ -26,7 +26,7 @@
 <dom-module id="search-search">
     <template>
         <style include="page-style flex-style iron-flex iron-flex-alignment iron-flex-factors">
-             :host {
+            :host {
                 display: block;
             }
 
@@ -114,6 +114,7 @@
                 height: 550px;
                 overflow: auto;
             }
+
             .labelDate {
                 line-height: 60px;
             }
@@ -135,7 +136,7 @@
                     ถึงวันที่ :
                 </div>
                 <div class="flex2child">
-                        <nylon-date-picker no-label-float selected="{{data.dateEnd}}" show-bc></nylon-date-picker>
+                    <nylon-date-picker no-label-float selected="{{data.dateEnd}}" show-bc></nylon-date-picker>
                     <!-- <gl-form-input type="date" value="{{data.dateEnd}}"></gl-form-input> -->
                 </div>
                 <div class="flex3child"></div>
@@ -243,11 +244,13 @@
                     </div>
                     <iron-pages selected="{{typeSelete}}" attr-for-selected="name">
                         <div name="list">
-                            <div class="horizontal layout header-item" warp>
-                                <div class="header-div flex"></div>
+                            <div class="horizontal start layout header-item" warp>
+                                <div class="self-center flex">
+                                    <paper-checkbox id="checkboxCheckAllList" on-tap="getCheckAllList">เลือกทั้งหมด</paper-checkbox>
+                                </div>
                                 <template is="dom-repeat" items={{columns}} initial-count="20">
                                     <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                        <gl-form-input label="[[item]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
+                                        <gl-form-input label="[[checkNameField(item)]]" id="input_[[item]]" always-float-label type="search" on-value-changed="searchItem"></gl-form-input>
                                     </div>
                                 </template>
                             </div>
@@ -267,13 +270,15 @@
                             </div>
                         </div>
                         <div name="group">
-                            <div class="horizontal layout header-item" warp>
+                            <div class="horizontal start layout header-item" warp>
                                 <div class=""></div>
-                                <div class="header-div flex"></div>
+                                <div class="self-center flex">
+                                    <paper-checkbox id="checkboxCheckAllGroup" on-tap="getCheckAllGroup">เลือกทั้งหมด</paper-checkbox>
+                                </div>
                                 <div class="header-div flex-3">ชื่อกลุ่ม</div>
                                 <template is="dom-repeat" items={{columns}} initial-count="20">
                                     <div class$="{{checkIsValue(item)}}" style="padding-right:15px;">
-                                        <gl-form-input label="[[item]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
+                                        <gl-form-input label="[[checkNameField(item)]]" id="input_group_[[item]]" always-float-label type="search" on-value-changed="searchItemGroup"></gl-form-input>
                                     </div>
                                 </template>
                             </div>
@@ -535,6 +540,59 @@
                 }
                 // console.log(value);
             },
+            _checkSelectAll(arr, prop) {
+                return arr.map(item => item[prop]).every(elem => elem == true)
+            },
+            getCheckAllList(e) {
+                let check = e.currentTarget.checked
+                // console.log(this.dataUse);
+                this.dataUse.map((item => {
+                    if (item.hidden === false) {
+                        this.set('dataUse.' + index + '.check', check)
+                        this._setDataGroup(item.value, check)
+                    }
+                    return item
+                }))
+                // this.set('dataUseGroup', this.dataUseGroup)
+                this.dataUseGroup.map((group, index1) => {
+                    if (group.hidden === false) {
+                        let isCheck = this._checkSelectAll(group.group_item, 'check')//.map(item => item.check).every(elem => elem == true)
+                        this.set('dataUseGroup.' + index1 + '.check', isCheck)
+                    }
+                    return group
+                    // return group
+                })
+                let isCheck = this._checkSelectAll(this.dataUseGroup, 'check')//this.dataUseGroup.map(item => item.check).every(elem => elem == true)
+                this.$.checkboxCheckAllGroup.checked = isCheck
+                // console.log(e.currentTarget.checked);
+            },
+            getCheckAllGroup(e) {
+                let check = e.currentTarget.checked
+                this.dataUseGroup.map((group, index1) => {
+                    if (group.hidden === false) {
+                        group.group_item.map((item, index2) => {
+                            if (item.hidden === false) {
+                                this.checkList(item)
+                                this.set('dataUseGroup.' + index1 + '.group_item.' + index2 + '.check', check)
+                            }
+                            return item
+                        })
+                        let isCheck = this._checkSelectAll(group.group_item, 'check')
+                        this.set('dataUseGroup.' + index1 + '.check', isCheck)
+                    }
+                    return group
+                    // return group
+                })
+                let isCheck = this._checkSelectAll(this.dataUse, 'check')
+                this.$.checkboxCheckAllList.checked = isCheck
+            },
+            checkNameField(name) {
+                if (name === 'value') {
+                    return 'รหัส'
+                } else {
+                    return 'ชื่อ'
+                }
+            },
             getSelete(e) {
                 let data = e.model.__data__
                 let value = data.item.value
@@ -669,7 +727,11 @@
             getCheckGroup(e) {
                 let value = e.model.__data__.main.value
                 let checkHost = e.currentTarget.checked
+                // console.log(value);
                 // let result = this._getValueInput(this.columns, 'input_')
+                this._setDataGroup(value, checkHost)
+            },
+            _setDataGroup(value, checkHost) {
                 this.dataUseGroup.map((group, index1) => {
                     group.group_item.map((item, index2) => {
                         if (item.value === value) {
@@ -679,13 +741,6 @@
                     })
                     return group
                 })
-                // this.dataUseGroup[indexRoot].group_item.map((item, index) => {
-                //     if (!this._checkPropIsMath(item, result.data)) {
-                //         this.set('dataUseGroup.' + indexRoot + '.group_item.' + index + '.check', checkHost)
-                //     }
-                // })
-                // console.log(item.vsalue);
-                // console.log(item,indexRoot,checkHost,result);
             },
             getCheckChild(e) {
                 let item = e.model.__data__.item
