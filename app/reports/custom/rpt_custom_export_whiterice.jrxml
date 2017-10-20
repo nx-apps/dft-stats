@@ -1322,7 +1322,7 @@
 		</band>
 	</columnFooter>
 	<summary>
-		<band height="60">
+		<band height="80">
 			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="82" height="10" backcolor="#CCCCCC" uuid="4051b8e0-1680-4bbe-bb38-82a9cdad87e4"/>
@@ -1650,7 +1650,7 @@
 				<textFieldExpression><![CDATA[($V{TOTAL_VALUE_B3}==null?0:$V{TOTAL_VALUE_B3})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="592" y="12" width="210" height="48" uuid="0edf0257-0763-449d-a451-f1aeee4043f8"/>
+				<reportElement x="592" y="12" width="210" height="50" uuid="0edf0257-0763-449d-a451-f1aeee4043f8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
