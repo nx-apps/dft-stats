@@ -48,6 +48,21 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
 	</variable>
+	<variable name="SUM_WEIGHT_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{weight}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VALUE_B_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{value_b}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VALUE_D_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{value_d}]]></variableExpression>
+	</variable>
+	<variable name="SUM_AVG_VALUE_B_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($F{value_b}*1000000)/$F{weight}]]></variableExpression>
+	</variable>
+	<variable name="SUM_AVG_VALUE_D_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[($F{value_d}*1000000)/$F{weight}]]></variableExpression>
+	</variable>
 	<group name="GP_FIELD1">
 		<groupExpression><![CDATA[$F{field1}]]></groupExpression>
 		<groupHeader>
@@ -453,7 +468,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_AVG_VALUE_B}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_AVG_VALUE_B_1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="482" y="0" width="80" height="20" uuid="35a180bc-997e-4dbb-851c-fa68a9634d62"/>
@@ -467,7 +482,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_VALUE_B}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_B_1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="642" y="0" width="80" height="20" uuid="c1fef213-ec7c-43f6-b940-36ec67da9895"/>
@@ -481,7 +496,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_VALUE_D}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_D_1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="80" height="20" uuid="dc420098-d668-4017-80c7-40405c5de81c"/>
@@ -495,7 +510,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_WEIGHT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_WEIGHT_1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="722" y="0" width="80" height="20" uuid="81a85c79-e727-471c-9b19-5fcbd989c158"/>
@@ -509,7 +524,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_AVG_VALUE_D}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_AVG_VALUE_D_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -22,11 +22,12 @@ exports.whiterice = function (req, res) {
 
             //     // this.set('req.query.modelMonth', month[month.length - 1].value)
             // }
-            param = rpt.keysToUpper(param);
+            
             param.current_date = new Date().toISOString().slice(0, 10);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ปริมาณและมูลค่าการส่งออกข้าวขาวของไทย'
+            param = rpt.keysToUpper(param);
             // console.log(req.query.modelMonth)
-            // res.json(arrMonth)
+            // res.json(param)
             res.ireport("custom/rpt_custom_export_whiterice.jasper", req.query.export || "pdf", data, param)
         })
 }
