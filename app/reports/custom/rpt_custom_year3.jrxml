@@ -607,7 +607,11 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[(($F{0_weight}-$F{1_weightx})/$F{1_weightx})*100]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(
+    $F{1_weightx}==0?0:
+    (($F{0_weight}-$F{1_weightx})/$F{1_weightx})*100
+)
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -801,7 +805,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{TOTAL_0_RATIO}-$V{TOTAL_1_RATIOX}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(($V{TOTAL_0_WEIGHT}-$V{TOTAL_1_WEIGHTX})/$V{TOTAL_1_WEIGHTX})*100]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement mode="Opaque" x="289" y="0" width="55" height="15" backcolor="#CCCCCC" uuid="9b91904d-8fc9-4cc4-9643-edc6304a53e2"/>
