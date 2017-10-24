@@ -104,7 +104,7 @@ exports.typerice = function (req, res) {
         from custom
         ${where}
 		group by hscode
-	)hs on ch.hscode=hs.HsCode
+	)hs on ch.hscode=hs.HsCode and ch.is_active='Y' 
     join hamonize hm on hm.hamonize_code=ch.hscode ${whereYear}
     group by typerice_name,hs.HsCode,hm.hamonize_th
     order by typerice_name,hs.HsCode`, [],
