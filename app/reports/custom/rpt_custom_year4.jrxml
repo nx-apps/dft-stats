@@ -205,7 +205,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 						<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{SUM_0_RATIO}-$V{SUM_1_RATIOX}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[(($V{SUM_0_WEIGHT}-$V{SUM_1_WEIGHTX})/$V{SUM_1_WEIGHTX})*100]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Group" evaluationGroup="GP_ZONE" pattern="#,##0">
 					<reportElement mode="Opaque" x="552" y="0" width="50" height="15" backcolor="#CCFFCC" uuid="f28ce098-b3a1-4ef6-b3c4-d4854453bcad"/>
@@ -709,7 +709,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{RATIO_0}-$V{RATIO_1x}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(($F{0_weight}-$F{1_weightx})/$F{1_weightx})*100]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
