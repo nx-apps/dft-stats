@@ -319,9 +319,10 @@
 	</columnFooter>
 	<summary>
 		<band height="80" splitType="Stretch">
-			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField>
-				<reportElement x="235" y="20" width="320" height="60" uuid="bfd9eb6f-ebcc-4ae5-8845-c9f78e90d2cd"/>
+				<reportElement x="235" y="20" width="320" height="60" uuid="bfd9eb6f-ebcc-4ae5-8845-c9f78e90d2cd">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

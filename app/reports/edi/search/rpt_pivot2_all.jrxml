@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_pivot2" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19fbe995-056d-4a3c-9eaf-4612262a6979">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="30"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="DATE_START" class="java.lang.String"/>
 	<parameter name="DATE_END" class="java.lang.String"/>
 	<parameter name="TRAN_TYPE" class="java.lang.String"/>
@@ -15,6 +15,7 @@
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="field1" class="java.lang.String"/>
 	<field name="field2" class="java.lang.String"/>
 	<field name="field3" class="java.lang.String"/>
@@ -521,6 +522,7 @@
 	</title>
 	<columnHeader>
 		<band height="60" splitType="Stretch">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<textField>
 				<reportElement x="0" y="0" width="100" height="60" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
 				<box>
@@ -945,6 +947,7 @@
 	</detail>
 	<columnFooter>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement x="782" y="0" width="20" height="20" uuid="836ea1fc-b0ca-4a9b-962f-3dcacb40a00c"/>
 				<box leftPadding="0" rightPadding="0">
@@ -978,7 +981,9 @@
 	<summary>
 		<band height="82" splitType="Stretch">
 			<textField>
-				<reportElement x="566" y="22" width="236" height="60" uuid="6cdf5704-1834-48d8-8185-c1b1a1b8f928"/>
+				<reportElement x="566" y="22" width="236" height="60" uuid="6cdf5704-1834-48d8-8185-c1b1a1b8f928">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

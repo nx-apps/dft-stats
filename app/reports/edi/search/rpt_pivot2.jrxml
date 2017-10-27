@@ -15,6 +15,7 @@
 	<parameter name="MONTH_DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
+	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<field name="net_weight" class="java.lang.Double"/>
 	<field name="fob_amt_baht" class="java.lang.Double"/>
 	<field name="fob_amt" class="java.lang.Double"/>
@@ -331,6 +332,7 @@
 	</title>
 	<columnHeader>
 		<band height="60" splitType="Stretch">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<textField>
 				<reportElement x="0" y="0" width="100" height="60" uuid="eab0124e-873d-421c-b11d-ac39c9f6ab34"/>
 				<box>
@@ -574,6 +576,7 @@
 	</detail>
 	<columnFooter>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement x="782" y="0" width="20" height="20" uuid="713453f0-5298-4f78-9da8-f021fde4f2bd"/>
 				<box leftPadding="0" rightPadding="0">
@@ -607,7 +610,9 @@
 	<summary>
 		<band height="82" splitType="Stretch">
 			<textField>
-				<reportElement x="482" y="22" width="320" height="60" uuid="6cdf5704-1834-48d8-8185-c1b1a1b8f928"/>
+				<reportElement x="482" y="22" width="320" height="60" uuid="6cdf5704-1834-48d8-8185-c1b1a1b8f928">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

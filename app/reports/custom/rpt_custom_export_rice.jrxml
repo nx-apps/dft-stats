@@ -469,6 +469,7 @@
 	</title>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="67" height="20" backcolor="#CCCCFF" uuid="51cd7483-9279-464d-a6eb-c84dbbb51edc"/>
 				<box>
@@ -1173,7 +1174,6 @@
 	</pageFooter>
 	<summary>
 		<band height="68">
-			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Opaque" x="627" y="0" width="35" height="15" backcolor="#CCCCCC" uuid="2d05759b-d84d-450f-944a-37a5b352966f"/>
 				<box leftPadding="2" rightPadding="2">
@@ -1461,7 +1461,9 @@
 				<textFieldExpression><![CDATA[($V{TOTAL_S_WEIGHT}==null?0:$V{TOTAL_S_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="662" y="18" width="140" height="50" uuid="25d1206a-428a-4635-b5f2-5c72d6c1537e"/>
+				<reportElement x="662" y="18" width="140" height="50" uuid="25d1206a-428a-4635-b5f2-5c72d6c1537e">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -1471,7 +1473,9 @@
 "วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="12" width="105" height="15" uuid="7a7770d8-597d-44c1-ab50-d5f78fe1d746"/>
+				<reportElement x="0" y="12" width="105" height="15" uuid="7a7770d8-597d-44c1-ab50-d5f78fe1d746">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="2">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -1484,7 +1488,9 @@
 				<text><![CDATA[ที่มา : กรมศุลกากร]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="27" width="38" height="15" uuid="7c4c054d-9c80-4e92-a775-6508e9677c82"/>
+				<reportElement x="0" y="27" width="38" height="15" uuid="7c4c054d-9c80-4e92-a775-6508e9677c82">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="2"/>
 				<textElement verticalAlignment="Top" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" isUnderline="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
@@ -1492,7 +1498,9 @@
 				<textFieldExpression><![CDATA["หมายเหตุ"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="35" y="27" width="347" height="36" uuid="39938835-7771-453c-86b6-365f13c60260"/>
+				<reportElement stretchType="RelativeToBandHeight" x="35" y="27" width="347" height="36" uuid="39938835-7771-453c-86b6-365f13c60260">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement verticalAlignment="Top" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" isUnderline="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

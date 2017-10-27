@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_pivot1_all" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9973847d-4c87-4f75-90c8-435347afc33a">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="30"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<parameter name="COLUMN_NAME1" class="java.lang.String"/>
@@ -528,7 +528,6 @@
 	</columnFooter>
 	<summary>
 		<band height="82" splitType="Stretch">
-			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="302" y="0" width="50" height="20" uuid="09baea70-8e2d-4e32-b56d-62005e3676c5"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -614,7 +613,9 @@
 				<textFieldExpression><![CDATA[$V{SUM_AVG_AMT_BAHT_I}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="566" y="22" width="236" height="60" uuid="bfd9eb6f-ebcc-4ae5-8845-c9f78e90d2cd"/>
+				<reportElement x="566" y="22" width="236" height="60" uuid="bfd9eb6f-ebcc-4ae5-8845-c9f78e90d2cd">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="8" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

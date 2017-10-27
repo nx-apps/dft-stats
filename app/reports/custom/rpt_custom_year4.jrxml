@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year4" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="484"/>
+	<property name="ireport.x" value="393"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -330,6 +330,7 @@
 	</title>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
+			<printWhenExpression><![CDATA[($P{FILE_TYPE}=="excel"&&$V{PAGE_NUMBER}==1)||($P{FILE_TYPE}!="excel")]]></printWhenExpression>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="152" height="30" backcolor="#CCCCFF" uuid="56198db8-3e3f-4428-876b-d500af412b37"/>
 				<box>
@@ -712,13 +713,13 @@
 				<textFieldExpression><![CDATA[(
     $F{1_weightx}==0?0:
     (($F{0_weight}-$F{1_weightx})/$F{1_weightx})*100
-)
-]]></textFieldExpression>
+)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="15">
+			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField>
 				<reportElement x="762" y="0" width="30" height="15" uuid="70af4273-2b0f-4ef4-8725-aec8bed41fc8"/>
 				<box leftPadding="0" rightPadding="0">
@@ -751,9 +752,10 @@
 	</pageFooter>
 	<summary>
 		<band height="70" splitType="Stretch">
-			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<staticText>
-				<reportElement x="0" y="17" width="105" height="15" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c"/>
+				<reportElement x="0" y="17" width="105" height="15" uuid="3f8feaf4-a561-4d01-9a88-79caefee5a8c">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="2">
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -948,7 +950,9 @@
 				<textFieldExpression><![CDATA[($V{TOTAL_2_WEIGHT}==null?0:$V{TOTAL_2_WEIGHT})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="602" y="17" width="200" height="53" uuid="a2dfe9b4-5e77-4fa6-94ca-3d65c06c8fd1"/>
+				<reportElement x="602" y="17" width="200" height="53" uuid="a2dfe9b4-5e77-4fa6-94ca-3d65c06c8fd1">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>

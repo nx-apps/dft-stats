@@ -385,7 +385,6 @@
 	</columnFooter>
 	<summary>
 		<band height="82" splitType="Stretch">
-			<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="482" y="0" width="80" height="20" uuid="7f5b0503-8d81-4c38-909d-182d19f1031f"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -401,7 +400,9 @@
 				<textFieldExpression><![CDATA[$V{SUM_FOB_BAHT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="482" y="22" width="320" height="60" uuid="c24b85d5-510b-405b-84b5-3cd91700b0bd"/>
+				<reportElement x="482" y="22" width="320" height="60" uuid="c24b85d5-510b-405b-84b5-3cd91700b0bd">
+					<printWhenExpression><![CDATA[$P{FILE_TYPE}!="excel"]]></printWhenExpression>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
