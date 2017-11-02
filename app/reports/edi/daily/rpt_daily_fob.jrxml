@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_daily_fob" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b1d2e419-3bbf-429d-806f-bd344d5dc434">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="523"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="67"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="LAST_DATE" class="java.lang.String"/>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<field name="year" class="java.lang.String"/>
 	<field name="rice_1" class="java.lang.Integer"/>
 	<field name="rice_2" class="java.lang.Integer"/>
@@ -1105,7 +1106,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="15">
+		<band height="45">
 			<textField>
 				<reportElement x="0" y="5" width="117" height="10" uuid="de1f0d9a-e6ab-4e3a-8e02-899bcd265402"/>
 				<box>
@@ -1118,7 +1119,7 @@
 				<textFieldExpression><![CDATA["ที่มา: สภาหอการค้าแห่งประเทศไทย"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="315" y="5" width="240" height="10" uuid="f60c0071-f176-48d3-bab8-41e44823cac6"/>
+				<reportElement x="315" y="5" width="240" height="40" uuid="f60c0071-f176-48d3-bab8-41e44823cac6"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -1126,7 +1127,10 @@
 				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="8" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
+"กองบริหารการค้าข้าว\n"+
+"กรมการค้าต่างประเทศ\n"+
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

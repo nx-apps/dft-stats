@@ -275,6 +275,7 @@ exports.dailyDit = function (req, res, next) {
         })
         .run()
         .then(function (data) {
+            params.current_date = new Date().toISOString().slice(0, 10);
             params = rpt.keysToUpper(params);
             params.current_date = new Date().toISOString().slice(0, 10);
             params.OUTPUT_NAME = params.current_date.replace(/-/g, '') + '_ราคาข้าวสาร_เอฟ_โอ_บี_กรุงเทพ';
@@ -384,10 +385,12 @@ exports.dailyFob = function (req, res, next) {
         .then(function (data) {
             // res.json(params.date.substr(0,8)+data[data.length-2]['date'])
             const yymm = params.date.substring(0, 8);
+            
+            params.current_date = new Date().toISOString().slice(0, 10);
             params = rpt.keysToUpper(params);
             params.LAST_DATE = yymm + data[data.length - 2]['date'].toString();
             params.OUTPUT_NAME = params.LAST_DATE.replace(/-/g, '') + '_ราคาข้าวสาร_FOB_กรุงเทพ';
-            // res.json(params)
+            // res.json(data)
             res.ireport("edi/daily/rpt_daily_fob.jasper", req.query.export || "pdf", data, params);
         })
 }

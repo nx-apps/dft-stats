@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_daily_dit" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91a82e65-913a-49fa-8e24-5f043fe1af21">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="28"/>
+	<property name="ireport.x" value="130"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<field name="month" class="java.lang.String"/>
 	<field name="date" class="java.lang.String"/>
 	<field name="rice_1" class="java.lang.Integer"/>
@@ -1326,7 +1327,7 @@ A1
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="15">
+		<band height="55">
 			<textField>
 				<reportElement x="0" y="0" width="117" height="15" uuid="c61f1bbe-a933-44b3-8fd5-788f1731191f"/>
 				<box>
@@ -1339,7 +1340,7 @@ A1
 				<textFieldExpression><![CDATA["ที่มา: ราคากรมการค้าภายใน"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="562" y="0" width="240" height="15" uuid="d637ae7e-7288-44b3-b098-0a3c9ecf33a9"/>
+				<reportElement x="562" y="5" width="240" height="50" uuid="26b5c321-65b1-4f52-9bdb-8c6e31d20d5e"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -1347,7 +1348,10 @@ A1
 				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="none">
 					<font fontName="TH SarabunPSK" size="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["กลุ่มกำกับและสถิติค้าข้าว"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
+"กองบริหารการค้าข้าว\n"+
+"กรมการค้าต่างประเทศ\n"+
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
