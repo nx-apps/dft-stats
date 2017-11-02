@@ -225,3 +225,20 @@ exports.getSearch = function (req, res) {
     //             + (val.field2 != '' && typeof val.field2 !== 'undefined' ? '2' : '1');
     //         res.ireport("custom/search/" + filename + ".jasper", req.query.export || "pdf", data, params);
     //     });
+exports.dailyExportrice = function (req, res) {
+    // var refData = (req.query.refData == 'edi' ? 'ใบอนุญาตส่งออกข้าว' : 'กรมศุลกากร');
+    req.jdbc.query("mssql", "exec sp_stats_rpt_daily_exportrice_custom @currentDate=?, @amountTime=?",
+        [req.query.currentDate, req.query.amountTime],
+        function (err, data) {
+            data = JSON.parse(data)
+            // res.send(data);
+            // req.r.json(data)
+            // .run().then(function (d2) {
+            res.ireport("edi/daily/rpt_daily_exportrice.jasper", req.query.export || "pdf", data, {
+                OUTPUT_NAME: req.query.currentDate.replace(/-/g, '') + '_สรุปสถานการณ์ส่งออกข้าว',
+                CURRENT_DATE: req.query.currentDate,
+                REF_DATA: 'กรมศุลกากร'
+            });
+            // })
+        })
+}
