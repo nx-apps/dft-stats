@@ -198,7 +198,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ปริมาณการส่งออกข้าวของไทย ปี "+$P{YEAR}+" ("+$P{STARTMONTH}+($P{ENDMONTH}==$P{STARTMONTH}?")":" - "+$P{ENDMONTH}+")")]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ปริมาณการส่งออกข้าวของไทยรายประเทศ ปี "+$P{YEAR}+" ("+$P{STARTMONTH}+($P{ENDMONTH}==$P{STARTMONTH}?")":" - "+$P{ENDMONTH}+")")]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
