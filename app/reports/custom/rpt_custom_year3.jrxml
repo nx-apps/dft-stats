@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.6934217901613318"/>
-	<property name="ireport.x" value="665"/>
+	<property name="ireport.x" value="332"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -274,7 +274,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="12" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ปริมาณการส่งออกข้าวของไทย ปี "+$P{YEAR}+" ("+$P{STARTMONTH}+($P{ENDMONTH}==$P{STARTMONTH}?")":" - "+$P{ENDMONTH}+")")]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ปริมาณการส่งออกข้าวของไทยรายประเทศ ปี "+$P{YEAR}+" ("+$P{STARTMONTH}+($P{ENDMONTH}==$P{STARTMONTH}?")":" - "+$P{ENDMONTH}+")")]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
