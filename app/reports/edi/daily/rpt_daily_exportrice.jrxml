@@ -439,7 +439,7 @@
 				<textFieldExpression><![CDATA["ที่มา : ข้อมูลจาก"+$P{REF_DATA}+"\n"+
 "กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
-"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

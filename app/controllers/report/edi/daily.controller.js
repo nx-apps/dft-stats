@@ -6,8 +6,9 @@ exports.dailyCompany = function (req, res) {
         var params = {
             date: req.query.date
         };
-        // params = rpt.keysToUpper(params);
+        
         params.current_date = new Date().toISOString().slice(0, 10);
+        params = rpt.keysToUpper(params);
         // res.json(params)
         res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", data, {
             approveDate: req.query.date,
@@ -52,6 +53,7 @@ exports.dailyPricerice = function (req, res) {
         };
         // params = rpt.keysToUpper(params);
         params.current_date = new Date().toISOString().slice(0, 10);
+        param = rpt.keysToUpper(param);
         res.ireport("edi/daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", data, {
             approveDate: req.query.date,
             FILE_TYPE: req.query.export,
@@ -139,8 +141,8 @@ exports.dailyCost = function (req, res) {
             var params = {
                 date: req.query.date
             };
-            param = rpt.keysToUpper(param);
             param.current_date = new Date().toISOString().slice(0, 10);
+            param = rpt.keysToUpper(param);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ข้อมูลส่งออกข้าว ต้นทุนและราคาข้าวชนิดต่างๆ';
             // res.json(param)
             res.ireport("edi/daily/rpt_daily_cost.jasper", req.query.export || "pdf", datas, param);
