@@ -3,17 +3,23 @@ exports.dailyCompany = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_company @approveDate=?", [req.query.date], function (err, data) {
         data = JSON.parse(data)
-        var params = {
-            date: req.query.date
+        var param = {
+            date: req.query.date,
+            CURRENT_DATE: new Date().toISOString().slice(0, 10)
         };
         
-        params.current_date = new Date().toISOString().slice(0, 10);
-        params = rpt.keysToUpper(params);
-        // res.json(params)
+        // params.current_date = new Date().toISOString().slice(0, 10);
+        
+        // console.log(params.current_date.replace(/-/g, ' '))
+        // param.CURRENT_DATE = new Date().toISOString().slice(0, 10);
+        // param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
+        // param = rpt.keysToUpper(param);
+        // res.json(param)
         res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", data, {
             approveDate: req.query.date,
             FILE_TYPE: req.query.export,
-            OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
+            CURRENT_DATE : new Date().toISOString().slice(0, 10),
+            OUTPUT_NAME: param.CURRENT_DATE.replace(/-/g, ' ')+ '_รับแจ้งขายข้าว'
         });
     })
 }

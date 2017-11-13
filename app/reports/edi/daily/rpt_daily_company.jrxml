@@ -13,6 +13,7 @@
 	</parameter>
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
+	<parameter name="DATE" class="java.lang.String"/>
 	<field name="company_name_th" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="destination_country" class="java.lang.String"/>
@@ -498,7 +499,7 @@ new  nylon.utility.NumberFormat().toThaiDate($P{approveDate})]]></textFieldExpre
 				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
-"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
+"วันที่พิมพ์ "+new  nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
