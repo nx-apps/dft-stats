@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_custom_year3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="604bfda5-a706-42b8-ae3e-650997161ecd">
 	<property name="ireport.zoom" value="1.6934217901613318"/>
-	<property name="ireport.x" value="332"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
 	<import value="nylon.report.*"/>
@@ -16,90 +16,90 @@
 	<parameter name="YEAR_3" class="java.lang.String"/>
 	<field name="country_th" class="java.lang.String"/>
 	<field name="zone_name" class="java.lang.String"/>
-	<field name="3_weight" class="java.lang.Double"/>
-	<field name="3_weightw" class="java.lang.Double"/>
-	<field name="2_weight" class="java.lang.Double"/>
-	<field name="2_weightw" class="java.lang.Double"/>
-	<field name="1_weight" class="java.lang.Double"/>
-	<field name="1_weightw" class="java.lang.Double"/>
-	<field name="1_weightx" class="java.lang.Double"/>
-	<field name="1_weightwx" class="java.lang.Double"/>
-	<field name="0_weight" class="java.lang.Double"/>
-	<field name="0_weightw" class="java.lang.Double"/>
+	<field name="weight_3" class="java.lang.Double"/>
+	<field name="weightw_3" class="java.lang.Double"/>
+	<field name="weight_2" class="java.lang.Double"/>
+	<field name="weightw_2" class="java.lang.Double"/>
+	<field name="weight_1" class="java.lang.Double"/>
+	<field name="weightw_1" class="java.lang.Double"/>
+	<field name="weightx_1" class="java.lang.Double"/>
+	<field name="weightwx_1" class="java.lang.Double"/>
+	<field name="weight_0" class="java.lang.Double"/>
+	<field name="weightw_0" class="java.lang.Double"/>
 	<variable name="SUM_3_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{3_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_3}]]></variableExpression>
 	</variable>
 	<variable name="SUM_2_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_2}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_WEIGHTX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weightx_1}]]></variableExpression>
 	</variable>
 	<variable name="SUM_0_WEIGHT" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE" calculation="Sum">
-		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_0}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_3_WEIGHT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{3_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_3}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_WEIGHT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{2_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_2}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_WEIGHT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_WEIGHTX" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{1_weightx}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weightx_1}]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_0_WEIGHT" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{0_weight}]]></variableExpression>
+		<variableExpression><![CDATA[$F{weight_0}]]></variableExpression>
 	</variable>
 	<variable name="RATIO_0" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{0_weight}==null?0:($F{0_weight}/$F{0_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{weight_0}==null?0:($F{weight_0}/$F{weightw_0})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1x" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weightx}==null?0:($F{1_weightx}/$F{1_weightwx})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{weightx_1}==null?0:($F{weightx_1}/$F{weightwx_1})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_1" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{1_weight}==null?0:($F{1_weight}/$F{1_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{weight_1}==null?0:($F{weight_1}/$F{weightw_1})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_2" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{2_weight}==null?0:($F{2_weight}/$F{2_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{weight_2}==null?0:($F{weight_2}/$F{weightw_2})*100)]]></variableExpression>
 	</variable>
 	<variable name="RATIO_3" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{3_weight}==null?0:($F{3_weight}/$F{3_weightw})*100)]]></variableExpression>
+		<variableExpression><![CDATA[($F{weight_3}==null?0:($F{weight_3}/$F{weightw_3})*100)]]></variableExpression>
 	</variable>
 	<variable name="SUM_3_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
-		<variableExpression><![CDATA[($V{SUM_3_WEIGHT}/$F{3_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{SUM_3_WEIGHT}/$F{weightw_3})*100]]></variableExpression>
 	</variable>
 	<variable name="SUM_2_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
-		<variableExpression><![CDATA[($V{SUM_2_WEIGHT}/$F{2_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{SUM_2_WEIGHT}/$F{weightw_2})*100]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
-		<variableExpression><![CDATA[($V{SUM_1_WEIGHT}/$F{1_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{SUM_1_WEIGHT}/$F{weightw_1})*100]]></variableExpression>
 	</variable>
 	<variable name="SUM_1_RATIOX" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
-		<variableExpression><![CDATA[($V{SUM_1_WEIGHTX}/$F{1_weightwx})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{SUM_1_WEIGHTX}/$F{weightwx_1})*100]]></variableExpression>
 	</variable>
 	<variable name="SUM_0_RATIO" class="java.lang.Double" resetType="Group" resetGroup="GP_ZONE">
-		<variableExpression><![CDATA[($V{SUM_0_WEIGHT}/$F{0_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{SUM_0_WEIGHT}/$F{weightw_0})*100]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_3_RATIO" class="java.lang.Double">
-		<variableExpression><![CDATA[($V{TOTAL_3_WEIGHT}/$F{3_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{TOTAL_3_WEIGHT}/$F{weightw_3})*100]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_2_RATIO" class="java.lang.Double">
-		<variableExpression><![CDATA[($V{TOTAL_2_WEIGHT}/$F{2_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{TOTAL_2_WEIGHT}/$F{weightw_2})*100]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIO" class="java.lang.Double">
-		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHT}/$F{1_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHT}/$F{weightw_1})*100]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_1_RATIOX" class="java.lang.Double">
-		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHTX}/$F{1_weightwx})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{TOTAL_1_WEIGHTX}/$F{weightwx_1})*100]]></variableExpression>
 	</variable>
 	<variable name="TOTAL_0_RATIO" class="java.lang.Double">
-		<variableExpression><![CDATA[($V{TOTAL_0_WEIGHT}/$F{0_weightw})*100]]></variableExpression>
+		<variableExpression><![CDATA[($V{TOTAL_0_WEIGHT}/$F{weightw_0})*100]]></variableExpression>
 	</variable>
 	<group name="GP_ZONE">
 		<groupExpression><![CDATA[$F{zone_name}]]></groupExpression>
@@ -478,7 +478,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{3_weight}==null?0:$F{3_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight_3}==null?0:$F{weight_3})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="234" y="0" width="55" height="15" backcolor="#FFFFCC" uuid="4ba60469-2867-4754-89c7-cb5438b6d041"/>
@@ -530,7 +530,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weight}==null?0:$F{1_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight_1}==null?0:$F{weight_1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement mode="Transparent" x="289" y="0" width="55" height="15" backcolor="#FFFFCC" uuid="1ce2b91b-6ff4-44b0-865a-f08b0eeb5504"/>
@@ -543,7 +543,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{2_weight}==null?0:$F{2_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight_2}==null?0:$F{weight_2})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="564" y="0" width="55" height="15" backcolor="#FFFFCC" uuid="41302e87-657a-47f3-b557-179330fccc17"/>
@@ -582,7 +582,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{0_weight}==null?0:$F{0_weight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weight_0}==null?0:$F{weight_0})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement mode="Transparent" x="509" y="0" width="55" height="15" backcolor="#FFFFCC" uuid="50466292-6818-4175-9e04-278cfd323554"/>
@@ -595,7 +595,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{1_weightx}==null?0:$F{1_weightx})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{weightx_1}==null?0:$F{weightx_1})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="729" y="0" width="55" height="15" backcolor="#FFFFCC" uuid="1bc33a27-29e9-472c-8a71-2c53a96eebb3"/>
@@ -609,8 +609,8 @@
 					<font fontName="TH SarabunPSK" size="10" isBold="false" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[(
-    $F{1_weightx}==0?0:
-    (($F{0_weight}-$F{1_weightx})/$F{1_weightx})*100
+    $F{weightx_1}==0?0:
+    (($F{weight_0}-$F{weightx_1})/$F{weightx_1})*100
 )]]></textFieldExpression>
 			</textField>
 		</band>
