@@ -3,16 +3,23 @@ exports.dailyCompany = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_company @approveDate=?", [req.query.date], function (err, data) {
         data = JSON.parse(data)
-        var params = {
-            date: req.query.date
+        var param = {
+            date: req.query.date,
+            CURRENT_DATE: new Date().toISOString().slice(0, 10)
         };
-        // params = rpt.keysToUpper(params);
-        params.current_date = new Date().toISOString().slice(0, 10);
-        // res.json(params)
+
+        // params.current_date = new Date().toISOString().slice(0, 10);
+
+        // console.log(params.current_date.replace(/-/g, ' '))
+        // param.CURRENT_DATE = new Date().toISOString().slice(0, 10);
+        // param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
+        // param = rpt.keysToUpper(param);
+        // res.json(param)
         res.ireport("edi/daily/rpt_daily_company.jasper", req.query.export || "pdf", data, {
             approveDate: req.query.date,
             FILE_TYPE: req.query.export,
-            OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_รับแจ้งขายข้าว'
+            CURRENT_DATE: new Date().toISOString().slice(0, 10),
+            OUTPUT_NAME: param.CURRENT_DATE.replace(/-/g, ' ') + '_รับแจ้งขายข้าว'
         });
     })
 }
@@ -47,15 +54,18 @@ exports.dailyPricerice = function (req, res) {
 
     req.jdbc.query("mssql", "exec sp_stats_rpt_daily_pricerice @approveDate=?", [req.query.date], function (err, data) {
         data = JSON.parse(data)
-        var params = {
-            date: req.query.date
+        var param = {
+            date: req.query.date,
+            CURRENT_DATE: new Date().toISOString().slice(0, 10)
         };
         // params = rpt.keysToUpper(params);
-        params.current_date = new Date().toISOString().slice(0, 10);
+        // param.current_date = new Date().toISOString().slice(0, 10);
+        // param = rpt.keysToUpper(param);
         res.ireport("edi/daily/rpt_daily_pricerice.jasper", req.query.export || "pdf", data, {
             approveDate: req.query.date,
             FILE_TYPE: req.query.export,
-            OUTPUT_NAME: params.current_date.replace(/-/g, '') + '_ราคาข้าวตามใบอนุญาต'
+            CURRENT_DATE: new Date().toISOString().slice(0, 10),
+            OUTPUT_NAME: param.CURRENT_DATE.replace(/-/g, '') + '_ราคาข้าวตามใบอนุญาต'
         });
     })
 }
@@ -139,8 +149,8 @@ exports.dailyCost = function (req, res) {
             var params = {
                 date: req.query.date
             };
-            param = rpt.keysToUpper(param);
             param.current_date = new Date().toISOString().slice(0, 10);
+            param = rpt.keysToUpper(param);
             param.OUTPUT_NAME = param.current_date.replace(/-/g, '') + '_ข้อมูลส่งออกข้าว ต้นทุนและราคาข้าวชนิดต่างๆ';
             // res.json(param)
             res.ireport("edi/daily/rpt_daily_cost.jasper", req.query.export || "pdf", datas, param);
@@ -385,7 +395,7 @@ exports.dailyFob = function (req, res, next) {
         .then(function (data) {
             // res.json(params.date.substr(0,8)+data[data.length-2]['date'])
             const yymm = params.date.substring(0, 8);
-            
+
             params.current_date = new Date().toISOString().slice(0, 10);
             params = rpt.keysToUpper(params);
             params.LAST_DATE = yymm + data[data.length - 2]['date'].toString();

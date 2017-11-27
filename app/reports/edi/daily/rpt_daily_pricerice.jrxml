@@ -12,6 +12,7 @@
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("-MM-dd").format(new Date())]]></defaultValueExpression>
 	</parameter>
 	<parameter name="FILE_TYPE" class="java.lang.String"/>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
 	<field name="tariff_code" class="java.lang.String"/>
 	<field name="hamonize_th" class="java.lang.String"/>
 	<field name="price_avg" class="java.lang.Double"/>
@@ -228,7 +229,7 @@
 				<textFieldExpression><![CDATA["ที่มา : กลุ่มกำกับและสถิติค้าข้าว\n"+
 "กองบริหารการค้าข้าว\n"+
 "กรมการค้าต่างประเทศ\n"+
-"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{YEAR}+$P{MONTH_DATE})]]></textFieldExpression>
+"วันที่พิมพ์ "+new nylon.utility.NumberFormat().toThaiDate($P{CURRENT_DATE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
